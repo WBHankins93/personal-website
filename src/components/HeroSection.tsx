@@ -1,12 +1,16 @@
 'use client';
 
 import React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
+import CVModal from "./CVModal";
 
 export default function HeroSection() {
-  const scrollToContact = () => {
-    const contact = document.getElementById("contact");
+  const [showModal, setShowModal] = useState(false);
+
+  const scrollToFooter = () => {
+    const contact = document.getElementById("footer");
     if (contact) {
       contact.scrollIntoView({ behavior: "smooth" });
     }
@@ -39,33 +43,29 @@ export default function HeroSection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
-              onClick={scrollToContact}
+              onClick={scrollToFooter}
               size="lg"
               className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-3 text-lg group"
             >
               Get In Touch
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <a
-              href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/2e73f98b9_Ben-Hankins-SREDevOpsEngineer-7-23.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-[#3D405B] text-white hover:bg-opacity-90 px-8 py-3 text-lg"
+              <button
+                onClick={() => setShowModal(true)}
+                className="px-6 py-2 bg-white text-slate-900 font-semibold rounded shadow hover:bg-slate-100 transition"
               >
-                <Download className="mr-2 w-5 h-5" />
-                View CV
-              </Button>
-            </a>
+              View CV
+              </button>
+              
+
+            <CVModal isOpen={showModal} onClose={() => setShowModal(false)} />
+
           </div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <Stat title="6+" subtitle="Years Experience" color="text-[#E07A5F]" />
             <Stat title="90%" subtitle="Faster Deployments" color="text-[#81B29A]" />
-            <Stat title="$10M+" subtitle="Cloud Deals Closed" color="text-green-400" />
+            <Stat title="$9M+" subtitle="Cloud Deals Closed" color="text-green-400" />
             <Stat title="40%" subtitle="Cost Reduction" color="text-purple-400" />
           </div>
         </div>

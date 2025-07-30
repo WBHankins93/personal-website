@@ -21,7 +21,7 @@ export default function Header() {
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
     { label: "Blog", href: "#blog" },
-    { label: "Contact", href: "#contact" }
+    { label: "Contact", href: "#footer" }
   ];
 
   const scrollToSection = (href: string) => {

@@ -89,7 +89,7 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="section-padding bg-slate-50">
+    <section id="experience" className="py-20 bg-slate-50">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">

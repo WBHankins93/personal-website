@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Project } from "@/entities/Project";
+import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Folder } from "lucide-react";
+import { ExternalLink, Folder } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+
 
 export default function ProjectsSection() {
-  const [projects, setProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-
-  useEffect(() => {
-    loadProjects();
-  }, []);
-
-  const loadProjects = async () => {
-    try {
-      const data = await Project.list("-created_date");
-      setProjects(data);
-    } catch (error) {
-      console.error("Error loading projects:", error);
-    }
-  };
 
   const categories = [
     { id: "all", label: "All Projects" },
@@ -32,9 +20,10 @@ export default function ProjectsSection() {
     { id: "security", label: "Security" }
   ];
 
-  const filteredProjects = selectedCategory === "all" 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  const filteredProjects =
+  selectedCategory === "all"
+    ? allProjects
+    : allProjects.filter((project) => project.category === selectedCategory);
 
   return (
     <section id="projects" className="section-padding bg-white">
@@ -98,17 +87,7 @@ export default function ProjectsSection() {
                             rel="noopener noreferrer"
                             className="text-slate-500 hover:text-slate-900 transition-colors"
                           >
-                            <Github className="w-5 h-5" />
-                          </a>
-                        )}
-                        {project.live_url && (
-                          <a 
-                            href={project.live_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-500 hover:text-blue-600 transition-colors"
-                          >
-                            <ExternalLink className="w-5 h-5" />
+                            <FaGithub size={20} />
                           </a>
                         )}
                       </div>
