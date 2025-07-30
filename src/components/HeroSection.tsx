@@ -5,6 +5,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import CVModal from "./CVModal";
+import dynamic from 'next/dynamic';
+import TypingAnimation from './TypingAnimation';
+
+const WordSphere = dynamic(() => import('./WordSphere'), { ssr: false });
+
+const roles = [
+  "SRE/DevOps Engineer",
+  "Infrastructure Engineer",
+  "Cloud Engineer",
+  "Automation Wizard",
+  "Software Engineer"
+];
 
 export default function HeroSection() {
   const [showModal, setShowModal] = useState(false);
@@ -32,9 +44,9 @@ export default function HeroSection() {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Ben Hankins
-            <span className="block gradient-text text-4xl md:text-6xl mt-2">
-              SRE/DevOps Engineer
-            </span>
+            <h2 className="text-xl md:text-2xl font-medium text-white">
+              <TypingAnimation words={roles} className="text-blue-400 font-semibold" />
+            </h2>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">

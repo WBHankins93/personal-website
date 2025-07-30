@@ -62,7 +62,7 @@ export type Project = {
       name: "Terraform AWS Modules",
       description: "Created reusable Terraform modules for AWS infrastructure provisioning, including VPC, EKS, RDS, and security groups with best practice configurations.",
       technologies: ["Terraform", "AWS", "CloudFormation", "GitHub Actions"],
-      github_url: "https://github.com/WBHankins93/terraform-infra-platform",
+      github_url: "https://github.com/WBHankins93/terraform-modules",
       image_url: "",
       category: "infrastructure",
       featured: true
@@ -108,28 +108,28 @@ export type Project = {
       category: "ci-cd",
       featured: true
     },
-    {
-      id: "1",
-      name: "Kubernetes Home Lab",
-      description: "A comprehensive home lab setup using Kubernetes (k3s) on a Raspberry Pi cluster. Features GitOps with ArgoCD, monitoring with Prometheus & Grafana, and automated deployments.",
-      technologies: ["Kubernetes", "Raspberry Pi", "k3s", "ArgoCD", "GitOps", "Prometheus", "Helm"],
-      github_url: "",
-      image_url: "",
-      category: "infrastructure",
-      featured: false,
-      draft: true
-    },
-    {
-      id: "11",
-      name: "Infrastructure Monitoring Stack",
-      description: "Implemented comprehensive monitoring solution using Prometheus, Grafana, and ELK stack with custom dashboards and intelligent alerting for 50+ microservices.",
-      technologies: ["Prometheus", "Grafana", "Elasticsearch", "Opensearch"],
-      github_url: "",
-      image_url: "",
-      category: "monitoring",
-      featured: false,
-      draft: true
-    }
+    // {
+    //   id: "1",
+    //   name: "Kubernetes Home Lab",
+    //   description: "A comprehensive home lab setup using Kubernetes (k8s) on a Raspberry Pi cluster. Features GitOps with ArgoCD, monitoring with Prometheus & Grafana, and automated deployments.",
+    //   technologies: ["Kubernetes", "Raspberry Pi", "k3s", "ArgoCD", "GitOps", "Prometheus", "Helm"],
+    //   github_url: "",
+    //   image_url: "",
+    //   category: "infrastructure",
+    //   featured: false,
+    //   draft: true
+    // },
+    // {
+    //   id: "11",
+    //   name: "Infrastructure Monitoring Stack",
+    //   description: "Implemented comprehensive monitoring solution using Prometheus, Grafana, and ELK stack with custom dashboards and intelligent alerting for 50+ microservices.",
+    //   technologies: ["Prometheus", "Grafana", "Elasticsearch", "Opensearch"],
+    //   github_url: "",
+    //   image_url: "",
+    //   category: "monitoring",
+    //   featured: false,
+    //   draft: true
+    // }
   ];
   
   
