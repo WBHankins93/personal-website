@@ -43,11 +43,11 @@ export default function HeroSection() {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Ben Hankins
-            <h2 className="text-xl md:text-2xl font-medium text-white">
-              <TypingAnimation words={roles} className="text-blue-400 font-semibold" />
-            </h2>
+            Ben Hankins  
           </h1>
+          <h2 className="text-xl md:text-2xl font-medium text-white">
+            <TypingAnimation words={roles} className="text-blue-400 font-semibold" />
+          </h2>
 
           <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
             Experienced SRE/DevOps engineer building infrastructure that stays out of the way and helps engineers move quickly without second-guessing their tools.
