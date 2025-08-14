@@ -1,18 +1,15 @@
 
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Label } from "@/components/ui/label";
 import { 
   Mail, 
   Phone, 
   MapPin,
-  Send,
-  CheckCircle,
 } from "lucide-react";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function ContactSection() {
   
@@ -48,8 +45,8 @@ export default function ContactSection() {
               Want to Connect?
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Ready to transform your infrastructure? Let's discuss how we can build 
-              scalable, reliable solutions that drive your business forward.
+              {`Ready to transform your infrastructure? Let's discuss how we can build 
+              scalable, reliable solutions that drive your business forward.`}
             </p>
           </div>
 

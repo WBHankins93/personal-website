@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
-            <h2 className="text-5xl font-bold mb-4">Let's Connect</h2>
+            <h2 className="text-5xl font-bold mb-4">{`Let's Connect`}</h2>
             <p className="text-slate-400 mb-8 max-w-lg mx-auto">
               Have a project in mind or just want to talk about tech? <br/> My inbox is always open.
             </p>

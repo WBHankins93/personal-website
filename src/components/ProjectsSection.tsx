@@ -57,7 +57,7 @@ export default function ProjectsSection() {
             <div className="text-center py-16">
               <Folder className="w-16 h-16 mx-auto text-slate-400 mb-4" />
               <h3 className="text-xl font-semibold text-slate-600 mb-2">No Projects Yet</h3>
-              <p className="text-slate-500">Projects will be displayed here once they're added to the portfolio.</p>
+              <p className="text-slate-500">{`Projects will be displayed here once they're added to the portfolio.`}</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
