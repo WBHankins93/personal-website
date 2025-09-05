@@ -101,24 +101,26 @@ export default function ProjectsSection() {
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
-              const styles =
-                isActive && category.id !== "all"
-                  ? "bg-gradient-to-r " +
-                    cat(category.id).grad +
-                    " border-transparent shadow-sm"
-                  : "bg-white hover:bg-slate-50";
+              const activeStyles =
+                category.id !== "all"
+                  ? "bg-gradient-to-r " + cat(category.id as any).grad + " border-transparent shadow-sm text-slate-900"
+                  : "bg-white ring-1 ring-slate-200 shadow-sm text-slate-900"; // keeps All readable too
               return (
                 <Button
                   key={category.id}
-                  variant={isActive ? "default" : "outline"}
+                  variant="outline" // ← keep outline so text doesn't turn white
                   onClick={() => setSelectedCategory(category.id)}
-                  className={clsx("rounded-full transition", styles)}
+                  className={clsx(
+                    "rounded-full transition",
+                    isActive ? activeStyles : "bg-white hover:bg-slate-50"
+                  )}
                 >
                   {category.label}
                 </Button>
               );
             })}
           </div>
+
 
           {filteredProjects.length === 0 ? (
             <div className="text-center py-16">
@@ -143,43 +145,32 @@ export default function ProjectsSection() {
                   >
                     <div className={clsx("p-[1px] rounded-2xl ring-1", c.ring, "bg-gradient-to-br", c.grad)}>
                       <Card className="group rounded-2xl border-0 bg-white backdrop-blur supports-[backdrop-filter]:bg-white/70 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
-                        {/* Media area or gradient artwork */}
-                        <div className="relative aspect-video overflow-hidden">
-                          {project.image_url ? (
+                        {/* Media area (render only if image exists) */}
+                        {project.image_url ? (
+                          <div className="relative aspect-video overflow-hidden">
                             <Image
                               src={project.image_url}
                               alt={project.name}
                               fill
                               sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                              priority={false}
                             />
-                          ) : (
-                            <div
-                              className={clsx(
-                                "h-full w-full",
-                                "bg-[radial-gradient(1000px_500px_at_-10%_-10%,rgba(0,0,0,0.06),transparent),radial-gradient(800px_400px_at_110%_120%,rgba(0,0,0,0.06),transparent)]",
-                                "bg-gradient-to-br",
-                                c.grad
-                              )}
-                            />
-                          )}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                            {project.github_url && (
+                              <a
+                                href={project.github_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium shadow hover:bg-white"
+                                aria-label={`Open repository for ${project.name}`}
+                              >
+                                <FaGithub className="opacity-70" />
+                                Repo
+                              </a>
+                            )}
+                          </div>
+                        ) : null}
 
-                          {/* Hover overlay CTA */}
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                          {project.github_url && (
-                            <a
-                              href={project.github_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium shadow hover:bg-white"
-                              aria-label={`Open repository for ${project.name}`}
-                            >
-                              <FaGithub className="opacity-70" />
-                              Repo
-                            </a>
-                          )}
-                        </div>
 
                         <CardHeader className="pb-3">
                           <div className="flex items-start justify-between">
