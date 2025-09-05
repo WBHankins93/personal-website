@@ -14,13 +14,44 @@ import {
 
 export default function AboutSection() {
   const skills = [
-    { icon: Cloud, name: "Cloud & Infra", description: "AWS, IBM Cloud, GCP, Kubernetes, OpenShift", hoverColor: "hover:bg-red-100" },
-    { icon: Server, name: "Automation & DevOps", description: "Terraform, Helm, Docker, GitHub Actions, Argo CD", hoverColor: "hover:bg-blue-100" },
-    { icon: Shield, name: "Identity & Security", description: "GitHub Secrets, AWS IAM, IRSA, RBAC", hoverColor: "hover:bg-green-100" },
-    { icon: Code, name: "Programming & Scripting", description: "Python, JavaScript, Node.js, Go, Bash", hoverColor: "hover:bg-yellow-100" },
-    { icon: Monitor, name: "Observability", description: "OpenSearch, Vector, Prometheus", hoverColor: "hover:bg-purple-100" },
-    { icon: BrainCircuit, name: "Web & Databases", description: "React, Vue.js, Next.js, Express, SQL, MongoDB", hoverColor: "hover:bg-orange-100" }
+    {
+      icon: Cloud,
+      name: "Cloud & Infra",
+      description: "AWS, IBM Cloud, GCP, Kubernetes, OpenShift",
+      hoverColor: "hover:bg-red-100",
+    },
+    {
+      icon: Server,
+      name: "Automation & DevOps",
+      description: "Terraform, Helm, Docker, GitHub Actions, Argo CD, Ansible",
+      hoverColor: "hover:bg-blue-100",
+    },
+    {
+      icon: Shield,
+      name: "Security & Compliance",
+      description: "AWS IAM, IRSA, least-privilege RBAC, GitHub Secrets, SOC 2",
+      hoverColor: "hover:bg-green-100",
+    },
+    {
+      icon: Code,
+      name: "Programming & Scripting",
+      description: "Python, JavaScript, Node.js, Go, Bash",
+      hoverColor: "hover:bg-yellow-100",
+    },
+    {
+      icon: Monitor,
+      name: "Observability",
+      description: "OpenSearch, Vector, Prometheus",
+      hoverColor: "hover:bg-purple-100",
+    },
+    {
+      icon: BrainCircuit,
+      name: "Web & Databases",
+      description: "React, Vue.js, Next.js, Express, SQL, MongoDB",
+      hoverColor: "hover:bg-orange-100",
+    },
   ];
+  
 
   return (
     <section id="about" className="section-padding bg-white">
