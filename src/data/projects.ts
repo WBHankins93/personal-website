@@ -117,8 +117,7 @@ export const projects: Project[] = [
     github_url: "",
     image_url: "",
     category: "automation",
-    featured: false,
-    draft: true
+    featured: true
   },
   {
     id: "python-pr-summary-bot",
