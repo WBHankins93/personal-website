@@ -101,25 +101,26 @@ export default function ProjectsSection() {
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
-              const activeStyles =
-                category.id !== "all"
-                  ? "bg-gradient-to-r " + cat(category.id as any).grad + " border-transparent shadow-sm text-slate-900"
-                  : "bg-white ring-1 ring-slate-200 shadow-sm text-slate-900"; // keeps All readable too
+
+              const styles = isActive
+                ? category.id === "all"
+                  ? "bg-white ring-1 ring-slate-200 shadow-sm text-slate-900"
+                  : `bg-gradient-to-r ${cat(category.id).grad} border-transparent shadow-sm text-slate-900`
+                : "bg-white hover:bg-slate-50";
+
               return (
                 <Button
                   key={category.id}
-                  variant="outline" // ← keep outline so text doesn't turn white
+                  variant="outline"
                   onClick={() => setSelectedCategory(category.id)}
-                  className={clsx(
-                    "rounded-full transition",
-                    isActive ? activeStyles : "bg-white hover:bg-slate-50"
-                  )}
+                  className={clsx("rounded-full transition", styles)}
                 >
                   {category.label}
                 </Button>
               );
             })}
           </div>
+
 
 
           {filteredProjects.length === 0 ? (
