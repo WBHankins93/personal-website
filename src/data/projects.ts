@@ -94,7 +94,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Go", "CLI", "SRE", "Automation", "Bash"],
     github_url: "https://github.com/WBHankins93/python-go-sre-utils",
     image_url: "",
-    category: "automation",
+    category: "security",
     featured: true
   },
   {
