@@ -66,7 +66,7 @@ export default function HeroSection() {
               onClick={() => setShowModal(true)}
               className="px-6 py-2 bg-white text-slate-900 font-semibold rounded shadow hover:bg-slate-100 transition font-body"
             >
-              View CV
+              Resume
             </button>
             <CVModal isOpen={showModal} onClose={() => setShowModal(false)} />
           </div>
