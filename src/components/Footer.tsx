@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
@@ -25,6 +26,10 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
+            <div className="mx-auto mb-5 inline-flex items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15 p-2">
+              <Image src="/b-logo.png" alt="Ben Hankins logo" width={28} height={28} />
+            </div>
+
             <h2 className="text-5xl font-bold mb-4">{`Let's Connect`}</h2>
             <p className="text-slate-400 mb-8 max-w-lg mx-auto">
               Have a project in mind or just want to talk about tech? <br/> My inbox is always open.

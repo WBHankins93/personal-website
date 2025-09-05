@@ -1,5 +1,6 @@
 // components/Header.tsx
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -31,21 +32,34 @@ export default function Header() {
   return (
     <header
       className={[
-        // fixed + layers
         "fixed inset-x-0 top-0 z-50",
-        // explicit height so we can pad the page correctly
         "h-16 md:h-20",
-        // glass baseline that becomes solid on scroll/menu
         isScrolled || isMenuOpen
           ? "bg-white/80 dark:bg-zinc-900/70 backdrop-blur border-b border-black/5 dark:border-white/10"
           : "bg-transparent",
         "transition-colors duration-300",
-        // safe-area polish
         "pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]",
       ].join(" ")}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
-        <div className="text-2xl font-bold gradient-text">Ben Hankins</div>
+        {/* LEFT: logo + name grouped */}
+        <a
+          href="#home"
+          className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+          aria-label="Go to home"
+        >
+          <Image
+            src="/b-logo-back-removed.png"
+            alt="Ben Hankins logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 rounded-lg ring-1 ring-black/5 dark:ring-white/10"
+            priority
+          />
+          <span className="text-xl md:text-2xl font-bold gradient-text">
+            Ben Hankins
+          </span>
+        </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -60,7 +74,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle (stays far right) */}
         <Button
           variant="ghost"
           size="icon"
