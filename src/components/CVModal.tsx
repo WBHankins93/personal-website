@@ -39,7 +39,7 @@ export default function CVModal({
         {/* PDF Viewer */}
         <div className="flex-1 overflow-auto px-4 pb-4">
           <embed
-            src="/devops-resume-9-4.pdf"
+            src="/resume-0.pdf"
             className="w-full h-[75vh]"
             title="Ben Hankins Resume"
           />
