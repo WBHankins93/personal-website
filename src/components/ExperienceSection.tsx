@@ -23,11 +23,11 @@ export default function ExperienceSection() {
       ],
       achievements: [
         "Built GitHub Actions workflows to automate Terraform for AWS and Kubernetes, reducing deployment time by 90% across 4 environments.",
-        "Deployed and maintained 4 production services using Helm, including chart templating and secrets integration.",
-        "Managed IAM roles, GitHub Secrets, and IRSA to securely provision workloads and enforce least-privilege access.",
-        "Oversaw SOC 2 readiness, driving completion from 34% to 100% compliance.",
-        "Tuned OpenSearch visibility by refining Vector transforms and dashboard filters, improving log quality.",
-        "Created Python scripts to summarize Terraform output and post clean PR plan summaries, reducing review friction."
+        "Deployed and maintained 4 production services using Helm with chart templating and secrets integration.",
+        "Managed IAM roles, GitHub Secrets, and IRSA to securely provision workloads with least-privilege access.",
+        "Drove SOC 2 readiness from 34% to 100% compliance.",
+        "Optimized OpenSearch visibility through Vector transforms and dashboard filters, improving log quality.",
+        "Automated IAM policy validation and RBAC auditing with Python scripts."
       ],
       technologies: ["AWS", "Kubernetes", "Terraform", "GitHub Actions", "Helm", "OpenSearch", "Vector", "Python"]
     },
