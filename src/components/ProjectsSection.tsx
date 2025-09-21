@@ -197,7 +197,7 @@ export default function ProjectsSection() {
                 <Folder className="w-16 h-16 mx-auto text-slate-400 mb-4" />
                 <h3 className="text-xl font-semibold text-slate-600 mb-2">No Projects Yet</h3>
                 <p className="text-slate-500">
-                  Projects will be displayed here once they're added to the portfolio.
+                  Projects will be displayed here once they&apos;re added to the portfolio.
                 </p>
               </motion.div>
             ) : (
