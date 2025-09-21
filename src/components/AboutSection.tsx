@@ -57,19 +57,19 @@ export default function AboutSection() {
     {
       icon: Shield,
       name: "Security & Compliance",
-      description: "AWS IAM, IRSA, least-privilege RBAC, SOC 2",
+      description: "AWS IAM, IRSA, RBAC, SOC 2",
       key: "security",
     },
     {
       icon: Code,
       name: "Programming & Scripting",
-      description: "Python, Go, JavaScript/Node.js, Bash",
+      description: "Python, JavaScript/Node.js, Bash, Go",
       key: "ci-cd",
     },
     {
       icon: Monitor,
       name: "Observability",
-      description: "OpenSearch, Vector, Prometheus",
+      description: "OpenSearch, Vector, Prometheus, Grafana",
       key: "monitoring",
     },
     {
