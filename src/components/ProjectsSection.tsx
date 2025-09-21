@@ -147,7 +147,7 @@ export default function ProjectsSection() {
               transition={{ delay: 0.1 }}
               className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
             >
-              Real-world solutions I've architected, from infrastructure automation to platform engineering that powers production systems.
+              Real-world solutions I&apos;ve architected, from infrastructure automation to platform engineering that powers production systems.
             </motion.p>
           </div>
 
