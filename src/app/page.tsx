@@ -29,6 +29,10 @@ export default function HomePage() {
         <ProjectsSection />
       </section>
 
+      {/* <section className="py-12">
+        <ContactSection />
+      </section> */}
+
       <footer id="footer">
         <Footer />
       </footer>
