@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, MapPin, Code, TrendingUp, Users, Award } from "lucide-react";
+import Image from "next/image";
 
 export default function ExperienceSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -195,7 +196,7 @@ export default function ExperienceSection() {
                             {/* Company Logo */}
                             <div className="w-14 h-14 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm">
                               {exp.logo ? (
-                                <img 
+                                <Image 
                                   src={exp.logo} 
                                   alt={`${exp.company} logo`} 
                                   className="object-contain w-full h-full"

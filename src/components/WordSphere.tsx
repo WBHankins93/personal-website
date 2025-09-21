@@ -66,7 +66,7 @@ function WordSphereScene() {
         radius * Math.cos(phi),
       ] as [number, number, number];
     });
-  }, []);
+  }, [wordCount]);
 
   useFrame((state) => {
     if (groupRef.current) {
