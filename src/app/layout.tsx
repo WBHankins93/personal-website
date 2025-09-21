@@ -25,6 +25,10 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   title: "Ben Hankins | SRE & DevOps Engineer",
   description: "Experienced infrastructure engineer...",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

@@ -35,7 +35,7 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="inline-flex items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15 p-2">
-                  <Image src="/b-logo.png" alt="Ben Hankins logo" width={28} height={28} />
+                  <Image src="/b-logo-fav.png" alt="Ben Hankins logo" width={48} height={48} />
                 </div>
                 <h3 className="text-2xl font-bold">Let&apos;s Connect</h3>
               </div>

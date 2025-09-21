@@ -49,11 +49,11 @@ export default function Header() {
           aria-label="Go to home"
         >
           <Image
-            src="/b-logo-back-removed.png"
+            src="/b-logo-refined.png"
             alt="Ben Hankins logo"
-            width={32}
-            height={32}
-            className="h-8 w-8 shrink-0 rounded-lg ring-1 ring-black/5 dark:ring-white/10"
+            width={48}
+            height={48}
+            className="h-12 w-12 shrink-0 rounded-lg ring-1 ring-black/5 dark:ring-white/10"
             priority
           />
           <span className="text-xl md:text-2xl font-bold gradient-text">
@@ -67,7 +67,7 @@ export default function Header() {
             <button
               key={item.label}
               onClick={() => scrollToSection(item.href)}
-              className="text-slate-700 hover:text-orange-600 transition-colors font-medium"
+              className="text-slate-700 hover:text-emerald-600 transition-colors font-medium"
             >
               {item.label}
             </button>
