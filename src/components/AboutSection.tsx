@@ -12,10 +12,6 @@ import {
   Monitor,
   BrainCircuit,
   Code,
-  CheckCircle2,
-  Target,
-  DollarSign,
-  Zap,
   Users,
   Award
 } from "lucide-react";
@@ -23,7 +19,6 @@ import {
 export default function AboutSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredPrinciple, setHoveredPrinciple] = useState<number | null>(null);
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
   // Track mouse position for dynamic effects
   useEffect(() => {
@@ -38,35 +33,11 @@ export default function AboutSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const impactMetrics = [
-    {
-      icon: Target,
-      title: "99.9% Uptime",
-      blurb: "Reliability focus across all production environments",
-      color: "bg-emerald-50 text-emerald-700",
-      iconBg: "bg-emerald-100",
-    },
-    {
-      icon: DollarSign,
-      title: "$10.1M Deal",
-      blurb: "Business impact through technical excellence at IBM",
-      color: "bg-blue-50 text-blue-700", 
-      iconBg: "bg-blue-100",
-    },
-    {
-      icon: Zap,
-      title: "90% Faster",
-      blurb: "Deployment efficiency improvement through automation",
-      color: "bg-purple-50 text-purple-700",
-      iconBg: "bg-purple-100",
-    },
-  ];
-
   const principles = [
     {
       icon: Users,
       title: "Developer experience first",
-      blurb: "20% PRODUCTIVITY BOOST",
+      blurb: "Clear defaults and paved paths that help teams ship without friction",
       expandedDetails: "I prioritize intuitive APIs, comprehensive documentation, and automated workflows that reduce cognitive overhead for development teams.",
       color: "bg-gradient-to-br from-blue-50 to-cyan-50",
       iconBg: "bg-blue-100",
@@ -172,37 +143,18 @@ export default function AboutSection() {
             <div>
               <h3 className="text-2xl font-bold text-slate-900 mb-6">My journey</h3>
               
-              {/* Impact Metrics under My journey */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                {impactMetrics.map((metric) => (
-                  <div
-                    key={metric.title}
-                    className={`rounded-2xl p-4 text-center shadow-sm hover:shadow-md transition-shadow ${metric.color}`}
-                  >
-                    <div className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full ${metric.iconBg}`}>
-                      <metric.icon className="h-5 w-5" />
-                    </div>
-                    <div className="font-bold text-sm mb-1">{metric.title}</div>
-                    <div className="text-xs opacity-80">{metric.blurb}</div>
-                  </div>
-                ))}
-              </div>
-
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development and leaned into platform work after
-                  seeing how much time teams lose to tooling. My focus is building
-                  systems that feel simple to use and safe to ship.
+                  I started coding in college and gravitated toward web development, but quickly realized the bigger impact was in infrastructure. Watching teams struggle with deployment bottlenecks made it clear that the real work was building systems that just work.
                 </p>
                 <p>
-                  At IBM I codified cloud environments and helped win a{" "}
-                  <span className="font-medium text-blue-600">$10.1M</span> SAP RISE deal by proving speed and safety.
-                  At Prove AI I owned deployment and operations for production services,
-                  using Terraform, Helm, and GitHub Actions to remove bottlenecks.
+                  My path took me from Mississippi to Texas to Oregon to Louisiana, picking up different perspectives along the way. Travel with my grandparents early on gave me a sense of wanderlust that still drives me today. Oregon remains my favorite place where mountains meet the sea.
                 </p>
                 <p>
-                  The result I care about most is clear ownership and fewer surprises
-                  from idea to production.
+                  Outside of work, I&apos;m usually hiking, paddleboarding, or in my workshop woodworking. I&apos;m also working on productivity tools designed for different mental frameworks. Plus I&apos;m a bit of a local history nerd and love hitting up concerts and festivals.
+                </p>
+                <p>
+                  My philosophy is simple: wake up wanting to be better than yesterday and leave the world better than you found it.
                 </p>
               </div>
             </div>
@@ -228,7 +180,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Interactive Principles with expandedDetails */}
+          {/* Interactive Principles */}
           <div className="mb-20">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
@@ -261,28 +213,27 @@ export default function AboutSection() {
                     </div>
                     <div className="font-semibold text-slate-900 mb-2">{principle.title}</div>
                     
-                    {/* Default content (show expandedDetails first) */}
+                    {/* Default content (show short blurb by default) */}
                     <motion.div
-                      className="text-sm text-slate-700 absolute inset-x-6"
-                      style={{ top: '120px' }}
+                      className="text-sm text-slate-600"
                       animate={{ 
                         opacity: hoveredPrinciple === index ? 0 : 1
                       }}
                       transition={{ duration: 0.2 }}
                     >
-                      {principle.expandedDetails}
+                      {principle.blurb}
                     </motion.div>
                     
-                    {/* Hover content (show blurb/stat on hover) */}
+                    {/* Hover content (show long expandedDetails on hover) */}
                     <motion.div
-                      className="text-sm text-slate-600 font-medium absolute inset-x-6"
+                      className="text-sm text-slate-700 absolute inset-x-6"
                       style={{ top: '120px' }}
                       animate={{ 
                         opacity: hoveredPrinciple === index ? 1 : 0
                       }}
                       transition={{ duration: 0.2, delay: 0.1 }}
                     >
-                      {principle.blurb}
+                      {principle.expandedDetails}
                     </motion.div>
                   </motion.div>
                 </motion.div>
@@ -290,7 +241,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Interactive Skills with Progress Bars */}
+          {/* Technical expertise - No hover effects, always show proficiency bars */}
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -310,55 +261,40 @@ export default function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  onHoverStart={() => setHoveredSkill(index)}
-                  onHoverEnd={() => setHoveredSkill(null)}
-                  className="group"
                 >
                   <Card
-                    className={`overflow-hidden rounded-2xl border-0 ring-1 transition-all duration-300 h-full ${c.ring} ${c.bg}`}
-                    style={{
-                      transform: hoveredSkill === index ? 'translateY(-4px)' : 'translateY(0px)',
-                      boxShadow: hoveredSkill === index ? '0 20px 40px rgba(0,0,0,0.1)' : '0 4px 12px rgba(0,0,0,0.05)'
-                    }}
+                    className={[
+                      "overflow-hidden rounded-2xl border-0 ring-1 h-full",
+                      c.ring,
+                      c.bg,
+                    ].join(" ")}
+                    style={{ minHeight: '280px' }}
                   >
                     <CardContent className="bg-transparent p-6 text-center">
-                      <motion.div
-                        className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white ring-1 ${c.ring} shadow-inner transition-all duration-300`}
-                        whileHover={{ 
-                          scale: 1.1,
-                          rotate: [0, -5, 5, 0]
-                        }}
+                      <div
+                        className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white ring-1 ${c.ring} shadow-inner`}
                       >
                         <skill.icon className="h-8 w-8 text-slate-800" />
-                      </motion.div>
+                      </div>
+                      <h4 className="font-semibold text-slate-900 mb-2">{skill.name}</h4>
+                      <p className="text-sm text-slate-700 mb-4">{skill.description}</p>
                       
-                      <h4 className="font-semibold text-slate-900 mb-1">{skill.name}</h4>
-                      
-                      {/* Experience badge */}
-                      <div className="text-xs text-slate-500 mb-3 font-medium">{skill.experience}</div>
-                      
-                      {/* Animated progress bar - only show on hover */}
-                      <motion.div 
-                        className="mb-3"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ 
-                          opacity: hoveredSkill === index ? 1 : 0,
-                          height: hoveredSkill === index ? "auto" : 0
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
+                      {/* Always visible progress bar */}
+                      <div className="mb-2">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-slate-500">{skill.experience}</span>
+                          <span className="text-xs text-slate-600 font-medium">{skill.level}%</span>
+                        </div>
                         <div className="w-full bg-white/50 rounded-full h-2">
                           <motion.div
                             className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
                             initial={{ width: 0 }}
-                            animate={{ width: hoveredSkill === index ? `${skill.level}%` : 0 }}
-                            transition={{ duration: 0.8 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
                           />
                         </div>
-                        <div className="text-xs text-slate-600 mt-1 text-center">{skill.level}% proficiency</div>
-                      </motion.div>
-                      
-                      <p className="text-sm text-slate-700">{skill.description}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
