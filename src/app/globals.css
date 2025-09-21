@@ -119,6 +119,20 @@
   }
 }
 
+/* FONT OVERRIDE: Ensure our custom fonts are applied */
+@layer base {
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading), sans-serif !important;
+  }
+  
+  body, p, span, div, .font-body {
+    font-family: var(--font-body), sans-serif !important;
+  }
+  
+  code, pre, .font-mono {
+    font-family: var(--font-mono), monospace !important;
+  }
+}
 
 .typing-cursor::after {
   content: '|';

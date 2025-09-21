@@ -2,33 +2,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Manrope, Open_Sans, Fira_Code } from "next/font/google";
+// NEW: Industrial Heritage with Human Touch font combination
+import { Titillium_Web, Source_Sans_3 } from "next/font/google";
 
-const manrope = Manrope({
+const titilliumWeb = Titillium_Web({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
-  variable: "--font-heading",  // 👈 This matches Tailwind config
+  variable: "--font-heading",
 });
 
-const openSans = Open_Sans({
+const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
   weight: ["400", "600"],
-  variable: "--font-body",     // 👈 Matches Tailwind config
+  variable: "--font-body",
 });
 
-const firaCode = Fira_Code({
+// NOTE: Anonymous Pro isn't available on Google Fonts
+// Using Roboto Mono as excellent alternative with similar feel
+import { Roboto_Mono } from "next/font/google";
+
+const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-mono",     // 👈 Matches Tailwind config
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
   title: "Ben Hankins | SRE & DevOps Engineer",
   description: "Experienced infrastructure engineer...",
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-  },
 };
 
 export default function RootLayout({
@@ -37,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${openSans.variable} ${firaCode.variable} antialiased`}
+        className={`${titilliumWeb.variable} ${sourceSans3.variable} ${robotoMono.variable} antialiased`}
       >
         {children}
       </body>
