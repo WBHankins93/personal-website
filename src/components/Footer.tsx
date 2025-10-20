@@ -41,7 +41,7 @@ export default function Footer() {
               </div>
               
               <p className="text-slate-400 mb-6 leading-relaxed">
-                Have a project in mind or just want to talk about tech? My inbox is always open.
+                Have a project in mind or just want to talk about tech?
               </p>
 
               <div className="flex items-center gap-4">
