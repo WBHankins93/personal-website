@@ -77,7 +77,7 @@ export default function HeroSection() {
           </h2>
 
           <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-4xl mx-auto font-body">
-            Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from "what if" to production with confidence.
+            Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from &quot;what if&quot; to production with confidence.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">

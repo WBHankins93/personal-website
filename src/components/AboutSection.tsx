@@ -154,7 +154,7 @@ export default function AboutSection() {
                   At Prove AI, I owned production infrastructure and took us from 34% to 100% SOC 2 compliance while keeping 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
                 </p>
                 <p>
-                  What gets me up in the morning is solving real problems for real teams. Whether that's a POC that proves feasibility, architecture that avoids expensive mistakes, or automation that lets engineers ship without second-guessing their tools.
+                  What gets me up in the morning is solving real problems for real teams. Whether that&apos;s a POC that proves feasibility, architecture that avoids expensive mistakes, or automation that lets engineers ship without second-guessing their tools.
                 </p>
               </div>
             </div>
