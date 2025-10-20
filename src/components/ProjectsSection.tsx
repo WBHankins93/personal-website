@@ -151,7 +151,6 @@ export default function ProjectsSection() {
             </motion.p>
           </div>
 
-          {/* Enhanced Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
