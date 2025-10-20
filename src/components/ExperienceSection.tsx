@@ -18,19 +18,18 @@ export default function ExperienceSection() {
       logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/ef8062d24_image.png",
       type: "current",
       highlights: [
-        { icon: TrendingUp, text: "90% reduction in deployment time", metric: true },
-        { icon: Award, text: "SOC 2 compliance: 34% → 100%", metric: true },
-        { icon: Code, text: "4 production services with Helm", metric: true }
+        { icon: Award, text: "SOC 2: 34% → 100%", metric: true },
+        { icon: TrendingUp, text: "99.9% uptime maintained", metric: true },
+        { icon: Code, text: "80% faster deployments", metric: true }
       ],
       achievements: [
-        "Built GitHub Actions workflows to automate Terraform for AWS and Kubernetes, reducing deployment time by 90% across 4 environments.",
-        "Deployed and maintained 4 production services using Helm with chart templating and secrets integration.",
-        "Managed IAM roles, GitHub Secrets, and IRSA to securely provision workloads with least-privilege access.",
-        "Drove SOC 2 readiness from 34% to 100% compliance.",
-        "Optimized OpenSearch visibility through Vector transforms and dashboard filters, improving log quality.",
-        "Automated IAM policy validation and RBAC auditing with Python scripts."
+        "Led SOC 2 compliance from 34% to 100%, establishing control frameworks that enabled successful certification.",
+        "Built production infrastructure automation with Terraform and GitHub Actions, cutting deployment time 80% across 4 environments.",
+        "Maintained 99.9% uptime for customer-facing services with comprehensive secret management and least-privilege access.",
+        "Redesigned observability using Vector and OpenSearch, reducing production issue detection time by 60%.",
+        "Created developer tooling that cut new engineer onboarding time by 50%."
       ],
-      technologies: ["AWS", "Kubernetes", "Terraform", "GitHub Actions", "Helm", "OpenSearch", "Vector", "Python"]
+      technologies: ["AWS", "Kubernetes", "Terraform", "GitHub Actions", "Helm", "SOC 2", "Vector", "OpenSearch", "Python"]
     },
     {
       title: "Cloud Infrastructure Engineer",
@@ -40,56 +39,39 @@ export default function ExperienceSection() {
       logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
       type: "past",
       highlights: [
-        { icon: TrendingUp, text: "85% faster deployments", metric: true },
-        { icon: Award, text: "$10.1M SAP RISE deal", metric: true },
-        { icon: Users, text: "20% team productivity gain", metric: true }
+        { icon: Award, text: "$10.1M deal closed", metric: true },
+        { icon: Users, text: "12 enterprise clients", metric: true },
+        { icon: TrendingUp, text: "85% faster setup", metric: true }
       ],
       achievements: [
-        "Architected and automated cloud environments on IBM Cloud, reducing deployment times by 85% through Terraform automation.",
-        "Led technical client sessions, collaborating on public and hybrid cloud solutions, resulting in a $10.1M SAP RISE IBM Cloud deal.",
-        "Developed monitoring systems to ensure 99.9% uptime and optimized performance across cloud infrastructures.",
-        "Mentored junior engineers, improving team productivity by 20%."
+        "Technical advisor for 12 enterprise clients across energy, financial services, and healthcare, managing full lifecycle from discovery through production.",
+        "Led technical delivery for $10.1M SAP RISE deal with CenterPoint Energy. Designed automation that reduced environment deployment by 85%.",
+        "Partnered with Solutions Engineers during sales cycles, delivering presentations and POCs that demonstrated feasibility.",
+        "Architected multi-cluster Kubernetes solutions with network policies, service mesh, and compliance controls.",
+        "Provided ongoing guidance and optimization to ensure customer success."
       ],
-      technologies: ["IBM Cloud", "Terraform", "Automation", "Monitoring", "Mentorship", "Client Delivery"]
+      technologies: ["Multi-cloud", "Terraform", "Kubernetes", "Service Mesh", "Solutions Architecture", "Client Delivery", "Pre-Sales"]
     },
     {
-      title: "Cloud Engineer",
+      title: "Solutions Engineer",
       company: "IBM",
-      period: "Feb 2021 - Jun 2022",
+      period: "Dec 2019 - Feb 2022",
       location: "Austin, TX",
       logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
       type: "past",
       highlights: [
-        { icon: TrendingUp, text: "40% build time reduction", metric: true },
-        { icon: Code, text: "Microservices on OpenShift", metric: false },
-        { icon: Award, text: "CI/CD pipeline automation", metric: false }
+        { icon: Users, text: "10+ presentations", metric: true },
+        { icon: Code, text: "Full sales lifecycle", metric: false },
+        { icon: Award, text: "80% POC conversion", metric: true }
       ],
       achievements: [
-        "Provisioned scalable cloud infrastructure using Terraform, significantly improving deployment efficiency.",
-        "Deployed microservices on Red Hat OpenShift, enabling seamless CI/CD integration.",
-        "Engineered Argo CD container pipelines, reducing build times by 40%.",
-        "Deployed and configured Cloud Pak for Data."
+        "Primary technical resource for enterprise customers through full sales cycle. Delivered 10+ presentations driving purchasing decisions.",
+        "Built POC environments with 80% conversion rate through effective scoping and stakeholder management.",
+        "Deployed enterprise Kubernetes platforms with GitOps, supporting customers from pre-sales through production.",
+        "Translated business challenges into technical solutions as trusted advisor.",
+        "Reduced POC build times 40% through automation and templating."
       ],
-      technologies: ["Terraform", "Red Hat OpenShift", "Argo CD", "Microservices", "Cloud Pak for Data"]
-    },
-    {
-      title: "Pre-Sales Technical Engineer",
-      company: "IBM",
-      period: "Dec 2019 - Feb 2021",
-      location: "Austin, TX",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-      type: "past",
-      highlights: [
-        { icon: Users, text: "Client cloud modernization", metric: false },
-        { icon: Code, text: "Tekton CI/CD optimization", metric: false },
-        { icon: Award, text: "Successful migrations", metric: false }
-      ],
-      achievements: [
-        "Guided clients in cloud modernization and migration, enhancing Java applications for cloud environments.",
-        "Managed Tekton container pipelines for CI/CD, optimizing deployment processes.",
-        "Designed cloud migration strategies using Red Hat OpenShift, leading to successful project completions."
-      ],
-      technologies: ["Cloud Modernization", "Tekton", "CI/CD", "Red Hat OpenShift", "Java", "Pre-Sales"]
+      technologies: ["Pre-Sales", "Technical Consultation", "Kubernetes", "OpenShift", "GitOps", "Argo CD", "Customer Success"]
     },
     {
       title: "Web Developer",
@@ -99,15 +81,15 @@ export default function ExperienceSection() {
       logo: null,
       type: "past",
       highlights: [
-        { icon: Code, text: "Chrome Extension Development", metric: false },
-        { icon: Award, text: "Production Client Usage", metric: false },
-        { icon: TrendingUp, text: "Vue.js Expertise", metric: false }
+        { icon: Code, text: "Full-stack development", metric: false },
+        { icon: Award, text: "Production deployment", metric: false },
+        { icon: TrendingUp, text: "SDLC ownership", metric: false }
       ],
       achievements: [
-        "Responsible for the SDLC of a Google Chrome extension using Vue.js framework to build a recruiter talent pool database.",
-        "Contributed to a product currently being used by Kortivity clients."
+        "Built Chrome extension using Vue.js for recruiter talent database, managing complete SDLC.",
+        "Contributed to product currently in production with Kortivity clients."
       ],
-      technologies: ["Vue.js", "Google Chrome Extension", "SDLC", "JavaScript"]
+      technologies: ["Vue.js", "Chrome Extension", "JavaScript", "Full-Stack"]
     }
   ];
 
@@ -136,7 +118,7 @@ export default function ExperienceSection() {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
             >
-              Professional Journey
+              Professional Experience
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -145,8 +127,7 @@ export default function ExperienceSection() {
               transition={{ delay: 0.1 }}
               className="text-xl text-slate-600 max-w-3xl mx-auto"
             >
-              From web development to infrastructure engineering, building scalable systems 
-              and fostering DevOps culture across innovative companies.
+              Helping enterprise customers succeed through technical expertise, consultative problem-solving, and customer-focused solution delivery.
             </motion.p>
           </div>
 
@@ -199,6 +180,8 @@ export default function ExperienceSection() {
                                 <Image 
                                   src={exp.logo} 
                                   alt={`${exp.company} logo`} 
+                                  width={56}
+                                  height={56}
                                   className="object-contain w-full h-full"
                                 />
                               ) : (
@@ -244,33 +227,33 @@ export default function ExperienceSection() {
                           </div>
                         </div>
 
-                        {/* Smart Horizontal Expansion */}
+                        {/* Smart Horizontal Expansion - Clean, No Overlap */}
                         <AnimatePresence>
                           {hoveredIndex === index && (
                             <motion.div
                               initial={{ width: 0, opacity: 0 }}
-                              animate={{ width: "500px", opacity: 1 }}
+                              animate={{ width: "480px", opacity: 1 }}
                               exit={{ width: 0, opacity: 0 }}
                               transition={{ duration: 0.4, ease: "easeInOut" }}
-                              className={`overflow-hidden absolute top-0 bg-white shadow-2xl border-2 border-blue-200 z-20 ${
+                              className={`overflow-hidden absolute top-0 bottom-0 bg-white shadow-2xl border-2 border-blue-200 z-30 ${
                                 index % 2 === 0 
-                                  ? 'left-full rounded-r-xl border-l-0' // Right side of timeline expands toward center (leftward)
-                                  : 'right-full rounded-l-xl border-r-0' // Left side of timeline expands toward center (rightward)
+                                  ? 'left-full rounded-r-xl border-l-0'
+                                  : 'right-full rounded-l-xl border-r-0'
                               }`}
-                              style={{ minHeight: "100%", width: "500px" }}
+                              style={{ width: "480px" }}
                             >
-                              <div className="p-6" style={{ width: "500px" }}>
-                                <h4 className="font-semibold text-slate-900 mb-4 text-lg">Key Achievements:</h4>
-                                <ul className="space-y-3">
+                              <div className="p-5 h-full overflow-y-auto" style={{ width: "480px" }}>
+                                <h4 className="font-semibold text-slate-900 mb-3 text-base sticky top-0 bg-white pb-2">Key Achievements:</h4>
+                                <ul className="space-y-2.5">
                                   {exp.achievements.map((achievement, achIndex) => (
                                     <motion.li 
                                       key={achIndex} 
-                                      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                                      initial={{ opacity: 0, x: index % 2 === 0 ? -15 : 15 }}
                                       animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: achIndex * 0.1 }}
-                                      className="flex items-start gap-3"
+                                      transition={{ delay: achIndex * 0.08 }}
+                                      className="flex items-start gap-2.5"
                                     >
-                                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
                                       <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
                                     </motion.li>
                                   ))}

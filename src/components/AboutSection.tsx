@@ -13,14 +13,15 @@ import {
   BrainCircuit,
   Code,
   Users,
-  Award
+  Lightbulb,
+  Handshake,
+  Target
 } from "lucide-react";
 
 export default function AboutSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredPrinciple, setHoveredPrinciple] = useState<number | null>(null);
 
-  // Track mouse position for dynamic effects
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -36,27 +37,27 @@ export default function AboutSection() {
   const principles = [
     {
       icon: Users,
-      title: "Developer experience first",
-      blurb: "Clear defaults and paved paths that help teams ship without friction",
-      expandedDetails: "I prioritize intuitive APIs, comprehensive documentation, and automated workflows that reduce cognitive overhead for development teams.",
+      title: "Customer discovery first",
+      blurb: "Understanding the business problem before jumping to technical solutions",
+      expandedDetails: "What's the real pain point? What does success look like? These questions shape every technical decision.",
       color: "bg-gradient-to-br from-blue-50 to-cyan-50",
       iconBg: "bg-blue-100",
       iconColor: "text-blue-700"
     },
     {
-      icon: Shield,
-      title: "Security by design",
-      blurb: "IAM, secrets, and RBAC baked into workflows, not bolted on later.",
-      expandedDetails: "Security controls are integrated from day one, with automated policy enforcement and least-privilege access patterns built into every deployment pipeline.",
+      icon: Lightbulb,
+      title: "Prove it works",
+      blurb: "Building working proof-of-concepts that validate feasibility and ROI",
+      expandedDetails: "I build functional POCs that let you touch, test, and validate before committing. Seeing is believing.",
       color: "bg-gradient-to-br from-emerald-50 to-teal-50",
       iconBg: "bg-emerald-100", 
       iconColor: "text-emerald-700"
     },
     {
-      icon: Award,
-      title: "Reliability as a habit",
-      blurb: "Simple, observable systems with automation that catches drift early.",
-      expandedDetails: "Monitoring, alerting, and auto-remediation are built into infrastructure patterns, ensuring systems self-heal and teams get actionable insights.",
+      icon: Handshake,
+      title: "Partnership, not handoffs",
+      blurb: "Supporting customers through implementation and beyond",
+      expandedDetails: "I stay engaged through deployment, provide optimization guidance, and ensure your team owns the solution.",
       color: "bg-gradient-to-br from-purple-50 to-pink-50",
       iconBg: "bg-purple-100",
       iconColor: "text-purple-700"
@@ -72,51 +73,51 @@ export default function AboutSection() {
     experience: string;
   }> = [
     {
+      icon: Users,
+      name: "Customer Engagement",
+      description: "Technical presentations, POC delivery, solution architecture, stakeholder management",
+      key: "ci-cd",
+      level: 95,
+      experience: "5+ years"
+    },
+    {
       icon: Cloud,
-      name: "Cloud & Infra",
-      description: "AWS, IBM Cloud, GCP, Kubernetes, OpenShift",
+      name: "Cloud & Multi-Cloud",
+      description: "AWS, GCP, IBM Cloud, Azure - architecture, migration, optimization",
       key: "infrastructure",
       level: 90,
       experience: "6+ years"
     },
     {
       icon: Server,
-      name: "Automation & DevOps", 
-      description: "Terraform, Helm, Docker, GitHub Actions, Argo CD, Ansible",
+      name: "Container Platforms", 
+      description: "Kubernetes, OpenShift, Docker, Helm, service mesh, microservices",
       key: "automation",
       level: 95,
       experience: "5+ years"
     },
     {
+      icon: Code,
+      name: "DevOps & Automation",
+      description: "Terraform, Ansible, CI/CD pipelines, GitOps, infrastructure-as-code",
+      key: "automation",
+      level: 90,
+      experience: "5+ years"
+    },
+    {
       icon: Shield,
       name: "Security & Compliance",
-      description: "AWS IAM, IRSA, least-privilege RBAC, SOC 2",
+      description: "IAM, RBAC, SOC 2, compliance frameworks, security controls",
       key: "security",
       level: 85,
       experience: "4+ years"
     },
     {
-      icon: Code,
-      name: "Programming & Scripting",
-      description: "Python, Go, JavaScript/Node.js, Bash",
-      key: "ci-cd",
-      level: 80,
-      experience: "6+ years"
-    },
-    {
       icon: Monitor,
-      name: "Observability",
-      description: "OpenSearch, Vector, Prometheus, Grafana",
+      name: "Observability & SRE",
+      description: "Monitoring, logging, alerting, SLO/SLI design, incident response",
       key: "monitoring",
-      level: 75,
-      experience: "3+ years"
-    },
-    {
-      icon: BrainCircuit,
-      name: "Web & Databases", 
-      description: "React, Next.js, Express, SQL, MongoDB",
-      key: "cloud",
-      level: 70,
+      level: 85,
       experience: "4+ years"
     },
   ];
@@ -133,8 +134,7 @@ export default function AboutSection() {
               </span>
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              SRE, DevOps, and Infrastructure engineer focused on secure,
-              automated platforms that let teams move fast with confidence.
+              Solutions Engineer and infrastructure specialist helping enterprise customers solve complex cloud and platform challenges.
             </p>
           </div>
 
@@ -145,16 +145,16 @@ export default function AboutSection() {
               
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started coding in college and gravitated toward web development, but quickly realized the bigger impact was in infrastructure. Watching teams struggle with deployment bottlenecks made it clear that the real work was building systems that just work.
+                  I started in web development but quickly realized the real impact was in infrastructure. Watching teams struggle with deployment bottlenecks made it clear where I could help most.
                 </p>
                 <p>
-                  My path took me from Mississippi to Texas to Oregon to Louisiana, picking up different perspectives along the way. Travel with my grandparents early on gave me a sense of wanderlust that still drives me today. Oregon remains my favorite place where mountains meet the sea.
+                  At IBM, I worked with 12+ enterprise clients across energy, financial services, and healthcare. The highlight was leading technical delivery for a $10.1M SAP RISE deal with CenterPoint Energy. We proved we could automate their complex infrastructure 85% faster than their manual process, which closed the deal.
                 </p>
                 <p>
-                  Outside of work, I&apos;m usually hiking, paddleboarding, or in my workshop woodworking. I&apos;m also working on productivity tools designed for different mental frameworks. Plus I&apos;m a bit of a local history nerd and love hitting up concerts and festivals.
+                  At Prove AI, I owned production infrastructure and took us from 34% to 100% SOC 2 compliance while keeping 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
                 </p>
                 <p>
-                  My philosophy is simple: wake up wanting to be better than yesterday and leave the world better than you found it.
+                  What gets me up in the morning is solving real problems for real teams. Whether that's a POC that proves feasibility, architecture that avoids expensive mistakes, or automation that lets engineers ship without second-guessing their tools.
                 </p>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Interactive Principles */}
+          {/* How I Work - NEW SECTION */}
           <div className="mb-20">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
@@ -188,7 +188,7 @@ export default function AboutSection() {
               viewport={{ once: true }}
               className="text-2xl font-bold text-slate-900 mb-8 text-center"
             >
-              Principles I build with
+              How I Work
             </motion.h3>
             <div className="grid md:grid-cols-3 gap-6">
               {principles.map((principle, index) => (
@@ -213,7 +213,6 @@ export default function AboutSection() {
                     </div>
                     <div className="font-semibold text-slate-900 mb-2">{principle.title}</div>
                     
-                    {/* Default content (show short blurb by default) */}
                     <motion.div
                       className="text-sm text-slate-600"
                       animate={{ 
@@ -224,7 +223,6 @@ export default function AboutSection() {
                       {principle.blurb}
                     </motion.div>
                     
-                    {/* Hover content (show long expandedDetails on hover) */}
                     <motion.div
                       className="text-sm text-slate-700 absolute inset-x-6"
                       style={{ top: '120px' }}
@@ -241,14 +239,14 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Technical expertise - No hover effects, always show proficiency bars */}
+          {/* Core Capabilities */}
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-2xl font-bold text-slate-900 mb-8 text-center"
           >
-            Technical expertise
+            Core Capabilities
           </motion.h3>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -279,7 +277,6 @@ export default function AboutSection() {
                       <h4 className="font-semibold text-slate-900 mb-2">{skill.name}</h4>
                       <p className="text-sm text-slate-700 mb-4">{skill.description}</p>
                       
-                      {/* Always visible progress bar */}
                       <div className="mb-2">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-xs text-slate-500">{skill.experience}</span>

@@ -8,19 +8,18 @@ import dynamic from 'next/dynamic';
 import TypingAnimation from './TypingAnimation';
 import FloatingTechParticles from './FloatingTechParticles';
 
-// Fixed WordSphere import with proper error handling
 const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: () => null })), { 
   ssr: false,
   loading: () => null
 });
 
 const roles = [
+  "Solutions Engineer",
+  "Technical Solutions Consultant",
+  "Customer Solutions Architect",
   "Site Reliability Engineer",
   "DevOps Engineer", 
-  "Infrastructure Engineer",
-  "Cloud Engineer",
-  "Automation Wizard",
-  "Platform Engineer"
+  "Infrastructure Specialist"
 ];
 
 export default function HeroSection() {
@@ -57,7 +56,7 @@ export default function HeroSection() {
         </div>
       </Suspense>
 
-      {/* Floating Tech Particles - Asteroids Style */}
+      {/* Floating Tech Particles */}
       <FloatingTechParticles />
 
       {/* Enhanced Background Blobs */}
@@ -78,7 +77,7 @@ export default function HeroSection() {
           </h2>
 
           <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-4xl mx-auto font-body">
-            Experienced SRE/DevOps engineer building infrastructure that stays out of the way and helps engineers move quickly without second-guessing their tools.
+            Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from "what if" to production with confidence.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -98,14 +97,14 @@ export default function HeroSection() {
             </button>
           </div>
 
-          {/* Enhanced Stats Grid */}
+          {/* Enhanced Stats Grid - Customer Impact Focus */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-            <Stat title="6+" subtitle="Years Experience" color="text-[#E07A5F]" />
-            <Stat title="90%" subtitle="Faster Deployments" color="text-[#81B29A]" />
-            <Stat title="$9M+" subtitle="Cloud Deals Closed" color="text-green-400" />
-            <Stat title="40%" subtitle="Cost Reduction" color="text-purple-400" />
-            <Stat title="500+" subtitle="CI/CD Executions" color="text-blue-400" />
-            <Stat title="0" subtitle="Critical Incidents" color="text-pink-400" />
+            <Stat title="20+" subtitle="Enterprise Clients" color="text-[#E07A5F]" />
+            <Stat title="$10.1M" subtitle="Deal Closed" color="text-green-400" />
+            <Stat title="85%" subtitle="Faster Deployments" color="text-[#81B29A]" />
+            <Stat title="12+" subtitle="Client Industries" color="text-blue-400" />
+            <Stat title="6+" subtitle="Years Experience" color="text-purple-400" />
+            <Stat title="99.9%" subtitle="Uptime Achieved" color="text-pink-400" />
           </div>
         </div>
       </div>

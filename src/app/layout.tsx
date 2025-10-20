@@ -17,8 +17,6 @@ const sourceSans3 = Source_Sans_3({
   variable: "--font-body",
 });
 
-// NOTE: Anonymous Pro isn't available on Google Fonts
-// Using Roboto Mono as excellent alternative with similar feel
 import { Roboto_Mono } from "next/font/google";
 
 const robotoMono = Roboto_Mono({
@@ -28,8 +26,8 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ben Hankins | SRE & DevOps Engineer",
-  description: "Experienced infrastructure engineer...",
+  title: "Ben Hankins | Solutions Engineer & Cloud Infrastructure Specialist",
+  description: "Solutions Engineer helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.",
 };
 
 export default function RootLayout({
