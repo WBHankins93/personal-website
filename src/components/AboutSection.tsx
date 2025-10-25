@@ -10,17 +10,12 @@ import {
   Server,
   Shield,
   Monitor,
-  BrainCircuit,
   Code,
   Users,
-  Lightbulb,
-  Handshake,
-  Target
 } from "lucide-react";
 
 export default function AboutSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [hoveredPrinciple, setHoveredPrinciple] = useState<number | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -34,36 +29,6 @@ export default function AboutSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const principles = [
-    {
-      icon: Users,
-      title: "Customer discovery first",
-      blurb: "Understanding the business problem before jumping to technical solutions",
-      expandedDetails: "What's the real pain point? What does success look like? These questions shape every technical decision.",
-      color: "bg-gradient-to-br from-blue-50 to-cyan-50",
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-700"
-    },
-    {
-      icon: Lightbulb,
-      title: "Prove it works",
-      blurb: "Building working proof-of-concepts that validate feasibility and ROI",
-      expandedDetails: "I build functional POCs that let you touch, test, and validate before committing. Seeing is believing.",
-      color: "bg-gradient-to-br from-emerald-50 to-teal-50",
-      iconBg: "bg-emerald-100", 
-      iconColor: "text-emerald-700"
-    },
-    {
-      icon: Handshake,
-      title: "Partnership, not handoffs",
-      blurb: "Supporting customers through implementation and beyond",
-      expandedDetails: "I stay engaged through deployment, provide optimization guidance, and ensure your team owns the solution.",
-      color: "bg-gradient-to-br from-purple-50 to-pink-50",
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-700"
-    },
-  ];
-
   const skills: Array<{
     icon: React.ComponentType<{ className?: string }>;
     name: string;
@@ -76,7 +41,7 @@ export default function AboutSection() {
       icon: Users,
       name: "Customer Engagement",
       description: "Technical presentations, POC delivery, solution architecture, stakeholder management",
-      key: "ci-cd",
+      key: "ci-cd", // Blue
       level: 95,
       experience: "5+ years"
     },
@@ -84,7 +49,7 @@ export default function AboutSection() {
       icon: Cloud,
       name: "Cloud & Multi-Cloud",
       description: "AWS, GCP, IBM Cloud, Azure - architecture, migration, optimization",
-      key: "infrastructure",
+      key: "infrastructure", // Cyan
       level: 90,
       experience: "6+ years"
     },
@@ -92,7 +57,7 @@ export default function AboutSection() {
       icon: Server,
       name: "Container Platforms", 
       description: "Kubernetes, OpenShift, Docker, Helm, service mesh, microservices",
-      key: "automation",
+      key: "containers", // Purple - FIXED (was "automation")
       level: 95,
       experience: "5+ years"
     },
@@ -100,7 +65,7 @@ export default function AboutSection() {
       icon: Code,
       name: "DevOps & Automation",
       description: "Terraform, Ansible, CI/CD pipelines, GitOps, infrastructure-as-code",
-      key: "automation",
+      key: "automation", // Orange
       level: 90,
       experience: "5+ years"
     },
@@ -108,7 +73,7 @@ export default function AboutSection() {
       icon: Shield,
       name: "Security & Compliance",
       description: "IAM, RBAC, SOC 2, compliance frameworks, security controls",
-      key: "security",
+      key: "security", // Red
       level: 85,
       experience: "4+ years"
     },
@@ -116,7 +81,7 @@ export default function AboutSection() {
       icon: Monitor,
       name: "Observability & SRE",
       description: "Monitoring, logging, alerting, SLO/SLI design, incident response",
-      key: "monitoring",
+      key: "monitoring", // Emerald
       level: 85,
       experience: "4+ years"
     },
@@ -154,6 +119,9 @@ export default function AboutSection() {
                   At Prove AI, I owned production infrastructure and took us from 34% to 100% SOC 2 compliance while keeping 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
                 </p>
                 <p>
+                  In late 2024, I founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> as a side venture, building modern web solutions for small businesses. Starting with my own portfolio site as proof-of-concept, I landed my first paying client and discovered I loved combining technical delivery with direct customer partnership. While Sproutflow is a side business, it strengthens the entrepreneurial mindset and customer-first approach I bring to Solutions Engineering.
+                </p>
+                <p>
                   What gets me up in the morning is solving real problems for real teams. Whether that&apos;s a POC that proves feasibility, architecture that avoids expensive mistakes, or automation that lets engineers ship without second-guessing their tools.
                 </p>
               </div>
@@ -180,66 +148,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* How I Work - NEW SECTION */}
-          <div className="mb-20">
-            <motion.h3 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-2xl font-bold text-slate-900 mb-8 text-center"
-            >
-              How I Work
-            </motion.h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {principles.map((principle, index) => (
-                <motion.div
-                  key={principle.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  onHoverStart={() => setHoveredPrinciple(index)}
-                  onHoverEnd={() => setHoveredPrinciple(null)}
-                  className="group relative"
-                >
-                  <motion.div
-                    className={`rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] ${principle.color} relative overflow-hidden`}
-                    style={{
-                      minHeight: '200px'
-                    }}
-                  >
-                    <div className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full ${principle.iconBg} transition-transform group-hover:scale-[1.05]`}>
-                      <principle.icon className={`h-6 w-6 ${principle.iconColor}`} />
-                    </div>
-                    <div className="font-semibold text-slate-900 mb-2">{principle.title}</div>
-                    
-                    <motion.div
-                      className="text-sm text-slate-600"
-                      animate={{ 
-                        opacity: hoveredPrinciple === index ? 0 : 1
-                      }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {principle.blurb}
-                    </motion.div>
-                    
-                    <motion.div
-                      className="text-sm text-slate-700 absolute inset-x-6"
-                      style={{ top: '120px' }}
-                      animate={{ 
-                        opacity: hoveredPrinciple === index ? 1 : 0
-                      }}
-                      transition={{ duration: 0.2, delay: 0.1 }}
-                    >
-                      {principle.expandedDetails}
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Core Capabilities */}
+          {/* Core Capabilities - LIGHT CARDS WITH VIBRANT ICONS */}
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -259,32 +168,39 @@ export default function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
+                  className="group"
                 >
                   <Card
                     className={[
-                      "overflow-hidden rounded-2xl border-0 ring-1 h-full",
+                      "overflow-hidden rounded-2xl border border-slate-200 ring-1 h-full transition-all duration-300 hover:shadow-lg",
                       c.ring,
                       c.bg,
                     ].join(" ")}
                     style={{ minHeight: '280px' }}
                   >
                     <CardContent className="bg-transparent p-6 text-center">
+                      {/* Vibrant icon circle */}
                       <div
-                        className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white ring-1 ${c.ring} shadow-inner`}
+                        className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
                       >
-                        <skill.icon className="h-8 w-8 text-slate-800" />
+                        <skill.icon className={`h-8 w-8 ${c.iconColor}`} />
                       </div>
+                      
+                      {/* Title - dark text on light background */}
                       <h4 className="font-semibold text-slate-900 mb-2">{skill.name}</h4>
+                      
+                      {/* Description */}
                       <p className="text-sm text-slate-700 mb-4">{skill.description}</p>
                       
+                      {/* Progress bar matching icon color */}
                       <div className="mb-2">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-xs text-slate-500">{skill.experience}</span>
                           <span className="text-xs text-slate-600 font-medium">{skill.level}%</span>
                         </div>
-                        <div className="w-full bg-white/50 rounded-full h-2">
+                        <div className="w-full bg-slate-200 rounded-full h-2">
                           <motion.div
-                            className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
+                            className={`h-2 rounded-full ${c.iconBg}`}
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.level}%` }}
                             viewport={{ once: true }}

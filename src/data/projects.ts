@@ -6,18 +6,20 @@ export type Project = {
   description: string;
   technologies: string[];
   github_url?: string;
+  live_url?: string;
   image_url?: string;
-  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "cloud" | "security";
+  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "cloud" | "security" | "web-dev";
   featured?: boolean;
   techCount: number;
   projectType: 'Production' | 'Client Work' | 'Open Source' | 'Learning';
   status: 'Active' | 'Complete' | 'Maintained' | 'Archived';
-  architecture: 'Microservices' | 'Monolith' | 'Serverless' | 'Infrastructure';
-  scale: 'Enterprise' | 'Startup' | 'Personal';
-  environment: 'AWS' | 'Multi-cloud' | 'On-prem' | 'GCP' | 'IBM Cloud';
+  architecture: 'Microservices' | 'Monolith' | 'Serverless' | 'Infrastructure' | 'JAMstack';
+  scale: 'Enterprise' | 'Startup' | 'Personal' | 'Small Business';
+  environment: 'AWS' | 'Multi-cloud' | 'On-prem' | 'GCP' | 'IBM Cloud' | 'Vercel';
 };
 
 export const projects: Project[] = [
+  // FEATURED PROJECTS
   {
     id: "automated-vpc-deployment-centerpoint",
     name: "Automated VPC Deployment (CenterPoint)",
@@ -88,6 +90,64 @@ export const projects: Project[] = [
     scale: 'Personal',
     environment: 'Multi-cloud'
   },
+
+  // SPROUTFLOW PROJECTS - WEB DEVELOPMENT
+  {
+    id: "nealy-event-decor",
+    name: "Nealy Event Decor",
+    description:
+      "Launching a small business owner's first online presence with a modern, fast, and elegant website. Built with Next.js and Tailwind CSS, featuring a custom CMS for easy content updates. Client is thrilled with progress and we're finalizing for launch.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Sanity CMS"],
+    github_url: "",
+    live_url: "",
+    image_url: "",
+    category: "web-dev",
+    featured: false,
+    techCount: 5,
+    projectType: 'Client Work',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Small Business',
+    environment: 'Vercel'
+  },
+  {
+    id: "sproutflow-flagship",
+    name: "Sproutflow Studio Website",
+    description:
+      "The flagship website for my web design agency, showcasing our services, portfolio, and approach. Built to demonstrate modern web development capabilities and attract small business clients.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    github_url: "https://github.com/WBHankins93/sproutflow-flagship",
+    live_url: "https://sproutflow.studio",
+    image_url: "",
+    category: "web-dev",
+    featured: false,
+    techCount: 5,
+    projectType: 'Production',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Personal',
+    environment: 'Vercel'
+  },
+  {
+    id: "personal-website",
+    name: "Personal Portfolio",
+    description:
+      "This site! A Solutions Engineering portfolio built with Next.js, featuring glassmorphism UI, project showcases, and a customer-first narrative. Serves as both my professional presence and proof-of-concept for Sproutflow's capabilities.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    github_url: "https://github.com/WBHankins93/personal-website",
+    live_url: "https://benhankins.dev",
+    image_url: "",
+    category: "web-dev",
+    featured: false,
+    techCount: 5,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Personal',
+    environment: 'Vercel'
+  },
+
+  // INFRASTRUCTURE & CLOUD PROJECTS
   {
     id: "enterprise-cloud-delivery-ibm",
     name: "Enterprise Cloud Delivery (IBM)",

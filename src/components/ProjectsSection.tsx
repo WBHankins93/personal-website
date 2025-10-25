@@ -5,11 +5,12 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink } from "lucide-react";
+import { Folder, Star, ExternalLink, Briefcase } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
+// FIXED: All 7 categories now have DISTINCT colors - no similar blues
 const CATEGORY = {
   infrastructure: {
     ring: "ring-emerald-200",
@@ -26,33 +27,40 @@ const CATEGORY = {
     accent: "text-amber-600"
   },
   monitoring: {
-    ring: "ring-violet-200",
-    grad: "from-violet-50 to-fuchsia-50",
-    pill: "bg-violet-50 text-violet-700 border-violet-200",
-    dot: "bg-violet-500",
-    accent: "text-violet-600"
+    ring: "ring-pink-200",
+    grad: "from-pink-50 to-rose-50",
+    pill: "bg-pink-50 text-pink-700 border-pink-200",
+    dot: "bg-pink-500",
+    accent: "text-pink-600"
   },
   "ci-cd": {
-    ring: "ring-sky-200",
-    grad: "from-sky-50 to-cyan-50",
-    pill: "bg-sky-50 text-sky-700 border-sky-200",
-    dot: "bg-sky-500",
-    accent: "text-sky-600"
+    ring: "ring-blue-200",
+    grad: "from-blue-50 to-indigo-50",
+    pill: "bg-blue-50 text-blue-700 border-blue-200",
+    dot: "bg-blue-500",
+    accent: "text-blue-600"
   },
   cloud: {
     ring: "ring-cyan-200",
-    grad: "from-cyan-50 to-blue-50",
+    grad: "from-cyan-50 to-sky-50",
     pill: "bg-cyan-50 text-cyan-700 border-cyan-200",
     dot: "bg-cyan-500",
     accent: "text-cyan-600"
   },
   security: {
-    ring: "ring-rose-200",
-    grad: "from-rose-50 to-orange-50",
-    pill: "bg-rose-50 text-rose-700 border-rose-200",
-    dot: "bg-rose-500",
-    accent: "text-rose-600"
+    ring: "ring-red-200",
+    grad: "from-red-50 to-red-50",
+    pill: "bg-red-50 text-red-700 border-red-200",
+    dot: "bg-red-500",
+    accent: "text-red-600"
   },
+  "web-dev": {
+    ring: "ring-violet-200",
+    grad: "from-violet-50 to-fuchsia-50",
+    pill: "bg-violet-50 text-violet-700 border-violet-200",
+    dot: "bg-violet-500",
+    accent: "text-violet-600"
+  }
 } as const;
 
 type CategoryKey = Project["category"];
@@ -95,6 +103,7 @@ export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | CategoryKey>("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
+  // FIXED: Added web-dev to categories array
   const categories: { id: "all" | CategoryKey; label: string; count: number }[] = [
     { id: "all", label: "All Projects", count: allProjects.length },
     { id: "infrastructure", label: "Infrastructure", count: allProjects.filter(p => p.category === "infrastructure").length },
@@ -103,6 +112,7 @@ export default function ProjectsSection() {
     { id: "ci-cd", label: "CI/CD", count: allProjects.filter(p => p.category === "ci-cd").length },
     { id: "cloud", label: "Cloud", count: allProjects.filter(p => p.category === "cloud").length },
     { id: "security", label: "Security", count: allProjects.filter(p => p.category === "security").length },
+    { id: "web-dev", label: "Web Dev", count: allProjects.filter(p => p.category === "web-dev").length },
   ];
 
   const filteredProjects = selectedCategory === "all"
@@ -164,18 +174,18 @@ export default function ProjectsSection() {
                 <motion.div
                   key={category.id}
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Button
-                    variant="outline"
                     onClick={() => setSelectedCategory(category.id)}
                     className={clsx(
-                      "rounded-full transition-all duration-300 font-medium px-6 py-2",
+                      "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 border shadow-sm",
                       styles
                     )}
+                    variant="ghost"
                   >
                     {category.label}
-                    <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-white/20">
+                    <span className="ml-2 rounded-full bg-white/30 px-2 py-0.5 text-xs">
                       {category.count}
                     </span>
                   </Button>
@@ -184,24 +194,24 @@ export default function ProjectsSection() {
             })}
           </div>
 
-          {/* Enhanced Projects Grid */}
           <AnimatePresence mode="wait">
-            {sortedProjects.length === 0 ? (
-              <motion.div 
+            {filteredProjects.length === 0 ? (
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-center py-16"
+                className="text-center py-20"
               >
                 <Folder className="w-16 h-16 mx-auto text-slate-400 mb-4" />
-                <h3 className="text-xl font-semibold text-slate-600 mb-2">No Projects Yet</h3>
-                <p className="text-slate-500">
-                  Projects will be displayed here once they&apos;re added to the portfolio.
-                </p>
+                <p className="text-slate-600 text-lg">No projects found in this category.</p>
               </motion.div>
             ) : (
-              <motion.div 
-                layout
+              <motion.div
+                key={selectedCategory}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
                 className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
               >
                 {sortedProjects.map((project, idx) => {
@@ -230,15 +240,25 @@ export default function ProjectsSection() {
                           <CardHeader className="pb-4">
                             <div className="flex items-start justify-between mb-3">
                               <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2">
+                                <div className="flex items-center gap-2 mb-2 flex-wrap">
                                   <span className={clsx("inline-block h-2.5 w-2.5 rounded-full", c.dot)} />
                                   <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                                    {project.category.replace('-', '/')}
+                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                                   </span>
+                                  
+                                  {/* Featured Badge */}
                                   {['terraform-infra-platform', 'automated-vpc-deployment-centerpoint', 'devops-studio'].includes(project.id) && (
                                     <div className="flex items-center gap-1 px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
                                       <Star className="w-3 h-3" />
                                       Featured
+                                    </div>
+                                  )}
+                                  
+                                  {/* ADDED: Client Work Badge */}
+                                  {project.projectType === 'Client Work' && (
+                                    <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
+                                      <Briefcase className="w-3 h-3" />
+                                      Client Work
                                     </div>
                                   )}
                                 </div>
@@ -340,7 +360,7 @@ export default function ProjectsSection() {
             )}
           </AnimatePresence>
 
-          {/* Project Stats Summary */}
+          {/* FIXED: Project Stats Summary - Added Client Work */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -355,7 +375,7 @@ export default function ProjectsSection() {
               <div className="w-px h-8 bg-slate-300"></div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">
-                  {allProjects.filter(p => p.projectType === 'Production' || p.projectType === 'Client Work').length}
+                  {allProjects.filter(p => p.projectType === 'Production').length}
                 </div>
                 <div className="text-sm text-slate-600">Production</div>
               </div>
@@ -367,6 +387,13 @@ export default function ProjectsSection() {
                 <div className="text-sm text-slate-600">Open Source</div>
               </div>
               <div className="w-px h-8 bg-slate-300"></div>
+              {/* ADDED: Client Work stat */}
+              <div className="text-center">
+                <div className="text-2xl font-bold text-pink-600">
+                  {allProjects.filter(p => p.projectType === 'Client Work').length}
+                </div>
+                <div className="text-sm text-slate-600">Client Work</div>
+              </div>
             </div>
           </motion.div>
         </div>
