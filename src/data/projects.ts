@@ -93,13 +93,31 @@ export const projects: Project[] = [
 
   // SPROUTFLOW PROJECTS - WEB DEVELOPMENT
   {
+    id: "second-line-psychiatry",
+    name: "Second Line Psychiatry",
+    description:
+      "Professional telehealth website for a mental health private practice in New Orleans. Built to showcase services, provider information, and enable online consultation scheduling. Modern, accessible design focused on patient experience and HIPAA compliance considerations.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "SEO"],
+    github_url: "https://github.com/WBHankins93/second-line-psych",
+    live_url: "https://www.secondlinepsychiatry.com/",
+    image_url: "",
+    category: "web-dev",
+    featured: true,
+    techCount: 5,
+    projectType: 'Client Work',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Small Business',
+    environment: 'Vercel'
+  },
+  {
     id: "nealy-event-decor",
     name: "Nealy Event Decor",
     description:
       "Launching a small business owner's first online presence with a modern, fast, and elegant website. Built with Next.js and Tailwind CSS, featuring a custom CMS for easy content updates. Client is thrilled with progress and we're finalizing for launch.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Sanity CMS"],
-    github_url: "",
-    live_url: "",
+    github_url: "https://github.com/WBHankins93/nealy-event-decor",
+    live_url: "https://nealy-event-decor.vercel.app/",
     image_url: "",
     category: "web-dev",
     featured: false,
@@ -117,7 +135,7 @@ export const projects: Project[] = [
       "The flagship website for my web design agency, showcasing our services, portfolio, and approach. Built to demonstrate modern web development capabilities and attract small business clients.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/sproutflow-flagship",
-    live_url: "https://sproutflow.studio",
+    live_url: "https://sproutflow.vercel.app",
     image_url: "",
     category: "web-dev",
     featured: false,
@@ -135,7 +153,7 @@ export const projects: Project[] = [
       "This site! A Solutions Engineering portfolio built with Next.js, featuring glassmorphism UI, project showcases, and a customer-first narrative. Serves as both my professional presence and proof-of-concept for Sproutflow's capabilities.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/personal-website",
-    live_url: "https://benhankins.dev",
+    live_url: "https://benhankins.vercel.app",
     image_url: "",
     category: "web-dev",
     featured: false,
