@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 // NEW: Industrial Heritage with Human Touch font combination
-import { Titillium_Web, Source_Sans_3 } from "next/font/google";
+import { Titillium_Web, Source_Sans_3, Sixtyfour, Roboto_Mono } from "next/font/google";
 
 const titilliumWeb = Titillium_Web({
   subsets: ["latin"],
@@ -17,7 +17,11 @@ const sourceSans3 = Source_Sans_3({
   variable: "--font-body",
 });
 
-import { Roboto_Mono } from "next/font/google";
+const sixtyfour = Sixtyfour({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sixtyfour',
+});
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -36,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${titilliumWeb.variable} ${sourceSans3.variable} ${robotoMono.variable} antialiased`}
+        className={`${titilliumWeb.variable} ${sourceSans3.variable} ${robotoMono.variable} ${sixtyfour.variable} antialiased`}
       >
         {children}
       </body>

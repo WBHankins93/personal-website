@@ -68,7 +68,7 @@ export default function HeroSection() {
       {/* Enhanced Hero Content */}
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-heading">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-sixtyfour">
             Ben Hankins  
           </h1>
 

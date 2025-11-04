@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { Mail, FileText } from "lucide-react";
 
 export default function Footer() {
   const socialLinks = [
@@ -44,7 +44,8 @@ export default function Footer() {
                 Have a project in mind or just want to talk about tech?
               </p>
 
-              <div className="flex items-center gap-4">
+              {/* Email */}
+              <div className="flex items-center gap-4 mb-4">
                 <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center ring-1 ring-white/15">
                   <Mail className="w-5 h-5 text-slate-300" />
                 </div>
@@ -55,6 +56,23 @@ export default function Footer() {
                     className="text-white hover:text-slate-300 transition-colors font-medium"
                   >
                     benhankins.work@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Resume Download */}
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center ring-1 ring-white/15">
+                  <FileText className="w-5 h-5 text-slate-300" />
+                </div>
+                <div>
+                  <p className="text-sm text-slate-400 font-medium">Resume</p>
+                  <a 
+                    href="/benhankins-solutions-engineer-resume.pdf"
+                    download
+                    className="text-white hover:text-slate-300 transition-colors font-medium"
+                  >
+                    Download PDF
                   </a>
                 </div>
               </div>
@@ -71,7 +89,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 rounded-xl bg-white/5 transition-all duration-200 ring-1 ring-white/10 ${
+                    className={`group flex items-center gap-4 p-4 rounded-xl bg-white/5 transition-all duration-200 ring-1 ring-white/10 ${
                       social.label === 'LinkedIn' ? 'hover:bg-emerald-500/10 hover:ring-emerald-500/30' :
                       social.label === 'GitHub' ? 'hover:bg-amber-500/10 hover:ring-amber-500/30' :
                       'hover:bg-violet-500/10 hover:ring-violet-500/30'
@@ -100,12 +118,17 @@ export default function Footer() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-slate-800 pt-8 text-center">
+          <div className="text-center pt-4 border-t border-slate-800/50">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} Ben Hankins. All rights reserved.
-            </p>
-            <p className="text-sm text-slate-500 mt-2 italic">
-              Built with code, coffee, and a touch of automation.
+              Crafted with care by{' '}
+              <a 
+                href="https://sproutflow.vercel.app" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 transition-colors font-medium"
+              >
+                Sproutflow Studio 🌱
+              </a>
             </p>
           </div>
         </div>
