@@ -99,12 +99,12 @@ export default function HeroSection() {
 
           {/* Enhanced Stats Grid - Customer Impact Focus */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-            <Stat title="20+" subtitle="Enterprise Clients" color="text-[#E07A5F]" />
+            <Stat title="12+" subtitle="Enterprise Clients" color="text-[#E07A5F]" />
             <Stat title="$10.1M" subtitle="Deal Closed" color="text-green-400" />
-            <Stat title="85%" subtitle="Faster Deployments" color="text-[#81B29A]" />
-            <Stat title="12+" subtitle="Client Industries" color="text-blue-400" />
-            <Stat title="6+" subtitle="Years Experience" color="text-purple-400" />
-            <Stat title="99.9%" subtitle="Uptime Achieved" color="text-pink-400" />
+            <Stat title="70%" subtitle="Close Rate" color="text-[#81B29A]" />
+            <Stat title="15+" subtitle="Client Presentations" color="text-blue-400" />
+            <Stat title="5+" subtitle="Years Experience" color="text-purple-400" />
+            <Stat title="85%" subtitle="Faster Deployments" color="text-pink-400" />
           </div>
         </div>
       </div>

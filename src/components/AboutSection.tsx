@@ -110,13 +110,16 @@ export default function AboutSection() {
               
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development but quickly realized the real impact was in infrastructure. Watching teams struggle with deployment bottlenecks made it clear where I could help most.
+                  I started in web development but quickly realized the real impact was in solving enterprise infrastructure challenges through customer engagement.
                 </p>
                 <p>
-                  At IBM, I worked with 12+ enterprise clients across energy, financial services, and healthcare. The highlight was leading technical delivery for a $10.1M SAP RISE deal with CenterPoint Energy. We proved we could automate their complex infrastructure 85% faster than their manual process, which closed the deal.
+                  At IBM, I worked with 12+ enterprise clients including Cencora, AT&T, and Pepsi across energy, financial services, and healthcare. The highlight was leading technical delivery for a $10.1M SAP RISE deal with CenterPoint Energy. We proved we could automate their complex infrastructure 85% faster than their manual process, which closed the deal and led to my promotion to Cloud Infrastructure Engineer.
                 </p>
                 <p>
-                  At Prove AI, I owned production infrastructure and took us from 34% to 100% SOC 2 compliance while keeping 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
+                  I also mentored 8 Solutions Engineers, with 3 earning promotions and 2 receiving performance awards. Delivered 15+ technical presentations to C-level executives with a 70% close rate on qualified opportunities.
+                </p>
+                <p>
+                  At Prove AI, I took on production infrastructure ownership, leading SOC 2 compliance from 34% to 100% while maintaining 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
                 </p>
                 <p>
                   In late 2024, I founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> as a side venture, building modern web solutions for small businesses. Starting with my own portfolio site as proof-of-concept, I landed my first paying client and discovered I loved combining technical delivery with direct customer partnership. While Sproutflow is a side business, it strengthens the entrepreneurial mindset and customer-first approach I bring to Solutions Engineering.
