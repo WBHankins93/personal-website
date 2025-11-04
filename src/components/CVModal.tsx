@@ -38,8 +38,8 @@ export default function CVModal({
 
         {/* PDF Viewer */}
         <div className="flex-1 overflow-auto px-4 pb-4">
-          <embed
-            src="/benhankins-solutions-engineer-resume.pdf"
+          <iframe
+            src={`/benhankins-solutions-engineer-resume.pdf`}
             className="w-full h-[75vh]"
             title="Ben Hankins Resume"
           />
@@ -48,7 +48,7 @@ export default function CVModal({
         {/* Footer */}
         <div className="p-4 border-t flex justify-end bg-slate-50">
           <a
-            href="/benhankins-solutions-engineer-resume.pdf"
+            href="/current-solutions-engineer-resume.pdf"
             download
             className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           >
