@@ -69,7 +69,7 @@ export default function HeroSection() {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-sixtyfour">
-            Ben Hankins  
+            Ben Hankins
           </h1>
 
           <h2 className="text-xl md:text-3xl font-medium text-white font-heading mb-6">
@@ -84,17 +84,18 @@ export default function HeroSection() {
             <Button
               onClick={scrollToFooter}
               size="lg"
-              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-4 text-lg group font-body shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-4 text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               Get In Touch
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <button
+            <Button
               onClick={() => setShowModal(true)}
-              className="px-8 py-4 bg-white/10 backdrop-blur text-white font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 font-body shadow-xl"
+              size="lg"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-4 text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               View Resume
-            </button>
+            </Button>
           </div>
 
           {/* Enhanced Stats Grid - Customer Impact Focus */}
@@ -134,7 +135,7 @@ function Stat({
   return (
     <div className="text-white animate-float bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
       <div className={`text-2xl md:text-3xl font-bold font-mono ${color} mb-1`}>{title}</div>
-      <div className="text-slate-300 font-body text-sm md:text-base">{subtitle}</div>
+      <div className="text-slate-300 font-heading text-sm md:text-base">{subtitle}</div>
     </div>
   );
 }

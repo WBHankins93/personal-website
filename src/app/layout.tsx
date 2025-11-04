@@ -2,12 +2,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// NEW: Industrial Heritage with Human Touch font combination
-import { Titillium_Web, Source_Sans_3, Sixtyfour, Roboto_Mono } from "next/font/google";
+import { Space_Grotesk, Source_Sans_3, Sixtyfour, JetBrains_Mono } from "next/font/google";
 
-const titilliumWeb = Titillium_Web({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-heading",
 });
 
@@ -23,9 +22,9 @@ const sixtyfour = Sixtyfour({
   variable: '--font-sixtyfour',
 });
 
-const robotoMono = Roboto_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
 });
 
@@ -40,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${titilliumWeb.variable} ${sourceSans3.variable} ${robotoMono.variable} ${sixtyfour.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} ${sixtyfour.variable} antialiased`}
       >
         {children}
       </body>
