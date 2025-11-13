@@ -57,7 +57,7 @@ export default function AboutSection() {
       icon: Server,
       name: "Container Platforms", 
       description: "Kubernetes, OpenShift, Docker, Helm, service mesh, microservices",
-      key: "containers", // Purple - FIXED (was "automation")
+      key: "containers", // Purple
       level: 95,
       experience: "5+ years"
     },
@@ -110,22 +110,37 @@ export default function AboutSection() {
               
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development but quickly realized the real impact was in solving enterprise infrastructure challenges through customer engagement.
+                  Started in web development, then moved into Solutions Engineering at IBM 
+                  when I realized I preferred solving problems with customers, not just for them.
                 </p>
                 <p>
-                  At IBM, I worked with 12+ enterprise clients including Cencora, AT&T, and Pepsi across energy, financial services, and healthcare. The highlight was leading technical delivery for a $10.1M SAP RISE deal with CenterPoint Energy. We proved we could automate their complex infrastructure 85% faster than their manual process, which closed the deal and led to my promotion to Cloud Infrastructure Engineer.
+                  Served as technical advisor for 12+ enterprise clients including CenterPoint 
+                  Energy, AT&T, Cencora, and Pepsi. Led technical delivery for CenterPoint&apos;s 
+                  11-month SAP RISE evaluation—designed automation that cut environment 
+                  provisioning by 85%, which helped close the $10.1M deal and expanded into 
+                  a multi-year engagement.
                 </p>
                 <p>
-                  I also mentored 8 Solutions Engineers, with 3 earning promotions and 2 receiving performance awards. Delivered 15+ technical presentations to C-level executives with a 70% close rate on qualified opportunities.
+                  After proving I could drive deals, I went deeper on infrastructure (promoted 
+                  to Cloud Infrastructure Engineer, then SRE contract at Prove AI). Most SEs 
+                  hand off to implementation teams after the sale closes. I wanted to own the 
+                  full stack—POC to production.
                 </p>
                 <p>
-                  At Prove AI, I took on production infrastructure ownership, leading SOC 2 compliance from 34% to 100% while maintaining 99.9% uptime on customer-facing services. Building systems that just work under pressure is what I do.
+                  At Prove AI, led SOC 2 compliance from 34% to 100% while maintaining 99.9% 
+                  uptime. Also mentored 8 Solutions Engineers at IBM—3 earned promotions, 2 
+                  received performance awards.
                 </p>
                 <p>
-                  In late 2024, I founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> as a side venture, building modern web solutions for small businesses. Starting with my own portfolio site as proof-of-concept, I landed my first paying client and discovered I loved combining technical delivery with direct customer partnership. While Sproutflow is a side business, it strengthens the entrepreneurial mindset and customer-first approach I bring to Solutions Engineering.
+                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in 
+                  late 2024 to apply SE methodology to small businesses. Built my portfolio 
+                  site as proof-of-concept, which landed my first paying client. Side venture, 
+                  but reinforces the consultative approach I bring to Solutions Engineering.
                 </p>
                 <p>
-                  What gets me up in the morning is solving real problems for real teams. Whether that&apos;s a POC that proves feasibility, architecture that avoids expensive mistakes, or automation that lets engineers ship without second-guessing their tools.
+                  What drives me: solving real problems for real teams. POCs that prove 
+                  feasibility, architecture that avoids expensive mistakes, automation that 
+                  lets engineers ship confidently.
                 </p>
               </div>
             </div>

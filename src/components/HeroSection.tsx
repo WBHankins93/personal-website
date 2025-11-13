@@ -15,10 +15,9 @@ const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: 
 
 const roles = [
   "Solutions Engineer",
-  "Technical Solutions Consultant",
-  "Customer Solutions Architect",
-  "Site Reliability Engineer",
-  "DevOps Engineer", 
+  "Technical Account Manager", 
+  "Solutions Architect",
+  "Customer Success Engineer",
   "Infrastructure Specialist"
 ];
 
@@ -104,7 +103,7 @@ export default function HeroSection() {
             <Stat title="$10.1M" subtitle="Deal Closed" color="text-green-400" />
             <Stat title="70%" subtitle="Close Rate" color="text-[#81B29A]" />
             <Stat title="15+" subtitle="Client Presentations" color="text-blue-400" />
-            <Stat title="5+" subtitle="Years Experience" color="text-purple-400" />
+            <Stat title="6+" subtitle="Years Experience" color="text-purple-400" />
             <Stat title="85%" subtitle="Faster Deployments" color="text-pink-400" />
           </div>
         </div>
