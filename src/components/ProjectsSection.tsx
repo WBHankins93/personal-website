@@ -136,16 +136,16 @@ export default function ProjectsSection() {
   });
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
             >
               Featured Projects
             </motion.h2>
@@ -154,13 +154,13 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed px-4"
             >
               Real-world solutions I&apos;ve architected, from infrastructure automation to platform engineering that powers production systems.
             </motion.p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 md:mb-12 px-2">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
               const styles = isActive
@@ -211,7 +211,7 @@ export default function ProjectsSection() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
               >
                 {sortedProjects.map((project, idx) => {
                   const c = cat(project.category);

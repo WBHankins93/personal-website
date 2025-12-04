@@ -67,23 +67,23 @@ export default function HeroSection() {
       {/* Enhanced Hero Content */}
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-sixtyfour">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight font-sixtyfour">
             Ben Hankins
           </h1>
 
-          <h2 className="text-xl md:text-3xl font-medium text-white font-heading mb-6">
+          <h2 className="text-lg sm:text-xl md:text-3xl font-medium text-white font-heading mb-4 md:mb-6">
             <TypingAnimation words={roles} className="text-blue-400 font-semibold" />
           </h2>
 
-          <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-4xl mx-auto font-body">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto font-body px-4">
             Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from &quot;what if&quot; to production with confidence.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 md:mb-16 px-4">
             <Button
               onClick={scrollToFooter}
               size="lg"
-              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-4 text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
             >
               Get In Touch
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -91,14 +91,14 @@ export default function HeroSection() {
             <Button
               onClick={() => setShowModal(true)}
               size="lg"
-              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-8 py-4 text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
             >
               View Resume
             </Button>
           </div>
 
           {/* Enhanced Stats Grid - Customer Impact Focus */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6 text-center px-4">
             <Stat title="12+" subtitle="Enterprise Clients" color="text-[#E07A5F]" />
             <Stat title="$10.1M" subtitle="Deal Closed" color="text-green-400" />
             <Stat title="70%" subtitle="Close Rate" color="text-[#81B29A]" />
@@ -132,9 +132,9 @@ function Stat({
   color: string;
 }) {
   return (
-    <div className="text-white animate-float bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
-      <div className={`text-2xl md:text-3xl font-bold font-mono ${color} mb-1`}>{title}</div>
-      <div className="text-slate-300 font-heading text-sm md:text-base">{subtitle}</div>
+    <div className="text-white animate-float bg-white/5 backdrop-blur rounded-lg p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
+      <div className={`text-xl sm:text-2xl md:text-3xl font-bold font-mono ${color} mb-1`}>{title}</div>
+      <div className="text-slate-300 font-heading text-xs sm:text-sm md:text-base">{subtitle}</div>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import {
   Target, 
   Rocket, 
   CheckCircle,
+  ChevronDown,
   type LucideIcon 
 } from "lucide-react";
 import Image from "next/image";
@@ -39,6 +40,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function ExperienceSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
   // Map string icon names to actual icon components
   const experiences = experiencesData.map(exp => ({
@@ -80,17 +82,31 @@ export default function ExperienceSection() {
     };
   };
 
+  const handleCardClick = (index: number) => {
+    setFlippedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
+  const isFlipped = (index: number) => flippedCards.has(index);
+
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      <div className="container mx-auto px-6">
+    <section id="experience" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
             >
               Professional Experience
             </motion.h2>
@@ -99,7 +115,7 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-slate-600 max-w-3xl mx-auto"
+              className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto px-4"
             >
               Helping enterprise customers succeed through technical expertise, consultative problem-solving, and customer-focused solution delivery.
             </motion.p>
@@ -107,10 +123,10 @@ export default function ExperienceSection() {
 
           {/* Timeline */}
           <div className="relative">
-            {/* Vertical Timeline Line */}
-            <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-200 via-blue-200 via-purple-200 to-green-200"></div>
+            {/* Vertical Timeline Line - Hidden on mobile, visible on desktop */}
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-200 via-blue-200 via-purple-200 to-green-200"></div>
 
-            <div className="space-y-16">
+            <div className="space-y-8 md:space-y-16">
               {experiences.map((exp, index) => {
                 const cardStyle = getCardStyle(exp.type);
                 
@@ -128,7 +144,7 @@ export default function ExperienceSection() {
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
                     {/* Timeline Dot */}
-                    <div className={`absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} transition-all duration-300 ${
+                    <div className={`hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} transition-all duration-300 ${
                       hoveredIndex === index ? 'scale-125 opacity-0 z-0' : 'opacity-100 z-10'
                     }`}>
                       {exp.type === 'current' && hoveredIndex !== index && (
@@ -140,10 +156,216 @@ export default function ExperienceSection() {
                     </div>
 
                     {/* Content Card */}
-                    <div className={`w-full md:w-5/12 ml-16 md:ml-0 ${
+                    <div className={`w-full md:w-5/12 ${
                       index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
                     }`}>
-                      <Card className={`border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${
+                      {/* Mobile: Flip Card Container */}
+                      <div 
+                        className="md:hidden relative cursor-pointer"
+                        style={{ 
+                          minHeight: '400px',
+                          perspective: '1000px'
+                        }}
+                        onClick={() => handleCardClick(index)}
+                      >
+                        <div
+                          className="relative w-full h-full transition-transform duration-700"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: isFlipped(index) ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                          }}
+                        >
+                          {/* Front of Card */}
+                          <div
+                            className="absolute inset-0 w-full"
+                            style={{
+                              backfaceVisibility: 'hidden',
+                              WebkitBackfaceVisibility: 'hidden',
+                              transform: 'rotateY(0deg)'
+                            }}
+                          >
+                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''} h-full`}>
+                              <CardContent className="p-4 md:p-6 flex flex-col h-full">
+                                {/* Header Section */}
+                                <div className="flex-1">
+                                  <div className="flex items-start gap-3 mb-4">
+                                    {/* Company Logo */}
+                                    <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
+                                      exp.type === 'side-business' 
+                                        ? 'bg-gradient-to-br from-amber-50 to-orange-100' 
+                                        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+                                    }`}>
+                                      {exp.logo ? (
+                                        <Image 
+                                          src={exp.logo} 
+                                          alt={`${exp.company} logo`} 
+                                          width={48}
+                                          height={48}
+                                          className="object-contain w-full h-full"
+                                        />
+                                      ) : (
+                                        <Code className={`w-6 h-6 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
+                                      )}
+                                    </div>
+
+                                    {/* Job Details */}
+                                    <div className="flex-1 min-w-0">
+                                      <h3 className="font-bold text-lg text-slate-900 mb-1">
+                                        {exp.title}
+                                      </h3>
+                                      <p className={`font-semibold text-base mb-2 ${
+                                        exp.type === 'side-business' ? 'text-amber-600' : 'text-blue-600'
+                                      }`}>
+                                        {exp.company}
+                                      </p>
+                                      
+                                      <div className="flex flex-col gap-2 text-xs text-gray-600">
+                                        <div className="flex items-center gap-2">
+                                          <Calendar className="w-3 h-3" />
+                                          {exp.period}
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                          <MapPin className="w-3 h-3" />
+                                          {exp.location}
+                                        </div>
+                                      </div>
+
+                                      {/* Optional Note Badge */}
+                                      {exp.note && (
+                                        <div className="mt-2">
+                                          <span className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
+                                            exp.type === 'side-business' 
+                                              ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                                              : 'bg-blue-100 text-blue-800 border border-blue-300'
+                                          }`}>
+                                            {exp.note}
+                                          </span>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  {/* Highlights */}
+                                  <div className="mt-4 flex flex-wrap gap-2">
+                                    {exp.highlights.map((highlight, hIndex) => (
+                                      <div 
+                                        key={hIndex}
+                                        className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium ${
+                                          exp.type === 'side-business'
+                                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                            : highlight.metric 
+                                              ? 'bg-green-50 text-green-700 border border-green-200' 
+                                              : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                        }`}
+                                      >
+                                        <highlight.icon className="w-3 h-3" />
+                                        <span className="truncate max-w-[120px]">{highlight.text}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  {/* Technologies */}
+                                  <div className="mt-4">
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {exp.technologies.slice(0, 6).map((tech, techIndex) => (
+                                        <span 
+                                          key={techIndex}
+                                          className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
+                                            techColors[techIndex % techColors.length]
+                                          }`}
+                                        >
+                                          {tech}
+                                        </span>
+                                      ))}
+                                      {exp.technologies.length > 6 && (
+                                        <span className="px-2 py-0.5 rounded-full text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200">
+                                          +{exp.technologies.length - 6}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Arrow Indicator */}
+                                <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-center">
+                                  <div className="flex flex-col items-center gap-1">
+                                    <span className="text-xs text-gray-500 font-medium">Tap to see details</span>
+                                    <ChevronDown className="w-5 h-5 text-gray-400 animate-bounce" />
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </div>
+
+                          {/* Back of Card */}
+                          <div
+                            className="absolute inset-0 w-full"
+                            style={{
+                              backfaceVisibility: 'hidden',
+                              WebkitBackfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <Card className={`border-0 shadow-lg h-full ${
+                              exp.type === 'side-business' 
+                                ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
+                                : 'bg-white border-2 border-blue-200'
+                            }`}>
+                              <CardContent className="p-4 md:p-6 h-full overflow-y-auto">
+                                <div className="flex items-center justify-between mb-4">
+                                  <h4 className={`font-semibold text-base ${
+                                    exp.type === 'side-business' ? 'text-amber-900' : 'text-slate-900'
+                                  }`}>
+                                    Key Achievements
+                                  </h4>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleCardClick(index);
+                                    }}
+                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    aria-label="Close"
+                                  >
+                                    <ChevronDown className="w-5 h-5 rotate-180" />
+                                  </button>
+                                </div>
+                                <ul className="space-y-3">
+                                  {exp.achievements.map((achievement, achIndex) => (
+                                    <li 
+                                      key={achIndex}
+                                      className="flex items-start gap-2.5"
+                                    >
+                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
+                                        exp.type === 'side-business'
+                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
+                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                                      }`}></div>
+                                      <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                                <div className="mt-6 pt-4 border-t border-gray-200">
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {exp.technologies.map((tech, techIndex) => (
+                                      <span 
+                                        key={techIndex}
+                                        className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
+                                          techColors[techIndex % techColors.length]
+                                        }`}
+                                      >
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Desktop: Original Hover Card */}
+                      <Card className={`hidden md:block border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${
                         hoveredIndex === index ? 'transform scale-105' : ''
                       } ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''}`}>
                         <CardContent className="p-0">
@@ -301,6 +523,7 @@ export default function ExperienceSection() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }
