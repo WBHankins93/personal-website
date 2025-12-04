@@ -39,7 +39,7 @@ export default function CVModal({
         {/* PDF Viewer */}
         <div className="flex-1 overflow-auto pb-4">
           <iframe
-            src={`/benhankins-solutions-engineer.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+            src={`/Ben_Hankins_Master_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
             className="w-full h-[75vh] border-0"
             title="Ben Hankins Resume"
           />
@@ -48,7 +48,7 @@ export default function CVModal({
         {/* Footer */}
         <div className="p-4 border-t flex justify-end bg-slate-50">
           <a
-            href="/current-solutions-engineer-resume.pdf"
+            href="/Ben_Hankins_Master_Resume.pdf"
             download
             className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           >

@@ -16,7 +16,7 @@ describe("CVModal", () => {
     expect(iframe.tagName).toBe("IFRAME");
     expect(iframe).toHaveAttribute(
       "src",
-      "/benhankins-solutions-engineer-resume.pdf"
+      expect.stringContaining("/Ben_Hankins_Master_Resume.pdf")
     );
   });
 
@@ -27,7 +27,7 @@ describe("CVModal", () => {
     expect(downloadLink).toBeInTheDocument();
     expect(downloadLink).toHaveAttribute(
       "href",
-      "/current-solutions-engineer-resume.pdf"
+      "/Ben_Hankins_Master_Resume.pdf"
     );
     expect(downloadLink).toHaveAttribute("download");
   });
