@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink, Briefcase } from "lucide-react";
+import { Folder, Star, ExternalLink, Briefcase, ChevronDown } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
@@ -102,6 +102,7 @@ const getStatusStyle = (status: string) => {
 export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | CategoryKey>("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
 
   const categories: { id: "all" | CategoryKey; label: string; count: number }[] = [
     { id: "all", label: "All Projects", count: allProjects.length },
@@ -118,22 +119,24 @@ export default function ProjectsSection() {
     ? allProjects
     : allProjects.filter((p) => p.category === selectedCategory);
 
-  // Sort projects to show featured ones first
+  // Sort projects to show DevOps Studio first
   const sortedProjects = [...filteredProjects].sort((a, b) => {
-    const featuredProjects = [
-      'terraform-infra-platform',
-      'automated-vpc-deployment-centerpoint', 
-      'devops-studio',
-      'second-line-psychiatry'
-    ];
-    
-    const aIsFeatured = featuredProjects.includes(a.id);
-    const bIsFeatured = featuredProjects.includes(b.id);
-    
-    if (aIsFeatured && !bIsFeatured) return -1;
-    if (!aIsFeatured && bIsFeatured) return 1;
+    if (a.id === 'devops-studio') return -1;
+    if (b.id === 'devops-studio') return 1;
     return 0;
   });
+
+  const toggleProject = (projectId: string) => {
+    setExpandedProjects(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(projectId)) {
+        newSet.delete(projectId);
+      } else {
+        newSet.add(projectId);
+      }
+      return newSet;
+    });
+  };
 
   return (
     <section id="projects" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
@@ -205,30 +208,195 @@ export default function ProjectsSection() {
                 <p className="text-slate-600 text-lg">No projects found in this category.</p>
               </motion.div>
             ) : (
-              <motion.div
-                key={selectedCategory}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-              >
-                {sortedProjects.map((project, idx) => {
-                  const c = cat(project.category);
-                  const techs = truncateTech(project.technologies ?? [], 5);
-                  
-                  return (
-                    <motion.div
-                      key={project.id}
-                      layout
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      onHoverStart={() => setHoveredProject(project.id)}
-                      onHoverEnd={() => setHoveredProject(null)}
-                      className="group"
-                    >
+              <>
+                {/* Mobile List View */}
+                <div className="md:hidden space-y-3">
+                  {sortedProjects.map((project, idx) => {
+                    const c = cat(project.category);
+                    const isExpanded = expandedProjects.has(project.id);
+                    const techs = truncateTech(project.technologies ?? [], 5);
+                    
+                    return (
+                      <motion.div
+                        key={project.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      >
+                        <Card 
+                          className={`rounded-2xl shadow-lg ring-1 transition-all duration-300 overflow-hidden ${
+                            c.ring
+                          } ${isExpanded ? 'ring-2' : ''}`}
+                        >
+                          {/* Collapsed View - Title & Category Only */}
+                          <div
+                            onClick={() => toggleProject(project.id)}
+                            className="p-4 cursor-pointer flex items-center justify-between"
+                          >
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                              <span className={clsx("inline-block h-2.5 w-2.5 rounded-full flex-shrink-0", c.dot)} />
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                  <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                                  </span>
+                                  {project.id === 'devops-studio' && (
+                                    <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
+                                      <Star className="w-3 h-3" />
+                                      Featured
+                                    </div>
+                                  )}
+                                </div>
+                                <h3 className="font-bold text-base text-slate-900 leading-tight truncate">
+                                  {project.name}
+                                </h3>
+                              </div>
+                            </div>
+                            <ChevronDown 
+                              className={clsx(
+                                "w-5 h-5 text-slate-400 transition-transform flex-shrink-0 ml-2",
+                                isExpanded && "rotate-180"
+                              )} 
+                            />
+                          </div>
+
+                          {/* Expanded View */}
+                          <AnimatePresence>
+                            {isExpanded && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="px-4 pb-4 border-t border-slate-200/60 pt-4 space-y-4">
+                                  {/* Metadata Grid */}
+                                  <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 rounded-lg p-3">
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-slate-500">Technologies:</span>
+                                      <span className="font-medium text-slate-700">{project.techCount}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-slate-500">Scale:</span>
+                                      <span className="font-medium text-slate-700">{project.scale}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-slate-500">Architecture:</span>
+                                      <span className="font-medium text-slate-700">{project.architecture}</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-slate-500">Environment:</span>
+                                      <span className="font-medium text-slate-700">{project.environment}</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Type & Status Badges */}
+                                  <div className="flex gap-2 flex-wrap">
+                                    <span className={clsx(
+                                      "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
+                                      getProjectTypeStyle(project.projectType)
+                                    )}>
+                                      {project.projectType}
+                                    </span>
+                                    <span className={clsx(
+                                      "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
+                                      getStatusStyle(project.status)
+                                    )}>
+                                      {project.status}
+                                    </span>
+                                    {project.projectType === 'Client Work' && (
+                                      <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60 shadow-sm">
+                                        <Briefcase className="w-3 h-3" />
+                                        Client Work
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {/* Description */}
+                                  <p className="text-slate-600 leading-relaxed text-sm">
+                                    {project.description}
+                                  </p>
+
+                                  {/* Tech Stack */}
+                                  <div className="flex flex-wrap gap-2">
+                                    {techs.map((tech, index) => (
+                                      <span
+                                        key={index}
+                                        className={clsx(
+                                          "inline-flex items-center gap-1 rounded-full ring-1 px-2.5 py-1 text-xs font-medium",
+                                          c.pill
+                                        )}
+                                      >
+                                        <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  </div>
+
+                                  {/* Action Buttons */}
+                                  <div className="flex gap-2 pt-2">
+                                    {project.github_url && (
+                                      <a
+                                        href={project.github_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className={`inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 text-white px-4 py-2.5 text-sm font-medium hover:bg-slate-800 transition-colors ${project.live_url && project.live_url.trim() !== '' ? 'flex-1' : 'w-full'}`}
+                                      >
+                                        <FaGithub className="w-4 h-4" />
+                                        View Code
+                                      </a>
+                                    )}
+                                    {project.live_url && project.live_url.trim() !== '' && (
+                                      <a
+                                        href={project.live_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 text-white px-4 py-2.5 text-sm font-medium hover:bg-emerald-700 transition-colors"
+                                      >
+                                        <ExternalLink className="w-4 h-4" />
+                                        Live Demo
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Desktop Grid View */}
+                <motion.div
+                  key={selectedCategory}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                >
+                  {sortedProjects.map((project, idx) => {
+                    const c = cat(project.category);
+                    const techs = truncateTech(project.technologies ?? [], 5);
+                    
+                    return (
+                      <motion.div
+                        key={project.id}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.4, delay: idx * 0.1 }}
+                        onHoverStart={() => setHoveredProject(project.id)}
+                        onHoverEnd={() => setHoveredProject(null)}
+                        className="group"
+                      >
                       <div className={clsx("p-[1px] rounded-2xl ring-1 transition-all duration-300", 
                         c.ring, 
                         "bg-gradient-to-br", 
@@ -245,8 +413,8 @@ export default function ProjectsSection() {
                                     {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                                   </span>
                                   
-                                  {/* Featured Badge */}
-                                  {['terraform-infra-platform', 'automated-vpc-deployment-centerpoint', 'devops-studio'].includes(project.id) && (
+                                  {/* Featured Badge - Only DevOps Studio */}
+                                  {project.id === 'devops-studio' && (
                                     <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60 shadow-sm">
                                       <Star className="w-3 h-3" />
                                       Featured
@@ -359,7 +527,8 @@ export default function ProjectsSection() {
                     </motion.div>
                   );
                 })}
-              </motion.div>
+                </motion.div>
+              </>
             )}
           </AnimatePresence>
 
