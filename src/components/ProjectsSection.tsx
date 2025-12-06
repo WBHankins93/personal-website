@@ -308,10 +308,9 @@ export default function ProjectsSection() {
                                     {project.description}
                                   </p>
 
-                                  {/* Tech Stack - Horizontal Scroll */}
-                                  <div className="overflow-x-auto scrollbar-hide -mx-1 px-1">
-                                    <div className="flex gap-1.5 min-w-max">
-                                      {techs.map((tech, index) => (
+                                  {/* Tech Stack - Flex Wrap */}
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {techs.map((tech, index) => (
                                       <span
                                         key={index}
                                         className={clsx(
@@ -323,7 +322,6 @@ export default function ProjectsSection() {
                                         {tech}
                                       </span>
                                     ))}
-                                    </div>
                                   </div>
 
                                   {/* Icon-Only Action Buttons */}
@@ -472,23 +470,21 @@ export default function ProjectsSection() {
                           </CardHeader>
 
                           <CardContent className="px-4 pb-4 pt-0 flex flex-col flex-1">
-                            {/* Horizontal Scroll Tags */}
-                            <div className="overflow-x-auto mb-3 scrollbar-hide -mx-1 px-1">
-                              <div className="flex gap-1.5 min-w-max">
-                                {techs.map((tech, index) => (
-                                  <span
-                                    key={index}
-                                    className={clsx(
-                                      "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap",
-                                      c.pill,
-                                      "ring-1"
-                                    )}
-                                  >
-                                    <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
+                            {/* Tags - Flex Wrap */}
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {techs.map((tech, index) => (
+                                <span
+                                  key={index}
+                                  className={clsx(
+                                    "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium",
+                                    c.pill,
+                                    "ring-1"
+                                  )}
+                                >
+                                  <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
+                                  {tech}
+                                </span>
+                              ))}
                             </div>
 
                             {/* Icon-Only Buttons Footer */}
