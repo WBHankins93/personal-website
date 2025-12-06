@@ -24,7 +24,7 @@ export const projects: Project[] = [
     id: "automated-vpc-deployment-centerpoint",
     name: "Automated VPC Deployment (CenterPoint)",
     description:
-      "As a key client project at IBM, I led the complete automation of a complex VPC & VSI deployment using Terraform, drastically reducing the provisioning time from over 2 weeks to just 2.7 hours.",
+      "Automated complex VPC & VSI deployment using Terraform, reducing provisioning time from 2 weeks to 2.7 hours.",
     technologies: ["Terraform", "VPC", "VSI", "Automation", "IBM Cloud", "Client Delivery"],
     github_url: "",
     image_url: "",
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     id: "terraform-infra-platform",
     name: "Terraform Infra Platform (Prove AI)",
     description:
-      "Production-level Terraform automation used to build the entire ProveAI infrastructure. This project showcases advanced IaC patterns, modular design, and reusable deployment strategies.",
+      "Production Terraform automation building ProveAI's infrastructure with advanced IaC patterns and modular design.",
     technologies: ["Terraform", "IaC", "AWS", "Kubernetes", "Helm", "GitHub Actions"],
     github_url: "https://github.com/WBHankins93/terraform-infra-platform",
     image_url: "",
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     id: "devops-studio",
     name: "DevOps Studio",
     description:
-      "An open-source learning tool for new DevOps and Infra Engineers, providing hands-on labs, tutorials, and real-world scenarios to accelerate skill development in a sandboxed environment.",
+      "Open-source DevOps training platform with labs, tutorials, and real-world scenarios for skill development.",
     technologies: [
       "Open Source",
       "Education",
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     id: "second-line-psychiatry",
     name: "Second Line Psychiatry",
     description:
-      "Professional telehealth website for a mental health private practice in New Orleans. Built to showcase services, provider information, and enable online consultation scheduling. Modern, accessible design focused on patient experience and HIPAA compliance considerations.",
+      "Professional telehealth website for a mental health practice with modern design, scheduling, and HIPAA-compliant architecture.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "SEO"],
     github_url: "https://github.com/WBHankins93/second-line-psych",
     live_url: "https://www.secondlinepsychiatry.com/",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     id: "nealy-event-decor",
     name: "Nealy Event Decor",
     description:
-      "Launching a small business owner's first online presence with a modern, fast, and elegant website. Built with Next.js and Tailwind CSS, featuring a custom CMS for easy content updates. Client is thrilled with progress and we're finalizing for launch.",
+      "Modern, fast website with custom CMS for event decor business, delivering elegant online presence from zero to launch.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Sanity CMS"],
     github_url: "https://github.com/WBHankins93/nealy-event-decor",
     live_url: "https://nealy-event-decor.vercel.app/",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
     id: "sproutflow-flagship",
     name: "Sproutflow Studio Website",
     description:
-      "The flagship website for my web design agency, showcasing our services, portfolio, and approach. Built to demonstrate modern web development capabilities and attract small business clients.",
+      "Flagship agency website showcasing services and portfolio, demonstrating modern web development capabilities.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/sproutflow-flagship",
     live_url: "https://sproutflow.vercel.app",
@@ -150,7 +150,7 @@ export const projects: Project[] = [
     id: "personal-website",
     name: "Personal Portfolio",
     description:
-      "This site! A Solutions Engineering portfolio built with Next.js, featuring glassmorphism UI, project showcases, and a customer-first narrative. Serves as both my professional presence and proof-of-concept for Sproutflow's capabilities.",
+      "Solutions Engineering portfolio with glassmorphism UI, showcasing projects and customer-first narrative approach.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/personal-website",
     live_url: "https://benhankins.vercel.app",
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     id: "enterprise-cloud-delivery-ibm",
     name: "Enterprise Cloud Delivery (IBM)",
     description:
-      "Architected and automated cloud environments for major enterprise clients, resulting in a $10.1M SAP RISE deal. Reduced deployment times by 85% using Terraform and custom automation.",
+      "Automated cloud environments for enterprise clients, contributing to $10.1M SAP RISE deal and 85% faster deployments.",
     technologies: ["IBM Cloud", "Solutions Architect", "Terraform", "Automation", "Enterprise", "Pre-Sales"],
     github_url: "",
     image_url: "",
@@ -187,7 +187,7 @@ export const projects: Project[] = [
     id: "terraform-aws-modules",
     name: "Terraform AWS Modules",
     description:
-      "Created reusable Terraform modules for AWS infrastructure provisioning, including VPC, EKS, RDS, and security groups with best practice configurations.",
+      "Reusable Terraform modules for AWS infrastructure with VPC, EKS, RDS, and security groups using best practices.",
     technologies: ["Terraform", "AWS", "CloudFormation", "GitHub Actions"],
     github_url: "https://github.com/WBHankins93/terraform-modules",
     image_url: "",
@@ -204,7 +204,7 @@ export const projects: Project[] = [
     id: "python-go-sre-utilities",
     name: "Python & Go SRE Utilities",
     description:
-      "A powerful CLI tool featuring useful Python automation scripts, bash utilities, and performant Go system code for common SRE and DevOps tasks, designed to boost daily productivity.",
+      "CLI tool with Python automation scripts, bash utilities, and Go code for common SRE and DevOps productivity tasks.",
     technologies: ["Python", "Go", "CLI", "SRE", "Automation", "Bash"],
     github_url: "https://github.com/WBHankins93/python-go-sre-utils",
     image_url: "",
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     id: "att-watsonxai-integration",
     name: "AT&T Watsonx.ai Integration",
     description:
-      "Enhanced customer service capabilities for AT&T by integrating IBM's watsonx.ai into their Connected Solutions platform, enabling advanced, AI-driven analytics and support.",
+      "Integrated IBM watsonx.ai into AT&T's platform, enabling AI-driven analytics and enhanced customer service capabilities.",
     technologies: ["Watsonx.ai", "IBM Cloud", "Openshift", "Next.js", "Integration", "API"],
     github_url: "",
     image_url: "",
@@ -238,7 +238,7 @@ export const projects: Project[] = [
     id: "python-pr-summary-bot",
     name: "Python PR Summary Bot",
     description:
-      "Developed Python scripts to summarize Terraform 'plan' output and post clean summaries in Pull Request comments, improving transparency and reducing review friction for the engineering team.",
+      "Python scripts that summarize Terraform plan output in PR comments, improving transparency and reducing review friction.",
     technologies: ["Python", "GitHub Actions", "Terraform", "API"],
     github_url: "https://github.com/WBHankins93/tf-plan-checker",
     image_url: "",
@@ -255,7 +255,7 @@ export const projects: Project[] = [
     id: "deployment-patterns",
     name: "deployment-patterns",
     description:
-      "Reference implementations of blue/green, canary, and GitOps flows with scripts and concise guides.",
+      "Reference implementations of blue/green, canary, and GitOps deployment patterns with scripts and guides.",
     technologies: ["Blue/Green", "Canary", "GitOps", "Helm", "Argo CD", "CI/CD"],
     github_url: "https://github.com/WBHankins93/deployment-patterns",
     image_url: "",
@@ -289,7 +289,7 @@ export const projects: Project[] = [
     id: "mlops-sre-mini",
     name: "mlops-sre-mini",
     description:
-      "Train a model, serve via FastAPI, deploy with Helm, monitor with Prometheus/Grafana, and automate CI/CD.",
+      "End-to-end MLOps pipeline: train models, serve via FastAPI, deploy with Helm, and monitor with Prometheus/Grafana.",
     technologies: ["MLOps", "FastAPI", "Docker", "Helm", "Prometheus", "Grafana"],
     github_url: "https://github.com/WBHankins93/mlops-sre-mini",
     image_url: "",
@@ -306,7 +306,7 @@ export const projects: Project[] = [
     id: "platform-engineering-lab",
     name: "Platform Engineering Lab",
     description:
-      "Comprehensive platform engineering experiments and patterns, showcasing modern platform tools, service mesh implementations, and developer experience optimization techniques.",
+      "Platform engineering experiments showcasing modern tools, service mesh implementations, and DX optimization patterns.",
     technologies: ["Platform Engineering", "Service Mesh", "Developer Experience", "Kubernetes", "Observability"],
     github_url: "https://github.com/WBHankins93/platform-engineering-lab",
     image_url: "",
@@ -323,7 +323,7 @@ export const projects: Project[] = [
     id: "helm-charts",
     name: "Helm Charts",
     description:
-      "Production-ready Helm charts for common applications and services, featuring best practices for templating, values management, and release automation.",
+      "Production-ready Helm charts with best practices for templating, values management, and release automation.",
     technologies: ["Helm", "Kubernetes", "Templating", "Charts", "Package Management"],
     github_url: "https://github.com/WBHankins93/helm-charts",
     image_url: "",
@@ -340,7 +340,7 @@ export const projects: Project[] = [
     id: "github-action-templates",
     name: "GitHub Action Templates",
     description:
-      "Reusable GitHub Actions workflows and templates for common CI/CD patterns, infrastructure deployment, and automated testing pipelines.",
+      "Reusable GitHub Actions workflows for CI/CD patterns, infrastructure deployment, and automated testing pipelines.",
     technologies: ["GitHub Actions", "CI/CD", "Automation", "Templates", "Workflows"],
     github_url: "https://github.com/WBHankins93/github-action-templates",
     image_url: "",

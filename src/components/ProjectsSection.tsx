@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink, Briefcase, ChevronDown } from "lucide-react";
+import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
@@ -214,7 +214,7 @@ export default function ProjectsSection() {
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
                     const isExpanded = expandedProjects.has(project.id);
-                    const techs = truncateTech(project.technologies ?? [], 5);
+                    const techs = project.technologies ?? [];
                     
                     return (
                       <motion.div
@@ -225,14 +225,14 @@ export default function ProjectsSection() {
                         transition={{ duration: 0.3, delay: idx * 0.05 }}
                       >
                         <Card 
-                          className={`rounded-2xl shadow-lg ring-1 transition-all duration-300 overflow-hidden ${
-                            c.ring
-                          } ${isExpanded ? 'ring-2' : ''}`}
+                          className={`rounded-2xl shadow-lg border-2 transition-all duration-300 overflow-hidden ${
+                            isExpanded ? 'border-slate-300' : 'border-slate-200'
+                          }`}
                         >
                           {/* Collapsed View - Title & Category Only */}
                           <div
                             onClick={() => toggleProject(project.id)}
-                            className="p-4 cursor-pointer flex items-center justify-between"
+                            className="p-3 cursor-pointer flex items-center justify-between"
                           >
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <span className={clsx("inline-block h-2.5 w-2.5 rounded-full flex-shrink-0", c.dot)} />
@@ -271,25 +271,14 @@ export default function ProjectsSection() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                               >
-                                <div className="px-4 pb-4 border-t border-slate-200/60 pt-4 space-y-4">
-                                  {/* Metadata Grid */}
-                                  <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 rounded-lg p-3">
-                                    <div className="flex items-center justify-between">
-                                      <span className="text-slate-500">Technologies:</span>
-                                      <span className="font-medium text-slate-700">{project.techCount}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                      <span className="text-slate-500">Scale:</span>
-                                      <span className="font-medium text-slate-700">{project.scale}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                      <span className="text-slate-500">Architecture:</span>
-                                      <span className="font-medium text-slate-700">{project.architecture}</span>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                      <span className="text-slate-500">Environment:</span>
-                                      <span className="font-medium text-slate-700">{project.environment}</span>
-                                    </div>
+                                <div className="px-4 pb-4 border-t border-slate-200/60 pt-3 space-y-3">
+                                  {/* Collapsed Metadata Line */}
+                                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                                    <span>{project.architecture}</span>
+                                    <span>•</span>
+                                    <span>{project.scale}</span>
+                                    <span>•</span>
+                                    <span>{project.environment}</span>
                                   </div>
 
                                   {/* Type & Status Badges */}
@@ -319,9 +308,10 @@ export default function ProjectsSection() {
                                     {project.description}
                                   </p>
 
-                                  {/* Tech Stack */}
-                                  <div className="flex flex-wrap gap-2">
-                                    {techs.map((tech, index) => (
+                                  {/* Tech Stack - Horizontal Scroll */}
+                                  <div className="overflow-x-auto scrollbar-hide -mx-1 px-1">
+                                    <div className="flex gap-1.5 min-w-max">
+                                      {techs.map((tech, index) => (
                                       <span
                                         key={index}
                                         className={clsx(
@@ -333,20 +323,21 @@ export default function ProjectsSection() {
                                         {tech}
                                       </span>
                                     ))}
+                                    </div>
                                   </div>
 
-                                  {/* Action Buttons */}
-                                  <div className="flex gap-2 pt-2">
+                                  {/* Icon-Only Action Buttons */}
+                                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
                                     {project.github_url && (
                                       <a
                                         href={project.github_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
-                                        className={`inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 text-white px-4 py-2.5 text-sm font-medium hover:bg-slate-800 transition-colors ${project.live_url && project.live_url.trim() !== '' ? 'flex-1' : 'w-full'}`}
+                                        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+                                        title="View Code"
                                       >
-                                        <FaGithub className="w-4 h-4" />
-                                        View Code
+                                        <Code2 className="w-4 h-4" />
                                       </a>
                                     )}
                                     {project.live_url && project.live_url.trim() !== '' && (
@@ -355,10 +346,10 @@ export default function ProjectsSection() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
-                                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 text-white px-4 py-2.5 text-sm font-medium hover:bg-emerald-700 transition-colors"
+                                        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors"
+                                        title="Live Demo"
                                       >
-                                        <ExternalLink className="w-4 h-4" />
-                                        Live Demo
+                                        <Eye className="w-4 h-4" />
                                       </a>
                                     )}
                                   </div>
@@ -372,18 +363,18 @@ export default function ProjectsSection() {
                   })}
                 </div>
 
-                {/* Desktop Grid View */}
+                {/* Desktop Grid View - Masonry Layout */}
                 <motion.div
                   key={selectedCategory}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                  className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-fr"
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
-                    const techs = truncateTech(project.technologies ?? [], 5);
+                    const techs = project.technologies ?? [];
                     
                     return (
                       <motion.div
@@ -392,141 +383,145 @@ export default function ProjectsSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, delay: idx * 0.1 }}
+                        transition={{ duration: 0.4, delay: idx * 0.05 }}
                         onHoverStart={() => setHoveredProject(project.id)}
                         onHoverEnd={() => setHoveredProject(null)}
-                        className="group"
+                        className="group flex"
                       >
-                      <div className={clsx("p-[1px] rounded-2xl ring-1 transition-all duration-300", 
-                        c.ring, 
-                        "bg-gradient-to-br", 
-                        c.grad,
-                        hoveredProject === project.id ? "ring-2 shadow-xl scale-[1.02]" : "hover:ring-2 hover:shadow-lg"
-                      )}>
-                        <Card className="group rounded-2xl border-0 bg-white/90 backdrop-blur-sm supports-[backdrop-filter]:bg-white/70 shadow-sm transition-all duration-300 overflow-hidden h-full">
-                          <CardHeader className="pb-4">
-                            <div className="flex items-start justify-between mb-3">
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                                  <span className={clsx("inline-block h-2.5 w-2.5 rounded-full", c.dot)} />
-                                  <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
-                                  </span>
-                                  
-                                  {/* Featured Badge - Only DevOps Studio */}
-                                  {project.id === 'devops-studio' && (
-                                    <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60 shadow-sm">
-                                      <Star className="w-3 h-3" />
-                                      Featured
-                                    </div>
-                                  )}
-                                  
-                                  {/* Client Work Badge */}
-                                  {project.projectType === 'Client Work' && (
-                                    <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60 shadow-sm">
-                                      <Briefcase className="w-3 h-3" />
-                                      Client Work
-                                    </div>
-                                  )}
+                        <Card className={clsx(
+                          "group rounded-2xl bg-white transition-all duration-300 overflow-hidden flex flex-col w-full",
+                          "border-2 shadow-lg",
+                          hoveredProject === project.id ? "shadow-xl scale-[1.02] border-slate-300" : "border-slate-200 hover:border-slate-300 hover:shadow-xl"
+                        )}>
+                          {/* Visual Banner */}
+                          <div className={clsx(
+                            "h-24 bg-gradient-to-br",
+                            c.grad,
+                            "relative overflow-hidden"
+                          )}>
+                            {project.image_url ? (
+                              <img 
+                                src={project.image_url} 
+                                alt={project.name}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                                <Folder className={clsx("w-12 h-12", c.accent)} />
+                              </div>
+                            )}
+                          </div>
+
+                          <CardHeader className="p-4 pb-3">
+                            {/* Category & Badges */}
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <span className={clsx("inline-block h-2 w-2 rounded-full", c.dot)} />
+                              <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                                {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                              </span>
+                              
+                              {project.id === 'devops-studio' && (
+                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
+                                  <Star className="w-3 h-3" />
+                                  Featured
                                 </div>
-                                <h3 className="font-bold text-xl text-slate-900 group-hover:text-slate-950 leading-tight">
-                                  {project.name}
-                                </h3>
-                              </div>
+                              )}
+                              
+                              {project.projectType === 'Client Work' && (
+                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60">
+                                  <Briefcase className="w-3 h-3" />
+                                  Client Work
+                                </div>
+                              )}
                             </div>
 
-                            {/* Authentic Project Metadata */}
-                            <div className="grid grid-cols-2 gap-3 text-xs bg-slate-50 rounded-lg p-3 mb-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-slate-500">Technologies:</span>
-                                <span className="font-medium text-slate-700">{project.techCount}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-slate-500">Scale:</span>
-                                <span className="font-medium text-slate-700">{project.scale}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-slate-500">Architecture:</span>
-                                <span className="font-medium text-slate-700">{project.architecture}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-slate-500">Environment:</span>
-                                <span className="font-medium text-slate-700">{project.environment}</span>
-                              </div>
+                            {/* Title */}
+                            <h3 className="font-bold text-lg text-slate-900 group-hover:text-slate-950 leading-tight mb-2">
+                              {project.name}
+                            </h3>
+
+                            {/* Collapsed Metadata Line */}
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                              <span>{project.architecture}</span>
+                              <span>•</span>
+                              <span>{project.scale}</span>
+                              <span>•</span>
+                              <span>{project.environment}</span>
                             </div>
 
-                            {/* Project Type and Status Badges */}
-                            <div className="flex gap-2 mb-3">
+                            {/* Type & Status Badges */}
+                            <div className="flex gap-1.5 mb-2">
                               <span className={clsx(
-                                "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
+                                "px-2 py-0.5 text-xs font-medium rounded-full ring-1",
                                 getProjectTypeStyle(project.projectType)
                               )}>
                                 {project.projectType}
                               </span>
                               <span className={clsx(
-                                "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
+                                "px-2 py-0.5 text-xs font-medium rounded-full ring-1",
                                 getStatusStyle(project.status)
                               )}>
                                 {project.status}
                               </span>
                             </div>
-                          </CardHeader>
 
-                          <CardContent className="pt-0">
-                            <p className="text-slate-600 mb-6 leading-relaxed text-sm">
+                            {/* Description - Reduced spacing */}
+                            <p className="text-slate-600 leading-relaxed text-sm mb-3 line-clamp-2">
                               {project.description}
                             </p>
+                          </CardHeader>
 
-                            {/* Enhanced Tech Stack */}
-                            <div className="flex flex-wrap gap-2 mb-6">
-                              {techs.map((tech, index) => (
-                                <span
-                                  key={index}
-                                  className={clsx(
-                                    "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-all duration-200",
-                                    c.pill,
-                                    "hover:scale-105 cursor-default"
-                                  )}
-                                >
-                                  <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
-                                  {tech}
-                                </span>
-                              ))}
+                          <CardContent className="px-4 pb-4 pt-0 flex flex-col flex-1">
+                            {/* Horizontal Scroll Tags */}
+                            <div className="overflow-x-auto mb-3 scrollbar-hide -mx-1 px-1">
+                              <div className="flex gap-1.5 min-w-max">
+                                {techs.map((tech, index) => (
+                                  <span
+                                    key={index}
+                                    className={clsx(
+                                      "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap",
+                                      c.pill,
+                                      "ring-1"
+                                    )}
+                                  >
+                                    <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
 
-                            {/* Action Buttons */}
-                            <div className="flex gap-3">
+                            {/* Icon-Only Buttons Footer */}
+                            <div className="flex items-center gap-2 mt-auto pt-2 border-t border-slate-100">
                               {project.github_url && (
                                 <a
                                   href={project.github_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className={`inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 text-white px-4 py-2.5 text-sm font-medium hover:bg-slate-800 transition-colors duration-200 ${project.live_url && project.live_url.trim() !== '' ? 'flex-1' : 'w-full'}`}
+                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200"
+                                  title="View Code"
                                 >
-                                  <FaGithub className="w-4 h-4" />
-                                  View Code
+                                  <Code2 className="w-4 h-4" />
                                 </a>
                               )}
                               
-                              {/* Live Demo Button - Only shows if live_url exists and is not empty */}
                               {project.live_url && project.live_url.trim() !== '' && (
                                 <a
                                   href={project.live_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 text-white px-4 py-2.5 text-sm font-medium hover:bg-emerald-700 transition-colors duration-200"
+                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-200"
+                                  title="Live Demo"
                                 >
-                                  <ExternalLink className="w-4 h-4" />
-                                  Live Demo
+                                  <Eye className="w-4 h-4" />
                                 </a>
                               )}
                             </div>
                           </CardContent>
                         </Card>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
               </>
             )}
