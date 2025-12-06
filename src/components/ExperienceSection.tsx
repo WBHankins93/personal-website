@@ -159,163 +159,159 @@ export default function ExperienceSection() {
                     <div className={`w-full md:w-5/12 ${
                       index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
                     }`}>
-                      {/* Mobile: Flip Card Container */}
+                      {/* Mobile: Flip Card Container - NO SCROLL VERSION */}
                       <div 
                         className="md:hidden relative cursor-pointer mb-4"
                         style={{ 
-                          height: '70vh',
-                          maxHeight: '600px',
-                          minHeight: '500px',
                           perspective: '1000px'
                         }}
                         onClick={() => handleCardClick(index)}
                       >
                         <div
-                          className="relative w-full h-full transition-transform duration-700"
+                          className="relative w-full transition-transform duration-700"
                           style={{
                             transformStyle: 'preserve-3d',
                             transform: isFlipped(index) ? 'rotateY(180deg)' : 'rotateY(0deg)'
                           }}
                         >
-                          {/* Front of Card */}
+                          {/* Front of Card - NO SCROLL */}
                           <div
-                            className="absolute inset-0 w-full h-full"
+                            className="w-full"
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
                               transform: 'rotateY(0deg)'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''} h-full flex flex-col`}>
-                              <CardContent className="p-4 flex flex-col h-full gap-0">
-                                {/* Header Section - Scrollable */}
-                                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-                                  <div className="flex items-start gap-3 mb-4">
-                                    {/* Company Logo */}
-                                    <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
-                                      exp.type === 'side-business' 
-                                        ? 'bg-gradient-to-br from-amber-50 to-orange-100' 
-                                        : 'bg-gradient-to-br from-gray-50 to-gray-100'
-                                    }`}>
-                                      {exp.logo ? (
-                                        <Image 
-                                          src={exp.logo} 
-                                          alt={`${exp.company} logo`} 
-                                          width={48}
-                                          height={48}
-                                          className="object-contain w-full h-full"
-                                        />
-                                      ) : (
-                                        <Code className={`w-6 h-6 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
-                                      )}
-                                    </div>
-
-                                    {/* Job Details */}
-                                    <div className="flex-1 min-w-0">
-                                      <h3 className="font-bold text-lg text-slate-900 mb-1">
-                                        {exp.title}
-                                      </h3>
-                                      <p className={`font-semibold text-base mb-2 ${
-                                        exp.type === 'side-business' ? 'text-amber-600' : 'text-blue-600'
-                                      }`}>
-                                        {exp.company}
-                                      </p>
-                                      
-                                      <div className="flex flex-col gap-2 text-xs text-gray-600">
-                                        <div className="flex items-center gap-2">
-                                          <Calendar className="w-3 h-3" />
-                                          {exp.period}
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                          <MapPin className="w-3 h-3" />
-                                          {exp.location}
-                                        </div>
-                                      </div>
-
-                                      {/* Optional Note Badge */}
-                                      {exp.note && (
-                                        <div className="mt-2">
-                                          <span className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
-                                            exp.type === 'side-business' 
-                                              ? 'bg-amber-100 text-amber-800 border border-amber-300' 
-                                              : 'bg-blue-100 text-blue-800 border border-blue-300'
-                                          }`}>
-                                            {exp.note}
-                                          </span>
-                                        </div>
-                                      )}
-                                    </div>
+                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''}`}>
+                              <CardContent className="p-4">
+                                {/* Header Section */}
+                                <div className="flex items-start gap-3 mb-3">
+                                  {/* Company Logo */}
+                                  <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
+                                    exp.type === 'side-business' 
+                                      ? 'bg-gradient-to-br from-amber-50 to-orange-100' 
+                                      : 'bg-gradient-to-br from-gray-50 to-gray-100'
+                                  }`}>
+                                    {exp.logo ? (
+                                      <Image 
+                                        src={exp.logo} 
+                                        alt={`${exp.company} logo`} 
+                                        width={48}
+                                        height={48}
+                                        className="object-contain w-full h-full"
+                                      />
+                                    ) : (
+                                      <Code className={`w-6 h-6 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
+                                    )}
                                   </div>
 
-                                  {/* Highlights */}
-                                  <div className="mt-3 flex flex-wrap gap-1.5">
-                                    {exp.highlights.map((highlight, hIndex) => (
-                                      <div 
-                                        key={hIndex}
-                                        className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${
-                                          exp.type === 'side-business'
-                                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                                            : highlight.metric 
-                                              ? 'bg-green-50 text-green-700 border border-green-200' 
-                                              : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                  {/* Job Details */}
+                                  <div className="flex-1 min-w-0">
+                                    <h3 className="font-bold text-sm leading-tight text-slate-900 mb-1 line-clamp-2">
+                                      {exp.title}
+                                    </h3>
+                                    <p className={`font-semibold text-xs mb-1.5 truncate ${
+                                      exp.type === 'side-business' ? 'text-amber-600' : 'text-blue-600'
+                                    }`}>
+                                      {exp.company}
+                                    </p>
+                                    
+                                    <div className="flex flex-col gap-1 text-[10px] text-gray-600">
+                                      <div className="flex items-center gap-1">
+                                        <Calendar className="w-3 h-3 flex-shrink-0" />
+                                        <span className="truncate">{exp.period}</span>
+                                      </div>
+                                      <div className="flex items-center gap-1">
+                                        <MapPin className="w-3 h-3 flex-shrink-0" />
+                                        <span className="truncate">{exp.location}</span>
+                                      </div>
+                                    </div>
+
+                                    {/* Optional Note Badge */}
+                                    {exp.note && (
+                                      <div className="mt-1.5">
+                                        <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                                          exp.type === 'side-business' 
+                                            ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                                            : 'bg-blue-100 text-blue-800 border border-blue-300'
+                                        }`}>
+                                          {exp.note}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+
+                                {/* Highlights - Show top 4 only */}
+                                <div className="mt-3 flex flex-wrap gap-1.5">
+                                  {exp.highlights.slice(0, 4).map((highlight, hIndex) => (
+                                    <div 
+                                      key={hIndex}
+                                      className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                                        exp.type === 'side-business'
+                                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                          : highlight.metric 
+                                            ? 'bg-green-50 text-green-700 border border-green-200' 
+                                            : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                      }`}
+                                    >
+                                      <highlight.icon className="w-3 h-3 flex-shrink-0" />
+                                      <span className="truncate">{highlight.text}</span>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                {/* Technologies - Show top 6 */}
+                                <div className="mt-3">
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {exp.technologies.slice(0, 6).map((tech, techIndex) => (
+                                      <span 
+                                        key={techIndex}
+                                        className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                                          techColors[techIndex % techColors.length]
                                         }`}
                                       >
-                                        <highlight.icon className="w-3 h-3 flex-shrink-0" />
-                                        <span className="truncate">{highlight.text}</span>
-                                      </div>
+                                        {tech}
+                                      </span>
                                     ))}
-                                  </div>
-
-                                  {/* Technologies */}
-                                  <div className="mt-3">
-                                    <div className="flex flex-wrap gap-1.5">
-                                      {exp.technologies.slice(0, 5).map((tech, techIndex) => (
-                                        <span 
-                                          key={techIndex}
-                                          className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
-                                            techColors[techIndex % techColors.length]
-                                          }`}
-                                        >
-                                          {tech}
-                                        </span>
-                                      ))}
-                                      {exp.technologies.length > 5 && (
-                                        <span className="px-2 py-0.5 rounded-full text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200">
-                                          +{exp.technologies.length - 5}
-                                        </span>
-                                      )}
-                                    </div>
+                                    {exp.technologies.length > 6 && (
+                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium border bg-slate-50 text-slate-700 border-slate-200">
+                                        +{exp.technologies.length - 6}
+                                      </span>
+                                    )}
                                   </div>
                                 </div>
 
                                 {/* Arrow Indicator */}
-                                <div className="mt-4 pt-3 border-t border-gray-200 flex items-center justify-center flex-shrink-0">
-                                  <div className="flex flex-col items-center gap-1">
-                                    <span className="text-xs text-gray-500 font-medium">Tap to see details</span>
-                                    <ChevronDown className="w-5 h-5 text-gray-400 animate-bounce" />
+                                <div className="mt-3 pt-3 border-t border-gray-200 flex items-center justify-center">
+                                  <div className="flex flex-col items-center gap-0.5">
+                                    <span className="text-[10px] text-gray-500 font-medium">Tap to see details</span>
+                                    <ChevronDown className="w-4 h-4 text-gray-400 animate-bounce" />
                                   </div>
                                 </div>
                               </CardContent>
                             </Card>
                           </div>
 
-                          {/* Back of Card */}
+                          {/* Back of Card - NO SCROLL */}
                           <div
-                            className="absolute inset-0 w-full h-full"
+                            className="absolute top-0 left-0 w-full"
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
                               transform: 'rotateY(180deg)'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg h-full flex flex-col ${
+                            <Card className={`border-0 shadow-lg ${
                               exp.type === 'side-business' 
                                 ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
                                 : 'bg-white border-2 border-blue-200'
                             }`}>
-                              <CardContent className="p-4 h-full flex flex-col gap-0">
-                                <div className="flex items-center justify-between mb-4 flex-shrink-0">
-                                  <h4 className={`font-semibold text-base ${
+                              <CardContent className="p-4">
+                                {/* Header */}
+                                <div className="flex items-center justify-between mb-3">
+                                  <h4 className={`font-semibold text-sm ${
                                     exp.type === 'side-business' ? 'text-amber-900' : 'text-slate-900'
                                   }`}>
                                     Key Achievements
@@ -328,32 +324,46 @@ export default function ExperienceSection() {
                                     className="text-gray-400 hover:text-gray-600 transition-colors p-1"
                                     aria-label="Close"
                                   >
-                                    <ChevronDown className="w-5 h-5 rotate-180" />
+                                    <ChevronDown className="w-4 h-4 rotate-180" />
                                   </button>
                                 </div>
-                                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-                                  <ul className="space-y-3">
-                                    {exp.achievements.map((achievement, achIndex) => (
-                                      <li 
-                                        key={achIndex}
-                                        className="flex items-start gap-2.5"
-                                      >
-                                        <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                                          exp.type === 'side-business'
-                                            ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                                            : 'bg-gradient-to-r from-blue-500 to-purple-500'
-                                        }`}></div>
-                                        <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                                <div className="mt-4 pt-3 border-t border-gray-200 flex-shrink-0">
+                                
+                                {/* Achievements - Show top 5 */}
+                                <ul className="space-y-2 mb-3">
+                                  {exp.achievements.slice(0, 5).map((achievement, achIndex) => (
+                                    <li 
+                                      key={achIndex}
+                                      className="flex items-start gap-2"
+                                    >
+                                      <div className={`w-1 h-1 rounded-full mt-1.5 flex-shrink-0 ${
+                                        exp.type === 'side-business'
+                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
+                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                                      }`}></div>
+                                      <span className="text-gray-700 text-[11px] leading-snug">{achievement}</span>
+                                    </li>
+                                  ))}
+                                  {exp.achievements.length > 5 && (
+                                    <li className="flex items-start gap-2">
+                                      <div className={`w-1 h-1 rounded-full mt-1.5 flex-shrink-0 ${
+                                        exp.type === 'side-business'
+                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
+                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                                      }`}></div>
+                                      <span className="text-gray-500 text-[11px] italic leading-snug">
+                                        +{exp.achievements.length - 5} more achievements
+                                      </span>
+                                    </li>
+                                  )}
+                                </ul>
+                                
+                                {/* Footer - All tech tags */}
+                                <div className="pt-3 border-t border-gray-200">
                                   <div className="flex flex-wrap gap-1.5">
                                     {exp.technologies.map((tech, techIndex) => (
                                       <span 
                                         key={techIndex}
-                                        className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
+                                        className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
                                           techColors[techIndex % techColors.length]
                                         }`}
                                       >
