@@ -30,9 +30,9 @@ export const experiencesData: ExperienceData[] = [
       { icon: "Code", text: "80% faster deployments", metric: true }
     ],
     achievements: [
-      "Led SOC 2 Type II compliance readiness from 34% to 100%, directly unblocking enterprise sales by meeting strict security vendor requirements.",
-      "Maintained 99.9% uptime across 4 production Kubernetes clusters while reducing deployment time by 80% through GitHub Actions automation.",
-      "Improved incident response by 60% via error-focused observability dashboards (Vector, OpenSearch)."
+      "Drove SOC 2 Type II readiness from 34% → 100%, unblocking enterprise sales.",
+      "Maintained 99.9% uptime across 4 Kubernetes clusters and cut deployment times 80% with GitHub Actions.",
+      "Improved incident response 60% using focused observability dashboards (Vector, OpenSearch)."
     ],
     technologies: ["AWS", "Kubernetes", "Terraform", "GitHub Actions", "Helm", "SOC 2", "Vector", "OpenSearch", "Python"]
   },
@@ -50,9 +50,9 @@ export const experiencesData: ExperienceData[] = [
       { icon: "TrendingUp", text: "Measurable business outcomes", metric: true }
     ],
     achievements: [
-      "Founded and operate technical consultancy serving 5 clients, applying enterprise Solutions Engineering methodology to small business engagements.",
-      "Manage complete customer lifecycle: technical discovery, solution design, custom platform development (TypeScript/Next.js/React), and ongoing account management.",
-      "Delivered 100% of projects on-time and within budget with measurable business outcomes: 50% lead generation increase (psychiatry), zero-to-traction launch (event decor), 30% customer acquisition growth (pool services)."
+      "Operate technical consultancy serving 5 clients using enterprise SE practices.",
+      "Own full lifecycle: discovery, design, development (TypeScript/Next.js), delivery, and account management.",
+      "Delivered 100% on-time projects with measurable impact: 50% more leads, zero-to-launch delivery, and 30% acquisition growth."
     ],
     technologies: ["TypeScript", "Next.js", "React", "Solutions Engineering", "Technical Discovery", "Account Management", "Customer Success"]
   },
@@ -69,10 +69,10 @@ export const experiencesData: ExperienceData[] = [
       { icon: "TrendingUp", text: "20+ environments deployed", metric: true }
     ],
     achievements: [
-      "Contributed infrastructure automation to CenterPoint Energy's $10.1M SAP RISE win by designing Terraform framework that scaled environments from 2 to 49, creating competitive differentiation during 11-month vendor evaluation.",
-      "Owned technical relationships across 12 strategic enterprise accounts (AT&T, CenterPoint Energy, Pepsi, NBC Universal, Cencora, Citibank, RBC), managing full customer lifecycle from discovery through production expansion.",
-      "Designed and deployed scalable infrastructure across 20+ enterprise environments, reducing deployment cycles from manual to automated workflows using Terraform and GitOps.",
-      "Partnered with Solutions Engineering throughout sales cycles, delivering technical workshops and architecture presentations to C-level stakeholders that accelerated adoption."
+      "Built Terraform automation scaling SAP RISE environments 2 → 49, contributing to a $10.1M win.",
+      "Owned technical leadership across 12 enterprise accounts from discovery through expansion.",
+      "Delivered 20+ cloud environments, replacing manual work with Terraform and GitOps automation.",
+      "Supported SE teams with workshops and C-level architecture sessions to accelerate adoption."
     ],
     technologies: ["Multi-cloud", "Terraform", "Kubernetes", "GitOps", "Solutions Architecture", "Enterprise Accounts", "CI/CD"]
   },
@@ -90,9 +90,9 @@ export const experiencesData: ExperienceData[] = [
       { icon: "Users", text: "Team mentorship", metric: false }
     ],
     achievements: [
-      "Achieved 70% close rate on enterprise POCs by architecting reusable Kubernetes deployment frameworks that reduced customer time-to-value by 40%.",
-      "Delivered technical presentations and solution workshops to C-level stakeholders across manufacturing, telecom, and energy sectors, accelerating purchase decisions.",
-      "Led technical enablement for 8-person engineering cohort through weekly mentorship sessions, contributing to 3 promotions and 2 performance awards within 12 months."
+      "Achieved 70% POC close rate using reusable Kubernetes frameworks that cut time-to-value 40%.",
+      "Delivered workshops and technical presentations to C-level leaders across key industries.",
+      "Led enablement for 8 engineers, contributing to 3 promotions and 2 performance awards."
     ],
     technologies: ["Pre-Sales", "Technical Leadership", "Kubernetes", "OpenShift", "Argo CD", "Tekton", "Team Mentorship", "Customer Success"]
   },
@@ -109,7 +109,7 @@ export const experiencesData: ExperienceData[] = [
       { icon: "Award", text: "Promoted after 14 months", metric: true }
     ],
     achievements: [
-      "Earned promotion to Senior Solutions Engineer after 14 months based on strong customer feedback, high win rate, and technical excellence in POC delivery."
+      "Promoted in 14 months for strong customer results, high win rates, and consistent technical delivery."
     ],
     technologies: ["Pre-Sales", "Technical Consultation", "Kubernetes", "OpenShift", "GitOps", "Argo CD", "Customer Success"]
   },
@@ -126,8 +126,8 @@ export const experiencesData: ExperienceData[] = [
       { icon: "TrendingUp", text: "SDLC ownership", metric: false }
     ],
     achievements: [
-      "Built Chrome extension using Vue.js for recruiter talent database, managing complete SDLC.",
-      "Contributed to product currently in production with Kortivity clients."
+      "Built a Vue-based Chrome extension for recruiter workflows, owning the full SDLC.",
+      "Delivered production features currently used by Kortivity clients."
     ],
     technologies: ["Vue.js", "Chrome Extension", "JavaScript", "Full-Stack"]
   }
