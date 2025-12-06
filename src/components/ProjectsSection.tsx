@@ -300,7 +300,7 @@ export default function ProjectsSection() {
                                   </p>
 
                                   {/* Tech Stack - Flex Wrap */}
-                                  <div className="flex flex-wrap gap-1.5">
+                                  <div className="flex flex-wrap gap-1.5 mb-0">
                                     {techs.map((tech, index) => (
                                       <span
                                         key={index}
@@ -316,7 +316,7 @@ export default function ProjectsSection() {
                                   </div>
 
                                   {/* Icon-Only Action Buttons */}
-                                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100 mt-0">
                                     {project.github_url && (
                                       <a
                                         href={project.github_url}
