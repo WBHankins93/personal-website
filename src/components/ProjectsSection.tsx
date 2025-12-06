@@ -272,15 +272,6 @@ export default function ProjectsSection() {
                                 className="overflow-hidden"
                               >
                                 <div className="px-4 pb-4 border-t border-slate-200/60 pt-3 space-y-3">
-                                  {/* Collapsed Metadata Line */}
-                                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                                    <span>{project.architecture}</span>
-                                    <span>•</span>
-                                    <span>{project.scale}</span>
-                                    <span>•</span>
-                                    <span>{project.environment}</span>
-                                  </div>
-
                                   {/* Type & Status Badges */}
                                   <div className="flex gap-2 flex-wrap">
                                     <span className={clsx(
@@ -437,15 +428,6 @@ export default function ProjectsSection() {
                             <h3 className="font-bold text-lg text-slate-900 group-hover:text-slate-950 leading-tight mb-2">
                               {project.name}
                             </h3>
-
-                            {/* Collapsed Metadata Line */}
-                            <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-                              <span>{project.architecture}</span>
-                              <span>•</span>
-                              <span>{project.scale}</span>
-                              <span>•</span>
-                              <span>{project.environment}</span>
-                            </div>
 
                             {/* Type & Status Badges */}
                             <div className="flex gap-1.5 mb-2">
