@@ -52,16 +52,16 @@ export default function ExperienceSection() {
   }));
 
   const techColors = [
-    "bg-blue-50 text-blue-700 border-blue-200",
-    "bg-green-50 text-green-700 border-green-200",
-    "bg-purple-50 text-purple-700 border-purple-200",
-    "bg-orange-50 text-orange-700 border-orange-200",
-    "bg-cyan-50 text-cyan-700 border-cyan-200",
-    "bg-pink-50 text-pink-700 border-pink-200",
-    "bg-indigo-50 text-indigo-700 border-indigo-200",
-    "bg-teal-50 text-teal-700 border-teal-200",
-    "bg-yellow-50 text-yellow-700 border-yellow-200",
-    "bg-red-50 text-red-700 border-red-200",
+    "bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-blue-200/60",
+    "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 ring-green-200/60",
+    "bg-gradient-to-r from-purple-50 to-violet-50 text-purple-700 ring-purple-200/60",
+    "bg-gradient-to-r from-orange-50 to-amber-50 text-orange-700 ring-orange-200/60",
+    "bg-gradient-to-r from-cyan-50 to-teal-50 text-cyan-700 ring-cyan-200/60",
+    "bg-gradient-to-r from-pink-50 to-rose-50 text-pink-700 ring-pink-200/60",
+    "bg-gradient-to-r from-indigo-50 to-blue-50 text-indigo-700 ring-indigo-200/60",
+    "bg-gradient-to-r from-teal-50 to-cyan-50 text-teal-700 ring-teal-200/60",
+    "bg-gradient-to-r from-yellow-50 to-amber-50 text-yellow-700 ring-yellow-200/60",
+    "bg-gradient-to-r from-red-50 to-pink-50 text-red-700 ring-red-200/60",
   ];
 
   // Color scheme for Sproutflow (warm tones)
@@ -159,7 +159,7 @@ export default function ExperienceSection() {
                     <div className={`w-full md:w-5/12 ${
                       index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
                     }`}>
-                      {/* Mobile: Flip Card Container - NO SCROLL VERSION */}
+                      {/* Mobile: Flip Card Container */}
                       <div 
                         className="md:hidden relative cursor-pointer mb-4"
                         style={{ 
@@ -174,7 +174,7 @@ export default function ExperienceSection() {
                             transform: isFlipped(index) ? 'rotateY(180deg)' : 'rotateY(0deg)'
                           }}
                         >
-                          {/* Front of Card - NO SCROLL */}
+                          {/* Front of Card */}
                           <div
                             className="w-full"
                             style={{
@@ -183,26 +183,30 @@ export default function ExperienceSection() {
                               transform: 'rotateY(0deg)'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''}`}>
-                              <CardContent className="p-4">
+                            <Card className={`rounded-3xl shadow-xl ${cardStyle.bgGradient} ${
+                              exp.type === 'side-business' 
+                                ? 'ring-2 ring-amber-200 ring-offset-2 ring-offset-transparent' 
+                                : 'ring-1 ring-gray-200/50'
+                            }`}>
+                              <CardContent className="p-5 bg-gradient-to-br from-white/60 to-transparent rounded-3xl">
                                 {/* Header Section */}
                                 <div className="flex items-start gap-3 mb-3">
                                   {/* Company Logo */}
-                                  <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
+                                  <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2.5 shadow-md ${
                                     exp.type === 'side-business' 
-                                      ? 'bg-gradient-to-br from-amber-50 to-orange-100' 
-                                      : 'bg-gradient-to-br from-gray-50 to-gray-100'
+                                      ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
+                                      : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
                                   }`}>
                                     {exp.logo ? (
                                       <Image 
                                         src={exp.logo} 
                                         alt={`${exp.company} logo`} 
-                                        width={48}
-                                        height={48}
+                                        width={56}
+                                        height={56}
                                         className="object-contain w-full h-full"
                                       />
                                     ) : (
-                                      <Code className={`w-6 h-6 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
+                                      <Code className={`w-7 h-7 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
                                     )}
                                   </div>
 
@@ -230,11 +234,11 @@ export default function ExperienceSection() {
 
                                     {/* Optional Note Badge */}
                                     {exp.note && (
-                                      <div className="mt-1.5">
-                                        <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                                      <div className="mt-2">
+                                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold shadow-sm ${
                                           exp.type === 'side-business' 
-                                            ? 'bg-amber-100 text-amber-800 border border-amber-300' 
-                                            : 'bg-blue-100 text-blue-800 border border-blue-300'
+                                            ? 'bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 ring-1 ring-amber-300/50' 
+                                            : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 ring-1 ring-blue-300/50'
                                         }`}>
                                           {exp.note}
                                         </span>
@@ -244,16 +248,16 @@ export default function ExperienceSection() {
                                 </div>
 
                                 {/* Highlights - Show top 4 only */}
-                                <div className="mt-3 flex flex-wrap gap-1.5">
+                                <div className="mt-3.5 flex flex-wrap gap-2">
                                   {exp.highlights.slice(0, 4).map((highlight, hIndex) => (
                                     <div 
                                       key={hIndex}
-                                      className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ${
                                         exp.type === 'side-business'
-                                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                          ? 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 ring-1 ring-amber-200/60'
                                           : highlight.metric 
-                                            ? 'bg-green-50 text-green-700 border border-green-200' 
-                                            : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                            ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 ring-1 ring-green-200/60' 
+                                            : 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-1 ring-blue-200/60'
                                       }`}
                                     >
                                       <highlight.icon className="w-3 h-3 flex-shrink-0" />
@@ -263,12 +267,12 @@ export default function ExperienceSection() {
                                 </div>
 
                                 {/* Technologies - Show top 6 */}
-                                <div className="mt-3">
+                                <div className="mt-3.5">
                                   <div className="flex flex-wrap gap-1.5">
                                     {exp.technologies.slice(0, 6).map((tech, techIndex) => (
                                       <span 
                                         key={techIndex}
-                                        className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                                        className={`px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ring-1 ${
                                           techColors[techIndex % techColors.length]
                                         }`}
                                       >
@@ -276,7 +280,7 @@ export default function ExperienceSection() {
                                       </span>
                                     ))}
                                     {exp.technologies.length > 6 && (
-                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium border bg-slate-50 text-slate-700 border-slate-200">
+                                      <span className="px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm bg-gradient-to-r from-slate-50 to-gray-50 text-slate-700 ring-1 ring-slate-200/60">
                                         +{exp.technologies.length - 6}
                                       </span>
                                     )}
@@ -284,8 +288,8 @@ export default function ExperienceSection() {
                                 </div>
 
                                 {/* Arrow Indicator */}
-                                <div className="mt-3 pt-3 border-t border-gray-200 flex items-center justify-center">
-                                  <div className="flex flex-col items-center gap-0.5">
+                                <div className="mt-4 pt-3.5 border-t border-gray-200/60 flex items-center justify-center">
+                                  <div className="flex flex-col items-center gap-1">
                                     <span className="text-[10px] text-gray-500 font-medium">Tap to see details</span>
                                     <ChevronDown className="w-4 h-4 text-gray-400 animate-bounce" />
                                   </div>
@@ -294,7 +298,7 @@ export default function ExperienceSection() {
                             </Card>
                           </div>
 
-                          {/* Back of Card - NO SCROLL */}
+                          {/* Back of Card */}
                           <div
                             className="absolute top-0 left-0 w-full"
                             style={{
@@ -303,12 +307,12 @@ export default function ExperienceSection() {
                               transform: 'rotateY(180deg)'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg ${
+                            <Card className={`rounded-3xl shadow-xl ${
                               exp.type === 'side-business' 
-                                ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
-                                : 'bg-white border-2 border-blue-200'
+                                ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 ring-2 ring-amber-300 ring-offset-2 ring-offset-transparent' 
+                                : 'bg-gradient-to-br from-white via-blue-50/30 to-white ring-2 ring-blue-200 ring-offset-2 ring-offset-transparent'
                             }`}>
-                              <CardContent className="p-4">
+                              <CardContent className="p-5 bg-gradient-to-br from-white/40 to-transparent rounded-3xl">
                                 {/* Header */}
                                 <div className="flex items-center justify-between mb-3">
                                   <h4 className={`font-semibold text-sm ${
@@ -329,13 +333,13 @@ export default function ExperienceSection() {
                                 </div>
                                 
                                 {/* Achievements - Show top 5 */}
-                                <ul className="space-y-2 mb-3">
+                                <ul className="space-y-2.5 mb-3.5">
                                   {exp.achievements.slice(0, 5).map((achievement, achIndex) => (
                                     <li 
                                       key={achIndex}
-                                      className="flex items-start gap-2"
+                                      className="flex items-start gap-2.5"
                                     >
-                                      <div className={`w-1 h-1 rounded-full mt-1.5 flex-shrink-0 ${
+                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 shadow-sm ${
                                         exp.type === 'side-business'
                                           ? 'bg-gradient-to-r from-amber-500 to-orange-500'
                                           : 'bg-gradient-to-r from-blue-500 to-purple-500'
@@ -344,11 +348,11 @@ export default function ExperienceSection() {
                                     </li>
                                   ))}
                                   {exp.achievements.length > 5 && (
-                                    <li className="flex items-start gap-2">
-                                      <div className={`w-1 h-1 rounded-full mt-1.5 flex-shrink-0 ${
+                                    <li className="flex items-start gap-2.5">
+                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
                                         exp.type === 'side-business'
-                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                                          ? 'bg-gradient-to-r from-amber-400 to-orange-400 opacity-50'
+                                          : 'bg-gradient-to-r from-blue-400 to-purple-400 opacity-50'
                                       }`}></div>
                                       <span className="text-gray-500 text-[11px] italic leading-snug">
                                         +{exp.achievements.length - 5} more achievements
@@ -358,12 +362,12 @@ export default function ExperienceSection() {
                                 </ul>
                                 
                                 {/* Footer - All tech tags */}
-                                <div className="pt-3 border-t border-gray-200">
+                                <div className="pt-3.5 border-t border-gray-200/60">
                                   <div className="flex flex-wrap gap-1.5">
                                     {exp.technologies.map((tech, techIndex) => (
                                       <span 
                                         key={techIndex}
-                                        className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${
+                                        className={`px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ring-1 ${
                                           techColors[techIndex % techColors.length]
                                         }`}
                                       >
@@ -379,18 +383,22 @@ export default function ExperienceSection() {
                       </div>
 
                       {/* Desktop: Original Hover Card */}
-                      <Card className={`hidden md:block border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${
+                      <Card className={`hidden md:block rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${
                         hoveredIndex === index ? 'transform scale-105' : ''
-                      } ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''}`}>
+                      } ${cardStyle.bgGradient} ${
+                        exp.type === 'side-business' 
+                          ? 'ring-2 ring-amber-200/50' 
+                          : 'ring-1 ring-gray-200/30'
+                      }`}>
                         <CardContent className="p-0">
                           {/* Header Section */}
                           <div className="p-6 border-b border-gray-100">
                             <div className="flex items-start gap-4">
                               {/* Company Logo */}
-                              <div className={`w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
+                              <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2 shadow-md ${
                                 exp.type === 'side-business' 
-                                  ? 'bg-gradient-to-br from-amber-50 to-orange-100' 
-                                  : 'bg-gradient-to-br from-gray-50 to-gray-100'
+                                  ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
+                                  : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
                               }`}>
                                 {exp.logo ? (
                                   <Image 
@@ -430,10 +438,10 @@ export default function ExperienceSection() {
                                 {/* Optional Note Badge */}
                                 {exp.note && (
                                   <div className="mt-2">
-                                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
                                       exp.type === 'side-business' 
-                                        ? 'bg-amber-100 text-amber-800 border border-amber-300' 
-                                        : 'bg-blue-100 text-blue-800 border border-blue-300'
+                                        ? 'bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 ring-1 ring-amber-300/50' 
+                                        : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 ring-1 ring-blue-300/50'
                                     }`}>
                                       {exp.note}
                                     </span>
@@ -447,12 +455,12 @@ export default function ExperienceSection() {
                               {exp.highlights.map((highlight, hIndex) => (
                                 <div 
                                   key={hIndex}
-                                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${
+                                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
                                     exp.type === 'side-business'
-                                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                      ? 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 ring-1 ring-amber-200/60'
                                       : highlight.metric 
-                                        ? 'bg-green-50 text-green-700 border border-green-200' 
-                                        : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                        ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 ring-1 ring-green-200/60' 
+                                        : 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-1 ring-blue-200/60'
                                   }`}
                                 >
                                   <highlight.icon className="w-4 h-4" />
@@ -472,20 +480,20 @@ export default function ExperienceSection() {
                                 transition={{ duration: 0.4, ease: "easeInOut" }}
                                 className={`overflow-hidden absolute top-0 bottom-0 shadow-2xl z-30 ${
                                   exp.type === 'side-business' 
-                                    ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
-                                    : 'bg-white border-2 border-blue-200'
+                                    ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 ring-2 ring-amber-300' 
+                                    : 'bg-gradient-to-br from-white via-blue-50/30 to-white ring-2 ring-blue-200'
                                 } ${
                                   index % 2 === 0 
-                                    ? 'left-full rounded-r-xl border-l-0'
-                                    : 'right-full rounded-l-xl border-r-0'
+                                    ? 'left-full rounded-r-2xl ring-l-0'
+                                    : 'right-full rounded-l-2xl ring-r-0'
                                 }`}
                                 style={{ width: "480px" }}
                               >
                                 <div className="p-5 h-full overflow-y-auto" style={{ width: "480px" }}>
                                   <h4 className={`font-semibold mb-3 text-base sticky top-0 pb-2 ${
                                     exp.type === 'side-business' 
-                                      ? 'bg-gradient-to-br from-amber-50 to-orange-50 text-amber-900' 
-                                      : 'bg-white text-slate-900'
+                                      ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 text-amber-900' 
+                                      : 'bg-gradient-to-br from-white via-blue-50/30 to-white text-slate-900'
                                   }`}>
                                     Key Achievements:
                                   </h4>
@@ -518,7 +526,7 @@ export default function ExperienceSection() {
                               {exp.technologies.map((tech, techIndex) => (
                                 <span 
                                   key={techIndex}
-                                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors duration-200 hover:scale-105 cursor-default ${
+                                  className={`px-3 py-1 rounded-full text-xs font-medium shadow-sm ring-1 transition-colors duration-200 hover:scale-105 cursor-default ${
                                     techColors[techIndex % techColors.length]
                                   }`}
                                 >
