@@ -132,7 +132,7 @@ function Stat({
   color: string;
 }) {
   return (
-    <div className="text-white animate-float bg-white/5 backdrop-blur rounded-lg p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
+    <div className="text-white animate-float bg-gradient-to-br from-white/5 to-white/0 backdrop-blur rounded-2xl p-3 sm:p-4 ring-1 ring-white/20 hover:from-white/10 hover:to-white/5 transition-all duration-300 shadow-sm hover:shadow-md">
       <div className={`text-xl sm:text-2xl md:text-3xl font-bold font-mono ${color} mb-1`}>{title}</div>
       <div className="text-slate-300 font-heading text-xs sm:text-sm md:text-base">{subtitle}</div>
     </div>

@@ -34,7 +34,7 @@ export default function Footer() {
             {/* Contact Section */}
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="inline-flex items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15 p-2">
+                <div className="inline-flex items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 p-2.5 shadow-sm">
                   <Image src="/b-logo-fav.png" alt="Ben Hankins logo" width={48} height={48} />
                 </div>
                 <h3 className="text-2xl font-bold">Let&apos;s Connect</h3>
@@ -46,7 +46,7 @@ export default function Footer() {
 
               {/* Email */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center ring-1 ring-white/15">
+                <div className="w-11 h-11 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center ring-1 ring-white/20 shadow-sm">
                   <Mail className="w-5 h-5 text-slate-300" />
                 </div>
                 <div>
@@ -62,7 +62,7 @@ export default function Footer() {
 
               {/* Resume Download */}
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center ring-1 ring-white/15">
+                <div className="w-11 h-11 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center ring-1 ring-white/20 shadow-sm">
                   <FileText className="w-5 h-5 text-slate-300" />
                 </div>
                 <div>
@@ -89,22 +89,22 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group flex items-center gap-4 p-4 rounded-xl bg-white/5 transition-all duration-200 ring-1 ring-white/10 ${
-                      social.label === 'LinkedIn' ? 'hover:bg-emerald-500/10 hover:ring-emerald-500/30' :
-                      social.label === 'GitHub' ? 'hover:bg-amber-500/10 hover:ring-amber-500/30' :
-                      'hover:bg-violet-500/10 hover:ring-violet-500/30'
+                    className={`group flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 transition-all duration-200 ring-1 ring-white/20 shadow-sm ${
+                      social.label === 'LinkedIn' ? 'hover:bg-gradient-to-br hover:from-emerald-500/10 hover:to-emerald-500/5 hover:ring-emerald-500/40' :
+                      social.label === 'GitHub' ? 'hover:bg-gradient-to-br hover:from-amber-500/10 hover:to-amber-500/5 hover:ring-amber-500/40' :
+                      'hover:bg-gradient-to-br hover:from-violet-500/10 hover:to-violet-500/5 hover:ring-violet-500/40'
                     }`}
                     title={social.label}
                   >
-                    <div className={`w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center transition-colors duration-200 ${
-                      social.label === 'LinkedIn' ? 'group-hover:bg-emerald-500/20' :
-                      social.label === 'GitHub' ? 'group-hover:bg-amber-500/20' :
-                      'group-hover:bg-violet-500/20'
+                    <div className={`w-11 h-11 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center transition-colors duration-200 ring-1 ring-white/20 shadow-sm ${
+                      social.label === 'LinkedIn' ? 'group-hover:from-emerald-500/20 group-hover:to-emerald-500/10 group-hover:ring-emerald-500/30' :
+                      social.label === 'GitHub' ? 'group-hover:from-amber-500/20 group-hover:to-amber-500/10 group-hover:ring-amber-500/30' :
+                      'group-hover:from-violet-500/20 group-hover:to-violet-500/10 group-hover:ring-violet-500/30'
                     }`}>
                       <social.icon className={`w-5 h-5 text-slate-300 transition-colors duration-200 ${
-                        social.label === 'LinkedIn' ? 'hover:text-emerald-400' :
-                        social.label === 'GitHub' ? 'hover:text-amber-400' :
-                        'hover:text-violet-400'
+                        social.label === 'LinkedIn' ? 'group-hover:text-emerald-400' :
+                        social.label === 'GitHub' ? 'group-hover:text-amber-400' :
+                        'group-hover:text-violet-400'
                       }`} />
                     </div>
                     <div>

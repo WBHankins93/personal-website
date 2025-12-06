@@ -190,7 +190,7 @@ export default function AboutSection() {
                 >
                   <Card
                     className={[
-                      "overflow-hidden rounded-2xl border border-slate-200 ring-1 h-full transition-all duration-300 hover:shadow-lg",
+                      "overflow-hidden rounded-2xl ring-1 h-full transition-all duration-300 hover:shadow-xl shadow-lg",
                       c.ring,
                       c.bg,
                     ].join(" ")}

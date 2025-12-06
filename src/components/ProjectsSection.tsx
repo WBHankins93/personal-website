@@ -80,22 +80,22 @@ function truncateTech(list: string[], max = 5) {
 // Get project type styling
 const getProjectTypeStyle = (type: string) => {
   switch (type) {
-    case 'Production': return 'bg-green-100 text-green-700 border-green-200';
-    case 'Client Work': return 'bg-blue-100 text-blue-700 border-blue-200';
-    case 'Open Source': return 'bg-purple-100 text-purple-700 border-purple-200';
-    case 'Learning': return 'bg-orange-100 text-orange-700 border-orange-200';
-    default: return 'bg-gray-100 text-gray-700 border-gray-200';
+    case 'Production': return 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 ring-green-200/60';
+    case 'Client Work': return 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-blue-200/60';
+    case 'Open Source': return 'bg-gradient-to-r from-purple-50 to-violet-50 text-purple-700 ring-purple-200/60';
+    case 'Learning': return 'bg-gradient-to-r from-orange-50 to-amber-50 text-orange-700 ring-orange-200/60';
+    default: return 'bg-gradient-to-r from-slate-50 to-gray-50 text-slate-700 ring-slate-200/60';
   }
 };
 
 // Get status styling
 const getStatusStyle = (status: string) => {
   switch (status) {
-    case 'Active': return 'bg-emerald-100 text-emerald-700';
-    case 'Complete': return 'bg-slate-100 text-slate-700';
-    case 'Maintained': return 'bg-amber-100 text-amber-700';
-    case 'Archived': return 'bg-red-100 text-red-700';
-    default: return 'bg-gray-100 text-gray-700';
+    case 'Active': return 'bg-gradient-to-r from-emerald-50 to-green-50 text-emerald-700 ring-emerald-200/60';
+    case 'Complete': return 'bg-gradient-to-r from-slate-50 to-gray-50 text-slate-700 ring-slate-200/60';
+    case 'Maintained': return 'bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 ring-amber-200/60';
+    case 'Archived': return 'bg-gradient-to-r from-red-50 to-pink-50 text-red-700 ring-red-200/60';
+    default: return 'bg-gradient-to-r from-gray-50 to-slate-50 text-gray-700 ring-gray-200/60';
   }
 };
 
@@ -247,7 +247,7 @@ export default function ProjectsSection() {
                                   
                                   {/* Featured Badge */}
                                   {['terraform-infra-platform', 'automated-vpc-deployment-centerpoint', 'devops-studio'].includes(project.id) && (
-                                    <div className="flex items-center gap-1 px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
+                                    <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60 shadow-sm">
                                       <Star className="w-3 h-3" />
                                       Featured
                                     </div>
@@ -255,7 +255,7 @@ export default function ProjectsSection() {
                                   
                                   {/* Client Work Badge */}
                                   {project.projectType === 'Client Work' && (
-                                    <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
+                                    <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60 shadow-sm">
                                       <Briefcase className="w-3 h-3" />
                                       Client Work
                                     </div>
@@ -290,13 +290,13 @@ export default function ProjectsSection() {
                             {/* Project Type and Status Badges */}
                             <div className="flex gap-2 mb-3">
                               <span className={clsx(
-                                "px-2 py-1 text-xs font-medium rounded-full border",
+                                "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
                                 getProjectTypeStyle(project.projectType)
                               )}>
                                 {project.projectType}
                               </span>
                               <span className={clsx(
-                                "px-2 py-1 text-xs font-medium rounded-full",
+                                "px-2.5 py-1 text-xs font-medium rounded-full ring-1 shadow-sm",
                                 getStatusStyle(project.status)
                               )}>
                                 {project.status}
@@ -370,7 +370,7 @@ export default function ProjectsSection() {
             viewport={{ once: true }}
             className="mt-16 text-center"
           >
-            <div className="inline-flex items-center gap-8 bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-slate-200">
+            <div className="inline-flex items-center gap-8 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg ring-1 ring-slate-200/60">
               <div className="text-center">
                 <div className="text-2xl font-bold text-slate-900">{allProjects.length}</div>
                 <div className="text-sm text-slate-600">Total Projects</div>

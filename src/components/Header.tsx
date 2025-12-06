@@ -53,7 +53,7 @@ export default function Header() {
             alt="Ben Hankins logo"
             width={48}
             height={48}
-            className="h-12 w-12 shrink-0 rounded-lg ring-1 ring-black/5 dark:ring-white/10"
+            className="h-12 w-12 shrink-0 rounded-xl ring-1 ring-black/10 dark:ring-white/20 shadow-sm"
             priority
           />
           <span className="text-xl md:text-2xl font-bold gradient-text">
