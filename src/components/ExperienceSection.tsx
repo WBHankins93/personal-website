@@ -161,9 +161,11 @@ export default function ExperienceSection() {
                     }`}>
                       {/* Mobile: Flip Card Container */}
                       <div 
-                        className="md:hidden relative cursor-pointer"
+                        className="md:hidden relative cursor-pointer mb-4"
                         style={{ 
-                          height: '500px',
+                          height: '70vh',
+                          maxHeight: '600px',
+                          minHeight: '500px',
                           perspective: '1000px'
                         }}
                         onClick={() => handleCardClick(index)}
@@ -177,18 +179,17 @@ export default function ExperienceSection() {
                         >
                           {/* Front of Card */}
                           <div
-                            className="absolute inset-0 w-full"
+                            className="absolute inset-0 w-full h-full"
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(0deg)',
-                              height: '100%'
+                              transform: 'rotateY(0deg)'
                             }}
                           >
                             <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''} h-full flex flex-col`}>
-                              <CardContent className="p-4 flex flex-col h-full overflow-hidden">
-                                {/* Header Section */}
-                                <div className="flex-1 overflow-y-auto">
+                              <CardContent className="p-4 flex flex-col h-full gap-0">
+                                {/* Header Section - Scrollable */}
+                                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
                                   <div className="flex items-start gap-3 mb-4">
                                     {/* Company Logo */}
                                     <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
@@ -288,7 +289,7 @@ export default function ExperienceSection() {
                                 </div>
 
                                 {/* Arrow Indicator */}
-                                <div className="mt-auto pt-3 border-t border-gray-200 flex items-center justify-center flex-shrink-0">
+                                <div className="mt-4 pt-3 border-t border-gray-200 flex items-center justify-center flex-shrink-0">
                                   <div className="flex flex-col items-center gap-1">
                                     <span className="text-xs text-gray-500 font-medium">Tap to see details</span>
                                     <ChevronDown className="w-5 h-5 text-gray-400 animate-bounce" />
@@ -300,12 +301,11 @@ export default function ExperienceSection() {
 
                           {/* Back of Card */}
                           <div
-                            className="absolute inset-0 w-full"
+                            className="absolute inset-0 w-full h-full"
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(180deg)',
-                              height: '100%'
+                              transform: 'rotateY(180deg)'
                             }}
                           >
                             <Card className={`border-0 shadow-lg h-full flex flex-col ${
@@ -313,8 +313,8 @@ export default function ExperienceSection() {
                                 ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
                                 : 'bg-white border-2 border-blue-200'
                             }`}>
-                              <CardContent className="p-4 h-full flex flex-col overflow-hidden">
-                                <div className="flex items-center justify-between mb-3 flex-shrink-0">
+                              <CardContent className="p-4 h-full flex flex-col gap-0">
+                                <div className="flex items-center justify-between mb-4 flex-shrink-0">
                                   <h4 className={`font-semibold text-base ${
                                     exp.type === 'side-business' ? 'text-amber-900' : 'text-slate-900'
                                   }`}>
@@ -331,8 +331,8 @@ export default function ExperienceSection() {
                                     <ChevronDown className="w-5 h-5 rotate-180" />
                                   </button>
                                 </div>
-                                <div className="flex-1 overflow-y-auto">
-                                  <ul className="space-y-2.5">
+                                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
+                                  <ul className="space-y-3">
                                     {exp.achievements.map((achievement, achIndex) => (
                                       <li 
                                         key={achIndex}
