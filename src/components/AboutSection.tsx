@@ -48,7 +48,7 @@ export default function AboutSection() {
     {
       icon: Cloud,
       name: "Cloud & Multi-Cloud",
-      description: "AWS, GCP, IBM Cloud, Azure - architecture, migration, optimization",
+      description: "AWS, GCP, IBM Cloud - architecture, migration, optimization",
       key: "infrastructure", // Cyan
       level: 90,
       experience: "6+ years"

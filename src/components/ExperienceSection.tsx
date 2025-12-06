@@ -163,7 +163,7 @@ export default function ExperienceSection() {
                       <div 
                         className="md:hidden relative cursor-pointer"
                         style={{ 
-                          minHeight: '400px',
+                          height: '500px',
                           perspective: '1000px'
                         }}
                         onClick={() => handleCardClick(index)}
@@ -181,13 +181,14 @@ export default function ExperienceSection() {
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(0deg)'
+                              transform: 'rotateY(0deg)',
+                              height: '100%'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''} h-full`}>
-                              <CardContent className="p-4 md:p-6 flex flex-col h-full">
+                            <Card className={`border-0 shadow-lg ${cardStyle.bgGradient} ${exp.type === 'side-business' ? 'border-2 border-amber-200' : ''} h-full flex flex-col`}>
+                              <CardContent className="p-4 flex flex-col h-full overflow-hidden">
                                 {/* Header Section */}
-                                <div className="flex-1">
+                                <div className="flex-1 overflow-y-auto">
                                   <div className="flex items-start gap-3 mb-4">
                                     {/* Company Logo */}
                                     <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center p-2 shadow-sm ${
@@ -246,11 +247,11 @@ export default function ExperienceSection() {
                                   </div>
 
                                   {/* Highlights */}
-                                  <div className="mt-4 flex flex-wrap gap-2">
+                                  <div className="mt-3 flex flex-wrap gap-1.5">
                                     {exp.highlights.map((highlight, hIndex) => (
                                       <div 
                                         key={hIndex}
-                                        className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium ${
+                                        className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${
                                           exp.type === 'side-business'
                                             ? 'bg-amber-50 text-amber-700 border border-amber-200'
                                             : highlight.metric 
@@ -258,16 +259,16 @@ export default function ExperienceSection() {
                                               : 'bg-blue-50 text-blue-700 border border-blue-200'
                                         }`}
                                       >
-                                        <highlight.icon className="w-3 h-3" />
-                                        <span className="truncate max-w-[120px]">{highlight.text}</span>
+                                        <highlight.icon className="w-3 h-3 flex-shrink-0" />
+                                        <span className="truncate">{highlight.text}</span>
                                       </div>
                                     ))}
                                   </div>
 
                                   {/* Technologies */}
-                                  <div className="mt-4">
+                                  <div className="mt-3">
                                     <div className="flex flex-wrap gap-1.5">
-                                      {exp.technologies.slice(0, 6).map((tech, techIndex) => (
+                                      {exp.technologies.slice(0, 5).map((tech, techIndex) => (
                                         <span 
                                           key={techIndex}
                                           className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
@@ -277,9 +278,9 @@ export default function ExperienceSection() {
                                           {tech}
                                         </span>
                                       ))}
-                                      {exp.technologies.length > 6 && (
+                                      {exp.technologies.length > 5 && (
                                         <span className="px-2 py-0.5 rounded-full text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200">
-                                          +{exp.technologies.length - 6}
+                                          +{exp.technologies.length - 5}
                                         </span>
                                       )}
                                     </div>
@@ -287,7 +288,7 @@ export default function ExperienceSection() {
                                 </div>
 
                                 {/* Arrow Indicator */}
-                                <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-center">
+                                <div className="mt-auto pt-3 border-t border-gray-200 flex items-center justify-center flex-shrink-0">
                                   <div className="flex flex-col items-center gap-1">
                                     <span className="text-xs text-gray-500 font-medium">Tap to see details</span>
                                     <ChevronDown className="w-5 h-5 text-gray-400 animate-bounce" />
@@ -303,16 +304,17 @@ export default function ExperienceSection() {
                             style={{
                               backfaceVisibility: 'hidden',
                               WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(180deg)'
+                              transform: 'rotateY(180deg)',
+                              height: '100%'
                             }}
                           >
-                            <Card className={`border-0 shadow-lg h-full ${
+                            <Card className={`border-0 shadow-lg h-full flex flex-col ${
                               exp.type === 'side-business' 
                                 ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300' 
                                 : 'bg-white border-2 border-blue-200'
                             }`}>
-                              <CardContent className="p-4 md:p-6 h-full overflow-y-auto">
-                                <div className="flex items-center justify-between mb-4">
+                              <CardContent className="p-4 h-full flex flex-col overflow-hidden">
+                                <div className="flex items-center justify-between mb-3 flex-shrink-0">
                                   <h4 className={`font-semibold text-base ${
                                     exp.type === 'side-business' ? 'text-amber-900' : 'text-slate-900'
                                   }`}>
@@ -323,28 +325,30 @@ export default function ExperienceSection() {
                                       e.stopPropagation();
                                       handleCardClick(index);
                                     }}
-                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    className="text-gray-400 hover:text-gray-600 transition-colors p-1"
                                     aria-label="Close"
                                   >
                                     <ChevronDown className="w-5 h-5 rotate-180" />
                                   </button>
                                 </div>
-                                <ul className="space-y-3">
-                                  {exp.achievements.map((achievement, achIndex) => (
-                                    <li 
-                                      key={achIndex}
-                                      className="flex items-start gap-2.5"
-                                    >
-                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                                        exp.type === 'side-business'
-                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
-                                      }`}></div>
-                                      <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                                <div className="mt-6 pt-4 border-t border-gray-200">
+                                <div className="flex-1 overflow-y-auto">
+                                  <ul className="space-y-2.5">
+                                    {exp.achievements.map((achievement, achIndex) => (
+                                      <li 
+                                        key={achIndex}
+                                        className="flex items-start gap-2.5"
+                                      >
+                                        <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
+                                          exp.type === 'side-business'
+                                            ? 'bg-gradient-to-r from-amber-500 to-orange-500'
+                                            : 'bg-gradient-to-r from-blue-500 to-purple-500'
+                                        }`}></div>
+                                        <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                                <div className="mt-4 pt-3 border-t border-gray-200 flex-shrink-0">
                                   <div className="flex flex-wrap gap-1.5">
                                     {exp.technologies.map((tech, techIndex) => (
                                       <span 
