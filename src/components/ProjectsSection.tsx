@@ -445,15 +445,15 @@ export default function ProjectsSection() {
                               </span>
                             </div>
 
-                            {/* Description - Reduced spacing */}
-                            <p className="text-slate-600 leading-relaxed text-sm mb-3 line-clamp-2">
+                            {/* Description - Full text */}
+                            <p className="text-slate-600 leading-relaxed text-sm mb-3">
                               {project.description}
                             </p>
                           </CardHeader>
 
                           <CardContent className="px-4 pb-4 pt-0 flex flex-col flex-1">
-                            {/* Tags - Flex Wrap */}
-                            <div className="flex flex-wrap gap-1.5 mb-3">
+                            {/* Tags - Flex Wrap (Max 3 rows) */}
+                            <div className="flex flex-wrap gap-1.5 mb-0 max-h-[4.5rem] overflow-hidden">
                               {techs.map((tech, index) => (
                                 <span
                                   key={index}
