@@ -299,8 +299,8 @@ export default function ProjectsSection() {
                                     {project.description}
                                   </p>
 
-                                  {/* Tech Stack - Flex Wrap (Max 3 rows) */}
-                                  <div className="flex flex-wrap gap-1.5 mb-0 max-h-[4.5rem] overflow-hidden">
+                                  {/* Tech Stack - Flex Wrap */}
+                                  <div className="flex flex-wrap gap-1.5 mb-0">
                                     {techs.map((tech, index) => (
                                       <span
                                         key={index}
@@ -452,8 +452,8 @@ export default function ProjectsSection() {
                           </CardHeader>
 
                           <CardContent className="px-4 pb-4 pt-0 flex flex-col flex-1">
-                            {/* Tags - Flex Wrap (Max 3 rows) */}
-                            <div className="flex flex-wrap gap-1.5 mb-0 max-h-[4.5rem] overflow-hidden">
+                            {/* Tags - Flex Wrap */}
+                            <div className="flex flex-wrap gap-1.5 mb-0">
                               {techs.map((tech, index) => (
                                 <span
                                   key={index}
