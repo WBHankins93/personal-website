@@ -37,10 +37,10 @@ export default function CVModal({
         </div>
 
         {/* PDF Viewer */}
-        <div className="flex-1 overflow-auto pb-2 md:pb-4">
+        <div className="flex-1 overflow-auto pb-2 md:pb-4 min-h-0">
           <iframe
-            src={`/Ben_Hankins_Cloud_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-            className="w-full h-[70vh] md:h-[75vh] border-0"
+            src={`/Ben_Hankins_Cloud_Resume.pdf#toolbar=0&navpanes=0&scrollbar=1`}
+            className="w-full min-h-[85vh] md:h-[75vh] border-0"
             title="Ben Hankins Resume"
           />
         </div>
