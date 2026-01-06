@@ -27,11 +27,11 @@ const CATEGORY = {
     accent: "text-amber-600"
   },
   monitoring: {
-    ring: "ring-pink-200",
-    grad: "from-pink-50 to-rose-50",
-    pill: "bg-pink-50 text-pink-700 border-pink-200",
-    dot: "bg-pink-500",
-    accent: "text-pink-600"
+    ring: "ring-cyan-200",
+    grad: "from-cyan-50 to-sky-50",
+    pill: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    dot: "bg-cyan-500",
+    accent: "text-cyan-600"
   },
   "ci-cd": {
     ring: "ring-blue-200",
@@ -41,25 +41,25 @@ const CATEGORY = {
     accent: "text-blue-600"
   },
   security: {
-    ring: "ring-red-200",
-    grad: "from-red-50 to-red-50",
-    pill: "bg-red-50 text-red-700 border-red-200",
-    dot: "bg-red-500",
-    accent: "text-red-600"
+    ring: "ring-orange-200",
+    grad: "from-orange-50 to-red-50",
+    pill: "bg-orange-50 text-orange-700 border-orange-200",
+    dot: "bg-orange-500",
+    accent: "text-orange-600"
   },
   "web-dev": {
-    ring: "ring-violet-200",
-    grad: "from-violet-50 to-fuchsia-50",
-    pill: "bg-violet-50 text-violet-700 border-violet-200",
-    dot: "bg-violet-500",
-    accent: "text-violet-600"
+    ring: "ring-fuchsia-200",
+    grad: "from-fuchsia-50 to-pink-50",
+    pill: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
+    dot: "bg-fuchsia-500",
+    accent: "text-fuchsia-600"
   },
   "education": {
-    ring: "ring-purple-200",
-    grad: "from-purple-50 to-violet-50",
-    pill: "bg-purple-50 text-purple-700 border-purple-200",
-    dot: "bg-purple-500",
-    accent: "text-purple-600"
+    ring: "ring-indigo-200",
+    grad: "from-indigo-50 to-purple-50",
+    pill: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    dot: "bg-indigo-500",
+    accent: "text-indigo-600"
   }
 } as const;
 
