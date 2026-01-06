@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2 } from "lucide-react";
+import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Cloud, Shield, Globe, BookOpen, Users } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
@@ -77,6 +77,26 @@ function truncateTech(list: string[], max = 5) {
   return [...head, `+${rest} more`];
 }
 
+// Get category icon for project
+const getCategoryIcon = (project: Project) => {
+  if (project.showcase) {
+    if (project.id === 'implementation-studio') return BookOpen;
+    if (project.id === 'solutions-playbook') return Users;
+    if (project.id === 'devops-studio') return Code2;
+  }
+  
+  switch (project.category) {
+    case 'infrastructure': return Server;
+    case 'automation': return Workflow;
+    case 'monitoring': return Activity;
+    case 'ci-cd': return GitBranch;
+    case 'cloud': return Cloud;
+    case 'security': return Shield;
+    case 'web-dev': return Globe;
+    default: return Server;
+  }
+};
+
 // Get project type styling
 const getProjectTypeStyle = (type: string) => {
   switch (type) {
@@ -119,10 +139,16 @@ export default function ProjectsSection() {
     ? allProjects
     : allProjects.filter((p) => p.category === selectedCategory);
 
-  // Sort projects to show DevOps Studio first
+  // Sort projects: showcase first, then featured, then regular
   const sortedProjects = [...filteredProjects].sort((a, b) => {
-    if (a.id === 'devops-studio') return -1;
-    if (b.id === 'devops-studio') return 1;
+    // Showcase projects first
+    if (a.showcase && !b.showcase) return -1;
+    if (!a.showcase && b.showcase) return 1;
+    
+    // Then featured projects
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    
     return 0;
   });
 
@@ -241,8 +267,14 @@ export default function ProjectsSection() {
                                   <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                                     {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                                   </span>
-                                  {project.id === 'devops-studio' && (
+                                  {project.showcase && (
                                     <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
+                                      <Star className="w-3 h-3 fill-current" />
+                                      Showcase
+                                    </div>
+                                  )}
+                                  {project.featured && !project.showcase && (
+                                    <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60">
                                       <Star className="w-3 h-3" />
                                       Featured
                                     </div>
@@ -395,8 +427,11 @@ export default function ProjectsSection() {
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                                <Folder className={clsx("w-12 h-12", c.accent)} />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                {(() => {
+                                  const CategoryIcon = getCategoryIcon(project);
+                                  return <CategoryIcon className="w-16 h-16 text-slate-400 opacity-40" />;
+                                })()}
                               </div>
                             )}
                           </div>
@@ -409,8 +444,15 @@ export default function ProjectsSection() {
                                 {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                               </span>
                               
-                              {project.id === 'devops-studio' && (
+                              {project.showcase && (
                                 <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
+                                  <Star className="w-3 h-3 fill-current" />
+                                  Showcase
+                                </div>
+                              )}
+                              
+                              {project.featured && !project.showcase && (
+                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60">
                                   <Star className="w-3 h-3" />
                                   Featured
                                 </div>

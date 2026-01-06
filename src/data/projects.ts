@@ -10,6 +10,7 @@ export type Project = {
   image_url?: string;
   category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "cloud" | "security" | "web-dev";
   featured?: boolean;
+  showcase?: boolean;
   techCount: number;
   projectType: 'Production' | 'Client Work' | 'Open Source' | 'Learning';
   status: 'Active' | 'Complete' | 'Maintained' | 'Archived';
@@ -77,6 +78,7 @@ export const projects: Project[] = [
     image_url: "",
     category: "ci-cd",
     featured: true,
+    showcase: true,
     techCount: 12,
     projectType: 'Open Source',
     status: 'Active',
@@ -96,7 +98,7 @@ export const projects: Project[] = [
     live_url: "https://www.secondlinepsychiatry.com/",
     image_url: "",
     category: "web-dev",
-    featured: true,
+    featured: false,
     techCount: 5,
     projectType: 'Client Work',
     status: 'Active',
@@ -114,7 +116,7 @@ export const projects: Project[] = [
     live_url: "https://nealy-event-decor.vercel.app/",
     image_url: "",
     category: "web-dev",
-    featured: false,
+    featured: true,
     techCount: 5,
     projectType: 'Client Work',
     status: 'Active',
@@ -287,7 +289,7 @@ export const projects: Project[] = [
     technologies: ["MLOps", "FastAPI", "Docker", "Helm", "Prometheus", "Grafana"],
     github_url: "https://github.com/WBHankins93/mlops-sre-mini",
     image_url: "",
-    category: "ci-cd",
+    category: "automation",
     featured: false,
     techCount: 6,
     projectType: 'Learning',
@@ -346,5 +348,59 @@ export const projects: Project[] = [
     architecture: 'Infrastructure',
     scale: 'Personal',
     environment: 'Multi-cloud'
+  },
+  {
+    id: "implementation-studio",
+    name: "Implementation Studio",
+    description: "Technical deployment patterns platform with 9 complete labs covering constrained environment deployments, featuring production-grade Terraform modules for GCP and AWS.",
+    technologies: ["Terraform", "GCP", "AWS", "Kubernetes", "Air-gapped", "Private Clusters", "Education"],
+    github_url: "https://github.com/WBHankins93/implementation-studio",
+    live_url: "",
+    image_url: "",
+    category: "infrastructure",
+    featured: true,
+    showcase: true,
+    techCount: 7,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Infrastructure',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "solutions-playbook",
+    name: "Solutions Playbook",
+    description: "Operational SE framework with 41 complete files covering the full operational lifecycle, structured around 'moments of need' for practical customer engagement guidance.",
+    technologies: ["Solutions Engineering", "Customer Success", "Technical Sales", "Documentation", "Frameworks"],
+    github_url: "https://github.com/WBHankins93/solutions-playbook",
+    live_url: "",
+    image_url: "",
+    category: "automation",
+    featured: true,
+    showcase: true,
+    techCount: 5,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Infrastructure',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "big-butt-association",
+    name: "Big Butt Association",
+    description: "E-commerce store for EDM fashion with integrated membership features. Built on Shopify/Liquid with custom theme development and payment integrations.",
+    technologies: ["Shopify", "Liquid", "E-commerce", "Theme Development", "Payment Integration"],
+    github_url: "https://github.com/WBHankins93/big-butt-association",
+    live_url: "https://bigbuttassociation.com/",
+    image_url: "",
+    category: "web-dev",
+    featured: false,
+    showcase: false,
+    techCount: 5,
+    projectType: 'Client Work',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Small Business',
+    environment: 'Vercel'
   }
 ];
