@@ -8,7 +8,7 @@ export type Project = {
   github_url?: string;
   live_url?: string;
   image_url?: string;
-  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "cloud" | "security" | "web-dev";
+  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "security" | "web-dev" | "education";
   featured?: boolean;
   showcase?: boolean;
   techCount: number;
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     ],
     github_url: "https://github.com/WBHankins93/devops-studio",
     image_url: "",
-    category: "ci-cd",
+    category: "education",
     featured: true,
     showcase: true,
     techCount: 12,
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     technologies: ["IBM Cloud", "Solutions Architect", "Terraform", "Automation", "Enterprise", "Pre-Sales"],
     github_url: "",
     image_url: "",
-    category: "cloud",
+    category: "infrastructure",
     featured: false,
     techCount: 6,
     projectType: 'Client Work',
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     technologies: ["Watsonx.ai", "IBM Cloud", "Openshift", "Next.js", "Integration", "API"],
     github_url: "",
     image_url: "",
-    category: "cloud",
+    category: "automation",
     featured: false,
     techCount: 6,
     projectType: 'Client Work',
@@ -357,7 +357,7 @@ export const projects: Project[] = [
     github_url: "https://github.com/WBHankins93/implementation-studio",
     live_url: "",
     image_url: "",
-    category: "infrastructure",
+    category: "education",
     featured: true,
     showcase: true,
     techCount: 7,
@@ -375,7 +375,7 @@ export const projects: Project[] = [
     github_url: "https://github.com/WBHankins93/solutions-playbook",
     live_url: "",
     image_url: "",
-    category: "automation",
+    category: "education",
     featured: true,
     showcase: true,
     techCount: 5,

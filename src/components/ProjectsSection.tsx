@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Cloud, Shield, Globe, BookOpen, Users } from "lucide-react";
+import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
@@ -40,13 +40,6 @@ const CATEGORY = {
     dot: "bg-blue-500",
     accent: "text-blue-600"
   },
-  cloud: {
-    ring: "ring-cyan-200",
-    grad: "from-cyan-50 to-sky-50",
-    pill: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    dot: "bg-cyan-500",
-    accent: "text-cyan-600"
-  },
   security: {
     ring: "ring-red-200",
     grad: "from-red-50 to-red-50",
@@ -60,6 +53,13 @@ const CATEGORY = {
     pill: "bg-violet-50 text-violet-700 border-violet-200",
     dot: "bg-violet-500",
     accent: "text-violet-600"
+  },
+  "education": {
+    ring: "ring-purple-200",
+    grad: "from-purple-50 to-violet-50",
+    pill: "bg-purple-50 text-purple-700 border-purple-200",
+    dot: "bg-purple-500",
+    accent: "text-purple-600"
   }
 } as const;
 
@@ -90,9 +90,9 @@ const getCategoryIcon = (project: Project) => {
     case 'automation': return Workflow;
     case 'monitoring': return Activity;
     case 'ci-cd': return GitBranch;
-    case 'cloud': return Cloud;
     case 'security': return Shield;
     case 'web-dev': return Globe;
+    case 'education': return GraduationCap;
     default: return Server;
   }
 };
@@ -130,8 +130,8 @@ export default function ProjectsSection() {
     { id: "automation", label: "Automation", count: allProjects.filter(p => p.category === "automation").length },
     { id: "monitoring", label: "Monitoring", count: allProjects.filter(p => p.category === "monitoring").length },
     { id: "ci-cd", label: "CI/CD", count: allProjects.filter(p => p.category === "ci-cd").length },
-    { id: "cloud", label: "Cloud", count: allProjects.filter(p => p.category === "cloud").length },
     { id: "security", label: "Security", count: allProjects.filter(p => p.category === "security").length },
+    { id: "education", label: "Education", count: allProjects.filter(p => p.category === "education").length },
     { id: "web-dev", label: "Web Dev", count: allProjects.filter(p => p.category === "web-dev").length },
   ];
 
