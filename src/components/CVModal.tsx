@@ -37,19 +37,20 @@ export default function CVModal({
         </div>
 
         {/* PDF Viewer */}
-        <div className="flex-1 overflow-auto pb-2 md:pb-4 min-h-0">
+        <div className="flex-1 overflow-y-auto pb-2 md:pb-4 min-h-0">
           <iframe
-            src={`/Ben_Hankins_Cloud_Resume.pdf#toolbar=0&navpanes=0&scrollbar=1`}
-            className="w-full min-h-[85vh] md:h-[75vh] border-0"
+            src={`/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1`}
+            className="w-full border-0 h-[1400px] md:h-[calc(90vh-180px)]"
             title="Ben Hankins Resume"
+            allow="fullscreen"
           />
         </div>
 
         {/* Footer */}
         <div className="p-4 md:p-6 border-t border-slate-200/60 flex justify-center md:justify-end bg-gradient-to-br from-slate-50/50 to-white">
           <a
-            href="/Ben_Hankins_Cloud_Resume.pdf"
-            download
+            href="/Ben_Hankins_Cloud_Resume_2026.pdf"
+            download="Ben_Hankins_Cloud_Resume_2026.pdf"
             className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all text-sm md:text-base shadow-lg hover:shadow-xl ring-1 ring-blue-600/20"
           >
             Download PDF
