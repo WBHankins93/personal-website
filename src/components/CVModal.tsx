@@ -72,16 +72,18 @@ export default function CVModal({
         </div>
 
         {/* PDF Viewer */}
-        <div className="flex-1 overflow-y-auto min-h-0">
+        <div className="flex-1 overflow-y-auto min-h-0" style={{ WebkitOverflowScrolling: 'touch' }}>
           <iframe
-            src={`/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitV`}
+            src={`/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
             className="w-full border-0"
             style={{ 
-              height: isMobile ? '2200px' : '1800px',
-              minHeight: isMobile ? '2200px' : '1800px'
+              height: isMobile ? '4000px' : 'calc(90vh - 180px)',
+              minHeight: isMobile ? '4000px' : '600px',
+              border: 'none'
             }}
             title="Ben Hankins Resume"
             allow="fullscreen"
+            scrolling="yes"
           />
         </div>
 
