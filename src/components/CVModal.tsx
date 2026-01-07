@@ -77,8 +77,8 @@ export default function CVModal({
             src={`/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
             className="w-full border-0"
             style={{ 
-              height: isMobile ? '4000px' : 'calc(90vh - 180px)',
-              minHeight: isMobile ? '4000px' : '600px',
+              height: isMobile ? '2000px' : 'calc(90vh - 180px)',
+              minHeight: isMobile ? '2000px' : '600px',
               border: 'none'
             }}
             title="Ben Hankins Resume"
