@@ -12,7 +12,6 @@ export default function CVModal({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Detect mobile on mount and window resize
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -47,7 +46,6 @@ export default function CVModal({
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Download failed:", error);
-      // Fallback to direct link
       window.open("/Ben_Hankins_Cloud_Resume_2026.pdf", "_blank");
     }
   };
@@ -60,7 +58,7 @@ export default function CVModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 md:top-4 md:right-6 text-2xl md:text-3xl text-slate-500 hover:text-slate-700 z-10 bg-white/90 rounded-full w-8 h-8 md:w-10 md:h-10 md:bg-white/80 flex items-center justify-center shadow-sm ring-1 ring-slate-200/50 hover:ring-slate-300/50 transition-all"
+          className="absolute top-3 right-3 md:top-4 md:right-6 text-2xl md:text-3xl text-slate-500 hover:text-slate-700 z-10 bg-white/90 rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shadow-sm ring-1 ring-slate-200/50 hover:ring-slate-300/50 transition-all"
           aria-label="Close modal"
         >
           &times;
@@ -71,20 +69,37 @@ export default function CVModal({
           <h2 className="text-lg md:text-xl font-semibold text-slate-800">My Resume</h2>
         </div>
 
-        {/* PDF Viewer */}
-        <div className="flex-1 overflow-y-auto min-h-0" style={{ WebkitOverflowScrolling: 'touch' }}>
-          <iframe
-            src={`/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
-            className="w-full border-0"
-            style={{ 
-              height: isMobile ? '2000px' : 'calc(90vh - 180px)',
-              minHeight: isMobile ? '2000px' : '600px',
-              border: 'none'
-            }}
-            title="Ben Hankins Resume"
-            allow="fullscreen"
-            scrolling="yes"
-          />
+        {/* PDF Viewer - Different approach for mobile vs desktop */}
+        <div className="flex-1 overflow-auto min-h-0">
+          {isMobile ? (
+            // Mobile: Use object tag with full height
+            <object
+              data="/Ben_Hankins_Cloud_Resume_2026.pdf"
+              type="application/pdf"
+              className="w-full h-full"
+              style={{ minHeight: '100%' }}
+            >
+              <div className="p-4 text-center">
+                <p className="text-slate-600 mb-4">PDF viewer not supported on this device.</p>
+                <a
+                  href="/Ben_Hankins_Cloud_Resume_2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg"
+                >
+                  Open PDF in New Tab
+                </a>
+              </div>
+            </object>
+          ) : (
+            // Desktop: Use iframe
+            <iframe
+              src="/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1"
+              className="w-full h-full border-0"
+              title="Ben Hankins Resume"
+              allow="fullscreen"
+            />
+          )}
         </div>
 
         {/* Footer - Only show download button on desktop */}
