@@ -50,7 +50,7 @@ export default function HeroSection() {
 
       {/* 3D Word Sphere Background */}
       <Suspense fallback={null}>
-        <div className="absolute inset-0 z-5 opacity-40">
+        <div className="absolute inset-0 z-[5] opacity-40 pointer-events-none">
           <WordSphere />
         </div>
       </Suspense>
