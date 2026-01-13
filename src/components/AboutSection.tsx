@@ -98,45 +98,51 @@ export default function AboutSection() {
 
           {/* Intro + Avatar */}
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
+          <div>
               <h3 className="text-2xl font-bold text-slate-900 mb-6">My journey</h3>
-              
+
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  Started in web development, then moved into Solutions Engineering at IBM 
+                  Started in web development, then moved into Solutions Engineering at IBM
                   when I realized I preferred solving problems with customers, not just for them.
                 </p>
+
                 <p>
-                  Served as technical advisor for 12+ enterprise clients including CenterPoint 
-                  Energy, AT&T, Cencora, and Pepsi. Led technical delivery for CenterPoint&apos;s 
-                  11-month SAP RISE evaluation—designed automation that cut environment 
-                  provisioning by 85%, which helped close the $10.1M deal and expanded into 
+                  Served as technical advisor for 12+ enterprise clients including CenterPoint
+                  Energy, AT&T, Cencora, and Pepsi. Led technical delivery for CenterPoint&apos;s
+                  11-month SAP RISE evaluation and designed automation that cut environment
+                  provisioning by 85%. That work helped close the $10.1M deal and expanded into
                   a multi-year engagement.
                 </p>
+
                 <p>
-                  After proving I could drive deals, I went deeper on infrastructure (promoted 
-                  to Cloud Infrastructure Engineer, then SRE contract at Prove AI). Most SEs 
-                  hand off to implementation teams after the sale closes. I wanted to own the 
-                  full stack—POC to production.
+                  After proving I could drive outcomes in customer-facing roles, I intentionally went deeper on
+                  production infrastructure inside the same Client Engineering org. Most SE teams hand off after
+                  a sale closes. I wanted to own more of the path from POC to production and build solutions that
+                  hold up under real constraints.
                 </p>
+
                 <p>
-                  At Prove AI, led SOC 2 compliance from 34% to 100% while maintaining 99.9% 
-                  uptime. Also mentored 8 Solutions Engineers at IBM—3 earned promotions, 2 
-                  received performance awards.
+                  At Prove AI, I was part of a two-person team responsible for platform reliability and operational readiness.
+                  I led SOC 2 compliance from 34% to 100% while maintaining 99.9% uptime.
+                  I also mentored 8 Solutions Engineers at IBM, 3 earned promotions and 2 received performance awards.
                 </p>
+
                 <p>
-                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in 
-                  late 2024 to apply SE methodology to small businesses. Built my portfolio 
-                  site as proof-of-concept, which landed my first paying client. Side venture, 
-                  but reinforces the consultative approach I bring to Solutions Engineering.
+                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in
+                  late 2024 to apply SE methodology to small businesses. Built my portfolio
+                  site as a proof of concept that landed my first paying client. It is a side venture,
+                  but it reinforces the consultative approach I bring to Solutions Engineering.
                 </p>
+
                 <p>
-                  What drives me: solving real problems for real teams. POCs that prove 
-                  feasibility, architecture that avoids expensive mistakes, automation that 
+                  What drives me: solving real problems for real teams. POCs that prove
+                  feasibility, architecture that avoids expensive mistakes, automation that
                   lets engineers ship confidently.
                 </p>
               </div>
             </div>
+
 
             <div className="relative">
               <motion.div 
