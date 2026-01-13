@@ -48,15 +48,15 @@ export default function HeroSection() {
         }} />
       </div>
 
+      {/* Floating Tech Particles */}
+      <FloatingTechParticles />
+
       {/* 3D Word Sphere Background */}
       <Suspense fallback={null}>
-        <div className="absolute inset-0 z-[5] opacity-40 pointer-events-none">
+        <div className="absolute inset-0 z-[5] opacity-60 pointer-events-none">
           <WordSphere />
         </div>
       </Suspense>
-
-      {/* Floating Tech Particles */}
-      <FloatingTechParticles />
 
       {/* Enhanced Background Blobs */}
       <div className="absolute inset-0 z-0">

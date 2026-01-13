@@ -121,7 +121,7 @@ export default function FloatingTechParticles() {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
       {particles.map(particle => (
         <div
           key={particle.id}
