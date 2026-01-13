@@ -23,58 +23,86 @@ export const experiencesData: ExperienceData[] = [
     location: "Remote",
     logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/ef8062d24_image.png",
     type: "past",
-    note: "Contract role to deepen technical expertise",
+    note: "2-person team, platform reliability and operational readiness",
     highlights: [
-      { icon: "Award", text: "SOC 2: 34% → 100%", metric: true },
+      { icon: "Award", text: "SOC 2: 34% to 100%", metric: true },
       { icon: "TrendingUp", text: "99.9% uptime maintained", metric: true },
       { icon: "Code", text: "80% faster deployments", metric: true }
     ],
     achievements: [
-      "Drove SOC 2 Type II readiness from 34% → 100%, unblocking enterprise sales.",
-      "Maintained 99.9% uptime across 4 Kubernetes clusters and cut deployment times 80% with GitHub Actions.",
-      "Improved incident response 60% using focused observability dashboards (Vector, OpenSearch)."
+      "Owned platform reliability, infrastructure, and CI/CD across multi-cluster Kubernetes environments supporting production services.",
+      "Led SOC 2 Type II readiness from 34% to 100%, unblocking enterprise sales by meeting security and compliance requirements.",
+      "Reduced deployment time by 80% using GitHub Actions while maintaining 99.9% uptime across four production environments.",
+      "Improved incident detection and response by 60% through redesigned observability using Vector and OpenSearch."
     ],
-    technologies: ["AWS", "Kubernetes", "Terraform", "GitHub Actions", "Helm", "SOC 2", "Vector", "OpenSearch", "Python"]
+    technologies: [
+      "AWS",
+      "Kubernetes",
+      "Terraform",
+      "GitHub Actions",
+      "Helm",
+      "SOC 2",
+      "Vector",
+      "OpenSearch",
+      "Python"
+    ]
   },
   {
-    title: "Founder & Technical Consultant",
+    title: "Founder and Technical Consultant",
     company: "Sproutflow Studio",
     period: "Nov 2024 - Present",
     location: "New Orleans, LA",
     logo: null,
     type: "side-business",
-    note: "Side Business",
+    note: "Founder, selective client engagements",
     highlights: [
       { icon: "Users", text: "5 clients served", metric: true },
       { icon: "CheckCircle", text: "100% on-time delivery", metric: true },
-      { icon: "TrendingUp", text: "Measurable business outcomes", metric: true }
+      { icon: "TrendingUp", text: "Measured business impact", metric: true }
     ],
     achievements: [
-      "Operate technical consultancy serving 5 clients using enterprise SE practices.",
-      "Own full lifecycle: discovery, design, development (TypeScript/Next.js), delivery, and account management.",
-      "Delivered 100% on-time projects with measurable impact: 50% more leads, zero-to-launch delivery, and 30% acquisition growth."
+      "Founded and operate a technical consulting practice to remain hands-on in customer engagement and delivery, selectively serving clients using enterprise discovery and delivery methods.",
+      "Owned full engagement lifecycle including discovery, solution design, development, delivery, and ongoing customer support.",
+      "Delivered measurable outcomes including a 50% increase in lead generation, zero-to-traction product launches, Shopify-based brand store redesigns gaining early traction, and 30% customer acquisition growth."
     ],
-    technologies: ["TypeScript", "Next.js", "React", "Solutions Engineering", "Technical Discovery", "Account Management", "Customer Success"]
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Solutions Engineering",
+      "Technical Discovery",
+      "Account Management",
+      "Customer Success"
+    ]
   },
   {
-    title: "Cloud Infrastructure Engineer",
+    title: "Senior Solutions Engineer - Infrastructure",
     company: "IBM",
     period: "March 2022 - Aug 2024",
     location: "Remote",
     logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
     type: "past",
+    note: "Expanded scope within Client Engineering, customer-facing infrastructure ownership",
     highlights: [
-      { icon: "Award", text: "$10.1M deal closed", metric: true },
+      { icon: "Award", text: "$10.1M SAP RISE win", metric: true },
       { icon: "Users", text: "12 enterprise clients", metric: true },
       { icon: "TrendingUp", text: "20+ environments deployed", metric: true }
     ],
     achievements: [
-      "Built Terraform automation scaling SAP RISE environments 2 → 49, contributing to a $10.1M win.",
-      "Owned technical leadership across 12 enterprise accounts from discovery through expansion.",
-      "Delivered 20+ cloud environments, replacing manual work with Terraform and GitOps automation.",
-      "Supported SE teams with workshops and C-level architecture sessions to accelerate adoption."
+      "Served as technical lead for CenterPoint Energy’s SAP RISE evaluation, designing Terraform automation that scaled environments from 2 to 49 and supported a $10.1M enterprise win.",
+      "Acted as technical advisor across 12 enterprise accounts, owning architecture from discovery through production deployment and ongoing optimization.",
+      "Established Terraform and GitOps standards across 20+ enterprise environments, replacing manual provisioning with automated delivery workflows.",
+      "Led architecture workshops with senior stakeholders, translating infrastructure capabilities into business outcomes such as faster time-to-market, cost optimization, and risk reduction."
     ],
-    technologies: ["Multi-cloud", "Terraform", "Kubernetes", "GitOps", "Solutions Architecture", "Enterprise Accounts", "CI/CD"]
+    technologies: [
+      "Multi-cloud",
+      "Terraform",
+      "Kubernetes",
+      "GitOps",
+      "Solutions Architecture",
+      "Enterprise Accounts",
+      "CI/CD"
+    ]
   },
   {
     title: "Senior Solutions Engineer",
@@ -87,14 +115,22 @@ export const experiencesData: ExperienceData[] = [
     highlights: [
       { icon: "Target", text: "70% close rate", metric: true },
       { icon: "TrendingUp", text: "40% faster POCs", metric: true },
-      { icon: "Users", text: "Team mentorship", metric: false }
+      { icon: "Users", text: "Mentored 8 engineers", metric: true }
     ],
     achievements: [
-      "Achieved 70% POC close rate using reusable Kubernetes frameworks that cut time-to-value 40%.",
-      "Delivered workshops and technical presentations to C-level leaders across key industries.",
-      "Led enablement for 8 engineers, contributing to 3 promotions and 2 performance awards."
+      "Maintained approximately 70% POC close rate by driving technical strategy and validation using reusable Kubernetes frameworks that reduced time-to-value by 40%.",
+      "Delivered executive architecture workshops and technical presentations for enterprise stakeholders across manufacturing, telecom, and energy sectors.",
+      "Mentored eight Solutions Engineers across two cohorts, contributing to three promotions and two performance awards."
     ],
-    technologies: ["Pre-Sales", "Technical Leadership", "Kubernetes", "OpenShift", "Argo CD", "Tekton", "Team Mentorship", "Customer Success"]
+    technologies: [
+      "Pre-Sales",
+      "Technical Leadership",
+      "Kubernetes",
+      "OpenShift",
+      "Argo CD",
+      "Tekton",
+      "Customer Success"
+    ]
   },
   {
     title: "Solutions Engineer",
@@ -109,9 +145,17 @@ export const experiencesData: ExperienceData[] = [
       { icon: "Award", text: "Promoted after 14 months", metric: true }
     ],
     achievements: [
-      "Promoted in 14 months for strong customer results, high win rates, and consistent technical delivery."
+      "Delivered technical pre-sales support across the full sales lifecycle, consistently driving strong customer outcomes and earning promotion within 14 months."
     ],
-    technologies: ["Pre-Sales", "Technical Consultation", "Kubernetes", "OpenShift", "GitOps", "Argo CD", "Customer Success"]
+    technologies: [
+      "Pre-Sales",
+      "Technical Consultation",
+      "Kubernetes",
+      "OpenShift",
+      "GitOps",
+      "Argo CD",
+      "Customer Success"
+    ]
   },
   {
     title: "Web Developer",
@@ -122,13 +166,18 @@ export const experiencesData: ExperienceData[] = [
     type: "past",
     highlights: [
       { icon: "Code", text: "Full-stack development", metric: false },
-      { icon: "Award", text: "Production deployment", metric: false },
+      { icon: "Award", text: "Production delivery", metric: false },
       { icon: "TrendingUp", text: "SDLC ownership", metric: false }
     ],
     achievements: [
-      "Built a Vue-based Chrome extension for recruiter workflows, owning the full SDLC.",
-      "Delivered production features currently used by Kortivity clients."
+      "Built and delivered a Vue-based Chrome extension for recruiter workflows, owning the full software development lifecycle.",
+      "Shipped production features that remain in use by Kortivity customers."
     ],
-    technologies: ["Vue.js", "Chrome Extension", "JavaScript", "Full-Stack"]
+    technologies: [
+      "Vue.js",
+      "JavaScript",
+      "Chrome Extensions",
+      "Full-Stack Development"
+    ]
   }
 ];

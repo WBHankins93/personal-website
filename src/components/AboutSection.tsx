@@ -34,56 +34,49 @@ export default function AboutSection() {
     name: string;
     description: string;
     key: CategoryKey;
-    level: number;
-    experience: string;
+    credentials: string[];
   }> = [
     {
       icon: Users,
-      name: "Customer Engagement",
-      description: "Technical presentations, POC delivery, solution architecture, stakeholder management",
+      name: "Customer-Facing Technical Leadership",
+      description: "Discovery, architecture workshops, POC strategy, executive communication, stakeholder alignment",
       key: "ci-cd", // Blue
-      level: 95,
-      experience: "5+ years"
+      credentials: ["Customer-led", "POC → production"]
     },
     {
       icon: Cloud,
-      name: "Cloud & Multi-Cloud",
-      description: "AWS, GCP, IBM Cloud - architecture, migration, optimization",
+      name: "Cloud & Multi-Cloud Architecture",
+      description: "AWS / GCP / IBM Cloud architectures, migration planning, optimization, production readiness",
       key: "infrastructure", // Cyan
-      level: 90,
-      experience: "6+ years"
+      credentials: ["Enterprise-scale", "Production ownership"]
     },
     {
       icon: Server,
-      name: "Container Platforms", 
-      description: "Kubernetes, OpenShift, Docker, Helm, service mesh, microservices",
+      name: "Kubernetes & Platform Engineering", 
+      description: "Kubernetes/OpenShift, multi-cluster patterns, networking/security primitives, delivery workflows",
       key: "containers", // Purple
-      level: 95,
-      experience: "5+ years"
+      credentials: ["Enterprise-scale", "Production ownership"]
     },
     {
       icon: Code,
-      name: "DevOps & Automation",
-      description: "Terraform, Ansible, CI/CD pipelines, GitOps, infrastructure-as-code",
+      name: "DevOps & Automation (IaC + CI/CD)",
+      description: "Terraform, GitOps, CI/CD automation, repeatable delivery frameworks",
       key: "automation", // Orange
-      level: 90,
-      experience: "5+ years"
+      credentials: ["Production ownership"]
     },
     {
       icon: Shield,
-      name: "Security & Compliance",
-      description: "IAM, RBAC, SOC 2, compliance frameworks, security controls",
+      name: "Security & Compliance Enablement",
+      description: "SOC 2 readiness, IAM/RBAC patterns, controls + evidence, security-conscious architectures",
       key: "security", // Red
-      level: 85,
-      experience: "4+ years"
+      credentials: ["Compliance-ready", "Enterprise-scale"]
     },
     {
       icon: Monitor,
-      name: "Observability & SRE",
-      description: "Monitoring, logging, alerting, SLO/SLI design, incident response",
+      name: "Observability & SRE Practices",
+      description: "Logging/metrics/alerts, SLO thinking, incident response, reducing MTTD/MTTR",
       key: "monitoring", // Emerald
-      level: 85,
-      experience: "4+ years"
+      credentials: ["Production ownership"]
     },
   ];
 
@@ -210,21 +203,16 @@ export default function AboutSection() {
                       {/* Description */}
                       <p className="text-sm text-slate-700 mb-4">{skill.description}</p>
                       
-                      {/* Progress bar matching icon color */}
-                      <div className="mb-2">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-xs text-slate-500">{skill.experience}</span>
-                          <span className="text-xs text-slate-600 font-medium">{skill.level}%</span>
-                        </div>
-                        <div className="w-full bg-slate-200 rounded-full h-2">
-                          <motion.div
-                            className={`h-2 rounded-full ${c.iconBg}`}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
-                          />
-                        </div>
+                      {/* Proof-based micro-credentials */}
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {skill.credentials.map((cred, credIndex) => (
+                          <span
+                            key={credIndex}
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${c.iconBg} ${c.iconColor} border border-opacity-20`}
+                          >
+                            {cred}
+                          </span>
+                        ))}
                       </div>
                     </CardContent>
                   </Card>
