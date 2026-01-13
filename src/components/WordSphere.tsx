@@ -13,29 +13,38 @@ const words = [
 
 function Word({ 
   children, 
-  position, 
+  initialPosition,
+  index,
   color = "#ffffff" 
 }: { 
   children: string; 
-  position: [number, number, number]; 
+  initialPosition: [number, number, number];
+  index: number;
   color?: string;
 }) {
   const ref = useRef<THREE.Mesh>(null!);
 
   useFrame((state) => {
     if (ref.current) {
-      // Gentle floating animation
-      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.1;
-      // Gentle rotation
-      ref.current.rotation.y = state.clock.elapsedTime * 0.2;
+      const time = state.clock.elapsedTime;
+      // Floating animation similar to FloatingTechParticles
+      const floatX = Math.sin(time * 0.5 + index * 1.7) * 0.4;
+      const floatY = Math.cos(time * 0.3 + index * 2.1) * 0.5;
+      
+      ref.current.position.x = initialPosition[0] + floatX;
+      ref.current.position.y = initialPosition[1] + floatY;
+      ref.current.position.z = initialPosition[2];
+      
+      // Gentle rotation for visual interest
+      ref.current.rotation.z = Math.sin(time * 0.2 + index) * 0.1;
     }
   });
 
   return (
     <Text
       ref={ref}
-      position={position}
-      fontSize={0.3}
+      position={initialPosition}
+      fontSize={0.4}
       color={color}
       anchorX="center"
       anchorY="middle"
@@ -49,42 +58,42 @@ function Word({
   );
 }
 
+// Seeded random function for consistent positioning
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
 function WordSphereScene() {
-  const groupRef = useRef<THREE.Group>(null!);
-  const radius = 4;
   const wordCount = words.length;
 
   const wordPositions = useMemo(() => {
+    // Distribute words across the 3D space in a more scattered pattern
+    // Using a wider area similar to FloatingTechParticles but in 3D
     return words.map((_, i) => {
-      // Better sphere distribution using Fibonacci spiral
-      const phi = Math.acos(1 - 2 * (i + 0.5) / wordCount);
-      const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
+      // Spread words across the viewport in 2D-like distribution but with slight Z variation
+      const spreadX = 8; // Width of distribution
+      const spreadY = 6; // Height of distribution
+      const spreadZ = 2; // Depth variation
       
-      return [
-        radius * Math.cos(theta) * Math.sin(phi),
-        radius * Math.sin(theta) * Math.sin(phi),
-        radius * Math.cos(phi),
-      ] as [number, number, number];
+      const x = (seededRandom(i * 3.7) - 0.5) * spreadX;
+      const y = (seededRandom(i * 5.3) - 0.5) * spreadY;
+      const z = (seededRandom(i * 7.1) - 0.5) * spreadZ;
+      
+      return [x, y, z] as [number, number, number];
     });
   }, [wordCount]);
 
-  useFrame((state) => {
-    if (groupRef.current) {
-      // Slow rotation of the entire sphere
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.1;
-    }
-  });
-
   return (
-    <group ref={groupRef}>
-      <ambientLight intensity={0.4} />
-      <pointLight position={[10, 10, 10]} intensity={0.6} />
+    <group>
+      <ambientLight intensity={0.6} />
+      <pointLight position={[10, 10, 10]} intensity={0.8} />
       
       {words.map((word, i) => (
         <Word 
           key={`${word}-${i}`} 
-          position={wordPositions[i]}
+          initialPosition={wordPositions[i]}
+          index={i}
           color={
             i % 4 === 0 ? "#E07A5F" : 
             i % 4 === 1 ? "#81B29A" : 
