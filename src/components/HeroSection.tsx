@@ -53,7 +53,7 @@ export default function HeroSection() {
 
       {/* BH Hero Background Image - Particles disappear behind this */}
       <div 
-        className="absolute inset-0 z-[2] opacity-20 pointer-events-none bg-cover bg-center bg-no-repeat mix-blend-screen"
+        className="absolute inset-0 z-[2] opacity-20 pointer-events-none bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/bh-hero.png)'
         }}
