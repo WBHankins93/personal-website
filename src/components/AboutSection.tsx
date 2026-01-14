@@ -29,6 +29,19 @@ export default function AboutSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Gradient colors for each category
+  const getGradientForCategory = (key: CategoryKey): string => {
+    const gradients: Record<CategoryKey, string> = {
+      'ci-cd': 'linear-gradient(135deg, rgb(239 246 255), rgb(224 242 254), rgb(219 234 254))',
+      infrastructure: 'linear-gradient(135deg, rgb(236 254 255), rgb(207 250 254), rgb(224 242 254))',
+      containers: 'linear-gradient(135deg, rgb(250 245 255), rgb(243 232 255), rgb(233 213 255))',
+      automation: 'linear-gradient(135deg, rgb(255 247 237), rgb(254 243 199), rgb(253 230 138))',
+      security: 'linear-gradient(135deg, rgb(255 241 242), rgb(255 228 230), rgb(254 202 202))',
+      monitoring: 'linear-gradient(135deg, rgb(236 253 245), rgb(209 250 229), rgb(167 243 208))',
+    };
+    return gradients[key];
+  };
+
   const skills: Array<{
     icon: React.ComponentType<{ className?: string }>;
     name: string;
@@ -189,13 +202,20 @@ export default function AboutSection() {
                 >
                   <Card
                     className={[
-                      "overflow-hidden rounded-2xl ring-1 h-full transition-all duration-300 hover:shadow-xl shadow-lg",
+                      "overflow-hidden rounded-2xl ring-1 h-full transition-all duration-300 hover:shadow-xl shadow-lg relative",
                       c.ring,
-                      c.bg,
                     ].join(" ")}
                     style={{ minHeight: '280px' }}
                   >
-                    <CardContent className="bg-transparent p-6 text-center">
+                    {/* Moving gradient background */}
+                    <div 
+                      className="absolute inset-0 opacity-40 animate-gradient"
+                      style={{
+                        backgroundSize: '200% 200%',
+                        backgroundImage: getGradientForCategory(skill.key),
+                      }}
+                    />
+                    <CardContent className="relative bg-white/70 backdrop-blur-sm p-6 text-center">
                       {/* Vibrant icon circle */}
                       <div
                         className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
