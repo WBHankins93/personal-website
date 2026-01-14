@@ -51,9 +51,9 @@ export default function HeroSection() {
       {/* Floating Tech Particles - Behind the image */}
       <FloatingTechParticles />
 
-      {/* BH Hero Background Image - In front of particles */}
+      {/* BH Hero Background Image - Particles disappear behind this */}
       <div 
-        className="absolute inset-0 z-[2] opacity-15 pointer-events-none bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-[2] opacity-20 pointer-events-none bg-cover bg-center bg-no-repeat mix-blend-screen"
         style={{
           backgroundImage: 'url(/bh-hero.png)'
         }}
