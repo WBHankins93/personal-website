@@ -29,15 +29,15 @@ export default function AboutSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Gradient colors for each category - highly contrasting for fluid effect
+  // Gradient colors for each category - two-tone fluid gradients
   const getGradientForCategory = (key: CategoryKey): string => {
     const gradients: Record<CategoryKey, string> = {
-      'ci-cd': 'linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd, #dbeafe, #60a5fa, #3b82f6)',
-      infrastructure: 'linear-gradient(135deg, #06b6d4, #22d3ee, #67e8f9, #cffafe, #22d3ee, #06b6d4)',
-      containers: 'linear-gradient(135deg, #a855f7, #c084fc, #e9d5ff, #f3e8ff, #c084fc, #a855f7)',
-      automation: 'linear-gradient(135deg, #f97316, #fb923c, #fdba74, #fed7aa, #fb923c, #f97316)',
-      security: 'linear-gradient(135deg, #ef4444, #f87171, #fca5a5, #fecaca, #f87171, #ef4444)',
-      monitoring: 'linear-gradient(135deg, #10b981, #34d399, #6ee7b7, #d1fae5, #34d399, #10b981)',
+      'ci-cd': 'radial-gradient(circle at 20% 50%, #1e40af 0%, transparent 50%), radial-gradient(circle at 80% 20%, #60a5fa 0%, transparent 50%), radial-gradient(circle at 40% 80%, #3b82f6 0%, transparent 50%), linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
+      infrastructure: 'radial-gradient(circle at 20% 50%, #0e7490 0%, transparent 50%), radial-gradient(circle at 80% 20%, #22d3ee 0%, transparent 50%), radial-gradient(circle at 40% 80%, #06b6d4 0%, transparent 50%), linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)',
+      containers: 'radial-gradient(circle at 20% 50%, #7e22ce 0%, transparent 50%), radial-gradient(circle at 80% 20%, #c084fc 0%, transparent 50%), radial-gradient(circle at 40% 80%, #a855f7 0%, transparent 50%), linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%)',
+      automation: 'radial-gradient(circle at 20% 50%, #c2410c 0%, transparent 50%), radial-gradient(circle at 80% 20%, #fb923c 0%, transparent 50%), radial-gradient(circle at 40% 80%, #f97316 0%, transparent 50%), linear-gradient(135deg, #fed7aa 0%, #fdba74 100%)',
+      security: 'radial-gradient(circle at 20% 50%, #b91c1c 0%, transparent 50%), radial-gradient(circle at 80% 20%, #f87171 0%, transparent 50%), radial-gradient(circle at 40% 80%, #ef4444 0%, transparent 50%), linear-gradient(135deg, #fecaca 0%, #fca5a5 100%)',
+      monitoring: 'radial-gradient(circle at 20% 50%, #047857 0%, transparent 50%), radial-gradient(circle at 80% 20%, #34d399 0%, transparent 50%), radial-gradient(circle at 40% 80%, #10b981 0%, transparent 50%), linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)',
     };
     return gradients[key];
   };
@@ -97,36 +97,39 @@ export default function AboutSection() {
     <section id="about" className="py-12 md:py-16 bg-white">
       <style jsx>{`
         @keyframes gradient-0 {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+          0% { background-position: 0% 0%, 100% 0%, 50% 100%; }
+          33% { background-position: 100% 50%, 0% 100%, 100% 0%; }
+          66% { background-position: 0% 100%, 100% 50%, 0% 50%; }
+          100% { background-position: 0% 0%, 100% 0%, 50% 100%; }
         }
         @keyframes gradient-1 {
-          0%, 100% { background-position: 100% 0%; }
-          25% { background-position: 50% 50%; }
-          50% { background-position: 0% 100%; }
-          75% { background-position: 50% 50%; }
+          0% { background-position: 100% 100%, 0% 0%, 100% 50%; }
+          33% { background-position: 0% 50%, 100% 100%, 50% 0%; }
+          66% { background-position: 100% 0%, 0% 50%, 0% 100%; }
+          100% { background-position: 100% 100%, 0% 0%, 100% 50%; }
         }
         @keyframes gradient-2 {
-          0%, 100% { background-position: 50% 0%; }
-          33% { background-position: 100% 100%; }
-          66% { background-position: 0% 100%; }
+          0% { background-position: 50% 0%, 50% 100%, 0% 50%; }
+          50% { background-position: 50% 100%, 50% 0%, 100% 50%; }
+          100% { background-position: 50% 0%, 50% 100%, 0% 50%; }
         }
         @keyframes gradient-3 {
-          0%, 100% { background-position: 0% 0%; }
-          25% { background-position: 100% 0%; }
-          50% { background-position: 100% 100%; }
-          75% { background-position: 0% 100%; }
+          0% { background-position: 0% 50%, 100% 50%, 50% 0%; }
+          25% { background-position: 100% 0%, 0% 100%, 100% 100%; }
+          50% { background-position: 0% 100%, 100% 0%, 0% 0%; }
+          75% { background-position: 100% 50%, 0% 50%, 50% 100%; }
+          100% { background-position: 0% 50%, 100% 50%, 50% 0%; }
         }
         @keyframes gradient-4 {
-          0%, 100% { background-position: 100% 100%; }
-          33% { background-position: 0% 50%; }
-          66% { background-position: 100% 0%; }
+          0% { background-position: 100% 0%, 0% 100%, 50% 50%; }
+          50% { background-position: 0% 100%, 100% 0%, 50% 50%; }
+          100% { background-position: 100% 0%, 0% 100%, 50% 50%; }
         }
         @keyframes gradient-5 {
-          0%, 100% { background-position: 50% 100%; }
-          25% { background-position: 0% 0%; }
-          50% { background-position: 50% 0%; }
-          75% { background-position: 100% 100%; }
+          0% { background-position: 50% 100%, 50% 0%, 100% 50%; }
+          33% { background-position: 0% 0%, 100% 100%, 50% 50%; }
+          66% { background-position: 100% 100%, 0% 0%, 0% 100%; }
+          100% { background-position: 50% 100%, 50% 0%, 100% 50%; }
         }
       `}</style>
       
@@ -244,14 +247,14 @@ export default function AboutSection() {
                   >
                     {/* Moving gradient background with unique animation */}
                     <div 
-                      className="absolute inset-0 opacity-70"
+                      className="absolute inset-0 opacity-80"
                       style={{
-                        backgroundSize: '400% 400%',
+                        backgroundSize: '200% 200%, 200% 200%, 200% 200%, 100% 100%',
                         backgroundImage: getGradientForCategory(skill.key),
-                        animation: `gradient-${index % 6} ${5 + index}s ease-in-out infinite`,
+                        animation: `gradient-${index % 6} ${8 + index * 1.5}s ease-in-out infinite`,
                       }}
                     />
-                    <CardContent className="relative bg-white/60 backdrop-blur-sm p-6 text-center">
+                    <CardContent className="relative bg-white/50 backdrop-blur-sm p-6 text-center">
                       {/* Vibrant icon circle */}
                       <div
                         className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
