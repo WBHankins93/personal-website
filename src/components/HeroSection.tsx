@@ -13,11 +13,6 @@ const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: 
   loading: () => null
 });
 
-const BHIconScene = dynamic(() => import('./BHIconScene').catch(() => ({ default: () => null })), { 
-  ssr: false,
-  loading: () => null
-});
-
 const roles = [
   "Solutions Engineer",
   "Technical Account Manager", 
@@ -56,17 +51,18 @@ export default function HeroSection() {
       {/* Floating Tech Particles */}
       <FloatingTechParticles />
 
+      {/* BH Hero Background Image */}
+      <div 
+        className="absolute inset-0 z-[2] opacity-20 pointer-events-none bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/bh-hero.png)'
+        }}
+      />
+
       {/* 3D Word Sphere Background */}
       <Suspense fallback={null}>
         <div className="absolute inset-0 z-[5] opacity-60 pointer-events-none">
           <WordSphere />
-        </div>
-      </Suspense>
-
-      {/* BH Icon 3D Scene Background */}
-      <Suspense fallback={null}>
-        <div className="absolute inset-0 z-[3] opacity-30 pointer-events-none">
-          <BHIconScene />
         </div>
       </Suspense>
 
