@@ -95,6 +95,40 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="py-12 md:py-16 bg-white">
+      <style jsx>{`
+        @keyframes gradient-0 {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes gradient-1 {
+          0% { background-position: 100% 0%; }
+          50% { background-position: 0% 100%; }
+          100% { background-position: 100% 0%; }
+        }
+        @keyframes gradient-2 {
+          0% { background-position: 50% 0%; }
+          50% { background-position: 50% 100%; }
+          100% { background-position: 50% 0%; }
+        }
+        @keyframes gradient-3 {
+          0% { background-position: 0% 0%; }
+          33% { background-position: 100% 50%; }
+          66% { background-position: 0% 100%; }
+          100% { background-position: 0% 0%; }
+        }
+        @keyframes gradient-4 {
+          0% { background-position: 100% 100%; }
+          50% { background-position: 0% 0%; }
+          100% { background-position: 100% 100%; }
+        }
+        @keyframes gradient-5 {
+          0% { background-position: 50% 100%; }
+          50% { background-position: 50% 0%; }
+          100% { background-position: 50% 100%; }
+        }
+      `}</style>
+      
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -207,12 +241,13 @@ export default function AboutSection() {
                     ].join(" ")}
                     style={{ minHeight: '280px' }}
                   >
-                    {/* Moving gradient background */}
+                    {/* Moving gradient background with unique animation */}
                     <div 
-                      className="absolute inset-0 opacity-40 animate-gradient"
+                      className="absolute inset-0 opacity-40"
                       style={{
                         backgroundSize: '200% 200%',
                         backgroundImage: getGradientForCategory(skill.key),
+                        animation: `gradient-${index % 6} ${8 + (index % 3) * 2}s ease infinite`,
                       }}
                     />
                     <CardContent className="relative bg-white/70 backdrop-blur-sm p-6 text-center">
