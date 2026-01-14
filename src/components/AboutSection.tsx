@@ -29,15 +29,15 @@ export default function AboutSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Gradient colors for each category
+  // Gradient colors for each category - highly contrasting for fluid effect
   const getGradientForCategory = (key: CategoryKey): string => {
     const gradients: Record<CategoryKey, string> = {
-      'ci-cd': 'linear-gradient(135deg, rgb(239 246 255), rgb(224 242 254), rgb(219 234 254))',
-      infrastructure: 'linear-gradient(135deg, rgb(236 254 255), rgb(207 250 254), rgb(224 242 254))',
-      containers: 'linear-gradient(135deg, rgb(250 245 255), rgb(243 232 255), rgb(233 213 255))',
-      automation: 'linear-gradient(135deg, rgb(255 247 237), rgb(254 243 199), rgb(253 230 138))',
-      security: 'linear-gradient(135deg, rgb(255 241 242), rgb(255 228 230), rgb(254 202 202))',
-      monitoring: 'linear-gradient(135deg, rgb(236 253 245), rgb(209 250 229), rgb(167 243 208))',
+      'ci-cd': 'linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd, #dbeafe, #60a5fa, #3b82f6)',
+      infrastructure: 'linear-gradient(135deg, #06b6d4, #22d3ee, #67e8f9, #cffafe, #22d3ee, #06b6d4)',
+      containers: 'linear-gradient(135deg, #a855f7, #c084fc, #e9d5ff, #f3e8ff, #c084fc, #a855f7)',
+      automation: 'linear-gradient(135deg, #f97316, #fb923c, #fdba74, #fed7aa, #fb923c, #f97316)',
+      security: 'linear-gradient(135deg, #ef4444, #f87171, #fca5a5, #fecaca, #f87171, #ef4444)',
+      monitoring: 'linear-gradient(135deg, #10b981, #34d399, #6ee7b7, #d1fae5, #34d399, #10b981)',
     };
     return gradients[key];
   };
@@ -97,35 +97,36 @@ export default function AboutSection() {
     <section id="about" className="py-12 md:py-16 bg-white">
       <style jsx>{`
         @keyframes gradient-0 {
-          0% { background-position: 0% 50%; }
+          0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
         }
         @keyframes gradient-1 {
-          0% { background-position: 100% 0%; }
+          0%, 100% { background-position: 100% 0%; }
+          25% { background-position: 50% 50%; }
           50% { background-position: 0% 100%; }
-          100% { background-position: 100% 0%; }
+          75% { background-position: 50% 50%; }
         }
         @keyframes gradient-2 {
-          0% { background-position: 50% 0%; }
-          50% { background-position: 50% 100%; }
-          100% { background-position: 50% 0%; }
+          0%, 100% { background-position: 50% 0%; }
+          33% { background-position: 100% 100%; }
+          66% { background-position: 0% 100%; }
         }
         @keyframes gradient-3 {
-          0% { background-position: 0% 0%; }
-          33% { background-position: 100% 50%; }
-          66% { background-position: 0% 100%; }
-          100% { background-position: 0% 0%; }
+          0%, 100% { background-position: 0% 0%; }
+          25% { background-position: 100% 0%; }
+          50% { background-position: 100% 100%; }
+          75% { background-position: 0% 100%; }
         }
         @keyframes gradient-4 {
-          0% { background-position: 100% 100%; }
-          50% { background-position: 0% 0%; }
-          100% { background-position: 100% 100%; }
+          0%, 100% { background-position: 100% 100%; }
+          33% { background-position: 0% 50%; }
+          66% { background-position: 100% 0%; }
         }
         @keyframes gradient-5 {
-          0% { background-position: 50% 100%; }
+          0%, 100% { background-position: 50% 100%; }
+          25% { background-position: 0% 0%; }
           50% { background-position: 50% 0%; }
-          100% { background-position: 50% 100%; }
+          75% { background-position: 100% 100%; }
         }
       `}</style>
       
@@ -243,14 +244,14 @@ export default function AboutSection() {
                   >
                     {/* Moving gradient background with unique animation */}
                     <div 
-                      className="absolute inset-0 opacity-40"
+                      className="absolute inset-0 opacity-70"
                       style={{
-                        backgroundSize: '200% 200%',
+                        backgroundSize: '400% 400%',
                         backgroundImage: getGradientForCategory(skill.key),
-                        animation: `gradient-${index % 6} ${8 + (index % 3) * 2}s ease infinite`,
+                        animation: `gradient-${index % 6} ${5 + index}s ease-in-out infinite`,
                       }}
                     />
-                    <CardContent className="relative bg-white/70 backdrop-blur-sm p-6 text-center">
+                    <CardContent className="relative bg-white/60 backdrop-blur-sm p-6 text-center">
                       {/* Vibrant icon circle */}
                       <div
                         className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
