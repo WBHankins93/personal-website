@@ -34,19 +34,19 @@ export default function CVModal({
     e.preventDefault();
     
     try {
-      const response = await fetch("/Ben_Hankins_Cloud_Resume_2026.pdf");
+      const response = await fetch("/Ben_Hankins_Cloud_Resume_Jan_2026.pdf");
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "Ben_Hankins_Cloud_Resume_2026.pdf";
+      link.download = "Ben_Hankins_Cloud_Resume_Jan_2026.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Download failed:", error);
-      window.open("/Ben_Hankins_Cloud_Resume_2026.pdf", "_blank");
+      window.open("/Ben_Hankins_Cloud_Resume_Jan_2026.pdf", "_blank");
     }
   };
 
@@ -74,7 +74,7 @@ export default function CVModal({
           {isMobile ? (
             // Mobile: Use object tag with full height
             <object
-              data="/Ben_Hankins_Cloud_Resume_2026.pdf"
+              data="/Ben_Hankins_Cloud_Resume_Jan_2026.pdf"
               type="application/pdf"
               className="w-full h-full"
               style={{ minHeight: '100%' }}
@@ -82,7 +82,7 @@ export default function CVModal({
               <div className="p-4 text-center">
                 <p className="text-slate-600 mb-4">PDF viewer not supported on this device.</p>
                 <a
-                  href="/Ben_Hankins_Cloud_Resume_2026.pdf"
+                  href="/Ben_Hankins_Cloud_Resume_Jan_2026.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg"
@@ -94,7 +94,7 @@ export default function CVModal({
           ) : (
             // Desktop: Use iframe
             <iframe
-              src="/Ben_Hankins_Cloud_Resume_2026.pdf#toolbar=0&navpanes=0&scrollbar=1"
+              src="/Ben_Hankins_Cloud_Resume_Jan_2026.pdf#toolbar=0&navpanes=0&scrollbar=1"
               className="w-full h-full border-0"
               title="Ben Hankins Resume"
               allow="fullscreen"
@@ -106,7 +106,7 @@ export default function CVModal({
         {!isMobile && (
           <div className="p-4 md:p-6 border-t border-slate-200/60 flex justify-center md:justify-end bg-gradient-to-br from-slate-50/50 to-white flex-shrink-0">
             <a
-              href="/Ben_Hankins_Cloud_Resume_2026.pdf"
+              href="/Ben_Hankins_Cloud_Resume_Jan_2026.pdf"
               onClick={handleDownload}
               className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all text-sm md:text-base shadow-lg hover:shadow-xl ring-1 ring-blue-600/20 cursor-pointer"
             >
