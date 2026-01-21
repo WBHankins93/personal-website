@@ -129,7 +129,7 @@ export default function AboutSection() {
               transition={{ delay: 0.1 }}
               className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto"
             >
-              Senior Cloud Engineer focused on Kubernetes, multi-cloud infrastructure, and production reliability &mdash; with a proven track record delivering outcomes in customer-facing enterprise environments.
+              Senior Cloud Engineer focused on Kubernetes, multi-cloud infrastructure, and production reliability with a proven track record delivering outcomes in customer-facing enterprise environments.
             </motion.p>
           </div>
 
@@ -142,7 +142,7 @@ export default function AboutSection() {
 
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development, then moved into cloud engineering inside IBM&apos;s client-facing org &mdash; where I learned how to build infrastructure that holds up under real enterprise constraints (security, networking, compliance, and delivery pressure).
+                  I started in web development, then moved into cloud engineering inside IBM&apos;s client-facing org where I learned how to build infrastructure that holds up under real enterprise constraints (security, networking, compliance, and delivery pressure).
                 </p>
 
                 <p>
@@ -154,15 +154,15 @@ export default function AboutSection() {
                 </p>
 
                 <p>
-                  At Prove AI, I joined a lean two-person infra team and owned reliability, CI/CD, and operational readiness &mdash; including leading SOC 2 Type II readiness from 34% to 100% while maintaining 99.9% uptime.
+                  At Prove AI, I joined a lean two-person infra team and owned reliability, CI/CD, and operational readiness including leading SOC 2 Type II readiness from 34% to 100% while maintaining 99.9% uptime.
                 </p>
 
                 <p>
-                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in late 2024 as a small consultancy for full-stack web work. It&apos;s separate from my cloud track &mdash; but it reinforces how I think: pragmatic delivery, clean systems, and outcomes that customers can feel.
+                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in late 2024 as a small consultancy for full-stack web work. It&apos;s separate from my cloud track, but it reinforces how I think: pragmatic delivery, clean systems, and outcomes that customers can feel.
                 </p>
 
                 <p>
-                  What drives me: building durable cloud platforms, reducing toil through automation, and helping teams ship confidently &mdash; whether the &quot;customer&quot; is external enterprise stakeholders or internal engineering teams.
+                  What drives me: building durable cloud platforms, reducing toil through automation, and helping teams ship confidently whether the &quot;customer&quot; is external enterprise stakeholders or internal engineering teams.
                 </p>
               </div>
             </div>
