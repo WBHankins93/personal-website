@@ -115,7 +115,7 @@ export const experiencesData = [
     period: "Late 2024 – Present",
     location: "Remote",
     type: "side-business",
-    logo: "/public/logo-design-Photoroom.png",
+    logo: "./public/logo-design-Photoroom.png",
     note: "Full-stack web platforms (separate from cloud track)",
     highlights: [
       { icon: "Briefcase", text: "Client delivery + consulting", metric: false },
