@@ -38,12 +38,17 @@ const iconMap: Record<string, LucideIcon> = {
   CheckCircle
 };
 
+type ExperienceItem = typeof experiencesData[number];
+type ExperienceWithIcons = Omit<ExperienceItem, 'highlights'> & {
+  highlights: Array<Omit<ExperienceItem['highlights'][number], 'icon'> & { icon: LucideIcon }>;
+};
+
 export default function ExperienceSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
   // Map string icon names to actual icon components
-  const experiences = experiencesData.map(exp => ({
+  const experiences: ExperienceWithIcons[] = experiencesData.map((exp: ExperienceItem) => ({
     ...exp,
     highlights: exp.highlights.map(h => ({
       ...h,
