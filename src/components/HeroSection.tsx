@@ -14,12 +14,12 @@ const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: 
 });
 
 const roles = [
-  "Solutions Engineer",
-  "Technical Account Manager", 
-  "Solutions Architect",
-  "Customer Success Engineer",
-  "Infrastructure Specialist"
+  "Senior Cloud Engineer",
+  "Cloud Infrastructure Engineer",
+  "Kubernetes & Platform Engineer",
+  "Site Reliability Engineer"
 ];
+
 
 export default function HeroSection() {
   const [showModal, setShowModal] = useState(false);
@@ -84,7 +84,8 @@ export default function HeroSection() {
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto font-body px-4">
-            Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from &quot;what if&quot; to production with confidence.
+            Senior Cloud Engineer designing and operating Kubernetes-based, multi-cloud infrastructure.
+            I help teams move from proof-of-concept to production systems that are reliable, secure, and built to scale.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 md:mb-16 px-4">

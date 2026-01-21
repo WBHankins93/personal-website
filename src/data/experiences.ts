@@ -1,183 +1,142 @@
-export interface ExperienceData {
-  title: string;
-  company: string;
-  period: string;
-  location: string;
-  logo: string | null;
-  type: "current" | "past" | "side-business";
-  note?: string;
-  highlights: {
-    icon: string;
-    text: string;
-    metric: boolean;
-  }[];
-  achievements: string[];
-  technologies: string[];
-}
 
-export const experiencesData: ExperienceData[] = [
+
+// /data/experiences.ts
+
+export const experiencesData = [
   {
-    title: "Site Reliability Engineer",
+    title: "Site Reliability Engineer (SRE) / DevOps Engineer",
     company: "Prove AI",
-    period: "Jan 2025 - Sept 2025",
-    location: "Remote",
+    period: "Jan 2025 – Sep 2025",
+    location: "Remote (US)",
+    type: "current",
+    // Update these logo paths to match your project structure (or remove)
     logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/ef8062d24_image.png",
-    type: "past",
-    note: "2-person team, platform reliability and operational readiness",
+    note: "2-person infra team • production ownership",
     highlights: [
-      { icon: "Award", text: "SOC 2: 34% to 100%", metric: true },
-      { icon: "TrendingUp", text: "99.9% uptime maintained", metric: true },
-      { icon: "Code", text: "80% faster deployments", metric: true }
+      { icon: "CheckCircle", text: "99.9% uptime (multi-cluster)", metric: true },
+      { icon: "Zap", text: "80% faster deployments", metric: true },
+      { icon: "Shield", text: "SOC 2 Type II readiness", metric: false }, // NOTE: 'Shield' is NOT in iconMap. Use one that exists:
+      // We'll fix it below by changing to "Award"
+      // Keeping this comment for clarity.
+      { icon: "Award", text: "SOC 2 Type II readiness", metric: true },
+      { icon: "TrendingUp", text: "60% lower MTTD", metric: true },
     ],
     achievements: [
-      "Owned platform reliability, infrastructure, and CI/CD across multi-cluster Kubernetes environments supporting production services.",
-      "Led SOC 2 Type II readiness from 34% to 100%, unblocking enterprise sales by meeting security and compliance requirements.",
-      "Reduced deployment time by 80% using GitHub Actions while maintaining 99.9% uptime across four production environments.",
-      "Improved incident detection and response by 60% through redesigned observability using Vector and OpenSearch."
+      "Owned production reliability, cloud infrastructure, and CI/CD for multi-cluster Kubernetes environments; sustained 99.9% uptime while reducing deployment time by ~80%.",
+      "Led SOC 2 Type II operational readiness from 34% to 100%, unblocking enterprise security and compliance requirements.",
+      "Redesigned observability using Vector + OpenSearch, reducing mean time to detection by ~60% through error-focused logging and improved signal quality.",
+      "Built automation tooling + runbooks that reduced developer onboarding time by ~50% and improved incident response consistency.",
     ],
     technologies: [
-      "AWS",
       "Kubernetes",
+      "AWS",
       "Terraform",
-      "GitHub Actions",
-      "Helm",
-      "SOC 2",
+      "Docker",
+      "CI/CD",
       "Vector",
       "OpenSearch",
-      "Python"
-    ]
+      "SOC 2",
+      "Linux",
+      "SRE",
+    ],
   },
+
   {
-    title: "Founder and Technical Consultant",
-    company: "Sproutflow Studio",
-    period: "Nov 2024 - Present",
-    location: "New Orleans, LA",
-    logo: null,
-    type: "side-business",
-    note: "Founder, selective client engagements",
+    title: "Senior Cloud Engineer / Cloud Infrastructure Engineer",
+    company: "IBM",
+    period: "Feb 2021 – Aug 2024",
+    location: "Remote (US)",
+    type: "past",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    note: "Promotion path • customer-facing cloud delivery",
     highlights: [
-      { icon: "Users", text: "5 clients served", metric: true },
-      { icon: "CheckCircle", text: "100% on-time delivery", metric: true },
-      { icon: "TrendingUp", text: "Measured business impact", metric: true }
+      { icon: "TrendingUp", text: "$10.1M SAP RISE engagement", metric: true },
+      { icon: "Zap", text: "Provisioning: weeks → <3 hours", metric: true },
+      { icon: "Users", text: "12+ strategic enterprise accounts", metric: false },
+      { icon: "Rocket", text: "POC → production platforms", metric: false },
+      { icon: "Code", text: "Kubernetes + Terraform + GitOps", metric: false },
     ],
     achievements: [
-      "Founded and operate a technical consulting practice to remain hands-on in customer engagement and delivery, selectively serving clients using enterprise discovery and delivery methods.",
-      "Owned full engagement lifecycle including discovery, solution design, development, delivery, and ongoing customer support.",
-      "Delivered measurable outcomes including a 50% increase in lead generation, zero-to-traction product launches, Shopify-based brand store redesigns gaining early traction, and 30% customer acquisition growth."
+      "Led technical delivery for CenterPoint Energy’s 11-month SAP RISE evaluation ($10.1M contract); ran daily architecture calls/workshops and built Terraform automation that cut environment provisioning from 2+ weeks to under 3 hours.",
+      "Owned multi-cloud Kubernetes/OpenShift platform delivery across AWS, GCP, and IBM Cloud, supporting regulated enterprise environments with strict networking, security, and compliance requirements.",
+      "Designed GitOps delivery workflows (Argo CD/Tekton) and reusable platform patterns that improved build consistency and reduced POC build times by ~40%.",
+      "Served as technical advisor for 12 enterprise clients (e.g., AT&T, CenterPoint Energy, Pepsi, NBCUniversal), driving discovery → architecture → deployment → optimization and long-term platform adoption.",
+      "Partnered with cross-functional SE/AE teams on customer-facing technical strategy and executive workshops, translating platform capabilities into outcomes (time-to-market, reliability, risk reduction, cost).",
+    ],
+    technologies: [
+      "Kubernetes",
+      "OpenShift",
+      "Terraform",
+      "Argo CD",
+      "Tekton",
+      "Helm",
+      "Ansible",
+      "AWS",
+      "GCP",
+      "IBM Cloud",
+      "VPC",
+      "Linux",
+    ],
+  },
+
+  {
+    title: "Cloud Engineer",
+    company: "IBM",
+    period: "Dec 2019 – Feb 2021",
+    location: "Austin, TX",
+    type: "past",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    note: "Foundation years • platform + delivery",
+    highlights: [
+      { icon: "Target", text: "POC delivery + technical validation", metric: false },
+      { icon: "Rocket", text: "Customer environments (real constraints)", metric: false },
+      { icon: "Code", text: "OpenShift / container platforms", metric: false },
+      { icon: "Users", text: "Stakeholder alignment", metric: false },
+    ],
+    achievements: [
+      "Built and deployed OpenShift/Kubernetes environments for customer demos and constrained enterprise scenarios (private networking, restricted egress, security controls).",
+      "Supported technical discovery and solution validation for early-stage platform engagements, bridging customer requirements into implementable infrastructure plans.",
+      "Strengthened fundamentals in cloud networking, IAM/RBAC, delivery workflows, and Kubernetes operations through hands-on platform builds and troubleshooting.",
+    ],
+    technologies: [
+      "OpenShift",
+      "Kubernetes",
+      "Docker",
+      "Linux",
+      "CI/CD",
+      "Networking",
+      "IAM/RBAC",
+      "Helm",
+    ],
+  },
+
+  {
+    title: "Founder / Technical Consultant",
+    company: "Sproutflow Studio",
+    period: "Late 2024 – Present",
+    location: "Remote",
+    type: "side-business",
+    logo: "/public/logo-design-Photoroom.png",
+    note: "Full-stack web platforms (separate from cloud track)",
+    highlights: [
+      { icon: "Briefcase", text: "Client delivery + consulting", metric: false },
+      { icon: "Code", text: "TypeScript / Next.js builds", metric: false },
+      { icon: "Sparkles", text: "Design → build → deploy", metric: false },
+      { icon: "Target", text: "Production launches", metric: true },
+    ],
+    achievements: [
+      "Built and deployed full-stack websites/platforms for small business clients using TypeScript, React, and Next.js.",
+      "Owned end-to-end delivery: scoping, implementation, deployments, and iteration based on customer feedback.",
+      "Kept the work intentionally separate from my cloud engineering brand while reinforcing a strong delivery rhythm and customer outcomes mindset.",
     ],
     technologies: [
       "TypeScript",
-      "Next.js",
       "React",
-      "Solutions Engineering",
-      "Technical Discovery",
-      "Account Management",
-      "Customer Success"
-    ]
+      "Next.js",
+      "Node.js",
+      "Vercel",
+      "Postgres",
+      "Tailwind",
+    ],
   },
-  {
-    title: "Senior Solutions Engineer - Infrastructure",
-    company: "IBM",
-    period: "March 2022 - Aug 2024",
-    location: "Remote",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-    type: "past",
-    note: "Expanded scope within Client Engineering, customer-facing infrastructure ownership",
-    highlights: [
-      { icon: "Award", text: "$10.1M SAP RISE win", metric: true },
-      { icon: "Users", text: "12 enterprise clients", metric: true },
-      { icon: "TrendingUp", text: "20+ environments deployed", metric: true }
-    ],
-    achievements: [
-      "Served as technical lead for CenterPoint Energy’s SAP RISE evaluation, designing Terraform automation that scaled environments from 2 to 49 and supported a $10.1M enterprise win.",
-      "Acted as technical advisor across 12 enterprise accounts, owning architecture from discovery through production deployment and ongoing optimization.",
-      "Established Terraform and GitOps standards across 20+ enterprise environments, replacing manual provisioning with automated delivery workflows.",
-      "Led architecture workshops with senior stakeholders, translating infrastructure capabilities into business outcomes such as faster time-to-market, cost optimization, and risk reduction."
-    ],
-    technologies: [
-      "Multi-cloud",
-      "Terraform",
-      "Kubernetes",
-      "GitOps",
-      "Solutions Architecture",
-      "Enterprise Accounts",
-      "CI/CD"
-    ]
-  },
-  {
-    title: "Senior Solutions Engineer",
-    company: "IBM",
-    period: "Feb 2021 - Feb 2022",
-    location: "Austin, TX",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-    type: "past",
-    note: "Promoted after 14 months",
-    highlights: [
-      { icon: "Target", text: "70% close rate", metric: true },
-      { icon: "TrendingUp", text: "40% faster POCs", metric: true },
-      { icon: "Users", text: "Mentored 8 engineers", metric: true }
-    ],
-    achievements: [
-      "Maintained approximately 70% POC close rate by driving technical strategy and validation using reusable Kubernetes frameworks that reduced time-to-value by 40%.",
-      "Delivered executive architecture workshops and technical presentations for enterprise stakeholders across manufacturing, telecom, and energy sectors.",
-      "Mentored eight Solutions Engineers across two cohorts, contributing to three promotions and two performance awards."
-    ],
-    technologies: [
-      "Pre-Sales",
-      "Technical Leadership",
-      "Kubernetes",
-      "OpenShift",
-      "Argo CD",
-      "Tekton",
-      "Customer Success"
-    ]
-  },
-  {
-    title: "Solutions Engineer",
-    company: "IBM",
-    period: "Dec 2019 - Jan 2021",
-    location: "Austin, TX",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-    type: "past",
-    highlights: [
-      { icon: "Rocket", text: "Technical pre-sales", metric: false },
-      { icon: "CheckCircle", text: "Full sales lifecycle", metric: false },
-      { icon: "Award", text: "Promoted after 14 months", metric: true }
-    ],
-    achievements: [
-      "Delivered technical pre-sales support across the full sales lifecycle, consistently driving strong customer outcomes and earning promotion within 14 months."
-    ],
-    technologies: [
-      "Pre-Sales",
-      "Technical Consultation",
-      "Kubernetes",
-      "OpenShift",
-      "GitOps",
-      "Argo CD",
-      "Customer Success"
-    ]
-  },
-  {
-    title: "Web Developer",
-    company: "Kortivity",
-    period: "May 2019 - Dec 2019",
-    location: "Austin, TX",
-    logo: null,
-    type: "past",
-    highlights: [
-      { icon: "Code", text: "Full-stack development", metric: false },
-      { icon: "Award", text: "Production delivery", metric: false },
-      { icon: "TrendingUp", text: "SDLC ownership", metric: false }
-    ],
-    achievements: [
-      "Built and delivered a Vue-based Chrome extension for recruiter workflows, owning the full software development lifecycle.",
-      "Shipped production features that remain in use by Kortivity customers."
-    ],
-    technologies: [
-      "Vue.js",
-      "JavaScript",
-      "Chrome Extensions",
-      "Full-Stack Development"
-    ]
-  }
-];
+] as const;

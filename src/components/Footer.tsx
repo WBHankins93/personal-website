@@ -68,8 +68,8 @@ export default function Footer() {
                 <div>
                   <p className="text-sm text-slate-400 font-medium">Resume</p>
                   <a 
-                    href="/Ben_Hankins_Cloud_Resume_Jan_2026.pdf"
-                    download="Ben_Hankins_Cloud_Resume_Jan_2026.pdf"
+                    href="/Ben_Hankins_Technical_Resume.pdf"
+                    download="Ben_Hankins_Technical_Resume.pdf"
                     className="text-white hover:text-slate-300 transition-colors font-medium"
                   >
                     Download PDF
