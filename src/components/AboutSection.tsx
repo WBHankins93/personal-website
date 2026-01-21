@@ -179,7 +179,7 @@ export default function AboutSection() {
               >
                 <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
                   <Image
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base/ben-cartoon.png"
+                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/c43e712a7_62696b86-1380-4132-bee7-5150b48ef3a9.png"
                     alt="Ben Hankins"
                     fill
                     className="object-cover"
@@ -191,79 +191,74 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Core Capabilities */}
-          <div className="mt-14 md:mt-18">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-                Core Capabilities
-              </h3>
-              <p className="text-slate-600 mt-2">
-                The work I&apos;m known for &mdash; production ownership, cloud architecture, automation, and technical leadership.
-              </p>
-            </div>
+          {/* Core Capabilities - LIGHT CARDS WITH VIBRANT ICONS */}
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-bold text-slate-900 mb-8 text-center"
+          >
+            Core Capabilities
+          </motion.h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {skills.map((skill, idx) => {
-                const Icon = skill.icon;
-                const gradient = getGradientForCategory(skill.key);
-                const category = CATEGORY[skill.key];
-
-                return (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.06 }}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((skill, index) => {
+              const c = CATEGORY[skill.key];
+              return (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
+                >
+                  <Card
+                    className={[
+                      "overflow-hidden rounded-2xl ring-1 h-full transition-all duration-300 hover:shadow-xl shadow-lg relative",
+                      c.ring,
+                    ].join(" ")}
+                    style={{ minHeight: '280px' }}
                   >
-                    <Card className="rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                      <CardContent
-                        className="p-0"
-                        style={{
-                          background: gradient,
-                        }}
+                    {/* Moving gradient background with unique animation */}
+                    <div 
+                      className="absolute inset-0 opacity-80"
+                      style={{
+                        backgroundSize: '200% 200%, 200% 200%, 200% 200%, 100% 100%',
+                        backgroundImage: getGradientForCategory(skill.key),
+                        animation: `gradient-${index % 6} ${8 + index * 1.5}s ease-in-out infinite`,
+                      }}
+                    />
+                    <CardContent className="relative bg-white/50 backdrop-blur-sm p-6 text-center">
+                      {/* Vibrant icon circle */}
+                      <div
+                        className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
                       >
-                        <div className="p-6">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div
-                              className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ring-1 ring-white/60"
-                              style={{
-                                background: "rgba(255,255,255,0.55)",
-                              }}
-                            >
-                              <Icon className="w-6 h-6 text-slate-900" />
-                            </div>
-                            <div>
-                              <div className="font-bold text-slate-900 text-lg">
-                                {skill.name}
-                              </div>
-                              <div className="text-slate-700 text-sm mt-0.5">
-                                {skill.description}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {skill.credentials.map((c, cIdx) => (
-                              <span
-                                key={cIdx}
-                                className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm ring-1 ring-white/60"
-                                style={{
-                                  background: "rgba(255,255,255,0.55)",
-                                  color: "#0f172a",
-                                }}
-                              >
-                                {c}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
+                        <skill.icon className={`h-8 w-8 ${c.iconColor}`} />
+                      </div>
+                      
+                      {/* Title - dark text on light background */}
+                      <h4 className="font-semibold text-slate-900 mb-2">{skill.name}</h4>
+                      
+                      {/* Description */}
+                      <p className="text-sm text-slate-700 mb-4">{skill.description}</p>
+                      
+                      {/* Proof-based micro-credentials */}
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {skill.credentials.map((cred, credIndex) => (
+                          <span
+                            key={credIndex}
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${c.iconBg} ${c.iconColor} border border-opacity-20`}
+                          >
+                            {cred}
+                          </span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

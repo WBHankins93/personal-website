@@ -4,12 +4,11 @@
 
 export const experiencesData = [
   {
-    title: "Site Reliability Engineer (SRE) / DevOps Engineer",
+    title: "Site Reliability Engineer (SRE)",
     company: "Prove AI",
     period: "Jan 2025 – Sep 2025",
     location: "Remote (US)",
     type: "current",
-    // Update these logo paths to match your project structure (or remove)
     logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/ef8062d24_image.png",
     note: "2-person infra team • production ownership",
     highlights: [
