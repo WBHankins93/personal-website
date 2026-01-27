@@ -142,27 +142,27 @@ export default function AboutSection() {
 
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development, then moved into cloud engineering inside IBM&apos;s client-facing org where I learned how to build infrastructure that holds up under real enterprise constraints (security, networking, compliance, and delivery pressure).
+                  I started in web development, then moved into solutions engineering at IBM&apos;s Client Engineering org where I learned how to guide enterprise customers through complex infrastructure deployments under real-world constraints: security, compliance, networking restrictions, and delivery pressure.
                 </p>
 
                 <p>
-                  Over time, my scope expanded from building repeatable Kubernetes/OpenShift environments to leading high-stakes engagements: validating architectures, accelerating migrations, and turning POCs into production platforms across AWS, GCP, and IBM Cloud.
+                  Over time, my scope expanded from executing technical POCs to leading high-stakes customer engagements: running discovery workshops, validating architectures, scoping proof-of-concepts, and guiding teams from &quot;it works in a demo&quot; to &quot;it&apos;s stable in production&quot; across AWS, GCP, and IBM Cloud.
                 </p>
 
                 <p>
-                  I&apos;m strongest at the intersection of <span className="font-semibold">hands-on platform execution</span> and <span className="font-semibold">clear technical leadership</span>: I can run the workshop, build the automation, and own the path from &quot;it works in a demo&quot; to &quot;it&apos;s stable in production.&quot;
+                  I&apos;m strongest at the intersection of deep technical execution and customer-facing leadership. I can run the executive workshop, design the solution, build the automation, and enable the customer team to operate it confidently.
                 </p>
 
                 <p>
-                  At Prove AI, I joined a lean two-person infra team and owned reliability, CI/CD, and operational readiness including leading SOC 2 Type II readiness from 34% to 100% while maintaining 99.9% uptime.
+                  At Prove AI, I strategically took an SRE role to deepen my operational expertise. I owned reliability, CI/CD, and SOC 2 readiness (34% to 100%) across four production Kubernetes clusters while maintaining 99.9% uptime. This made me a better solutions engineer because I&apos;ve now lived the operational burden customers face.
                 </p>
 
                 <p>
-                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in late 2024 as a small consultancy for full-stack web work. It&apos;s separate from my cloud track, but it reinforces how I think: pragmatic delivery, clean systems, and outcomes that customers can feel.
+                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in late 2024 as a web design consultancy serving small businesses with TypeScript/Next.js platforms. It&apos;s separate from my infrastructure track, but it reinforces how I think: pragmatic delivery, clean systems, and outcomes customers can feel.
                 </p>
 
                 <p>
-                  What drives me: building durable cloud platforms, reducing toil through automation, and helping teams ship confidently whether the &quot;customer&quot; is external enterprise stakeholders or internal engineering teams.
+                  What drives me: helping enterprise teams adopt cloud platforms with confidence, reducing operational burden through smart automation, and translating complex technical requirements into solutions that work in the real world.
                 </p>
               </div>
             </div>

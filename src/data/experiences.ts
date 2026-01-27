@@ -41,7 +41,7 @@ export const experiencesData = [
   },
 
   {
-    title: "Senior Cloud Engineer / Cloud Infrastructure Engineer",
+    title: "Senior Solutions Engineer / Cloud Infrastructure Engineer",
     company: "IBM",
     period: "Feb 2021 – Aug 2024",
     location: "Remote (US)",
@@ -79,7 +79,7 @@ export const experiencesData = [
   },
 
   {
-    title: "Cloud Engineer",
+    title: "Solutions Engineer",
     company: "IBM",
     period: "Dec 2019 – Feb 2021",
     location: "Austin, TX",
