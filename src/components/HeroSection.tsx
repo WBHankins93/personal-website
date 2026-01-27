@@ -14,9 +14,10 @@ const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: 
 });
 
 const roles = [
-  "Senior Cloud Engineer",
-  "Cloud Infrastructure Engineer",
-  "Kubernetes & Platform Engineer",
+  "Senior Solutions Engineer",
+  "Solutions Architect",
+  "Customer Engineer",
+  "Technical Solutions Lead",
   "Site Reliability Engineer"
 ];
 
