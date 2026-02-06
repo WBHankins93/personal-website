@@ -41,7 +41,7 @@ export default function Header() {
         "pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-6">
         {/* LEFT: logo + name grouped */}
         <a
           href="#home"
@@ -90,7 +90,7 @@ export default function Header() {
       {/* Mobile sheet */}
       {isMenuOpen && (
         <nav className="md:hidden border-t border-slate-200">
-          <div className="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-4">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 py-4 flex flex-col gap-4">
             {navItems.map((item) => (
               <button
                 key={item.label}

@@ -57,6 +57,8 @@ export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | CategoryKey>("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
+  const [expandedTags, setExpandedTags] = useState<Set<string>>(new Set());
+  const [tagCarouselPages, setTagCarouselPages] = useState<Record<string, number>>({});
 
   const categories: { id: "all" | CategoryKey; label: string; count: number }[] = [
     { id: "all", label: "All Projects", count: allProjects.length },
@@ -98,12 +100,49 @@ export default function ProjectsSection() {
     });
   };
 
+  const toggleTagCarousel = (projectId: string) => {
+    setExpandedTags(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(projectId)) {
+        newSet.delete(projectId);
+        // Reset carousel page when closing
+        setTagCarouselPages(prevPages => {
+          const newPages = { ...prevPages };
+          delete newPages[projectId];
+          return newPages;
+        });
+      } else {
+        newSet.add(projectId);
+        // Initialize carousel page to 0
+        setTagCarouselPages(prevPages => ({
+          ...prevPages,
+          [projectId]: 0
+        }));
+      }
+      return newSet;
+    });
+  };
+
+  const nextTagPage = (projectId: string, totalPages: number) => {
+    setTagCarouselPages(prev => ({
+      ...prev,
+      [projectId]: ((prev[projectId] || 0) + 1) % totalPages
+    }));
+  };
+
+  const prevTagPage = (projectId: string, totalPages: number) => {
+    setTagCarouselPages(prev => ({
+      ...prev,
+      [projectId]: ((prev[projectId] || 0) - 1 + totalPages) % totalPages
+    }));
+  };
+
   return (
-    <section id="projects" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <section id="projects" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Enhanced Header */}
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-8 md:mb-10">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +162,7 @@ export default function ProjectsSection() {
             </motion.p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 md:mb-12 px-2">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 md:mb-8 px-2">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
               const styles = isActive
@@ -185,20 +224,35 @@ export default function ProjectsSection() {
                         transition={{ duration: 0.3, delay: idx * 0.05 }}
                       >
                         <Card 
-                          className={`rounded-2xl shadow-lg border-2 transition-all duration-300 overflow-hidden ${
-                            isExpanded ? 'border-slate-300' : 'border-slate-200'
-                          }`}
+                          className={clsx(
+                            "rounded-2xl shadow-lg border-2 transition-all duration-300 overflow-hidden",
+                            (project.featured || project.showcase)
+                              ? clsx(
+                                  c.bg,
+                                  `ring-2 ${c.ring}`,
+                                  isExpanded ? `ring-4 ${c.ring}` : ""
+                                )
+                              : clsx(
+                                  isExpanded ? 'border-slate-300' : 'border-slate-200'
+                                )
+                          )}
                         >
                           {/* Collapsed View - Title & Category Only */}
                           <div
                             onClick={() => toggleProject(project.id)}
-                            className="p-3 cursor-pointer flex items-center justify-between"
+                            className={clsx(
+                              "p-3 cursor-pointer flex items-center justify-between",
+                              (project.featured || project.showcase) && "bg-white/60 backdrop-blur-sm"
+                            )}
                           >
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <span className={clsx("inline-block h-2.5 w-2.5 rounded-full flex-shrink-0", c.dot)} />
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                  <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                                  <span className={clsx(
+                                    "text-xs font-semibold uppercase tracking-wide",
+                                    (project.featured || project.showcase) ? c.accent : "text-slate-500"
+                                  )}>
                                     {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                                   </span>
                                   {project.showcase && (
@@ -237,7 +291,12 @@ export default function ProjectsSection() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                               >
-                                <div className="px-4 pb-4 border-t border-slate-200/60 pt-3 space-y-3">
+                                <div className={clsx(
+                                  "px-4 pb-4 border-t pt-3 space-y-3",
+                                  (project.featured || project.showcase) 
+                                    ? "bg-white/40 backdrop-blur-sm border-slate-200/60" 
+                                    : "border-slate-200/60"
+                                )}>
                                   {/* Type & Status Badges */}
                                   <div className="flex gap-2 flex-wrap">
                                     <span className={clsx(
@@ -325,7 +384,7 @@ export default function ProjectsSection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-fr"
+                  className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 auto-rows-fr"
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
@@ -344,120 +403,227 @@ export default function ProjectsSection() {
                         className="group flex"
                       >
                         <Card className={clsx(
-                          "group rounded-2xl bg-white transition-all duration-300 overflow-hidden flex flex-col w-full",
+                          "group rounded-2xl transition-all duration-300 overflow-hidden flex flex-col w-full",
                           "border-2 shadow-lg",
-                          hoveredProject === project.id ? "shadow-xl scale-[1.02] border-slate-300" : "border-slate-200 hover:border-slate-300 hover:shadow-xl"
+                          // Apply category colors to ALL cards
+                          `bg-gradient-to-br ${c.grad}`,
+                          `ring-2 ${c.ring}`,
+                          hoveredProject === project.id 
+                            ? `shadow-2xl scale-[1.03] ring-4 ${c.ring} transition-all duration-300` 
+                            : `shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:ring-4 ${c.ring} transition-all duration-300`
                         )}>
-                          {/* Visual Banner */}
-                          <div className={clsx(
-                            "h-24 bg-gradient-to-br",
-                            c.grad,
-                            "relative overflow-hidden"
-                          )}>
-                            {project.image_url ? (
-                              <Image 
-                                src={project.image_url} 
-                                alt={project.name}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                {(() => {
-                                  const CategoryIcon = getCategoryIcon(project);
-                                  return <CategoryIcon className="w-16 h-16 text-slate-400 opacity-40" />;
-                                })()}
-                              </div>
-                            )}
-                          </div>
 
-                          <CardHeader className="p-4 pb-3">
+                          <CardHeader className="p-2.5">
                             {/* Category & Badges */}
-                            <div className="flex items-center gap-2 mb-2 flex-wrap">
-                              <span className={clsx("inline-block h-2 w-2 rounded-full", c.dot)} />
-                              <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            <div className="flex items-center gap-1 mb-1.5 flex-wrap">
+                              <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
+                              <span className={clsx(
+                                "text-[10px] font-semibold uppercase tracking-wide",
+                                (project.featured || project.showcase) ? c.accent : "text-slate-500"
+                              )}>
                                 {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
                               </span>
                               
                               {project.showcase && (
-                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
-                                  <Star className="w-3 h-3 fill-current" />
+                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-[10px] font-medium rounded-full ring-1 ring-amber-200/60">
+                                  <Star className="w-2.5 h-2.5 fill-current" />
                                   Showcase
                                 </div>
                               )}
                               
                               {project.featured && !project.showcase && (
-                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60">
-                                  <Star className="w-3 h-3" />
+                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60">
+                                  <Star className="w-2.5 h-2.5" />
                                   Featured
                                 </div>
                               )}
                               
                               {project.projectType === 'Client Work' && (
-                                <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-xs font-medium rounded-full ring-1 ring-blue-200/60">
-                                  <Briefcase className="w-3 h-3" />
+                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60">
+                                  <Briefcase className="w-2.5 h-2.5" />
                                   Client Work
                                 </div>
                               )}
                             </div>
 
                             {/* Title */}
-                            <h3 className="font-bold text-lg text-slate-900 group-hover:text-slate-950 leading-tight mb-2">
+                            <h3 className={clsx(
+                              "font-bold text-sm leading-tight mb-1.5",
+                              (project.featured || project.showcase) 
+                                ? "text-slate-900 group-hover:text-slate-950" 
+                                : "text-slate-900 group-hover:text-slate-950"
+                            )}>
                               {project.name}
                             </h3>
 
                             {/* Type & Status Badges */}
-                            <div className="flex gap-1.5 mb-2">
+                            <div className="flex gap-1 mb-1.5">
                               <span className={clsx(
-                                "px-2 py-0.5 text-xs font-medium rounded-full ring-1",
+                                "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
                                 getProjectTypeStyle(project.projectType)
                               )}>
                                 {project.projectType}
                               </span>
                               <span className={clsx(
-                                "px-2 py-0.5 text-xs font-medium rounded-full ring-1",
+                                "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
                                 getStatusStyle(project.status)
                               )}>
                                 {project.status}
                               </span>
                             </div>
 
-                            {/* Description - Full text */}
-                            <p className="text-slate-600 leading-relaxed text-sm mb-3">
+                            {/* Description - Truncated for compact layout */}
+                            <p className="text-slate-600 leading-snug text-xs mb-2 line-clamp-2">
                               {project.description}
                             </p>
                           </CardHeader>
 
-                          <CardContent className="px-4 pb-4 pt-0 flex flex-col flex-1">
-                            {/* Tags - Flex Wrap */}
-                            <div className="flex flex-wrap gap-1.5 mb-0">
-                              {techs.map((tech, index) => (
-                                <span
-                                  key={index}
-                                  className={clsx(
-                                    "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium",
-                                    c.pill,
-                                    "ring-1"
-                                  )}
-                                >
-                                  <span className={clsx("h-1.5 w-1.5 rounded-full", c.dot)} />
-                                  {tech}
-                                </span>
-                              ))}
+                          <CardContent className="px-2.5 pb-2.5 pt-0 flex flex-col flex-1">
+                            {/* Tags - 2-Row Carousel */}
+                            <div className="relative mb-0">
+                              {/* Fixed height container for 2 rows */}
+                              <div className="overflow-hidden" style={{ maxHeight: '2.5rem' }}>
+                                <AnimatePresence mode="wait">
+                                  {(() => {
+                                  const isExpanded = expandedTags.has(project.id);
+                                  const initialTagCount = 8; // Tags that fit in 2 rows
+                                  const remainingTags = techs.length - initialTagCount;
+                                  const tagsPerPage = 4; // Tags per carousel page
+                                  const totalPages = Math.ceil(remainingTags / tagsPerPage);
+                                  const currentPage = tagCarouselPages[project.id] || 0;
+                                  
+                                  if (!isExpanded) {
+                                    // Show initial tags that fit in 2 rows
+                                    return (
+                                      <div className="flex flex-wrap gap-1">
+                                        {techs.slice(0, initialTagCount).map((tech, index) => (
+                                          <span
+                                            key={index}
+                                            className={clsx(
+                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                                              c.pill,
+                                              "ring-1"
+                                            )}
+                                          >
+                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
+                                            {tech}
+                                          </span>
+                                        ))}
+                                        {remainingTags > 0 && (
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              toggleTagCarousel(project.id);
+                                            }}
+                                            className="text-[10px] text-slate-600 hover:text-slate-900 px-1.5 py-0.5 cursor-pointer transition-colors"
+                                          >
+                                            +{remainingTags}
+                                          </button>
+                                        )}
+                                      </div>
+                                    );
+                                  } else {
+                                    // Show carousel with all tags
+                                    const startIdx = initialTagCount + (currentPage * tagsPerPage);
+                                    const endIdx = Math.min(startIdx + tagsPerPage, techs.length);
+                                    const visibleTags = techs.slice(startIdx, endIdx);
+                                    const hasMore = endIdx < techs.length;
+                                    const hasPrev = currentPage > 0;
+                                    
+                                    return (
+                                      <motion.div
+                                        key={currentPage}
+                                        initial={{ x: 20, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        exit={{ x: -20, opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="flex flex-wrap gap-1 items-center"
+                                      >
+                                        {/* Show initial tags */}
+                                        {techs.slice(0, initialTagCount).map((tech, index) => (
+                                          <span
+                                            key={index}
+                                            className={clsx(
+                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                                              c.pill,
+                                              "ring-1"
+                                            )}
+                                          >
+                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
+                                            {tech}
+                                          </span>
+                                        ))}
+                                        
+                                        {/* Carousel tags */}
+                                        {visibleTags.map((tech, index) => (
+                                          <motion.span
+                                            key={`carousel-${startIdx + index}`}
+                                            initial={{ scale: 0.8, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className={clsx(
+                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                                              c.pill,
+                                              "ring-1"
+                                            )}
+                                          >
+                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
+                                            {tech}
+                                          </motion.span>
+                                        ))}
+                                        
+                                        {/* Navigation */}
+                                        <div className="flex items-center gap-1 ml-1">
+                                          {hasPrev && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                prevTagPage(project.id, totalPages);
+                                              }}
+                                              className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
+                                            >
+                                              ←
+                                            </button>
+                                          )}
+                                          {hasMore && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                nextTagPage(project.id, totalPages);
+                                              }}
+                                              className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
+                                            >
+                                              →
+                                            </button>
+                                          )}
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              toggleTagCarousel(project.id);
+                                            }}
+                                            className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
+                                          >
+                                            ×
+                                          </button>
+                                        </div>
+                                      </motion.div>
+                                    );
+                                  }
+                                  })()}
+                                </AnimatePresence>
+                              </div>
                             </div>
 
                             {/* Icon-Only Buttons Footer */}
-                            <div className="flex items-center gap-2 mt-auto pt-2 border-t border-slate-100">
+                            <div className="flex items-center gap-1.5 mt-auto pt-1.5 border-t border-slate-100">
                               {project.github_url && (
                                 <a
                                   href={project.github_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200"
+                                    className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200"
                                   title="View Code"
                                 >
-                                  <Code2 className="w-4 h-4" />
+                                  <Code2 className="w-3.5 h-3.5" />
                                 </a>
                               )}
                               
@@ -466,10 +632,10 @@ export default function ProjectsSection() {
                                   href={project.live_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-200"
+                                    className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-200"
                                   title="Live Demo"
                                 >
-                                  <Eye className="w-4 h-4" />
+                                  <Eye className="w-3.5 h-3.5" />
                                 </a>
                               )}
                             </div>

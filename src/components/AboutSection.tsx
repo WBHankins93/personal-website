@@ -44,6 +44,10 @@ export default function AboutSection() {
         "radial-gradient(circle at 20% 50%, #b91c1c 0%, transparent 50%), radial-gradient(circle at 80% 20%, #f87171 0%, transparent 50%), radial-gradient(circle at 40% 80%, #ef4444 0%, transparent 50%), linear-gradient(135deg, #fecaca 0%, #fca5a5 100%)",
       monitoring:
         "radial-gradient(circle at 20% 50%, #047857 0%, transparent 50%), radial-gradient(circle at 80% 20%, #34d399 0%, transparent 50%), radial-gradient(circle at 40% 80%, #10b981 0%, transparent 50%), linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
+      "web-dev":
+        "radial-gradient(circle at 20% 50%, #0369a1 0%, transparent 50%), radial-gradient(circle at 80% 20%, #38bdf8 0%, transparent 50%), radial-gradient(circle at 40% 80%, #0ea5e9 0%, transparent 50%), linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)",
+      education:
+        "radial-gradient(circle at 20% 50%, #a21caf 0%, transparent 50%), radial-gradient(circle at 80% 20%, #e879f9 0%, transparent 50%), radial-gradient(circle at 40% 80%, #d946ef 0%, transparent 50%), linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%)",
     };
     return gradients[key];
   };
@@ -113,12 +117,12 @@ export default function AboutSection() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-10 md:mb-14">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
             >
               About Me
             </motion.h2>
@@ -127,7 +131,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto"
+              className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto px-4"
             >
               Senior Cloud Engineer focused on Kubernetes, multi-cloud infrastructure, and production reliability with a proven track record delivering outcomes in customer-facing enterprise environments.
             </motion.p>
@@ -137,32 +141,28 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                My journey
+                My Journey
               </h3>
 
               <div className="space-y-4 text-slate-700 leading-relaxed">
                 <p>
-                  I started in web development, then moved into solutions engineering at IBM&apos;s Client Engineering org where I learned how to guide enterprise customers through complex infrastructure deployments under real-world constraints: security, compliance, networking restrictions, and delivery pressure.
+                  I started building websites because I loved creating things people actually use. That feeling stuck with me.
                 </p>
 
                 <p>
-                  Over time, my scope expanded from executing technical POCs to leading high-stakes customer engagements: running discovery workshops, validating architectures, scoping proof-of-concepts, and guiding teams from &quot;it works in a demo&quot; to &quot;it&apos;s stable in production&quot; across AWS, GCP, and IBM Cloud.
+                  At IBM, I spent three years helping enterprise customers deploy cloud infrastructure across AWS, GCP, and IBM Cloud. I learned how to understand what they really needed, design solutions that would survive production, and guide teams through the whole process. The work I enjoyed most was when I could own it end to end: discovery, architecture, implementation, and making sure the team felt confident running it.
                 </p>
 
                 <p>
-                  I&apos;m strongest at the intersection of deep technical execution and customer-facing leadership. I can run the executive workshop, design the solution, build the automation, and enable the customer team to operate it confidently.
+                  I took an SRE role at Prove AI to deepen my operational expertise. Owned reliability and SOC 2 compliance across four production Kubernetes clusters while maintaining 99.9% uptime. Made me better at customer-facing work because I&apos;ve lived what they&apos;re dealing with.
                 </p>
 
                 <p>
-                  At Prove AI, I strategically took an SRE role to deepen my operational expertise. I owned reliability, CI/CD, and SOC 2 readiness (34% to 100%) across four production Kubernetes clusters while maintaining 99.9% uptime. This made me a better solutions engineer because I&apos;ve now lived the operational burden customers face.
+                  Founded Sproutflow Studio in 2024 to stay close to what I love: building clean, modern websites for small businesses. Direct customer feedback, great UX, shipping something people enjoy using.
                 </p>
 
                 <p>
-                  Founded <span className="font-semibold text-amber-700">Sproutflow Studio</span> in late 2024 as a web design consultancy serving small businesses with TypeScript/Next.js platforms. It&apos;s separate from my infrastructure track, but it reinforces how I think: pragmatic delivery, clean systems, and outcomes customers can feel.
-                </p>
-
-                <p>
-                  What drives me: helping enterprise teams adopt cloud platforms with confidence, reducing operational burden through smart automation, and translating complex technical requirements into solutions that work in the real world.
+                  I&apos;m looking for my next role in solutions engineering or customer-facing product work where I can combine technical depth with real customer impact.
                 </p>
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl font-bold text-slate-900 mb-8 text-center"
+            className="text-2xl font-bold text-slate-900 mb-8 mt-16 md:mt-20 text-center"
           >
             Core Capabilities
           </motion.h3>
