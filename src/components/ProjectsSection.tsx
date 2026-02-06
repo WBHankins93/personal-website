@@ -540,7 +540,7 @@ export default function ProjectsSection() {
 
                             {/* Full Description - No Scroll, Fixed Height */}
                             <div className="mb-0 flex-shrink-0" style={{ height: '5.5rem' }}>
-                              <p className="text-slate-600 leading-relaxed text-xs line-clamp-3">
+                              <p className="text-slate-600 leading-relaxed text-xs">
                                 {project.description}
                               </p>
                             </div>
