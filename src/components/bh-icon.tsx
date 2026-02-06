@@ -16,7 +16,7 @@ export const colors = {
 
 // --- Custom Orbit Controls (Native Three implementation to avoid Drei error) ---
 export const CameraController = () => {
-  const { camera, gl } = useThree();
+  const { camera } = useThree();
   
   useEffect(() => {
     // Basic camera positioning

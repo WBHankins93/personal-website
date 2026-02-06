@@ -65,8 +65,6 @@ function seededRandom(seed: number): number {
 }
 
 function WordSphereScene() {
-  const wordCount = words.length;
-
   const wordPositions = useMemo(() => {
     // Distribute words across the 3D space in a more scattered pattern
     // Using a wider area similar to FloatingTechParticles but in 3D
@@ -82,7 +80,7 @@ function WordSphereScene() {
       
       return [x, y, z] as [number, number, number];
     });
-  }, [wordCount]);
+  }, []);
 
   return (
     <group>

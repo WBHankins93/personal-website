@@ -5,18 +5,11 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
+import { Folder, Star, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
-import { CATEGORY, cat, type CategoryKey } from "@/lib/colors";
-
-function truncateTech(list: string[], max = 5) {
-  if (!list) return [];
-  if (list.length <= max) return list;
-  const head = list.slice(0, max);
-  const rest = list.length - max;
-  return [...head, `+${rest} more`];
-}
+import { cat, type CategoryKey } from "@/lib/colors";
+import Image from "next/image";
 
 // Get category icon for project
 const getCategoryIcon = (project: Project) => {
@@ -362,10 +355,12 @@ export default function ProjectsSection() {
                             "relative overflow-hidden"
                           )}>
                             {project.image_url ? (
-                              <img 
+                              <Image 
                                 src={project.image_url} 
                                 alt={project.name}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 33vw"
                               />
                             ) : (
                               <div className="absolute inset-0 flex items-center justify-center">
