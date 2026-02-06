@@ -52,7 +52,7 @@ export function useActiveSection(sectionIds: string[]): string | null {
   }, [sectionIds]);
 
   // Create ref callbacks for each section
-  const getRef = (id: string) => (node: Element | null) => {
+  const getRef = (id: string): ((node?: Element | null) => void) => (node?: Element | null) => {
     if (node) {
       sectionRefs.current.set(id, node);
       // Observe the element when it's added
@@ -127,7 +127,7 @@ export function useSectionRefs(sectionIds: string[]) {
   }, [sectionIds]);
 
   // Create ref callbacks for each section
-  const getRef = (id: string) => (node: Element | null) => {
+  const getRef = (id: string): ((node?: Element | null) => void) => (node?: Element | null) => {
     if (node) {
       sectionRefs.current.set(id, node);
       // Observe the element when it's added
