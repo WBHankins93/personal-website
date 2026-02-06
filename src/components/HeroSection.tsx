@@ -32,14 +32,7 @@ export default function HeroSection() {
       
       {/* Animated Grid Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          animation: 'gridMove 20s linear infinite'
-        }} />
+        <div className="absolute inset-0 hero-grid-pattern" />
       </div>
 
       {/* Floating Tech Particles - Behind the image */}
@@ -118,14 +111,6 @@ export default function HeroSection() {
       </div>
 
       <CVModal isOpen={showModal} onClose={() => setShowModal(false)} />
-      
-      {/* CSS for grid animation */}
-      <style jsx>{`
-        @keyframes gridMove {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(50px, 50px); }
-        }
-      `}</style>
     </section>
   );
 }

@@ -8,65 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
-
-// FIXED: All 7 categories now have DISTINCT colors - no similar blues
-const CATEGORY = {
-  infrastructure: {
-    ring: "ring-emerald-200",
-    grad: "from-emerald-50 to-teal-50",
-    pill: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    dot: "bg-emerald-500",
-    accent: "text-emerald-600"
-  },
-  automation: {
-    ring: "ring-amber-200",
-    grad: "from-amber-50 to-yellow-50",
-    pill: "bg-amber-50 text-amber-700 border-amber-200",
-    dot: "bg-amber-500",
-    accent: "text-amber-600"
-  },
-  monitoring: {
-    ring: "ring-cyan-200",
-    grad: "from-cyan-50 to-sky-50",
-    pill: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    dot: "bg-cyan-500",
-    accent: "text-cyan-600"
-  },
-  "ci-cd": {
-    ring: "ring-blue-200",
-    grad: "from-blue-50 to-indigo-50",
-    pill: "bg-blue-50 text-blue-700 border-blue-200",
-    dot: "bg-blue-500",
-    accent: "text-blue-600"
-  },
-  security: {
-    ring: "ring-orange-200",
-    grad: "from-orange-50 to-red-50",
-    pill: "bg-orange-50 text-orange-700 border-orange-200",
-    dot: "bg-orange-500",
-    accent: "text-orange-600"
-  },
-  "web-dev": {
-    ring: "ring-fuchsia-200",
-    grad: "from-fuchsia-50 to-pink-50",
-    pill: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
-    dot: "bg-fuchsia-500",
-    accent: "text-fuchsia-600"
-  },
-  "education": {
-    ring: "ring-indigo-200",
-    grad: "from-indigo-50 to-purple-50",
-    pill: "bg-indigo-50 text-indigo-700 border-indigo-200",
-    dot: "bg-indigo-500",
-    accent: "text-indigo-600"
-  }
-} as const;
-
-type CategoryKey = Project["category"];
-
-function cat(c: CategoryKey) {
-  return CATEGORY[c] ?? CATEGORY.infrastructure;
-}
+import { CATEGORY, cat, type CategoryKey } from "@/lib/colors";
 
 function truncateTech(list: string[], max = 5) {
   if (!list) return [];
