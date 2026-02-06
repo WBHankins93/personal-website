@@ -22,27 +22,10 @@ export type Project = {
 export const projects: Project[] = [
   // FEATURED PROJECTS
   {
-    id: "automated-vpc-deployment-centerpoint",
-    name: "Automated VPC Deployment (CenterPoint)",
-    description:
-      "Automated complex VPC & VSI deployment using Terraform, reducing provisioning time from 2 weeks to 2.7 hours.",
-    technologies: ["Terraform", "VPC", "VSI", "Automation", "IBM Cloud", "Client Delivery"],
-    github_url: "",
-    image_url: "",
-    category: "infrastructure",
-    featured: true,
-    techCount: 6,
-    projectType: 'Client Work',
-    status: 'Complete',
-    architecture: 'Infrastructure',
-    scale: 'Enterprise',
-    environment: 'IBM Cloud'
-  },
-  {
     id: "terraform-infra-platform",
     name: "Terraform Infra Platform (Prove AI)",
     description:
-      "Production Terraform automation building ProveAI's infrastructure with advanced IaC patterns and modular design.",
+      "Production Terraform automation for ProveAI's infrastructure with advanced IaC patterns and modular design.",
     technologies: ["Terraform", "IaC", "AWS", "Kubernetes", "Helm", "GitHub Actions"],
     github_url: "https://github.com/WBHankins93/terraform-infra-platform",
     image_url: "",
@@ -59,7 +42,7 @@ export const projects: Project[] = [
     id: "devops-studio",
     name: "DevOps Studio",
     description:
-      "Open-source DevOps training platform with labs, tutorials, and real-world scenarios for skill development.",
+      "Open-source DevOps training platform with labs, tutorials, and real-world scenarios.",
     technologies: [
       "Open Source",
       "Education",
@@ -92,7 +75,7 @@ export const projects: Project[] = [
     id: "second-line-psychiatry",
     name: "Second Line Psychiatry",
     description:
-      "Professional telehealth website for a mental health practice with modern design, scheduling, and HIPAA-compliant architecture.",
+      "Professional telehealth website with modern design, scheduling, and HIPAA-compliant architecture.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "SEO"],
     github_url: "https://github.com/WBHankins93/second-line-psych",
     live_url: "https://www.secondlinepsychiatry.com/",
@@ -110,7 +93,7 @@ export const projects: Project[] = [
     id: "nealy-event-decor",
     name: "Nealy Event Decor",
     description:
-      "Modern, fast website with custom CMS for event decor business, delivering elegant online presence from zero to launch.",
+      "Modern website with custom CMS for event decor business, delivering elegant online presence.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Sanity CMS"],
     github_url: "https://github.com/WBHankins93/nealy-event-decor",
     live_url: "https://nealy-event-decor.vercel.app/",
@@ -128,7 +111,7 @@ export const projects: Project[] = [
     id: "sproutflow-flagship",
     name: "Sproutflow Studio Website",
     description:
-      "Flagship agency website showcasing services and portfolio, demonstrating modern web development capabilities.",
+      "Flagship agency website showcasing services and portfolio with modern web development capabilities.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/sproutflow-flagship",
     live_url: "https://sproutflow.vercel.app",
@@ -146,7 +129,7 @@ export const projects: Project[] = [
     id: "personal-website",
     name: "Personal Portfolio",
     description:
-      "Solutions Engineering portfolio with glassmorphism UI, showcasing projects and customer-first narrative approach.",
+      "Solutions Engineering portfolio with glassmorphism UI, showcasing projects and customer-first approach.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/personal-website",
     live_url: "https://benhankins.vercel.app",
@@ -163,27 +146,10 @@ export const projects: Project[] = [
 
   // INFRASTRUCTURE & CLOUD PROJECTS
   {
-    id: "enterprise-cloud-delivery-ibm",
-    name: "Enterprise Cloud Delivery (IBM)",
-    description:
-      "Automated cloud environments for enterprise clients, contributing to $10.1M SAP RISE deal and 85% faster deployments.",
-    technologies: ["IBM Cloud", "Solutions Architect", "Terraform", "Automation", "Enterprise", "Pre-Sales"],
-    github_url: "",
-    image_url: "",
-    category: "infrastructure",
-    featured: false,
-    techCount: 6,
-    projectType: 'Client Work',
-    status: 'Complete',
-    architecture: 'Infrastructure',
-    scale: 'Enterprise',
-    environment: 'IBM Cloud'
-  },
-  {
     id: "terraform-aws-modules",
     name: "Terraform AWS Modules",
     description:
-      "Reusable Terraform modules for AWS infrastructure with VPC, EKS, RDS, and security groups using best practices.",
+      "Reusable Terraform modules for AWS infrastructure with VPC, EKS, RDS, and security groups.",
     technologies: ["Terraform", "AWS", "CloudFormation", "GitHub Actions"],
     github_url: "https://github.com/WBHankins93/terraform-modules",
     image_url: "",
@@ -200,7 +166,7 @@ export const projects: Project[] = [
     id: "python-go-sre-utilities",
     name: "Python & Go SRE Utilities",
     description:
-      "CLI tool with Python automation scripts, bash utilities, and Go code for common SRE and DevOps productivity tasks.",
+      "CLI tool with Python automation scripts, bash utilities, and Go code for SRE and DevOps tasks.",
     technologies: ["Python", "Go", "CLI", "SRE", "Automation", "Bash"],
     github_url: "https://github.com/WBHankins93/python-go-sre-utils",
     image_url: "",
@@ -214,27 +180,10 @@ export const projects: Project[] = [
     environment: 'Multi-cloud'
   },
   {
-    id: "att-watsonxai-integration",
-    name: "AT&T Watsonx.ai Integration",
-    description:
-      "Integrated IBM watsonx.ai into AT&T's platform, enabling AI-driven analytics and enhanced customer service capabilities.",
-    technologies: ["Watsonx.ai", "IBM Cloud", "Openshift", "Next.js", "Integration", "API"],
-    github_url: "",
-    image_url: "",
-    category: "automation",
-    featured: false,
-    techCount: 6,
-    projectType: 'Client Work',
-    status: 'Complete',
-    architecture: 'Microservices',
-    scale: 'Enterprise',
-    environment: 'IBM Cloud'
-  },
-  {
     id: "python-pr-summary-bot",
     name: "Python PR Summary Bot",
     description:
-      "Python scripts that summarize Terraform plan output in PR comments, improving transparency and reducing review friction.",
+      "Python scripts that summarize Terraform plan output in PR comments, improving transparency and review efficiency.",
     technologies: ["Python", "GitHub Actions", "Terraform", "API"],
     github_url: "https://github.com/WBHankins93/tf-plan-checker",
     image_url: "",
@@ -251,7 +200,7 @@ export const projects: Project[] = [
     id: "deployment-patterns",
     name: "deployment-patterns",
     description:
-      "Reference implementations of blue/green, canary, and GitOps deployment patterns with scripts and guides.",
+      "Reference implementations of blue/green, canary, and GitOps deployment patterns with guides.",
     technologies: ["Blue/Green", "Canary", "GitOps", "Helm", "Argo CD", "CI/CD"],
     github_url: "https://github.com/WBHankins93/deployment-patterns",
     image_url: "",
@@ -268,7 +217,7 @@ export const projects: Project[] = [
     id: "gcp-gke-gitops",
     name: "gcp-gke-gitops",
     description:
-      "GitOps-driven GKE deployment framework using Argo CD and Terraform with environment overlays.",
+      "GitOps-driven GKE deployment framework using Argo CD and Terraform.",
     technologies: ["GKE", "Terraform", "Argo CD", "Kubernetes", "GitOps"],
     github_url: "https://github.com/WBHankins93/gcp-gke-gitops",
     image_url: "",
@@ -285,7 +234,7 @@ export const projects: Project[] = [
     id: "mlops-sre-mini",
     name: "mlops-sre-mini",
     description:
-      "End-to-end MLOps pipeline: train models, serve via FastAPI, deploy with Helm, and monitor with Prometheus/Grafana.",
+      "End-to-end MLOps pipeline: train models, serve via FastAPI, deploy with Helm, and monitor with Prometheus.",
     technologies: ["MLOps", "FastAPI", "Docker", "Helm", "Prometheus", "Grafana"],
     github_url: "https://github.com/WBHankins93/mlops-sre-mini",
     image_url: "",
@@ -302,7 +251,7 @@ export const projects: Project[] = [
     id: "platform-engineering-lab",
     name: "Platform Engineering Lab",
     description:
-      "Platform engineering experiments showcasing modern tools, service mesh implementations, and DX optimization patterns.",
+      "Platform engineering experiments showcasing modern tools, service mesh, and DX optimization patterns.",
     technologies: ["Platform Engineering", "Service Mesh", "Developer Experience", "Kubernetes", "Observability"],
     github_url: "https://github.com/WBHankins93/platform-engineering-lab",
     image_url: "",
@@ -319,7 +268,7 @@ export const projects: Project[] = [
     id: "helm-charts",
     name: "Helm Charts",
     description:
-      "Production-ready Helm charts with best practices for templating, values management, and release automation.",
+      "Production-ready Helm charts with best practices for templating and release automation.",
     technologies: ["Helm", "Kubernetes", "Templating", "Charts", "Package Management"],
     github_url: "https://github.com/WBHankins93/helm-charts",
     image_url: "",
@@ -336,7 +285,7 @@ export const projects: Project[] = [
     id: "github-action-templates",
     name: "GitHub Action Templates",
     description:
-      "Reusable GitHub Actions workflows for CI/CD patterns, infrastructure deployment, and automated testing pipelines.",
+      "Reusable GitHub Actions workflows for CI/CD patterns, infrastructure deployment, and testing pipelines.",
     technologies: ["GitHub Actions", "CI/CD", "Automation", "Templates", "Workflows"],
     github_url: "https://github.com/WBHankins93/github-action-templates",
     image_url: "",
@@ -352,7 +301,7 @@ export const projects: Project[] = [
   {
     id: "implementation-studio",
     name: "Implementation Studio",
-    description: "Technical deployment patterns platform with 9 complete labs covering constrained environment deployments, featuring production-grade Terraform modules for GCP and AWS.",
+    description: "Technical deployment patterns platform with 9 labs covering constrained environments and production-grade Terraform modules.",
     technologies: ["Terraform", "GCP", "AWS", "Kubernetes", "Air-gapped", "Private Clusters", "Education"],
     github_url: "https://github.com/WBHankins93/implementation-studio",
     live_url: "",
@@ -370,7 +319,7 @@ export const projects: Project[] = [
   {
     id: "solutions-playbook",
     name: "Solutions Playbook",
-    description: "Operational SE framework with 41 complete files covering the full operational lifecycle, structured around 'moments of need' for practical customer engagement guidance.",
+    description: "Operational SE framework with 41 files covering the full lifecycle, structured around 'moments of need'.",
     technologies: ["Solutions Engineering", "Customer Success", "Technical Sales", "Documentation", "Frameworks"],
     github_url: "https://github.com/WBHankins93/solutions-playbook",
     live_url: "",
@@ -388,7 +337,7 @@ export const projects: Project[] = [
   {
     id: "big-butt-association",
     name: "Big Butt Association",
-    description: "E-commerce store for EDM fashion with integrated membership features. Built on Shopify/Liquid with custom theme development and payment integrations.",
+    description: "E-commerce store for EDM fashion with membership features, built on Shopify/Liquid with custom theme development.",
     technologies: ["Shopify", "Liquid", "E-commerce", "Theme Development", "Payment Integration"],
     github_url: "https://github.com/WBHankins93/big-butt-association",
     live_url: "https://bigbuttassociation.com/",
@@ -402,5 +351,58 @@ export const projects: Project[] = [
     architecture: 'JAMstack',
     scale: 'Small Business',
     environment: 'Vercel'
+  },
+
+  // NDA PROJECTS (No GitHub repos available)
+  {
+    id: "automated-vpc-deployment-centerpoint",
+    name: "Automated VPC Deployment (CenterPoint)",
+    description:
+      "Automated VPC & VSI deployment using Terraform, reducing provisioning time from 2 weeks to 2.7 hours.",
+    technologies: ["Terraform", "VPC", "VSI", "Automation", "IBM Cloud", "Client Delivery"],
+    github_url: "",
+    image_url: "",
+    category: "infrastructure",
+    featured: false,
+    techCount: 6,
+    projectType: 'Client Work',
+    status: 'Complete',
+    architecture: 'Infrastructure',
+    scale: 'Enterprise',
+    environment: 'IBM Cloud'
+  },
+  {
+    id: "enterprise-cloud-delivery-ibm",
+    name: "Enterprise Cloud Delivery (IBM)",
+    description:
+      "Automated cloud environments for enterprise clients, contributing to $10.1M SAP RISE deal.",
+    technologies: ["IBM Cloud", "Solutions Architect", "Terraform", "Automation", "Enterprise", "Pre-Sales"],
+    github_url: "",
+    image_url: "",
+    category: "infrastructure",
+    featured: false,
+    techCount: 6,
+    projectType: 'Client Work',
+    status: 'Complete',
+    architecture: 'Infrastructure',
+    scale: 'Enterprise',
+    environment: 'IBM Cloud'
+  },
+  {
+    id: "att-watsonxai-integration",
+    name: "AT&T Watsonx.ai Integration",
+    description:
+      "Integrated IBM watsonx.ai into AT&T's platform, enabling AI-driven analytics and enhanced customer service.",
+    technologies: ["Watsonx.ai", "IBM Cloud", "Openshift", "Next.js", "Integration", "API"],
+    github_url: "",
+    image_url: "",
+    category: "automation",
+    featured: false,
+    techCount: 6,
+    projectType: 'Client Work',
+    status: 'Complete',
+    architecture: 'Microservices',
+    scale: 'Enterprise',
+    environment: 'IBM Cloud'
   }
 ];

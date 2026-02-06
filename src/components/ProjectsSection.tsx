@@ -88,6 +88,51 @@ export default function ProjectsSection() {
     return 0;
   });
 
+  // Helper function to get brighter gradient for hover state
+  const getBrightGradient = (category: CategoryKey): string => {
+    const brightGradients: Record<CategoryKey, string> = {
+      infrastructure: "from-emerald-100 to-teal-100",
+      automation: "from-amber-100 to-yellow-100",
+      monitoring: "from-cyan-100 to-sky-100",
+      "ci-cd": "from-blue-100 to-indigo-100",
+      security: "from-orange-100 to-red-100",
+      "web-dev": "from-fuchsia-100 to-pink-100",
+      education: "from-indigo-100 to-purple-100",
+      containers: "from-purple-100 to-violet-100",
+    };
+    return brightGradients[category];
+  };
+
+  // Helper function to get brighter ring for hover state
+  const getBrightRing = (category: CategoryKey): string => {
+    const brightRings: Record<CategoryKey, string> = {
+      infrastructure: "ring-emerald-300",
+      automation: "ring-amber-300",
+      monitoring: "ring-cyan-300",
+      "ci-cd": "ring-blue-300",
+      security: "ring-orange-300",
+      "web-dev": "ring-fuchsia-300",
+      education: "ring-indigo-300",
+      containers: "ring-purple-300",
+    };
+    return brightRings[category];
+  };
+
+  // Helper function to get shadow color for glow effect
+  const getShadowColor = (category: CategoryKey): string => {
+    const shadowColors: Record<CategoryKey, string> = {
+      infrastructure: "shadow-emerald-300/50",
+      automation: "shadow-amber-300/50",
+      monitoring: "shadow-cyan-300/50",
+      "ci-cd": "shadow-blue-300/50",
+      security: "shadow-orange-300/50",
+      "web-dev": "shadow-fuchsia-300/50",
+      education: "shadow-indigo-300/50",
+      containers: "shadow-purple-300/50",
+    };
+    return shadowColors[category];
+  };
+
   const toggleProject = (projectId: string) => {
     setExpandedProjects(prev => {
       const newSet = new Set(prev);
@@ -136,6 +181,7 @@ export default function ProjectsSection() {
       [projectId]: ((prev[projectId] || 0) - 1 + totalPages) % totalPages
     }));
   };
+
 
   return (
     <section id="projects" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
@@ -384,7 +430,8 @@ export default function ProjectsSection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 auto-rows-fr"
+                  className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3"
+                  style={{ gridAutoRows: 'minmax(360px, 360px)' }}
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
@@ -400,20 +447,39 @@ export default function ProjectsSection() {
                         transition={{ duration: 0.4, delay: idx * 0.05 }}
                         onHoverStart={() => setHoveredProject(project.id)}
                         onHoverEnd={() => setHoveredProject(null)}
-                        className="group flex"
+                        className="group h-full"
                       >
-                        <Card className={clsx(
-                          "group rounded-2xl transition-all duration-300 overflow-hidden flex flex-col w-full",
-                          "border-2 shadow-lg",
-                          // Apply category colors to ALL cards
-                          `bg-gradient-to-br ${c.grad}`,
-                          `ring-2 ${c.ring}`,
-                          hoveredProject === project.id 
-                            ? `shadow-2xl scale-[1.03] ring-4 ${c.ring} transition-all duration-300` 
-                            : `shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:ring-4 ${c.ring} transition-all duration-300`
-                        )}>
-
-                          <CardHeader className="p-2.5">
+                        {/* Card Flip Container */}
+                        <div 
+                          className="relative w-full h-full"
+                          style={{ 
+                            perspective: '1000px',
+                            height: '100%'
+                          }}
+                        >
+                          <div
+                            className="relative w-full h-full transition-transform duration-500"
+                            style={{
+                              transformStyle: 'preserve-3d',
+                              transform: hoveredProject === project.id ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                              height: '100%'
+                            }}
+                          >
+                            {/* Front of Card - Description */}
+                            <Card 
+                              className={clsx(
+                                "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
+                                "border-2 shadow-lg",
+                                `bg-gradient-to-br ${c.grad}`,
+                                `ring-2 ${c.ring}`
+                              )}
+                              style={{
+                                backfaceVisibility: 'hidden',
+                                WebkitBackfaceVisibility: 'hidden',
+                                transform: 'rotateY(0deg)'
+                              }}
+                            >
+                              <CardHeader className="p-2.5 flex-shrink-0">
                             {/* Category & Badges */}
                             <div className="flex items-center gap-1 mb-1.5 flex-wrap">
                               <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
@@ -472,149 +538,17 @@ export default function ProjectsSection() {
                               </span>
                             </div>
 
-                            {/* Description - Truncated for compact layout */}
-                            <p className="text-slate-600 leading-snug text-xs mb-2 line-clamp-2">
-                              {project.description}
-                            </p>
+                            {/* Full Description - No Scroll, Fixed Height */}
+                            <div className="mb-0 flex-shrink-0" style={{ height: '5.5rem' }}>
+                              <p className="text-slate-600 leading-relaxed text-xs line-clamp-3">
+                                {project.description}
+                              </p>
+                            </div>
                           </CardHeader>
 
-                          <CardContent className="px-2.5 pb-2.5 pt-0 flex flex-col flex-1">
-                            {/* Tags - 2-Row Carousel */}
-                            <div className="relative mb-0">
-                              {/* Fixed height container for 2 rows */}
-                              <div className="overflow-hidden" style={{ maxHeight: '2.5rem' }}>
-                                <AnimatePresence mode="wait">
-                                  {(() => {
-                                  const isExpanded = expandedTags.has(project.id);
-                                  const initialTagCount = 8; // Tags that fit in 2 rows
-                                  const remainingTags = techs.length - initialTagCount;
-                                  const tagsPerPage = 4; // Tags per carousel page
-                                  const totalPages = Math.ceil(remainingTags / tagsPerPage);
-                                  const currentPage = tagCarouselPages[project.id] || 0;
-                                  
-                                  if (!isExpanded) {
-                                    // Show initial tags that fit in 2 rows
-                                    return (
-                                      <div className="flex flex-wrap gap-1">
-                                        {techs.slice(0, initialTagCount).map((tech, index) => (
-                                          <span
-                                            key={index}
-                                            className={clsx(
-                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
-                                              c.pill,
-                                              "ring-1"
-                                            )}
-                                          >
-                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
-                                            {tech}
-                                          </span>
-                                        ))}
-                                        {remainingTags > 0 && (
-                                          <button
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              toggleTagCarousel(project.id);
-                                            }}
-                                            className="text-[10px] text-slate-600 hover:text-slate-900 px-1.5 py-0.5 cursor-pointer transition-colors"
-                                          >
-                                            +{remainingTags}
-                                          </button>
-                                        )}
-                                      </div>
-                                    );
-                                  } else {
-                                    // Show carousel with all tags
-                                    const startIdx = initialTagCount + (currentPage * tagsPerPage);
-                                    const endIdx = Math.min(startIdx + tagsPerPage, techs.length);
-                                    const visibleTags = techs.slice(startIdx, endIdx);
-                                    const hasMore = endIdx < techs.length;
-                                    const hasPrev = currentPage > 0;
-                                    
-                                    return (
-                                      <motion.div
-                                        key={currentPage}
-                                        initial={{ x: 20, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        exit={{ x: -20, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="flex flex-wrap gap-1 items-center"
-                                      >
-                                        {/* Show initial tags */}
-                                        {techs.slice(0, initialTagCount).map((tech, index) => (
-                                          <span
-                                            key={index}
-                                            className={clsx(
-                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
-                                              c.pill,
-                                              "ring-1"
-                                            )}
-                                          >
-                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
-                                            {tech}
-                                          </span>
-                                        ))}
-                                        
-                                        {/* Carousel tags */}
-                                        {visibleTags.map((tech, index) => (
-                                          <motion.span
-                                            key={`carousel-${startIdx + index}`}
-                                            initial={{ scale: 0.8, opacity: 0 }}
-                                            animate={{ scale: 1, opacity: 1 }}
-                                            className={clsx(
-                                              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
-                                              c.pill,
-                                              "ring-1"
-                                            )}
-                                          >
-                                            <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
-                                            {tech}
-                                          </motion.span>
-                                        ))}
-                                        
-                                        {/* Navigation */}
-                                        <div className="flex items-center gap-1 ml-1">
-                                          {hasPrev && (
-                                            <button
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                prevTagPage(project.id, totalPages);
-                                              }}
-                                              className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
-                                            >
-                                              ←
-                                            </button>
-                                          )}
-                                          {hasMore && (
-                                            <button
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                nextTagPage(project.id, totalPages);
-                                              }}
-                                              className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
-                                            >
-                                              →
-                                            </button>
-                                          )}
-                                          <button
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              toggleTagCarousel(project.id);
-                                            }}
-                                            className="text-[10px] text-slate-600 hover:text-slate-900 px-1 cursor-pointer"
-                                          >
-                                            ×
-                                          </button>
-                                        </div>
-                                      </motion.div>
-                                    );
-                                  }
-                                  })()}
-                                </AnimatePresence>
-                              </div>
-                            </div>
-
-                            {/* Icon-Only Buttons Footer */}
-                            <div className="flex items-center gap-1.5 mt-auto pt-1.5 border-t border-slate-100">
+                          <CardContent className="px-2.5 pb-2.5 pt-0 flex flex-col flex-1 min-h-0">
+                            {/* Icon-Only Buttons Footer - Always at Bottom */}
+                            <div className="flex items-center gap-1.5 mt-auto pt-1.5 border-t border-slate-100 flex-shrink-0">
                               {project.github_url && (
                                 <a
                                   href={project.github_url}
@@ -640,7 +574,57 @@ export default function ProjectsSection() {
                               )}
                             </div>
                           </CardContent>
-                        </Card>
+                            </Card>
+
+                            {/* Back of Card - Tools/Concepts */}
+                            <Card
+                              className={clsx(
+                                "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
+                                "border-2 shadow-lg",
+                                `bg-gradient-to-br ${getBrightGradient(project.category)}`,
+                                `ring-4 ${getBrightRing(project.category)}`,
+                                `shadow-2xl ${getShadowColor(project.category)}`
+                              )}
+                              style={{
+                                backfaceVisibility: 'hidden',
+                                WebkitBackfaceVisibility: 'hidden',
+                                transform: 'rotateY(180deg)'
+                              }}
+                            >
+                              <CardHeader className="p-2.5 flex-shrink-0">
+                                {/* Category & Title on Back */}
+                                <div className="flex items-center gap-1 mb-1.5 flex-wrap">
+                                  <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
+                                  <span className={clsx("text-[10px] font-semibold uppercase tracking-wide", c.accent)}>
+                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                                  </span>
+                                </div>
+                                <h3 className="font-bold text-sm leading-tight mb-3 text-slate-900">
+                                  {project.name}
+                                </h3>
+                              </CardHeader>
+
+                              <CardContent className="px-2.5 pb-2.5 pt-2.5 flex flex-col flex-1 min-h-0 overflow-y-auto">
+                                {/* All Tools/Concepts */}
+                                <div className="flex flex-wrap gap-2.5">
+                                  {techs.map((tech, index) => (
+                                    <span
+                                      key={index}
+                                      className={clsx(
+                                        "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                                        c.pill,
+                                        "ring-1"
+                                      )}
+                                    >
+                                      <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </div>
                       </motion.div>
                     );
                   })}
