@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Github } from "lucide-react";
 import CVModal from "./CVModal";
 import dynamic from 'next/dynamic';
 import TypingAnimation from './TypingAnimation';
@@ -24,13 +24,6 @@ const roles = [
 
 export default function HeroSection() {
   const [showModal, setShowModal] = useState(false);
-
-  const scrollToFooter = () => {
-    const contact = document.getElementById("footer");
-    if (contact) {
-      contact.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section id="home" className="min-h-[90vh] flex items-center justify-center relative overflow-hidden">
@@ -90,12 +83,18 @@ export default function HeroSection() {
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 md:mb-16 px-4">
             <Button
-              onClick={scrollToFooter}
+              asChild
               size="lg"
               className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
             >
-              Get In Touch
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <a
+                href="https://github.com/WBHankins93"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Github
+                <Github className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
             </Button>
             <Button
               onClick={() => setShowModal(true)}

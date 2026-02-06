@@ -6,7 +6,6 @@ import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Folder, Star, ExternalLink, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
