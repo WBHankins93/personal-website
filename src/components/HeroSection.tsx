@@ -30,9 +30,7 @@ const roles = [
 export default function HeroSection() {
   const [showModal, setShowModal] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    layoutEffect: false,
-  });
+  const { scrollYProgress } = useScroll();
   
   // Parallax offsets using useTransform (slower scroll for name/tagline, faster for stats)
   const nameY = useTransform(scrollYProgress, [0, 1], [0, -30]);
