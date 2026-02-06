@@ -336,7 +336,7 @@ export const projects: Project[] = [
   },
   {
     id: "big-butt-association",
-    name: "Big Butt Association",
+    name: "Bekky (BBA)",
     description: "E-commerce store for EDM fashion with membership features, built on Shopify/Liquid with custom theme development.",
     technologies: ["Shopify", "Liquid", "E-commerce", "Theme Development", "Payment Integration"],
     github_url: "https://github.com/WBHankins93/big-butt-association",
