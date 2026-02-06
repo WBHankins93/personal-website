@@ -431,7 +431,7 @@ export default function ProjectsSection() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3"
-                  style={{ gridAutoRows: 'minmax(360px, 360px)' }}
+                  style={{ gridAutoRows: 'minmax(340px, 340px)' }}
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
@@ -539,7 +539,7 @@ export default function ProjectsSection() {
                             </div>
 
                             {/* Full Description - No Scroll, Fixed Height */}
-                            <div className="mb-0 flex-shrink-0" style={{ height: '5.5rem' }}>
+                            <div className="mb-0 flex-shrink-0" style={{ height: '4.75rem' }}>
                               <p className="text-slate-600 leading-relaxed text-xs">
                                 {project.description}
                               </p>
