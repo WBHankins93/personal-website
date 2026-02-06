@@ -51,6 +51,8 @@ export default function AboutSection() {
         "radial-gradient(circle at 20% 50%, #a855f7 0%, transparent 50%), radial-gradient(circle at 80% 20%, #c084fc 0%, transparent 50%), radial-gradient(circle at 40% 80%, #9333ea 0%, transparent 50%), linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%)",
       education:
         "radial-gradient(circle at 20% 50%, #6366f1 0%, transparent 50%), radial-gradient(circle at 80% 20%, #818cf8 0%, transparent 50%), radial-gradient(circle at 40% 80%, #4f46e5 0%, transparent 50%), linear-gradient(135deg, #eef2ff 0%, #c7d2fe 100%)",
+      monitoring:
+        "radial-gradient(circle at 20% 50%, #06b6d4 0%, transparent 50%), radial-gradient(circle at 80% 20%, #22d3ee 0%, transparent 50%), radial-gradient(circle at 40% 80%, #0891b2 0%, transparent 50%), linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
     };
     return gradients[key];
   };
