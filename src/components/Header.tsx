@@ -10,6 +10,7 @@ import { useScrollTrigger } from "@/hooks/useScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { SPRING } from "@/lib/animation-configs/spring";
 import { TIMING } from "@/lib/animation-configs/timing";
+import { EASE } from "@/lib/animation-configs/ease";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,7 +74,7 @@ export default function Header() {
       x: '100%',
       transition: {
         duration: TIMING.fast / 1000,
-        ease: [0.4, 0, 0.2, 1],
+        ease: EASE.easeInOut,
       },
     },
     visible: {
@@ -81,7 +82,7 @@ export default function Header() {
       x: 0,
       transition: {
         duration: TIMING.normal / 1000,
-        ease: [0.4, 0, 0.2, 1],
+        ease: EASE.easeInOut,
       },
     },
     exit: {
@@ -89,7 +90,7 @@ export default function Header() {
       x: '100%',
       transition: {
         duration: TIMING.fast / 1000,
-        ease: [0.4, 0, 0.2, 1],
+        ease: EASE.easeInOut,
       },
     },
   };
