@@ -3,7 +3,7 @@
 import React, { useState, Suspense, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github, FileText } from "lucide-react";
 import CVModal from "./CVModal";
 import dynamic from 'next/dynamic';
 import TypingAnimation from './TypingAnimation';
@@ -54,7 +54,7 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, [prefersReducedMotion]);
 
-  // Animation variants
+  // Animation variants - matching plan timing
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -87,6 +87,33 @@ export default function HeroSection() {
       transition: {
         duration: 0.6,
         ease: EASE.smooth,
+        delay: 0, // 0ms as per plan
+      },
+    },
+  };
+
+  const taglineVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: TIMING.normal / 1000,
+        ease: EASE.smooth,
+        delay: 0.2, // 200ms delay as per plan
+      },
+    },
+  };
+
+  const ctaVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: TIMING.normal / 1000,
+        ease: EASE.smooth,
+        delay: 0.4, // 400ms delay as per plan
       },
     },
   };
@@ -96,8 +123,8 @@ export default function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.6,
+        staggerChildren: 0.05, // Stagger for left→right, top→bottom effect
+        delayChildren: 0.6, // 600ms start as per plan
       },
     },
   };
@@ -148,8 +175,8 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Floating Tech Particles - Behind the image */}
-      <FloatingTechParticles />
+      {/* Floating Tech Particles - Disabled for performance */}
+      {/* <FloatingTechParticles /> */}
 
       {/* BH Hero Background Image - Particles disappear behind this */}
       <div 
@@ -194,7 +221,7 @@ export default function HeroSection() {
           {/* Tagline with parallax */}
           <motion.h2 
             className="text-lg sm:text-xl md:text-3xl font-medium text-white font-heading mb-4 md:mb-6"
-            variants={itemVariants}
+            variants={taglineVariants}
             style={prefersReducedMotion ? {} : {
               y: taglineY,
             }}
@@ -205,7 +232,7 @@ export default function HeroSection() {
           {/* Description */}
           <motion.p 
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto font-body px-4"
-            variants={itemVariants}
+            variants={taglineVariants}
           >
             Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from &quot;what if&quot; to production with confidence
           </motion.p>
@@ -213,7 +240,7 @@ export default function HeroSection() {
           {/* CTA Buttons */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 md:mb-16 px-4"
-            variants={itemVariants}
+            variants={ctaVariants}
           >
             <Button
               asChild
@@ -234,7 +261,8 @@ export default function HeroSection() {
               size="lg"
               className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
             >
-              View Resume
+              Resume
+              <FileText className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
             </Button>
           </motion.div>
 
@@ -306,18 +334,8 @@ function Stat({
 
   return (
     <motion.div 
-      className="text-white bg-gradient-to-br from-white/5 to-white/0 backdrop-blur rounded-2xl p-3 sm:p-4 ring-1 ring-white/20 hover:from-white/10 hover:to-white/5 transition-all duration-300 shadow-sm hover:shadow-md"
+      className="text-white bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 ring-1 ring-white/20 hover:from-white/15 hover:to-white/10 transition-all duration-300 shadow-sm hover:shadow-md"
       whileHover={{ scale: 1.05, y: -4 }}
-      animate={prefersReducedMotion ? {} : {
-        y: [0, -8, 0],
-      }}
-      transition={{
-        y: {
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      }}
     >
       <div className={`text-xl sm:text-2xl md:text-3xl font-bold font-mono ${color} mb-1`}>
         {shouldAnimate ? (

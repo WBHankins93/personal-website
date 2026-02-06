@@ -1,7 +1,12 @@
 'use client';
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useInView as useIntersectionObserver } from "react-intersection-observer";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { TIMING } from "@/lib/animation-configs/timing";
+import { SPRING } from "@/lib/animation-configs/spring";
+import { EASE } from "@/lib/animation-configs/ease";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   Calendar, 
@@ -43,18 +48,71 @@ type ExperienceWithIcons = Omit<ExperienceItem, 'highlights'> & {
   highlights: Array<Omit<ExperienceItem['highlights'][number], 'icon'> & { icon: LucideIcon }>;
 };
 
-export default function ExperienceSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+// Helper function to generate work summary from achievements
+function generateWorkSummary(achievements: string[]): string {
+  if (achievements.length === 0) return '';
+  
+  // Take first 1-2 achievements and create concise summary
+  const firstAchievement = achievements[0];
+  
+  // Extract key points: look for impact metrics, scope, and outcomes
+  // Create a 1-2 sentence summary focusing on what was accomplished
+  const sentences = firstAchievement.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  
+  if (sentences.length >= 2) {
+    // Use first two sentences if they're concise
+    return `${sentences[0].trim()}. ${sentences[1].trim()}.`;
+  } else if (sentences.length === 1) {
+    // If only one sentence, try to split it or use as-is if short enough
+    const sentence = sentences[0].trim();
+    if (sentence.length < 200) {
+      return `${sentence}.`;
+    }
+    // If too long, take first part
+    const parts = sentence.split(';');
+    if (parts.length >= 2) {
+      return `${parts[0].trim()}; ${parts[1].trim()}.`;
+    }
+    return `${sentence.substring(0, 180)}...`;
+  }
+  
+  return firstAchievement.substring(0, 200);
+}
 
-  // Map string icon names to actual icon components
-  const experiences: ExperienceWithIcons[] = experiencesData.map((exp: ExperienceItem) => ({
-    ...exp,
-    highlights: exp.highlights.map(h => ({
-      ...h,
-      icon: iconMap[h.icon] || Code // Fallback to Code icon if not found
+export default function ExperienceSection() {
+  const prefersReducedMotion = useReducedMotion();
+  const [timelineRef, timelineInView] = useIntersectionObserver({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  // Map string icon names to actual icon components and sort chronologically
+  const experiences: ExperienceWithIcons[] = experiencesData
+    .map((exp: ExperienceItem) => ({
+      ...exp,
+      highlights: exp.highlights.map(h => ({
+        ...h,
+        icon: iconMap[h.icon] || Code // Fallback to Code icon if not found
+      }))
     }))
-  }));
+    .sort((a, b) => {
+      // Sort by period - extract year and month for comparison
+      const getDateValue = (period: string) => {
+        // Extract year and month from period string like "Jan 2025 – Sep 2025" or "Feb 2021 – Aug 2024"
+        const match = period.match(/(\w+)\s+(\d{4})/);
+        if (match) {
+          const month = match[1];
+          const year = parseInt(match[2]);
+          const monthMap: Record<string, number> = {
+            'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+            'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+          };
+          return year * 12 + (monthMap[month] || 0);
+        }
+        return 0;
+      };
+      return getDateValue(b.period) - getDateValue(a.period); // Most recent first
+    });
 
   const techColors = [
     "bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-blue-200/60",
@@ -87,19 +145,6 @@ export default function ExperienceSection() {
     };
   };
 
-  const handleCardClick = (index: number) => {
-    setFlippedCards(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(index)) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
-      return newSet;
-    });
-  };
-
-  const isFlipped = (index: number) => flippedCards.has(index);
 
   return (
     <section id="experience" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
@@ -127,93 +172,137 @@ export default function ExperienceSection() {
           </div>
 
           {/* Timeline */}
-          <div className="relative">
-            {/* Vertical Timeline Line - Hidden on mobile, visible on desktop */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-200 via-blue-200 via-purple-200 to-green-200"></div>
+          <div className="relative" ref={timelineRef}>
+            {/* Vertical Timeline Line - Hidden on mobile, visible on desktop - Animated draw */}
+            <motion.div
+              className="hidden md:block absolute left-1/2 transform -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-200 via-blue-200 via-purple-200 to-green-200"
+              initial={{ scaleY: 0 }}
+              animate={timelineInView && !prefersReducedMotion ? { scaleY: 1 } : { scaleY: 1 }}
+              transition={{
+                duration: 1.5,
+                ease: EASE.easeOut,
+              }}
+              style={{ transformOrigin: 'top' }}
+            />
 
-            <div className="space-y-8 md:space-y-16">
+            <div className="space-y-6 md:space-y-8">
               {experiences.map((exp, index) => {
                 const cardStyle = getCardStyle(exp.type);
                 
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{
+                      duration: TIMING.normal / 1000,
+                      delay: index * 0.1,
+                      ease: EASE.easeOut,
+                    }}
                     className={`relative flex items-center ${
                       index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                     } flex-col md:gap-8`}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    {/* Timeline Dot */}
-                    <div className={`hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} transition-all duration-300 ${
-                      hoveredIndex === index ? 'scale-125 opacity-0 z-0' : 'opacity-100 z-10'
-                    }`}>
-                      {exp.type === 'current' && hoveredIndex !== index && (
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} animate-pulse opacity-75`}></div>
-                      )}
-                      {exp.type === 'side-business' && hoveredIndex !== index && (
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} animate-pulse opacity-75`}></div>
-                      )}
-                    </div>
+                    {/* Timeline Dot with pulse and glow */}
+                    <motion.div
+                      className={`hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo} z-10`}
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{
+                        duration: TIMING.normal / 1000,
+                        delay: index * 0.1 + 0.3,
+                        ease: EASE.easeOut,
+                      }}
+                    >
+                      {/* Glowing ring animation */}
+                      <motion.div
+                        className={`absolute inset-0 rounded-full bg-gradient-to-r ${cardStyle.gradientFrom} ${cardStyle.gradientTo}`}
+                        animate={prefersReducedMotion ? {} : {
+                          scale: [1, 1.5, 1],
+                          opacity: [0.75, 0, 0.75],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </motion.div>
+                    
+                    {/* Year Label on Timeline */}
+                    {(() => {
+                      const yearMatch = exp.period.match(/\d{4}/);
+                      const year = yearMatch ? yearMatch[0] : null;
+                      return year ? (
+                        <motion.div
+                          className="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-10"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true, amount: 0.3 }}
+                          transition={{
+                            duration: TIMING.normal / 1000,
+                            delay: index * 0.1 + 0.5,
+                            ease: EASE.easeOut,
+                          }}
+                          style={{ top: 'calc(50% + 12px)' }}
+                        >
+                          <span className="text-xs font-semibold text-slate-600 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-sm border border-slate-200">
+                            {year}
+                          </span>
+                        </motion.div>
+                      ) : null;
+                    })()}
 
                     {/* Content Card */}
-                    <div className={`w-full md:w-5/12 ${
-                      index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
-                    }`}>
-                      {/* Mobile: Flip Card Container */}
-                      <div 
-                        className="md:hidden relative cursor-pointer mb-4"
-                        style={{ 
-                          perspective: '1000px'
-                        }}
-                        onClick={() => handleCardClick(index)}
-                      >
-                        <div
-                          className="relative w-full transition-transform duration-700"
-                          style={{
-                            transformStyle: 'preserve-3d',
-                            transform: isFlipped(index) ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                          }}
-                        >
-                          {/* Front of Card */}
-                          <div
-                            className="w-full"
-                            style={{
-                              backfaceVisibility: 'hidden',
-                              WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(0deg)'
-                            }}
-                          >
-                            <Card className={`rounded-3xl shadow-xl ${cardStyle.bgGradient} ${
-                              exp.type === 'side-business' 
-                                ? 'ring-2 ring-amber-200 ring-offset-2 ring-offset-transparent' 
-                                : 'ring-1 ring-gray-200/50'
-                            }`}>
-                              <CardContent className="p-5 bg-gradient-to-br from-white/60 to-transparent rounded-3xl">
+                    <div className={`w-full md:w-[48%] ${
+                      index % 2 === 0 ? 'md:pr-4' : 'md:pl-4'
+                    } relative`}>
+                      {/* Mobile: Simplified Card */}
+                      <div className="md:hidden relative mb-4">
+                        <Card className={`rounded-3xl shadow-xl ${cardStyle.bgGradient} ${
+                          exp.type === 'side-business' 
+                            ? 'ring-2 ring-amber-200 ring-offset-2 ring-offset-transparent' 
+                            : 'ring-1 ring-gray-200/50'
+                        }`}>
+                          <CardContent className="p-5 bg-gradient-to-br from-white/60 to-transparent rounded-3xl">
                                 {/* Header Section */}
                                 <div className="flex items-start gap-3 mb-3">
-                                  {/* Company Logo */}
-                                  <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2.5 shadow-md ${
-                                    exp.type === 'side-business' 
-                                      ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
-                                      : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
-                                  }`}>
+                                  {/* Company Logo with spin animation */}
+                                  <motion.div
+                                    className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2.5 shadow-md overflow-hidden ${
+                                      exp.type === 'side-business' 
+                                        ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
+                                        : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
+                                    }`}
+                                    initial={{ opacity: 0, scale: 0, rotate: 0 }}
+                                    whileInView={{ opacity: 1, scale: 1, rotate: 360 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    transition={{
+                                      duration: 0.8,
+                                      delay: index * 0.1 + 0.2,
+                                      ease: EASE.easeOut,
+                                    }}
+                                  >
                                     {exp.logo ? (
                                       <Image 
                                         src={exp.logo} 
                                         alt={`${exp.company} logo`} 
                                         width={56}
                                         height={56}
-                                        className="object-contain w-full h-full"
+                                        className={
+                                          exp.company === 'Prove AI' 
+                                            ? 'object-cover w-full h-full scale-150'
+                                            : (exp.company === 'Sproutflow Studio' || exp.company === 'General Assembly')
+                                              ? 'object-cover w-full h-full scale-110'
+                                              : 'object-contain w-full h-full'
+                                        }
                                       />
                                     ) : (
                                       <Code className={`w-7 h-7 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
                                     )}
-                                  </div>
+                                  </motion.div>
 
                                   {/* Job Details */}
                                   <div className="flex-1 min-w-0">
@@ -252,12 +341,20 @@ export default function ExperienceSection() {
                                   </div>
                                 </div>
 
-                                {/* Highlights - Show top 4 only */}
+                                {/* Highlights - Left aligned, fit content - Stagger pop in */}
                                 <div className="mt-3.5 flex flex-wrap gap-2">
                                   {exp.highlights.slice(0, 4).map((highlight, hIndex) => (
-                                    <div 
+                                    <motion.div
                                       key={hIndex}
-                                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ${
+                                      initial={{ opacity: 0, scale: 0 }}
+                                      whileInView={{ opacity: 1, scale: 1 }}
+                                      viewport={{ once: true, amount: 0.3 }}
+                                      transition={{
+                                        delay: index * 0.1 + hIndex * 0.05,
+                                        duration: TIMING.fast / 1000,
+                                        ease: EASE.easeOut,
+                                      }}
+                                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm w-fit ${
                                         exp.type === 'side-business'
                                           ? 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 ring-1 ring-amber-200/60'
                                           : highlight.metric 
@@ -266,23 +363,38 @@ export default function ExperienceSection() {
                                       }`}
                                     >
                                       <highlight.icon className="w-3 h-3 flex-shrink-0" />
-                                      <span className="truncate">{highlight.text}</span>
-                                    </div>
+                                      <span>{highlight.text}</span>
+                                    </motion.div>
                                   ))}
                                 </div>
 
-                                {/* Technologies - Show top 6 */}
+                                {/* Work Summary */}
+                                <div className="mt-3.5 mb-3.5">
+                                  <p className="text-slate-600 text-xs leading-relaxed">
+                                    {generateWorkSummary(exp.achievements)}
+                                  </p>
+                                </div>
+
+                                {/* Technologies - Show top 6 - Stagger slide up */}
                                 <div className="mt-3.5">
                                   <div className="flex flex-wrap gap-1.5">
                                     {exp.technologies.slice(0, 6).map((tech, techIndex) => (
-                                      <span 
+                                      <motion.span
                                         key={techIndex}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{
+                                          delay: index * 0.1 + techIndex * 0.03,
+                                          duration: TIMING.fast / 1000,
+                                          ease: EASE.easeOut,
+                                        }}
                                         className={`px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ring-1 ${
                                           techColors[techIndex % techColors.length]
                                         }`}
                                       >
                                         {tech}
-                                      </span>
+                                      </motion.span>
                                     ))}
                                     {exp.technologies.length > 6 && (
                                       <span className="px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm bg-gradient-to-r from-slate-50 to-gray-50 text-slate-700 ring-1 ring-slate-200/60">
@@ -291,106 +403,12 @@ export default function ExperienceSection() {
                                     )}
                                   </div>
                                 </div>
-
-                                {/* Arrow Indicator */}
-                                <div className="mt-4 pt-3.5 border-t border-gray-200/60 flex items-center justify-center">
-                                  <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[10px] text-gray-500 font-medium">Tap to see details</span>
-                                    <ChevronDown className="w-4 h-4 text-gray-400 animate-bounce" />
-                                  </div>
-                                </div>
                               </CardContent>
                             </Card>
                           </div>
 
-                          {/* Back of Card */}
-                          <div
-                            className="absolute top-0 left-0 w-full"
-                            style={{
-                              backfaceVisibility: 'hidden',
-                              WebkitBackfaceVisibility: 'hidden',
-                              transform: 'rotateY(180deg)'
-                            }}
-                          >
-                            <Card className={`rounded-3xl shadow-xl ${
-                              exp.type === 'side-business' 
-                                ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 ring-2 ring-amber-300 ring-offset-2 ring-offset-transparent' 
-                                : 'bg-gradient-to-br from-white via-blue-50/30 to-white ring-2 ring-blue-200 ring-offset-2 ring-offset-transparent'
-                            }`}>
-                              <CardContent className="p-5 bg-gradient-to-br from-white/40 to-transparent rounded-3xl">
-                                {/* Header */}
-                                <div className="flex items-center justify-between mb-3">
-                                  <h4 className={`font-semibold text-sm ${
-                                    exp.type === 'side-business' ? 'text-amber-900' : 'text-slate-900'
-                                  }`}>
-                                    Key Achievements
-                                  </h4>
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      handleCardClick(index);
-                                    }}
-                                    className="text-gray-400 hover:text-gray-600 transition-colors p-1"
-                                    aria-label="Close"
-                                  >
-                                    <ChevronDown className="w-4 h-4 rotate-180" />
-                                  </button>
-                                </div>
-                                
-                                {/* Achievements - Show top 5 */}
-                                <ul className="space-y-2.5 mb-3.5">
-                                  {exp.achievements.slice(0, 5).map((achievement, achIndex) => (
-                                    <li 
-                                      key={achIndex}
-                                      className="flex items-start gap-2.5"
-                                    >
-                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 shadow-sm ${
-                                        exp.type === 'side-business'
-                                          ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                                          : 'bg-gradient-to-r from-blue-500 to-purple-500'
-                                      }`}></div>
-                                      <span className="text-gray-700 text-[11px] leading-snug">{achievement}</span>
-                                    </li>
-                                  ))}
-                                  {exp.achievements.length > 5 && (
-                                    <li className="flex items-start gap-2.5">
-                                      <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                                        exp.type === 'side-business'
-                                          ? 'bg-gradient-to-r from-amber-400 to-orange-400 opacity-50'
-                                          : 'bg-gradient-to-r from-blue-400 to-purple-400 opacity-50'
-                                      }`}></div>
-                                      <span className="text-gray-500 text-[11px] italic leading-snug">
-                                        +{exp.achievements.length - 5} more achievements
-                                      </span>
-                                    </li>
-                                  )}
-                                </ul>
-                                
-                                {/* Footer - All tech tags */}
-                                <div className="pt-3.5 border-t border-gray-200/60">
-                                  <div className="flex flex-wrap gap-1.5">
-                                    {exp.technologies.map((tech, techIndex) => (
-                                      <span 
-                                        key={techIndex}
-                                        className={`px-2.5 py-1 rounded-full text-[10px] font-medium shadow-sm ring-1 ${
-                                          techColors[techIndex % techColors.length]
-                                        }`}
-                                      >
-                                        {tech}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Desktop: Original Hover Card */}
-                      <Card className={`hidden md:block rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${
-                        hoveredIndex === index ? 'transform scale-105' : ''
-                      } ${cardStyle.bgGradient} ${
+                      {/* Desktop: Simplified Card */}
+                      <Card className={`hidden md:block rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-visible relative ${cardStyle.bgGradient} ${
                         exp.type === 'side-business' 
                           ? 'ring-2 ring-amber-200/50' 
                           : 'ring-1 ring-gray-200/30'
@@ -399,24 +417,40 @@ export default function ExperienceSection() {
                           {/* Header Section */}
                           <div className="p-6 border-b border-gray-100">
                             <div className="flex items-start gap-4">
-                              {/* Company Logo */}
-                              <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2 shadow-md ${
-                                exp.type === 'side-business' 
-                                  ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
-                                  : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
-                              }`}>
+                              {/* Company Logo with spin animation */}
+                              <motion.div
+                                className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center p-2 shadow-md overflow-hidden ${
+                                  exp.type === 'side-business' 
+                                    ? 'bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50 ring-2 ring-amber-200/50' 
+                                    : 'bg-gradient-to-br from-blue-50 via-gray-50 to-slate-50 ring-1 ring-gray-200/50'
+                                }`}
+                                initial={{ opacity: 0, scale: 0, rotate: 0 }}
+                                whileInView={{ opacity: 1, scale: 1, rotate: 360 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{
+                                  duration: 0.8,
+                                  delay: index * 0.1 + 0.2,
+                                  ease: EASE.easeOut,
+                                }}
+                              >
                                 {exp.logo ? (
                                   <Image 
                                     src={exp.logo} 
                                     alt={`${exp.company} logo`} 
                                     width={56}
                                     height={56}
-                                    className="object-contain w-full h-full"
+                                    className={
+                                      exp.company === 'Prove AI' 
+                                        ? 'object-cover w-full h-full scale-150'
+                                        : (exp.company === 'Sproutflow Studio' || exp.company === 'General Assembly')
+                                          ? 'object-cover w-full h-full scale-110'
+                                          : 'object-contain w-full h-full'
+                                    }
                                   />
                                 ) : (
                                   <Code className={`w-8 h-8 ${exp.type === 'side-business' ? 'text-amber-600' : 'text-gray-500'}`} />
                                 )}
-                              </div>
+                              </motion.div>
 
                               {/* Job Details */}
                               <div className="flex-1">
@@ -455,12 +489,20 @@ export default function ExperienceSection() {
                               </div>
                             </div>
 
-                            {/* Highlights */}
+                            {/* Highlights - Left aligned, fit content - Stagger pop in */}
                             <div className="mt-4 flex flex-wrap gap-3">
                               {exp.highlights.map((highlight, hIndex) => (
-                                <div 
+                                <motion.div
                                   key={hIndex}
-                                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  viewport={{ once: true, amount: 0.3 }}
+                                  transition={{
+                                    delay: index * 0.1 + hIndex * 0.05,
+                                    duration: TIMING.fast / 1000,
+                                    ease: EASE.easeOut,
+                                  }}
+                                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium shadow-sm w-fit ${
                                     exp.type === 'side-business'
                                       ? 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 ring-1 ring-amber-200/60'
                                       : highlight.metric 
@@ -468,75 +510,42 @@ export default function ExperienceSection() {
                                         : 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 ring-1 ring-blue-200/60'
                                   }`}
                                 >
-                                  <highlight.icon className="w-4 h-4" />
-                                  {highlight.text}
-                                </div>
+                                  <highlight.icon className="w-4 h-4 flex-shrink-0" />
+                                  <span>{highlight.text}</span>
+                                </motion.div>
                               ))}
+                            </div>
+                            
+                            {/* Work Summary */}
+                            <div className="mt-4">
+                              <p className="text-slate-600 text-sm leading-relaxed">
+                                {generateWorkSummary(exp.achievements)}
+                              </p>
                             </div>
                           </div>
 
-                          {/* Smart Horizontal Expansion - Clean, No Overlap */}
-                          <AnimatePresence>
-                            {hoveredIndex === index && (
-                              <motion.div
-                                initial={{ width: 0, opacity: 0 }}
-                                animate={{ width: "480px", opacity: 1 }}
-                                exit={{ width: 0, opacity: 0 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className={`overflow-hidden absolute top-0 bottom-0 shadow-2xl z-30 ${
-                                  exp.type === 'side-business' 
-                                    ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 ring-2 ring-amber-300' 
-                                    : 'bg-gradient-to-br from-white via-blue-50/30 to-white ring-2 ring-blue-200'
-                                } ${
-                                  index % 2 === 0 
-                                    ? 'left-full rounded-r-2xl ring-l-0'
-                                    : 'right-full rounded-l-2xl ring-r-0'
-                                }`}
-                                style={{ width: "480px" }}
-                              >
-                                <div className="p-5 h-full overflow-y-auto" style={{ width: "480px" }}>
-                                  <h4 className={`font-semibold mb-3 text-base sticky top-0 pb-2 ${
-                                    exp.type === 'side-business' 
-                                      ? 'bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 text-amber-900' 
-                                      : 'bg-gradient-to-br from-white via-blue-50/30 to-white text-slate-900'
-                                  }`}>
-                                    Key Achievements:
-                                  </h4>
-                                  <ul className="space-y-2.5">
-                                    {exp.achievements.map((achievement, achIndex) => (
-                                      <motion.li 
-                                        key={achIndex} 
-                                        initial={{ opacity: 0, x: index % 2 === 0 ? -15 : 15 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: achIndex * 0.08 }}
-                                        className="flex items-start gap-2.5"
-                                      >
-                                        <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                                          exp.type === 'side-business'
-                                            ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                                            : 'bg-gradient-to-r from-blue-500 to-purple-500'
-                                        }`}></div>
-                                        <span className="text-gray-700 text-sm leading-relaxed">{achievement}</span>
-                                      </motion.li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
 
-                          {/* Technologies */}
+                          {/* Technologies - Stagger slide up */}
                           <div className="p-6 pt-4">
                             <div className="flex flex-wrap gap-2">
                               {exp.technologies.map((tech, techIndex) => (
-                                <span 
+                                <motion.span
                                   key={techIndex}
-                                  className={`px-3 py-1 rounded-full text-xs font-medium shadow-sm ring-1 transition-colors duration-200 hover:scale-105 cursor-default ${
+                                  initial={{ opacity: 0, y: 10 }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  viewport={{ once: true, amount: 0.3 }}
+                                  transition={{
+                                    delay: index * 0.1 + techIndex * 0.03, // 30ms apart as per plan
+                                    duration: TIMING.fast / 1000,
+                                    ease: EASE.easeOut,
+                                  }}
+                                  whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+                                  className={`px-3 py-1 rounded-full text-xs font-medium shadow-sm ring-1 transition-colors duration-200 cursor-default ${
                                     techColors[techIndex % techColors.length]
                                   }`}
                                 >
                                   {tech}
-                                </span>
+                                </motion.span>
                               ))}
                             </div>
                           </div>

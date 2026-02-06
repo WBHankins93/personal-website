@@ -10,6 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { cat, type CategoryKey } from "@/lib/colors";
 import Image from "next/image";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { TIMING } from "@/lib/animation-configs/timing";
+import { SPRING } from "@/lib/animation-configs/spring";
+import { EASE } from "@/lib/animation-configs/ease";
 
 // Get category icon for project
 const getCategoryIcon = (project: Project) => {
@@ -59,6 +63,7 @@ export default function ProjectsSection() {
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
   const [expandedTags, setExpandedTags] = useState<Set<string>>(new Set());
   const [tagCarouselPages, setTagCarouselPages] = useState<Record<string, number>>({});
+  const prefersReducedMotion = useReducedMotion();
 
   const categories: { id: "all" | CategoryKey; label: string; count: number }[] = [
     { id: "all", label: "All Projects", count: allProjects.length },
@@ -211,31 +216,46 @@ export default function ProjectsSection() {
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 md:mb-8 px-2">
             {categories.map((category) => {
               const isActive = selectedCategory === category.id;
-              const styles = isActive
-                ? category.id === "all"
-                  ? "bg-slate-900 text-white shadow-lg scale-105"
-                  : `bg-gradient-to-r ${cat(category.id).grad} ${cat(category.id).ring} ring-2 shadow-lg scale-105 ${cat(category.id).accent}`
-                : "bg-white hover:bg-slate-50 hover:shadow-md text-slate-600 hover:text-slate-900";
+              const baseStyles = category.id === "all"
+                ? "bg-slate-900 text-white"
+                : `bg-gradient-to-r ${cat(category.id).grad} ${cat(category.id).ring} ring-2 ${cat(category.id).accent}`;
 
               return (
                 <motion.div
                   key={category.id}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="overflow-hidden rounded-full"
+                  animate={isActive ? {
+                    scale: 1.05,
+                  } : {
+                    scale: 1,
+                  }}
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+                  whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+                  transition={SPRING.snappy}
                 >
-                  <Button
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={clsx(
-                      "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 border shadow-sm",
-                      styles
-                    )}
-                    variant="ghost"
+                  <motion.div
+                    className="overflow-hidden rounded-full"
+                    animate={isActive ? {
+                      boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    } : {
+                      boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+                    }}
+                    transition={SPRING.smooth}
                   >
-                    {category.label}
-                    <span className="ml-2 rounded-full bg-white/30 px-2 py-0.5 text-xs">
-                      {category.count}
-                    </span>
-                  </Button>
+                    <Button
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={clsx(
+                        "rounded-full px-5 py-2 text-sm font-medium transition-colors duration-200 border overflow-hidden",
+                        isActive ? baseStyles : "bg-white hover:bg-slate-50 hover:shadow-md text-slate-600 hover:text-slate-900"
+                      )}
+                      variant="ghost"
+                    >
+                      {category.label}
+                      <span className="ml-2 rounded-full bg-white/30 px-2 py-0.5 text-xs">
+                        {category.count}
+                      </span>
+                    </Button>
+                  </motion.div>
                 </motion.div>
               );
             })}
@@ -429,22 +449,34 @@ export default function ProjectsSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: TIMING.fast / 1000 }}
                   className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3"
                   style={{ gridAutoRows: 'minmax(340px, 340px)' }}
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
                     const techs = project.technologies ?? [];
+                    // Initial grid load stagger: Row 1 (0,1,2): 0ms, 100ms, 200ms; Row 2 (3,4): 150ms, 250ms
+                    const row = Math.floor(idx / 5); // Assuming 5 columns max
+                    const col = idx % 5;
+                    const initialDelay = (row * 150 + col * 100) / 1000; // Convert to seconds
                     
                     return (
                       <motion.div
                         key={project.id}
                         layout
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, delay: idx * 0.05 }}
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                        transition={{
+                          duration: TIMING.normal / 1000,
+                          delay: initialDelay,
+                          ease: EASE.easeOut,
+                        }}
+                        whileHover={prefersReducedMotion ? {} : {
+                          y: -8, // Lift 8px
+                          transition: SPRING.gentle,
+                        }}
                         onHoverStart={() => setHoveredProject(project.id)}
                         onHoverEnd={() => setHoveredProject(null)}
                         className="group h-full"
@@ -466,19 +498,25 @@ export default function ProjectsSection() {
                             }}
                           >
                             {/* Front of Card - Description */}
-                            <Card 
-                              className={clsx(
-                                "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
-                                "border-2 shadow-lg",
-                                `bg-gradient-to-br ${c.grad}`,
-                                `ring-2 ${c.ring}`
-                              )}
-                              style={{
-                                backfaceVisibility: 'hidden',
-                                WebkitBackfaceVisibility: 'hidden',
-                                transform: 'rotateY(0deg)'
+                            <motion.div
+                              whileHover={prefersReducedMotion ? {} : {
+                                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                               }}
+                              transition={SPRING.gentle}
                             >
+                              <Card 
+                                className={clsx(
+                                  "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
+                                  "border-2 shadow-lg",
+                                  `bg-gradient-to-br ${c.grad}`,
+                                  `ring-2 ${c.ring}`
+                                )}
+                                style={{
+                                  backfaceVisibility: 'hidden',
+                                  WebkitBackfaceVisibility: 'hidden',
+                                  transform: 'rotateY(0deg)'
+                                }}
+                              >
                               <CardHeader className="p-2.5 flex-shrink-0">
                             {/* Category & Badges */}
                             <div className="flex items-center gap-1 mb-1.5 flex-wrap">
@@ -491,17 +529,37 @@ export default function ProjectsSection() {
                               </span>
                               
                               {project.showcase && (
-                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-[10px] font-medium rounded-full ring-1 ring-amber-200/60">
+                                <motion.div
+                                  animate={prefersReducedMotion ? {} : {
+                                    scale: [1, 1.05, 1],
+                                  }}
+                                  transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                  }}
+                                  className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-[10px] font-medium rounded-full ring-1 ring-amber-200/60"
+                                >
                                   <Star className="w-2.5 h-2.5 fill-current" />
                                   Showcase
-                                </div>
+                                </motion.div>
                               )}
                               
                               {project.featured && !project.showcase && (
-                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60">
+                                <motion.div
+                                  animate={prefersReducedMotion ? {} : {
+                                    scale: [1, 1.05, 1],
+                                  }}
+                                  transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                  }}
+                                  className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60"
+                                >
                                   <Star className="w-2.5 h-2.5" />
                                   Featured
-                                </div>
+                                </motion.div>
                               )}
                               
                               {project.projectType === 'Client Work' && (
@@ -530,12 +588,22 @@ export default function ProjectsSection() {
                               )}>
                                 {project.projectType}
                               </span>
-                              <span className={clsx(
-                                "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
-                                getStatusStyle(project.status)
-                              )}>
+                              <motion.span
+                                className={clsx(
+                                  "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
+                                  getStatusStyle(project.status)
+                                )}
+                                animate={prefersReducedMotion ? {} : {
+                                  opacity: [1, 0.8, 1],
+                                }}
+                                transition={{
+                                  duration: 3,
+                                  repeat: Infinity,
+                                  ease: "easeInOut",
+                                }}
+                              >
                                 {project.status}
-                              </span>
+                              </motion.span>
                             </div>
 
                             {/* Full Description - No Scroll, Fixed Height */}
@@ -575,6 +643,7 @@ export default function ProjectsSection() {
                             </div>
                           </CardContent>
                             </Card>
+                            </motion.div>
 
                             {/* Back of Card - Tools/Concepts */}
                             <Card
