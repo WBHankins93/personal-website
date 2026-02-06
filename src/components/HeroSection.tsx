@@ -12,6 +12,7 @@ import CountUp from 'react-countup';
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TIMING } from "@/lib/animation-configs/timing";
 import { SPRING } from "@/lib/animation-configs/spring";
+import { EASE } from "@/lib/animation-configs/ease";
 
 const WordSphere = dynamic(() => import('./WordSphere').catch(() => ({ default: () => null })), { 
   ssr: false,
@@ -72,7 +73,7 @@ export default function HeroSection() {
       y: 0,
       transition: {
         duration: TIMING.normal / 1000,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: EASE.smooth,
       },
     },
   };
@@ -85,7 +86,7 @@ export default function HeroSection() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: EASE.smooth,
       },
     },
   };
