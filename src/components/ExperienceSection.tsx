@@ -49,7 +49,7 @@ type ExperienceWithIcons = Omit<ExperienceItem, 'highlights'> & {
 };
 
 // Helper function to generate work summary from achievements
-function generateWorkSummary(achievements: string[]): string {
+function generateWorkSummary(achievements: readonly string[]): string {
   if (achievements.length === 0) return '';
   
   // Take first 1-2 achievements and create concise summary
