@@ -146,7 +146,7 @@ export default function AboutSection() {
               }}
               className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto px-4"
             >
-              Senior Cloud Engineer focused on Kubernetes, multi-cloud infrastructure, and production reliability with a proven track record delivering outcomes in customer-facing enterprise environments.
+              Solutions engineer at heart — I like sitting at the intersection of technical depth and real customer problems. My background spans cloud infrastructure, reliability engineering, and building things from scratch.
             </motion.p>
           </div>
 
