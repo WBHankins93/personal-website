@@ -173,7 +173,7 @@ export const experiencesData = [
   {
     title: "Founder / Technical Consultant",
     company: "Sproutflow Studio",
-    period: "Late 2024 – Present",
+    period: "Oct 2025 – Present",
     location: "Remote",
     type: "side-business",
     logo: "/logo-design-Photoroom.png",
