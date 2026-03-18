@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { CATEGORY, type CategoryKey } from "@/lib/colors";
@@ -13,26 +13,12 @@ import {
   Cloud,
   Server,
   Shield,
-  Monitor,
   Code,
   Users,
 } from "lucide-react";
 
 export default function AboutSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   // Gradient colors for each category - using darker and lighter versions of same color
   const getGradientForCategory = (key: CategoryKey): string => {
@@ -135,23 +121,9 @@ export default function AboutSection() {
             >
               About Me
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{
-                delay: 0.1,
-                duration: TIMING.normal / 1000,
-                ease: EASE.easeOut,
-              }}
-              className="text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto px-4"
-            >
-              Solutions engineer at heart — I like sitting at the intersection of technical depth and real customer problems. My background spans cloud infrastructure, reliability engineering, and building things from scratch.
-            </motion.p>
           </div>
 
-          {/* About + Image */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <div className="max-w-[680px] mx-auto text-left px-4 md:px-0">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -160,81 +132,97 @@ export default function AboutSection() {
                 hidden: { opacity: 0 },
                 visible: {
                   opacity: 1,
-                  transition: {
-                    staggerChildren: 0.1, // 100ms each paragraph
-                  },
+                  transition: { staggerChildren: 0.12 },
                 },
               }}
-            >
-              <motion.h3
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                className="text-2xl font-bold text-slate-900 mb-4"
-              >
-                My Journey
-              </motion.h3>
-
-              <div className="space-y-4 text-slate-700 leading-relaxed">
-                {[
-                  "I started building websites because I loved creating things people actually use. That feeling stuck with me.",
-                  "At IBM, I spent three years helping enterprise customers deploy cloud infrastructure across AWS, GCP, and IBM Cloud. I learned how to understand what they really needed, design solutions that would survive production, and guide teams through the whole process. The work I enjoyed most was when I could own it end to end: discovery, architecture, implementation, and making sure the team felt confident running it.",
-                  "I took an SRE role at Prove AI to deepen my operational expertise. Owned reliability and SOC 2 compliance across four production Kubernetes clusters while maintaining 99.9% uptime. Made me better at customer-facing work because I've lived what they're dealing with.",
-                  "Founded Sproutflow Studio in 2024 to stay close to what I love: building clean, modern websites for small businesses. Direct customer feedback, great UX, shipping something people enjoy using.",
-                  "I'm looking for my next role in solutions engineering or customer-facing product work where I can combine technical depth with real customer impact.",
-                ].map((text, index) => (
-                  <motion.p
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                          duration: TIMING.normal / 1000,
-                          ease: EASE.easeOut,
-                        },
-                      },
-                    }}
-                  >
-                    {text}
-                  </motion.p>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{
-                delay: 0.3, // 300ms delay as per plan
-                duration: TIMING.normal / 1000,
-                ease: EASE.easeOut,
-              }}
+              className="flex flex-col items-center md:items-start"
             >
               <motion.div
-                className="relative rounded-3xl p-1 bg-gradient-to-br from-sky-50 to-emerald-50 ring-1 ring-slate-200 shadow-sm"
-                whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
-                style={{
-                  boxShadow: `${20 + mousePosition.x * 0.1}px ${
-                    20 + mousePosition.y * 0.1
-                  }px 60px rgba(0,0,0,0.1)`,
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: TIMING.normal / 1000,
+                      ease: EASE.easeOut,
+                    },
+                  },
                 }}
+                className="relative h-44 w-44 shrink-0 overflow-hidden rounded-full ring-2 ring-slate-200 bg-slate-100 mb-8"
               >
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
-                  <Image
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/c43e712a7_62696b86-1380-4132-bee7-5150b48ef3a9.png"
-                    alt="Ben Hankins"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    priority={false}
-                  />
-                </div>
+                <Image
+                  // SWAP: set src to real headshot path when ready (e.g. "/about-headshot.jpg")
+                  src="/about-photo-placeholder.svg"
+                  alt="Ben Hankins"
+                  fill
+                  className="object-cover"
+                  sizes="176px"
+                  priority={false}
+                />
               </motion.div>
+
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: TIMING.normal / 1000,
+                      ease: EASE.easeOut,
+                    },
+                  },
+                }}
+                className="font-body text-base text-slate-700 leading-[1.7] mb-8 w-full"
+              >
+                I&apos;ve never been someone who waits to be told what to do. I started building
+                things because I loved seeing people actually use them — and that feeling
+                hasn&apos;t left. Six years later I&apos;m writing AI pipelines, shipping client
+                products, and still getting that same hit when something goes live.
+              </motion.p>
+
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: TIMING.normal / 1000,
+                      ease: EASE.easeOut,
+                    },
+                  },
+                }}
+                className="font-body text-base text-slate-700 leading-[1.7] mb-8 w-full"
+              >
+                Started at Kortivity in Austin building a Vue-powered recruiting tool. Went to
+                IBM where I spent four years doing the hard stuff — enterprise cloud delivery,
+                architecture workshops, and a $10.1M deal with CenterPoint Energy. Deepened my
+                operational instincts as an SRE at Prove AI: 99.9% uptime, four Kubernetes
+                clusters, SOC 2 from 34% to 100%. In late 2024 I founded Sproutflow Studio to get
+                back to what I love — building things people use, owning it end to end.
+              </motion.p>
+
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: TIMING.normal / 1000,
+                      ease: EASE.easeOut,
+                    },
+                  },
+                }}
+                className="font-body text-base text-slate-700 leading-[1.7] mb-0 w-full"
+              >
+                Outside of work I&apos;m usually at a concert, planning a trip, or coding late at
+                night when the house is quiet and the thinking gets sharper. Split between New
+                Orleans and always wanting to be back in the Pacific Northwest. Both places feed
+                different parts of me — the festivals and the forests.
+              </motion.p>
             </motion.div>
           </div>
 
