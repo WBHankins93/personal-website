@@ -89,6 +89,16 @@ export const CATEGORY = {
     iconColor: "text-white",
     bg: "bg-gradient-to-br from-slate-50 to-purple-50/30 hover:from-purple-50/50 hover:to-purple-50/50",
   },
+  "ai-engineering": {
+    ring: "ring-rose-200",
+    grad: "from-rose-50 to-pink-50",
+    pill: "bg-rose-50 text-rose-700 border-rose-200",
+    dot: "bg-rose-500",
+    accent: "text-rose-600",
+    iconBg: "bg-rose-500",
+    iconColor: "text-white",
+    bg: "bg-gradient-to-br from-slate-50 to-rose-50/30 hover:from-rose-50/50 hover:to-rose-50/50",
+  },
 } as const;
 
 export type CategoryKey = keyof typeof CATEGORY;

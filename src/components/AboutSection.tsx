@@ -14,7 +14,7 @@ import {
   Server,
   Shield,
   Code,
-  Users,
+  Sparkles,
 } from "lucide-react";
 
 export default function AboutSection() {
@@ -39,11 +39,20 @@ export default function AboutSection() {
         "radial-gradient(circle at 20% 50%, #6366f1 0%, transparent 50%), radial-gradient(circle at 80% 20%, #818cf8 0%, transparent 50%), radial-gradient(circle at 40% 80%, #4f46e5 0%, transparent 50%), linear-gradient(135deg, #eef2ff 0%, #c7d2fe 100%)",
       monitoring:
         "radial-gradient(circle at 20% 50%, #06b6d4 0%, transparent 50%), radial-gradient(circle at 80% 20%, #22d3ee 0%, transparent 50%), radial-gradient(circle at 40% 80%, #0891b2 0%, transparent 50%), linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
+      "ai-engineering":
+        "radial-gradient(circle at 20% 50%, #f43f5e 0%, transparent 50%), radial-gradient(circle at 80% 20%, #fb7185 0%, transparent 50%), radial-gradient(circle at 40% 80%, #e11d48 0%, transparent 50%), linear-gradient(135deg, #ffe4e6 0%, #fda4af 100%)",
     };
     return gradients[key];
   };
 
-  const skills: Array<{
+  const heroCapability = {
+    name: "Customer-Facing Technical Leadership",
+    description:
+      "Discovery through delivery. I run technical conversations from first call to production — architecture workshops, POC strategy, executive alignment, and making sure the handoff never happens because I never hand off.",
+    credentials: ["Customer-led", "POC → production", "Enterprise-scale"],
+  };
+
+  const gridSkills: Array<{
     icon: React.ComponentType<{ className?: string }>;
     name: string;
     description: string;
@@ -51,52 +60,52 @@ export default function AboutSection() {
     credentials: string[];
   }> = [
     {
-      icon: Users,
-      name: "Customer-Facing Technical Leadership",
-      description:
-        "Discovery, architecture workshops, POC strategy, executive communication, stakeholder alignment",
-      key: "ci-cd", // Blue
-      credentials: ["Customer-led", "POC → production"],
-    },
-    {
       icon: Cloud,
       name: "Cloud & Multi-Cloud Architecture",
       description:
-        "AWS / GCP / IBM Cloud architectures, migration planning, optimization, production readiness",
-      key: "infrastructure", // Cyan
+        "AWS, GCP, IBM Cloud — multi-cloud architectures, migration planning, production readiness across regulated enterprise environments.",
+      key: "infrastructure",
       credentials: ["Enterprise-scale", "Production ownership"],
     },
     {
       icon: Server,
       name: "Kubernetes & Platform Engineering",
       description:
-        "Kubernetes/OpenShift, multi-cluster patterns, networking/security primitives, delivery workflows",
-      key: "containers", // Purple
-      credentials: ["Enterprise-scale", "Production ownership"],
+        "Kubernetes/OpenShift, multi-cluster patterns, networking and security primitives, EKS/GKE/OpenShift delivery workflows.",
+      key: "containers",
+      credentials: ["Production ownership", "Enterprise-scale"],
     },
     {
       icon: Code,
       name: "DevOps & Automation (IaC + CI/CD)",
       description:
-        "Terraform, GitOps, CI/CD automation, repeatable delivery frameworks",
-      key: "automation", // Orange
+        "Terraform, GitOps, GitHub Actions CI/CD — repeatable delivery frameworks that cut provisioning from weeks to hours.",
+      key: "automation",
       credentials: ["Production ownership"],
-    },
-    {
-      icon: Shield,
-      name: "Security & Compliance Enablement",
-      description:
-        "SOC 2 readiness, IAM/RBAC patterns, controls + evidence, security-conscious architectures",
-      key: "security", // Orange
-      credentials: ["Compliance-ready", "Enterprise-ready"],
     },
     {
       icon: Code,
       name: "Web Development & Fullstack",
       description:
-        "Modern web development, fullstack applications, TypeScript/React/Next.js, production deployments",
-      key: "web-dev", // Purple/Fuchsia
+        "TypeScript, React, Next.js, Node.js, Supabase — modern full-stack applications from architecture through production deployment.",
+      key: "web-dev",
       credentials: ["Modern stack", "Production-ready"],
+    },
+    {
+      icon: Sparkles,
+      name: "AI Engineering",
+      description:
+        "Multi-agent pipelines, LLM system architecture, prompt engineering — provider-agnostic workflows across Anthropic, Groq, OpenAI, Gemini, and Ollama.",
+      key: "ai-engineering",
+      credentials: ["AI-native", "Production-architected"],
+    },
+    {
+      icon: Shield,
+      name: "Security & Compliance",
+      description:
+        "SOC 2 Type II readiness, IAM/RBAC patterns, controls and evidence frameworks, security-conscious architectures for regulated industries.",
+      key: "security",
+      credentials: ["Compliance-ready", "Enterprise-ready"],
     },
   ];
 
@@ -236,14 +245,46 @@ export default function AboutSection() {
             Core Capabilities
           </motion.h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              className="md:col-span-3 group"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: TIMING.normal / 1000,
+                ease: EASE.easeOut,
+              }}
+            >
+              <motion.div
+                whileHover={prefersReducedMotion ? {} : { y: -2, transition: SPRING.gentle }}
+                className="rounded-2xl bg-slate-900 text-white ring-2 ring-slate-700 shadow-xl p-8 md:p-10 md:text-left text-center"
+              >
+                <h4 className="text-xl md:text-2xl font-semibold text-white mb-4">
+                  {heroCapability.name}
+                </h4>
+                <p className="text-base text-slate-300 leading-relaxed mb-6 max-w-4xl md:mx-0 mx-auto">
+                  {heroCapability.description}
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                  {heroCapability.credentials.map((cred, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/10 text-white ring-1 ring-white/20"
+                    >
+                      {cred}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {gridSkills.map((skill, index) => {
               const c = CATEGORY[skill.key];
-              // Stagger wave pattern: Row 1 (0,1,2): 0ms, 100ms, 200ms; Row 2 (3,4,5): 100ms, 200ms, 300ms
               const row = Math.floor(index / 3);
               const col = index % 3;
-              const delay = (row * 100 + col * 100) / 1000; // Convert to seconds
-              
+              const delay = (row * 100 + col * 100) / 1000;
+
               return (
                 <motion.div
                   key={skill.name}
@@ -259,7 +300,7 @@ export default function AboutSection() {
                 >
                   <motion.div
                     whileHover={prefersReducedMotion ? {} : {
-                      y: -4, // Lift 4px
+                      y: -4,
                       scale: 1.02,
                       transition: SPRING.gentle,
                     }}
@@ -267,21 +308,19 @@ export default function AboutSection() {
                     <Card
                       className={[
                         "overflow-hidden rounded-2xl ring-2 h-full transition-all duration-300 shadow-xl relative flex flex-col",
-                        "group-hover:shadow-2xl group-hover:ring-4", // Shadow and ring increase on hover
+                        "group-hover:shadow-2xl group-hover:ring-4",
                         c.ring,
                       ].join(" ")}
                     >
-                      {/* Moving gradient background with unique animation */}
-                      <div 
+                      <div
                         className="absolute inset-0 opacity-90"
                         style={{
-                          backgroundSize: '200% 200%, 200% 200%, 200% 200%, 100% 100%',
+                          backgroundSize: "200% 200%, 200% 200%, 200% 200%, 100% 100%",
                           backgroundImage: getGradientForCategory(skill.key),
                           animation: `gradient-${index % 6} ${8 + index * 1.5}s ease-in-out infinite`,
                         }}
                       />
                       <CardContent className="relative bg-white/60 backdrop-blur-md p-6 text-center flex flex-col flex-1">
-                        {/* Vibrant icon circle with rotation/pulse on hover */}
                         <motion.div
                           className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md flex-shrink-0`}
                           whileHover={prefersReducedMotion ? {} : {
@@ -292,14 +331,8 @@ export default function AboutSection() {
                         >
                           <skill.icon className={`h-8 w-8 ${c.iconColor}`} />
                         </motion.div>
-                        
-                        {/* Title - dark text on light background */}
                         <h4 className="font-semibold text-slate-900 mb-2 flex-shrink-0">{skill.name}</h4>
-                        
-                        {/* Description */}
                         <p className="text-sm text-slate-700 mb-4 flex-1">{skill.description}</p>
-                        
-                        {/* Proof-based micro-credentials */}
                         <div className="flex flex-wrap gap-2 justify-center flex-shrink-0">
                           {skill.credentials.map((cred, credIndex) => (
                             <span

@@ -104,6 +104,7 @@ export default function ProjectsSection() {
       "web-dev": "from-fuchsia-100 to-pink-100",
       education: "from-indigo-100 to-purple-100",
       containers: "from-purple-100 to-violet-100",
+      "ai-engineering": "from-rose-100 to-pink-100",
     };
     return brightGradients[category];
   };
@@ -119,6 +120,7 @@ export default function ProjectsSection() {
       "web-dev": "ring-fuchsia-300",
       education: "ring-indigo-300",
       containers: "ring-purple-300",
+      "ai-engineering": "ring-rose-300",
     };
     return brightRings[category];
   };
@@ -134,6 +136,7 @@ export default function ProjectsSection() {
       "web-dev": "shadow-fuchsia-300/50",
       education: "shadow-indigo-300/50",
       containers: "shadow-purple-300/50",
+      "ai-engineering": "shadow-rose-300/50",
     };
     return shadowColors[category];
   };
