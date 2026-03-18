@@ -235,7 +235,7 @@ export default function HeroSection() {
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto font-body px-4"
             variants={taglineVariants}
           >
-            Solutions Engineer translating complex business challenges into scalable technical solutions. I help enterprise teams move from &quot;what if&quot; to production with confidence
+            Full-stack engineer with enterprise roots — I build customer-facing products, AI-native applications, and the systems that hold them together.
           </motion.p>
 
           {/* CTA Buttons */}
