@@ -4,7 +4,6 @@ import React, { useState, Suspense, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Github, FileText } from "lucide-react";
-import CVModal from "./CVModal";
 import dynamic from 'next/dynamic';
 import TypingAnimation from './TypingAnimation';
 import FloatingTechParticles from './FloatingTechParticles';
@@ -30,7 +29,6 @@ const roles = [
 
 
 export default function HeroSection() {
-  const [showModal, setShowModal] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   
@@ -238,15 +236,15 @@ export default function HeroSection() {
             Full-stack engineer with enterprise roots — I build customer-facing products, AI-native applications, and the systems that hold them together.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 md:mb-16 px-4"
+          {/* CTA Buttons: Github + dual resumes; stacked below md, row on md+ */}
+          <motion.div
+            className="flex flex-col gap-3 md:flex-row md:flex-wrap md:justify-center items-stretch md:items-center mb-12 md:mb-16 px-4 w-full max-w-4xl mx-auto"
             variants={ctaVariants}
           >
             <Button
               asChild
               size="lg"
-              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full md:w-auto shrink-0"
             >
               <a
                 href="https://github.com/WBHankins93"
@@ -257,14 +255,38 @@ export default function HeroSection() {
                 <Github className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
             </Button>
-            <Button
-              onClick={() => setShowModal(true)}
-              size="lg"
-              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
-            >
-              Resume
-              <FileText className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:flex-nowrap justify-stretch sm:justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:flex-1 md:flex-initial md:w-auto md:min-w-0"
+              >
+                <a
+                  href="/resumes/Ben_Hankins_FS_final.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Ben_Hankins_FS_final.pdf"
+                >
+                  Resume — Full-Stack
+                  <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:flex-1 md:flex-initial md:w-auto md:min-w-0"
+              >
+                <a
+                  href="/resumes/Ben_Hankins_SE_final.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Ben_Hankins_SE_final.pdf"
+                >
+                  Resume — Solutions Engineering
+                  <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
+                </a>
+              </Button>
+            </div>
           </motion.div>
 
           {/* Enhanced Stats Grid - Customer Impact Focus with stagger */}
@@ -297,8 +319,6 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      <CVModal isOpen={showModal} onClose={() => setShowModal(false)} />
-      
       {/* CSS for grid animation */}
       <style jsx>{`
         @keyframes gridMove {
