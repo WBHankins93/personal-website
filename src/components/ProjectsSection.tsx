@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { projects as allProjects } from "@/data/projects";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Folder, Star, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, BookOpen, Users, GraduationCap } from "lucide-react";
+import { Folder, Star, Briefcase, ChevronDown, Eye, Code2, Server, Workflow, Activity, GitBranch, Shield, Globe, GraduationCap, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { cat, type CategoryKey } from "@/lib/colors";
@@ -17,21 +17,25 @@ import { EASE } from "@/lib/animation-configs/ease";
 
 // Get category icon for project
 const getCategoryIcon = (project: Project) => {
-  if (project.showcase) {
-    if (project.id === 'implementation-studio') return BookOpen;
-    if (project.id === 'solutions-playbook') return Users;
-    if (project.id === 'devops-studio') return Code2;
-  }
-  
   switch (project.category) {
-    case 'infrastructure': return Server;
-    case 'automation': return Workflow;
-    case 'monitoring': return Activity;
-    case 'ci-cd': return GitBranch;
-    case 'security': return Shield;
-    case 'web-dev': return Globe;
-    case 'education': return GraduationCap;
-    default: return Server;
+    case "infrastructure":
+      return Server;
+    case "automation":
+      return Workflow;
+    case "monitoring":
+      return Activity;
+    case "ci-cd":
+      return GitBranch;
+    case "security":
+      return Shield;
+    case "web-dev":
+      return Globe;
+    case "education":
+      return GraduationCap;
+    case "ai-engineering":
+      return Sparkles;
+    default:
+      return Server;
   }
 };
 
@@ -53,9 +57,18 @@ const getStatusStyle = (status: string) => {
     case 'Complete': return 'bg-gradient-to-r from-slate-50 to-gray-50 text-slate-700 ring-slate-200/60';
     case 'Maintained': return 'bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 ring-amber-200/60';
     case 'Archived': return 'bg-gradient-to-r from-red-50 to-pink-50 text-red-700 ring-red-200/60';
+    case 'Live Beta':
+      return 'bg-gradient-to-r from-teal-50 to-cyan-50 text-teal-800 ring-teal-200/60';
     default: return 'bg-gradient-to-r from-gray-50 to-slate-50 text-gray-700 ring-gray-200/60';
   }
 };
+
+const formatCategoryLabel = (category: Project["category"]) =>
+  category === "web-dev"
+    ? "Web Dev"
+    : category === "ai-engineering"
+      ? "AI Engineering"
+      : category.replace("-", "/");
 
 export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | CategoryKey>("all");
@@ -74,6 +87,11 @@ export default function ProjectsSection() {
     { id: "security", label: "Security", count: allProjects.filter(p => p.category === "security").length },
     { id: "education", label: "Education", count: allProjects.filter(p => p.category === "education").length },
     { id: "web-dev", label: "Web Dev", count: allProjects.filter(p => p.category === "web-dev").length },
+    {
+      id: "ai-engineering",
+      label: "AI Engineering",
+      count: allProjects.filter((p) => p.category === "ai-engineering").length,
+    },
   ];
 
   const filteredProjects = selectedCategory === "all"
@@ -322,7 +340,7 @@ export default function ProjectsSection() {
                                     "text-xs font-semibold uppercase tracking-wide",
                                     (project.featured || project.showcase) ? c.accent : "text-slate-500"
                                   )}>
-                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                                    {formatCategoryLabel(project.category)}
                                   </span>
                                   {project.showcase && (
                                     <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-xs font-medium rounded-full ring-1 ring-amber-200/60">
@@ -528,7 +546,7 @@ export default function ProjectsSection() {
                                 "text-[10px] font-semibold uppercase tracking-wide",
                                 (project.featured || project.showcase) ? c.accent : "text-slate-500"
                               )}>
-                                {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                                {formatCategoryLabel(project.category)}
                               </span>
                               
                               {project.showcase && (
@@ -668,7 +686,7 @@ export default function ProjectsSection() {
                                 <div className="flex items-center gap-1 mb-1.5 flex-wrap">
                                   <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
                                   <span className={clsx("text-[10px] font-semibold uppercase tracking-wide", c.accent)}>
-                                    {project.category === 'web-dev' ? 'Web Dev' : project.category.replace('-', '/')}
+                                    {formatCategoryLabel(project.category)}
                                   </span>
                                 </div>
                                 <h3 className="font-bold text-sm leading-tight mb-3 text-slate-900">

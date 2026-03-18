@@ -8,12 +8,12 @@ export type Project = {
   github_url?: string;
   live_url?: string;
   image_url?: string;
-  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "security" | "web-dev" | "education";
+  category: "infrastructure" | "automation" | "monitoring" | "ci-cd" | "security" | "web-dev" | "education" | "ai-engineering";
   featured?: boolean;
   showcase?: boolean;
   techCount: number;
   projectType: 'Production' | 'Client Work' | 'Open Source' | 'Learning';
-  status: 'Active' | 'Complete' | 'Maintained' | 'Archived';
+  status: 'Active' | 'Complete' | 'Maintained' | 'Archived' | 'Live Beta';
   architecture: 'Microservices' | 'Monolith' | 'Serverless' | 'Infrastructure' | 'JAMstack';
   scale: 'Enterprise' | 'Startup' | 'Personal' | 'Small Business';
   environment: 'AWS' | 'Multi-cloud' | 'On-prem' | 'GCP' | 'IBM Cloud' | 'Vercel';
@@ -61,7 +61,6 @@ export const projects: Project[] = [
     image_url: "",
     category: "education",
     featured: true,
-    showcase: true,
     techCount: 12,
     projectType: 'Open Source',
     status: 'Active',
@@ -308,7 +307,6 @@ export const projects: Project[] = [
     image_url: "",
     category: "education",
     featured: true,
-    showcase: true,
     techCount: 7,
     projectType: 'Open Source',
     status: 'Active',
@@ -326,11 +324,82 @@ export const projects: Project[] = [
     image_url: "",
     category: "education",
     featured: true,
-    showcase: true,
     techCount: 5,
     projectType: 'Open Source',
     status: 'Active',
     architecture: 'Infrastructure',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "greenlit",
+    name: "Greenlit",
+    description:
+      "AI resume coaching platform with industry-specific feedback, ATS scoring, and bullet rewrites. Built during my own job search to solve a problem I was actually experiencing.",
+    technologies: ["Next.js", "Supabase", "Google Gemini", "Anthropic"],
+    live_url: "https://greenlit-cv-j3yz.vercel.app/",
+    image_url: "",
+    category: "ai-engineering",
+    featured: true,
+    showcase: true,
+    techCount: 4,
+    projectType: 'Production',
+    status: 'Live Beta',
+    architecture: 'JAMstack',
+    scale: 'Personal',
+    environment: 'Vercel'
+  },
+  {
+    id: "ai-business-plan-generator",
+    name: "AI Business Plan Generator",
+    description:
+      "5-agent AI pipeline for business plan generation. Provider-agnostic architecture spanning Groq, Anthropic, and OpenAI.",
+    technologies: ["Python", "Groq", "Anthropic", "OpenAI"],
+    github_url: "https://github.com/WBHankins93/business-plan-writer",
+    image_url: "",
+    category: "ai-engineering",
+    featured: true,
+    showcase: true,
+    techCount: 4,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "prompt-library",
+    name: "Prompt Library",
+    description:
+      "A reasoning and judgment architecture for AI — not just a folder of prompts. 50 personas, 12 workflows, layered foundation standards. Model-agnostic. Built to make AI interactions produce better thinking, not just better outputs.",
+    technologies: ["Markdown", "Open Source"],
+    github_url: "https://github.com/WBHankins93/master-prompts",
+    image_url: "",
+    category: "ai-engineering",
+    featured: true,
+    showcase: true,
+    techCount: 2,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Infrastructure',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "job-extractor",
+    name: "Job Extractor",
+    description:
+      "Automated job hunting pipeline built during my own search. Scans multiple ATS job boards, filters for remote roles matching target criteria, runs on cron schedules, and exports structured CSVs. Built to solve the problem, then kept building.",
+    technologies: ["Python", "Automation", "Cron"],
+    github_url: "https://github.com/WBHankins93/job-extractor",
+    image_url: "",
+    category: "automation",
+    featured: true,
+    showcase: true,
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Monolith',
     scale: 'Personal',
     environment: 'Multi-cloud'
   },
