@@ -13,21 +13,10 @@ export default function HomePage() {
     <main>
       <Header />
 
-      <section className="py-12 md:py-20">
-        <HeroSection />
-      </section>
-
-      <section className="py-12 md:py-20">
-        <AboutSection />
-      </section>
-
-      <section className="py-12 md:py-20">
-        <ExperienceSection />
-      </section>
-
-      <section className="py-12 md:py-20">
-        <ProjectsSection />
-      </section>
+      <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
+      <ProjectsSection />
 
       {/* <section className="py-12">
         <ContactSection />

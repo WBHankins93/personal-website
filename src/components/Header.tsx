@@ -153,7 +153,7 @@ export default function Header() {
               className="h-12 w-12 shrink-0 rounded-xl ring-1 ring-black/10 dark:ring-white/20 shadow-sm"
               priority
             />
-            <span className="text-xl md:text-2xl font-bold gradient-text">
+            <span className={`text-xl md:text-2xl font-bold ${isScrolled ? "gradient-text" : "text-white"}`}>
               Ben Hankins
             </span>
           </motion.a>
@@ -166,7 +166,11 @@ export default function Header() {
                 <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="relative text-slate-700 hover:text-emerald-600 transition-colors font-medium px-2 py-1"
+                  className={`relative transition-colors font-medium px-2 py-1 ${
+                    isScrolled
+                      ? "text-slate-700 hover:text-emerald-600"
+                      : "text-white/90 hover:text-white"
+                  }`}
                   whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                   whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
                   transition={SPRING.gentle}

@@ -20,7 +20,6 @@ import {
 export default function AboutSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  // Gradient colors for each category - using darker and lighter versions of same color
   const getGradientForCategory = (key: CategoryKey): string => {
     const gradients: Record<CategoryKey, string> = {
       "ci-cd":
@@ -55,84 +54,89 @@ export default function AboutSection() {
   const gridSkills: Array<{
     icon: React.ComponentType<{ className?: string }>;
     name: string;
-    description: string;
     key: CategoryKey;
-    credentials: string[];
   }> = [
     {
       icon: Cloud,
       name: "Cloud & Multi-Cloud Architecture",
-      description:
-        "AWS, GCP, IBM Cloud — multi-cloud architectures, migration planning, production readiness across regulated enterprise environments.",
       key: "infrastructure",
-      credentials: ["Enterprise-scale", "Production ownership"],
     },
     {
       icon: Server,
       name: "Kubernetes & Platform Engineering",
-      description:
-        "Kubernetes/OpenShift, multi-cluster patterns, networking and security primitives, EKS/GKE/OpenShift delivery workflows.",
       key: "containers",
-      credentials: ["Production ownership", "Enterprise-scale"],
     },
     {
       icon: Code,
       name: "DevOps & Automation (IaC + CI/CD)",
-      description:
-        "Terraform, GitOps, GitHub Actions CI/CD — repeatable delivery frameworks that cut provisioning from weeks to hours.",
       key: "automation",
-      credentials: ["Production ownership"],
     },
     {
       icon: Code,
       name: "Web Development & Fullstack",
-      description:
-        "TypeScript, React, Next.js, Node.js, Supabase — modern full-stack applications from architecture through production deployment.",
       key: "web-dev",
-      credentials: ["Modern stack", "Production-ready"],
     },
     {
       icon: Sparkles,
       name: "AI Engineering",
-      description:
-        "Multi-agent pipelines, LLM system architecture, prompt engineering — provider-agnostic workflows across Anthropic, Groq, OpenAI, Gemini, and Ollama.",
       key: "ai-engineering",
-      credentials: ["AI-native", "Production-architected"],
     },
     {
       icon: Shield,
       name: "Security & Compliance",
-      description:
-        "SOC 2 Type II readiness, IAM/RBAC patterns, controls and evidence frameworks, security-conscious architectures for regulated industries.",
       key: "security",
-      credentials: ["Compliance-ready", "Enterprise-ready"],
     },
+  ];
+
+  const quickFacts = [
+    "New Orleans & PNW",
+    "6+ years building",
+    "Founder, Sproutflow Studio",
   ];
 
   return (
     <section
       id="about"
-      className="py-12 md:py-20 bg-gradient-to-br from-white via-slate-50 to-white"
+      className="py-12 md:py-20 bg-slate-50"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <motion.h2
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          {/* Editorial Profile: Two-column bio */}
+          <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8 md:gap-12 items-start mb-16 md:mb-20 max-w-4xl mx-auto">
+            {/* Left column: Photo + quick facts */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{
                 duration: TIMING.normal / 1000,
                 ease: EASE.easeOut,
               }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
+              className="flex flex-col items-center md:items-center md:sticky md:top-24"
             >
-              About Me
-            </motion.h2>
-          </div>
+              <div className="relative h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64 overflow-hidden rounded-2xl ring-2 ring-slate-200 bg-slate-100">
+                <Image
+                  src="/about-photo-placeholder.svg"
+                  alt="Ben Hankins"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, 256px"
+                  priority={false}
+                />
+              </div>
+              <div className="flex flex-wrap gap-2 mt-4 justify-center max-w-[280px]">
+                {quickFacts.map((fact) => (
+                  <span
+                    key={fact}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white text-slate-600 border border-slate-200"
+                  >
+                    {fact}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
 
-          <div className="max-w-[680px] mx-auto text-left px-4 md:px-0">
+            {/* Right column: Heading + bio text */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -144,11 +148,11 @@ export default function AboutSection() {
                   transition: { staggerChildren: 0.12 },
                 },
               }}
-              className="flex flex-col items-center md:items-start"
+              className="flex flex-col text-center md:text-left pt-0 md:pt-2"
             >
-              <motion.div
+              <motion.h2
                 variants={{
-                  hidden: { opacity: 0, y: 16 },
+                  hidden: { opacity: 0, y: 20 },
                   visible: {
                     opacity: 1,
                     y: 0,
@@ -158,18 +162,10 @@ export default function AboutSection() {
                     },
                   },
                 }}
-                className="relative h-44 w-44 shrink-0 overflow-hidden rounded-full ring-2 ring-slate-200 bg-slate-100 mb-8"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6"
               >
-                <Image
-                  // SWAP: set src to real headshot path when ready (e.g. "/about-headshot.jpg")
-                  src="/about-photo-placeholder.svg"
-                  alt="Ben Hankins"
-                  fill
-                  className="object-cover"
-                  sizes="176px"
-                  priority={false}
-                />
-              </motion.div>
+                About Me
+              </motion.h2>
 
               <motion.p
                 variants={{
@@ -183,12 +179,14 @@ export default function AboutSection() {
                     },
                   },
                 }}
-                className="font-body text-base text-slate-700 leading-[1.7] mb-8 w-full"
+                className="font-body text-base md:text-lg text-slate-700 leading-[1.7] mb-5"
               >
-                I&apos;ve never been someone who waits to be told what to do. I started building
-                things because I loved seeing people actually use them — and that feeling
-                hasn&apos;t left. Six years later I&apos;m writing AI pipelines, shipping client
-                products, and still getting that same hit when something goes live.
+                What I care about is building things end to end and watching them hold up under real
+                traffic. The moment that hooked me was taking a $10.1M cloud deal from architecture
+                workshop to production at IBM — owning every layer, not handing anything off. That
+                instinct carried me through standing up four Kubernetes clusters and driving SOC 2
+                from 34% to 100% at Prove AI, and it&apos;s why I founded Sproutflow Studio: to keep
+                building things people actually use, on my own terms.
               </motion.p>
 
               <motion.p
@@ -203,49 +201,32 @@ export default function AboutSection() {
                     },
                   },
                 }}
-                className="font-body text-base text-slate-700 leading-[1.7] mb-8 w-full"
-              >
-                Started at Kortivity in Austin building a Vue-powered recruiting tool. Went to
-                IBM where I spent four years doing the hard stuff — enterprise cloud delivery,
-                architecture workshops, and a $10.1M deal with CenterPoint Energy. Deepened my
-                operational instincts as an SRE at Prove AI: 99.9% uptime, four Kubernetes
-                clusters, SOC 2 from 34% to 100%. In late 2024 I founded Sproutflow Studio to get
-                back to what I love — building things people use, owning it end to end.
-              </motion.p>
-
-              <motion.p
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: TIMING.normal / 1000,
-                      ease: EASE.easeOut,
-                    },
-                  },
-                }}
-                className="font-body text-base text-slate-700 leading-[1.7] mb-0 w-full"
+                className="font-body text-base md:text-lg text-slate-700 leading-[1.7]"
               >
                 Outside of work I&apos;m usually at a concert, planning a trip, or coding late at
                 night when the house is quiet and the thinking gets sharper. Split between New
-                Orleans and always wanting to be back in the Pacific Northwest. Both places feed
-                different parts of me — the festivals and the forests.
+                Orleans and always wanting to be back in the Pacific Northwest — the festivals and
+                the forests.
               </motion.p>
             </motion.div>
           </div>
 
-          {/* Core Capabilities - LIGHT CARDS WITH VIBRANT ICONS */}
-          <motion.h3 
+          {/* Core Capabilities */}
+          <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl font-bold text-slate-900 mb-8 mt-16 md:mt-20 text-center"
+            transition={{
+              duration: TIMING.normal / 1000,
+              ease: EASE.easeOut,
+            }}
+            className="text-2xl font-bold text-slate-900 mb-8 text-center"
           >
             Core Capabilities
           </motion.h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Hero capability card */}
             <motion.div
               className="md:col-span-3 group"
               initial={{ opacity: 0, y: 24 }}
@@ -279,6 +260,7 @@ export default function AboutSection() {
               </motion.div>
             </motion.div>
 
+            {/* Skill cards - visual-forward with animated gradients */}
             {gridSkills.map((skill, index) => {
               const c = CATEGORY[skill.key];
               const row = Math.floor(index / 3);
@@ -317,12 +299,14 @@ export default function AboutSection() {
                         style={{
                           backgroundSize: "200% 200%, 200% 200%, 200% 200%, 100% 100%",
                           backgroundImage: getGradientForCategory(skill.key),
-                          animation: `gradient-${index % 6} ${8 + index * 1.5}s ease-in-out infinite`,
+                          animation: prefersReducedMotion
+                            ? "none"
+                            : `gradient-${index % 6} ${8 + index * 1.5}s ease-in-out infinite`,
                         }}
                       />
-                      <CardContent className="relative bg-white/60 backdrop-blur-md p-6 text-center flex flex-col flex-1">
+                      <CardContent className="relative bg-white/60 backdrop-blur-md p-6 sm:p-8 text-center flex flex-col flex-1 items-center justify-center min-h-[180px] sm:min-h-[200px]">
                         <motion.div
-                          className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md flex-shrink-0`}
+                          className={`mb-4 flex h-16 w-16 items-center justify-center rounded-full ${c.iconBg} shadow-md`}
                           whileHover={prefersReducedMotion ? {} : {
                             rotate: 5,
                             scale: 1.1,
@@ -331,18 +315,7 @@ export default function AboutSection() {
                         >
                           <skill.icon className={`h-8 w-8 ${c.iconColor}`} />
                         </motion.div>
-                        <h4 className="font-semibold text-slate-900 mb-2 flex-shrink-0">{skill.name}</h4>
-                        <p className="text-sm text-slate-700 mb-4 flex-1">{skill.description}</p>
-                        <div className="flex flex-wrap gap-2 justify-center flex-shrink-0">
-                          {skill.credentials.map((cred, credIndex) => (
-                            <span
-                              key={credIndex}
-                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${c.iconBg} ${c.iconColor} border border-opacity-20`}
-                            >
-                              {cred}
-                            </span>
-                          ))}
-                        </div>
+                        <h4 className="font-semibold text-slate-900 text-base sm:text-lg">{skill.name}</h4>
                       </CardContent>
                     </Card>
                   </motion.div>
