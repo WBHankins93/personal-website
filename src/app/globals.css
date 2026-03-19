@@ -39,6 +39,31 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Matrix color system */
+  --color-matrix: #00FF41;
+  --color-matrix-light: #39FF6E;
+  --color-matrix-dim: #00CC34;
+  --color-matrix-dark: #009926;
+
+  --color-mbg-primary: #060606;
+  --color-mbg-card: rgba(10,10,10,0.75);
+  --color-mbg-cardHover: rgba(16,16,16,0.85);
+
+  --color-mborder-subtle: rgba(255,255,255,0.04);
+  --color-mborder-hover: rgba(255,255,255,0.10);
+  --color-mborder-rule: rgba(255,255,255,0.06);
+
+  --color-mglow-sm: rgba(0,255,65,0.08);
+  --color-mglow-md: rgba(0,255,65,0.15);
+  --color-mglow-lg: rgba(0,255,65,0.25);
+  --color-mglow-border: rgba(0,255,65,0.10);
+  --color-mglow-borderHover: rgba(0,255,65,0.30);
+
+  --color-mtext-primary: #EDEDED;
+  --color-mtext-dim: #999999;
+  --color-mtext-light: #B0B0B0;
+  --color-mtext-muted: #5A5A5A;
 }
 
 :root {
@@ -94,22 +119,24 @@
 
 /* FONT OVERRIDE: Ensure our custom fonts are applied */
 @layer base {
-  h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: var(--font-heading), sans-serif !important;
+  body {
+    font-family: var(--font-body), sans-serif;
   }
 
-  .font-sixtyfour {
-    font-family: var(--font-sixtyfour), monospace !important;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), sans-serif;
   }
 
-  body, p, span, div, .font-body {
-    font-family: var(--font-body), sans-serif !important;
-  }
-
-  code, pre, .font-mono {
-    font-family: var(--font-mono), monospace !important;
+  code, pre {
+    font-family: var(--font-mono), monospace;
   }
 }
+
+/* Explicit font family utilities — these win over base layer */
+.font-heading { font-family: var(--font-heading), sans-serif !important; }
+.font-body { font-family: var(--font-body), sans-serif !important; }
+.font-mono { font-family: var(--font-mono), monospace !important; }
+.font-sixtyfour { font-family: var(--font-sixtyfour), monospace !important; }
 
 /* Matrix green gradient text utility */
 .matrix-gradient-text {
