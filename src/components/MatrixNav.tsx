@@ -1,17 +1,15 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useScrollTrigger } from '@/hooks/useScrollTrigger';
-
-const navLinks = [
-  { label: 'Work', href: '#work' },
-  { label: 'About', href: '#about' },
-  { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Resume', href: '/resumes/Ben_Hankins_SE_final.pdf' },
-];
+import ResumeDropdown from './ResumeDropdown';
 
 export default function MatrixNav() {
+  const pathname = usePathname();
   const { isScrolled, scrollDirection } = useScrollTrigger(8);
   const shouldShow = scrollDirection === 'up' || !isScrolled;
+
+  const anchor = (hash: string) => (pathname === '/' ? hash : `/${hash}`);
 
   return (
     <nav
@@ -30,7 +28,7 @@ export default function MatrixNav() {
       />
 
       {/* Logo */}
-      <a href="#home" className="flex items-center gap-3 font-heading font-semibold text-base text-mtext-primary no-underline">
+      <a href={pathname === '/' ? '#home' : '/'} className="flex items-center gap-3 font-heading font-semibold text-base text-mtext-primary no-underline">
         <div
           className="w-[30px] h-[30px] border-[1.5px] border-matrix rounded-[5px] flex items-center justify-center font-mono font-medium text-[0.8rem] text-matrix relative"
         >
@@ -47,18 +45,32 @@ export default function MatrixNav() {
       </a>
 
       {/* Nav links — hidden on mobile */}
-      <ul className="hidden md:flex gap-10 list-none font-heading text-[0.8rem] tracking-[0.05em] uppercase">
-        {navLinks.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              className="text-mtext-muted no-underline transition-colors duration-300 hover:text-matrix-light"
-              {...(link.href.startsWith('/') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
+      <ul className="hidden md:flex items-center gap-10 list-none font-heading text-[0.8rem] tracking-[0.05em] uppercase">
+        <li>
+          <a
+            href={anchor('#work')}
+            className="text-mtext-muted no-underline transition-colors duration-300 hover:text-matrix-light"
+          >
+            Work
+          </a>
+        </li>
+        <li>
+          <a
+            href={anchor('#about')}
+            className="text-mtext-muted no-underline transition-colors duration-300 hover:text-matrix-light"
+          >
+            About
+          </a>
+        </li>
+        <li>
+          <ResumeDropdown
+            trigger={
+              <span className="text-mtext-muted no-underline transition-colors duration-300 hover:text-matrix-light font-heading text-[0.8rem] tracking-[0.05em] uppercase">
+                Resume
+              </span>
+            }
+          />
+        </li>
       </ul>
 
       {/* GitHub CTA */}

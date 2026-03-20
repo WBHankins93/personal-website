@@ -90,7 +90,7 @@ export default function MatrixHero() {
         {/* CTAs */}
         <motion.div className="flex flex-wrap gap-4 items-center" {...anim(0.8)}>
           <a
-            href="#contact"
+            href="/contact"
             className="font-heading text-[0.8rem] font-medium tracking-[0.04em] text-mbg-primary bg-matrix py-[0.7rem] px-7 rounded-[4px] no-underline inline-flex items-center gap-2 relative transition-all duration-300 hover:bg-matrix-light"
           >
             {/* Radial glow behind button */}
