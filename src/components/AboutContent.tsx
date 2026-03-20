@@ -12,39 +12,39 @@ function fadeUp(delay: number) {
 
 const timeline = [
   {
-    period: '2018 – 2019',
-    role: 'Getting Started',
+    period: '2018',
+    role: 'Software Engineering Bootcamp',
     company: 'General Assembly',
     detail:
-      'Bootcamp. Learned to code late at night, shipped my first real project, and realized I actually loved this.',
+      'Learned to code late at night, shipped my first real project, and realized I actually loved this. Went from zero to employed in under a year.',
   },
   {
-    period: '2019 – 2023',
-    role: 'Cloud Solutions Architect / SE',
-    company: 'IBM',
+    period: 'Jan 2019 – June 2019',
+    role: 'Web Developer',
+    company: 'Kortivity',
     detail:
-      "Worked with Fortune 500 clients — NBC Universal, Citibank, AT&T, CenterPoint Energy. Helped architect cloud migrations, led technical discovery, contributed to a $10.1M SAP RISE deal. Learned how enterprise moves (slowly, carefully, politically) and how to make it move anyway.",
+      'First job out of bootcamp. Built a Vue/SQL-powered web extension for candidate sourcing. Contributed to 2 client closes before the contract ended. Owned the full SDLC from day one.',
   },
   {
-    period: '2023 – 2025',
+    period: 'Dec 2019 – Aug 2024',
+    role: 'Solutions Engineer → Senior SE',
+    company: 'IBM — Client Engineering',
+    detail:
+      "Promoted to Senior SE in 14 months. Led technical engagements for 12 enterprise customers — NBC Universal, Citibank, AT&T, CenterPoint Energy. Designed multi-cloud Kubernetes solutions across AWS, GCP, and IBM Cloud. POC close rate of 70%. Directly contributed to a $10.1M SAP RISE deal by automating Terraform environments from 2 to 49, cutting provisioning from 2+ weeks to under 3 hours.",
+  },
+  {
+    period: 'Jan 2025 – Sept 2025',
     role: 'Site Reliability Engineer',
     company: 'Prove AI',
     detail:
-      "Startup life. Owned the infrastructure end-to-end — AWS, Kubernetes, Terraform. Maintained 99.9% uptime, cut deploy times by 80%, and built the tooling that kept production running. Learned what real ownership looks like.",
+      "Startup pace after four years of enterprise. Owned production infrastructure across 4 Kubernetes clusters. Maintained 99.9% uptime, reduced deploy times by 80% through GitHub Actions automation, and led SOC 2 Type II readiness from 34% to 100%.",
   },
   {
     period: 'Oct 2025 – Present',
-    role: 'Founder',
+    role: 'Founder & Full-Stack Developer',
     company: 'Sproutflow Studio',
     detail:
-      "After Prove AI, started a web consultancy doing what I'd been wanting to do — ship real products for real people. Five client apps in production: telehealth platforms, event businesses, e-commerce stores. Small businesses deserve good software too.",
-  },
-  {
-    period: 'Now',
-    role: 'Building in AI',
-    company: 'Independent',
-    detail:
-      "Alongside Sproutflow, deep in AI tooling. Built Greenlit (AI resume coaching), a 5-agent business plan generator, an automated job pipeline, and a prompt engineering framework. Actively looking for the right full-time opportunity.",
+      "Five client apps shipped end-to-end — telehealth platforms, e-commerce stores, event booking. Lead technical discovery, scope architecture, build, and deploy. No handoffs. Small businesses deserve software that actually works.",
   },
 ];
 
@@ -97,19 +97,19 @@ export default function AboutContent() {
           </div>
           <div className="space-y-5 font-body text-[1rem] text-mtext-dim leading-relaxed">
             <p>
-              I didn&apos;t grow up wanting to be an engineer. I found my way into tech through General Assembly in 2018 — took the bootcamp, built some things, stayed up too late debugging, and somewhere along the way got genuinely hooked.
+              I didn&apos;t grow up wanting to be an engineer. I found my way into tech through General Assembly in 2018 — took the bootcamp, built some things, stayed up too late debugging, and somewhere along the way got genuinely hooked. First job out of bootcamp was at Kortivity in Austin, building a candidate sourcing tool. Owned the full stack from day one.
             </p>
             <p>
-              IBM was my proving ground. I spent four years in enterprise — architecture workshops, pre-sales cycles, production deployments for companies like NBC Universal, Citibank, and AT&T. I learned how large organizations think, what makes technical trust hard to earn, and how to translate between business and engineering in both directions.
+              IBM was my proving ground. Almost five years — started as a Solutions Engineer in December 2019, promoted to Senior SE in 14 months. Worked with 12 enterprise customers, ran POCs with a 70% close rate, and served as the technical lead on a $10.1M SAP RISE deal for CenterPoint Energy. Learned how large organizations think, what makes technical trust hard to earn, and how to translate between business and engineering in both directions.
             </p>
             <p>
-              Prove AI was the opposite energy. Startup pace, real ownership, every problem lands on your plate. I owned the infrastructure end-to-end — AWS, Kubernetes, Terraform — maintained production reliability, and built the internal tooling that kept things running. That stretch confirmed what I suspected: I work best when I have real responsibility for what I build.
+              Prove AI was the opposite energy. January to September 2025. Startup pace, real ownership. I ran SRE across 4 production Kubernetes clusters, maintained 99.9% uptime, cut deploy times by 80%, and took SOC 2 Type II readiness from 34% to 100%. That nine months confirmed what I suspected: I work best when I have genuine responsibility for what I build.
             </p>
             <p>
-              After Prove AI, I started Sproutflow Studio in October 2025. It&apos;s the consultancy I&apos;d been wanting to build — shipping real products for real people, not just enterprise POCs. Small businesses, local service providers, people who actually depend on the software. Five apps in production. More on the way.
+              Sproutflow Studio started in October 2025. It&apos;s the consultancy I&apos;d been wanting to build — shipping real products for real people. Five client apps in production. Telehealth platforms, e-commerce stores, event booking. No handoffs. I lead discovery, scope architecture, build, and deploy.
             </p>
             <p>
-              Right now I&apos;m deep in AI tooling — building things that make AI outputs actually useful rather than just impressive. Greenlit started as a tool I built for my own job search. The prompt library started as notes I was keeping for myself. That&apos;s usually how the best stuff starts.
+              Alongside Sproutflow, I&apos;m deep in AI tooling. Greenlit started as something I built for my own job search. The prompt engineering framework started as notes I was keeping for myself. That&apos;s usually how the best stuff starts.
             </p>
           </div>
         </div>

@@ -4,8 +4,16 @@ import { useState, useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const resumes = [
-  { label: 'Full-Stack Engineer', href: '/Ben_Hankins_FS_final.pdf' },
-  { label: 'Solutions Engineer', href: '/Ben_Hankins_SE_final.pdf' },
+  {
+    label: 'Solutions Engineer',
+    subtitle: 'Enterprise infrastructure, pre-sales, and technical discovery.',
+    href: '/Ben_Hankins_SE_final.pdf',
+  },
+  {
+    label: 'Full-Stack Engineer',
+    subtitle: 'Product development, cloud platforms, and AI tooling.',
+    href: '/Ben_Hankins_FS_final.pdf',
+  },
 ];
 
 interface ResumeDropdownProps {
@@ -61,10 +69,10 @@ export default function ResumeDropdown({ trigger, align = 'left', className }: R
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className={`absolute top-full mt-2 z-50 min-w-[200px] rounded-[6px] border border-matrix-dim backdrop-blur-[12px] overflow-hidden ${
+            className={`absolute top-full mt-2 z-50 w-[280px] rounded-[8px] border border-matrix-dim backdrop-blur-[12px] overflow-hidden p-1.5 flex flex-col gap-1 ${
               align === 'right' ? 'right-0' : 'left-0'
             }`}
-            style={{ background: 'rgba(10,10,10,0.95)' }}
+            style={{ background: 'rgba(10,10,10,0.97)' }}
           >
             {resumes.map((resume) => (
               <a
@@ -72,9 +80,14 @@ export default function ResumeDropdown({ trigger, align = 'left', className }: R
                 href={resume.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block font-mono text-[0.7rem] tracking-[0.05em] text-mtext-dim no-underline py-3 px-4 transition-colors duration-200 hover:text-matrix-light hover:bg-[rgba(0,255,65,0.05)]"
+                className="group block no-underline rounded-[5px] px-4 py-3 transition-colors duration-150 hover:bg-[rgba(0,255,65,0.06)]"
               >
-                {resume.label}
+                <div className="font-heading text-[0.8rem] font-medium text-mtext-primary group-hover:text-matrix-light transition-colors duration-150 mb-0.5">
+                  {resume.label}
+                </div>
+                <div className="font-mono text-[0.65rem] text-mtext-muted leading-snug">
+                  {resume.subtitle}
+                </div>
               </a>
             ))}
           </motion.div>
