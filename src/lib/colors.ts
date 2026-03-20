@@ -99,6 +99,26 @@ export const CATEGORY = {
     iconColor: "text-white",
     bg: "bg-gradient-to-br from-slate-50 to-rose-50/30 hover:from-rose-50/50 hover:to-rose-50/50",
   },
+  python: {
+    ring: "ring-yellow-200",
+    grad: "from-yellow-50 to-amber-50",
+    pill: "bg-yellow-50 text-yellow-700 border-yellow-200",
+    dot: "bg-yellow-500",
+    accent: "text-yellow-600",
+    iconBg: "bg-yellow-500",
+    iconColor: "text-white",
+    bg: "bg-gradient-to-br from-slate-50 to-yellow-50/30 hover:from-yellow-50/50 hover:to-yellow-50/50",
+  },
+  "client-work": {
+    ring: "ring-teal-200",
+    grad: "from-teal-50 to-emerald-50",
+    pill: "bg-teal-50 text-teal-700 border-teal-200",
+    dot: "bg-teal-500",
+    accent: "text-teal-600",
+    iconBg: "bg-teal-500",
+    iconColor: "text-white",
+    bg: "bg-gradient-to-br from-slate-50 to-teal-50/30 hover:from-teal-50/50 hover:to-teal-50/50",
+  },
 } as const;
 
 export type CategoryKey = keyof typeof CATEGORY;

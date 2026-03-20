@@ -64,6 +64,11 @@
   --color-mtext-dim: #999999;
   --color-mtext-light: #B0B0B0;
   --color-mtext-muted: #5A5A5A;
+
+  /* Animations */
+  --animate-ticker-scroll: ticker-scroll 35s linear infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-cursor-blink: cursor-blink 1s step-end infinite;
 }
 
 :root {
@@ -155,6 +160,22 @@
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
+}
+
+/* ─── Keyframe animations (must live here for Tailwind v4) ─────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { border-color: #00FF41; }
+  50%       { border-color: transparent; }
 }
 
 /* Scrollbar hide utility */

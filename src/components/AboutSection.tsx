@@ -40,6 +40,10 @@ export default function AboutSection() {
         "radial-gradient(circle at 20% 50%, #06b6d4 0%, transparent 50%), radial-gradient(circle at 80% 20%, #22d3ee 0%, transparent 50%), radial-gradient(circle at 40% 80%, #0891b2 0%, transparent 50%), linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
       "ai-engineering":
         "radial-gradient(circle at 20% 50%, #f43f5e 0%, transparent 50%), radial-gradient(circle at 80% 20%, #fb7185 0%, transparent 50%), radial-gradient(circle at 40% 80%, #e11d48 0%, transparent 50%), linear-gradient(135deg, #ffe4e6 0%, #fda4af 100%)",
+      python:
+        "radial-gradient(circle at 20% 50%, #eab308 0%, transparent 50%), radial-gradient(circle at 80% 20%, #facc15 0%, transparent 50%), radial-gradient(circle at 40% 80%, #ca8a04 0%, transparent 50%), linear-gradient(135deg, #fef9c3 0%, #fde047 100%)",
+      "client-work":
+        "radial-gradient(circle at 20% 50%, #14b8a6 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2dd4bf 0%, transparent 50%), radial-gradient(circle at 40% 80%, #0d9488 0%, transparent 50%), linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%)",
     };
     return gradients[key];
   };

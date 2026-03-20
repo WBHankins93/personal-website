@@ -56,7 +56,7 @@ export default function MatrixNav() {
         </li>
         <li>
           <a
-            href={anchor('#about')}
+            href="/about"
             className="text-mtext-muted no-underline transition-colors duration-300 hover:text-matrix-light"
           >
             About

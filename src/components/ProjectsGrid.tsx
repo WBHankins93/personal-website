@@ -4,29 +4,76 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects, type Project } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { SPRING } from '@/lib/animation-configs/spring';
 
-type Filter = 'all' | 'full-stack' | 'ai-engineering' | 'infrastructure' | 'client-work';
+type Filter = 'all' | 'full-stack' | 'ai-engineering' | 'python' | 'infrastructure' | 'client-work';
 
 const filters: { label: string; value: Filter }[] = [
   { label: 'All', value: 'all' },
   { label: 'Full-Stack', value: 'full-stack' },
   { label: 'AI Engineering', value: 'ai-engineering' },
+  { label: 'Python', value: 'python' },
   { label: 'Infrastructure', value: 'infrastructure' },
   { label: 'Client Work', value: 'client-work' },
 ];
 
-function filterProjects(filter: Filter): Project[] {
-  if (filter === 'all') return projects;
-  if (filter === 'full-stack') return projects.filter((p) => p.category === 'web-dev');
-  if (filter === 'ai-engineering') return projects.filter((p) => p.category === 'ai-engineering');
-  if (filter === 'infrastructure')
-    return projects.filter((p) =>
-      ['infrastructure', 'ci-cd', 'automation', 'education'].includes(p.category)
-    );
-  if (filter === 'client-work') return projects.filter((p) => p.projectType === 'Client Work');
-  return projects;
+function sortProjects(list: Project[]): Project[] {
+  return [...list].sort((a, b) => {
+    const rank = (p: Project) => (p.showcase ? 0 : p.featured ? 1 : 2);
+    return rank(a) - rank(b);
+  });
 }
+
+function filterProjects(filter: Filter): Project[] {
+  let result: Project[];
+  switch (filter) {
+    case 'full-stack':
+      result = projects.filter(
+        (p) => p.category === 'web-dev' || p.tags?.includes('full-stack')
+      );
+      break;
+    case 'ai-engineering':
+      result = projects.filter(
+        (p) => p.category === 'ai-engineering' || p.tags?.includes('ai-engineering')
+      );
+      break;
+    case 'python':
+      result = projects.filter((p) => p.category === 'python');
+      break;
+    case 'infrastructure':
+      result = projects.filter(
+        (p) =>
+          p.category === 'infrastructure' ||
+          p.category === 'ci-cd' ||
+          p.category === 'education' ||
+          p.tags?.includes('infrastructure')
+      );
+      break;
+    case 'client-work':
+      result = projects.filter(
+        (p) =>
+          p.category === 'client-work' ||
+          p.tags?.includes('client-work') ||
+          p.projectType === 'Client Work'
+      );
+      break;
+    default:
+      result = projects;
+  }
+  return sortProjects(result);
+}
+
+const categoryLabel: Record<string, string> = {
+  'web-dev': 'Full-Stack',
+  'ai-engineering': 'AI Engineering',
+  python: 'Python',
+  infrastructure: 'Infrastructure',
+  'ci-cd': 'CI/CD',
+  education: 'Education',
+  'client-work': 'Client Work',
+  monitoring: 'Monitoring',
+  security: 'Security',
+  automation: 'Automation',
+};
 
 function statusColor(status: Project['status']): string {
   switch (status) {
@@ -45,7 +92,6 @@ function statusColor(status: Project['status']): string {
 
 function ProjectCard({ project }: { project: Project }) {
   const prefersReducedMotion = useReducedMotion();
-  const hasLink = !!(project.github_url || project.live_url);
   const isNDA = !project.github_url && !project.live_url;
 
   return (
@@ -69,10 +115,8 @@ function ProjectCard({ project }: { project: Project }) {
     >
       {/* Image placeholder */}
       <div
-        className="w-full h-[140px] flex items-center justify-center font-mono text-[0.6rem] text-mtext-muted tracking-[0.08em] uppercase relative"
-        style={{
-          background: 'linear-gradient(135deg, #060f06, #0a1a08, #081208)',
-        }}
+        className="w-full h-[140px] flex items-center justify-center relative"
+        style={{ background: 'linear-gradient(135deg, #060f06, #0a1a08, #081208)' }}
       >
         <div
           className="absolute inset-0 opacity-30"
@@ -82,12 +126,10 @@ function ProjectCard({ project }: { project: Project }) {
             backgroundSize: '30px 30px',
           }}
         />
-
         {/* Category badge */}
         <div className="absolute top-3 left-3 font-mono text-[0.5rem] tracking-[0.08em] uppercase bg-matrix text-mbg-primary py-[0.15rem] px-2 rounded-[3px] font-medium z-[2]">
-          {project.category.replace('-', ' ')}
+          {categoryLabel[project.category] ?? project.category}
         </div>
-
         {/* Status badge */}
         <span
           className="absolute top-3 right-3 font-mono text-[0.5rem] tracking-[0.08em] uppercase py-[0.15rem] px-2 rounded-[3px] font-medium z-[2] border"
@@ -128,7 +170,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* Link */}
-        {hasLink ? (
+        {!isNDA ? (
           <a
             href={project.live_url || project.github_url || '#'}
             target="_blank"
@@ -137,14 +179,14 @@ function ProjectCard({ project }: { project: Project }) {
           >
             {project.live_url ? 'Visit Site →' : 'GitHub →'}
           </a>
-        ) : isNDA ? (
+        ) : (
           <a
             href="/contact"
             className="font-heading text-[0.75rem] text-mtext-dim no-underline flex items-center gap-1.5 transition-colors duration-300 hover:text-mtext-primary"
           >
             Get in touch to learn more →
           </a>
-        ) : null}
+        )}
       </div>
     </motion.div>
   );
