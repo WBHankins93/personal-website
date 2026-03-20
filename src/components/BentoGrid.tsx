@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { SPRING } from '@/lib/animation-configs/spring';
+import ResumeDropdown from './ResumeDropdown';
 
 interface BentoCard {
   icon: string;
@@ -165,14 +166,14 @@ export default function BentoGrid() {
             What I Bring to the Table
           </h2>
         </div>
-        <a
-          href="/resumes/Ben_Hankins_SE_final.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-heading text-[0.8rem] text-matrix no-underline flex items-center gap-1.5 transition-[gap] duration-300 hover:gap-3 shrink-0"
-        >
-          View Resume <span>→</span>
-        </a>
+        <ResumeDropdown
+          align="right"
+          trigger={
+            <span className="font-heading text-[0.8rem] text-matrix flex items-center gap-1.5 transition-[gap] duration-300 hover:gap-3 shrink-0">
+              View Resume
+            </span>
+          }
+        />
       </div>
 
       {/* Grid */}
