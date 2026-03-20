@@ -26,25 +26,25 @@ const timeline = [
       "Worked with Fortune 500 clients — NBC Universal, Citibank, AT&T, CenterPoint Energy. Helped architect cloud migrations, led technical discovery, contributed to a $10.1M SAP RISE deal. Learned how enterprise moves (slowly, carefully, politically) and how to make it move anyway.",
   },
   {
-    period: '2022 – Present',
+    period: '2023 – 2025',
+    role: 'Site Reliability Engineer',
+    company: 'Prove AI',
+    detail:
+      "Startup life. Owned the infrastructure end-to-end — AWS, Kubernetes, Terraform. Maintained 99.9% uptime, cut deploy times by 80%, and built the tooling that kept production running. Learned what real ownership looks like.",
+  },
+  {
+    period: 'Oct 2025 – Present',
     role: 'Founder',
     company: 'Sproutflow Studio',
     detail:
-      "Built a web consultancy on the side, mostly because I wanted to keep shipping real products. Five client apps in production. Telehealth platforms, event businesses, e-commerce stores — small businesses deserve good software too.",
+      "After Prove AI, started a web consultancy doing what I'd been wanting to do — ship real products for real people. Five client apps in production: telehealth platforms, event businesses, e-commerce stores. Small businesses deserve good software too.",
   },
   {
-    period: '2023 – 2024',
-    role: 'SRE / Full-Stack Engineer',
-    company: 'Prove AI',
-    detail:
-      "Startup life. Wore every hat. Built and maintained production infrastructure on AWS, maintained 99.9% uptime, cut deploy times by 80%. Learned what it means to own a system end-to-end.",
-  },
-  {
-    period: '2024 – Now',
-    role: 'Building & Exploring',
+    period: 'Now',
+    role: 'Building in AI',
     company: 'Independent',
     detail:
-      "Deep in AI tooling. Built Greenlit (AI resume coaching), a 5-agent business plan generator, an automated job pipeline, and a prompt engineering framework. Actively looking for the next challenge.",
+      "Alongside Sproutflow, deep in AI tooling. Built Greenlit (AI resume coaching), a 5-agent business plan generator, an automated job pipeline, and a prompt engineering framework. Actively looking for the right full-time opportunity.",
   },
 ];
 
@@ -103,10 +103,10 @@ export default function AboutContent() {
               IBM was my proving ground. I spent four years in enterprise — architecture workshops, pre-sales cycles, production deployments for companies like NBC Universal, Citibank, and AT&T. I learned how large organizations think, what makes technical trust hard to earn, and how to translate between business and engineering in both directions.
             </p>
             <p>
-              Prove AI was the opposite energy. Startup pace, real ownership, every problem lands on your plate. I built infrastructure, wrote full-stack features, maintained production systems. That stretch confirmed what I suspected: I work best when I have real responsibility for what I build.
+              Prove AI was the opposite energy. Startup pace, real ownership, every problem lands on your plate. I owned the infrastructure end-to-end — AWS, Kubernetes, Terraform — maintained production reliability, and built the internal tooling that kept things running. That stretch confirmed what I suspected: I work best when I have real responsibility for what I build.
             </p>
             <p>
-              Sproutflow Studio runs in parallel. It&apos;s the consultancy I started because I wanted to keep shipping products for real people — not just enterprise POCs. Small businesses, local service providers, people who actually depend on the software. Five apps in production. More on the way.
+              After Prove AI, I started Sproutflow Studio in October 2025. It&apos;s the consultancy I&apos;d been wanting to build — shipping real products for real people, not just enterprise POCs. Small businesses, local service providers, people who actually depend on the software. Five apps in production. More on the way.
             </p>
             <p>
               Right now I&apos;m deep in AI tooling — building things that make AI outputs actually useful rather than just impressive. Greenlit started as a tool I built for my own job search. The prompt library started as notes I was keeping for myself. That&apos;s usually how the best stuff starts.
