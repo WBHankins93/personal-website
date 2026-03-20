@@ -1,8 +1,11 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 
 import { Space_Grotesk, Source_Sans_3, Sixtyfour, JetBrains_Mono } from "next/font/google";
+
+const FluidBlob = dynamic(() => import("@/components/FluidBlob"), { ssr: false });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -41,6 +44,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} ${sixtyfour.variable} antialiased`}
       >
+        <FluidBlob />
         {children}
       </body>
     </html>
