@@ -62,19 +62,16 @@ const compactRow1: CompactProject[] = [
     name: 'Prompt Library',
     tagline:
       'Modular prompt engineering framework with personas, reasoning playbooks, and response standards',
-    statusBadge: 'Private Repo',
-    statusColor: 'rgba(255,255,255,0.4)',
     techs: ['TypeScript', 'LLM', 'Prompt Engineering'],
-    link: '/contact',
-    linkLabel: 'Get in touch to learn more →',
-    isPrivate: true,
+    link: 'https://github.com/WBHankins93/prompt-library',
+    linkLabel: 'GitHub →',
   },
   {
     name: 'AI Business Plan Generator',
     tagline:
       '5-agent system, provider-agnostic across Anthropic, Groq, and OpenAI',
     techs: ['Multi-Agent', 'Python', 'Groq'],
-    link: 'https://github.com/WBHankins93/ai-business-plan-generator',
+    link: 'https://github.com/WBHankins93/business-plan-writer',
     linkLabel: 'GitHub →',
   },
 ];

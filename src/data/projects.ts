@@ -30,7 +30,7 @@ export const projects: Project[] = [
     description:
       "AI resume coaching platform with industry-specific feedback, ATS scoring, and bullet rewrites. Built during my own job search to solve a problem I was actually experiencing.",
     technologies: ["Next.js", "Supabase", "Google Gemini", "Anthropic"],
-    live_url: "https://greenlit-cv-j3yz.vercel.app/",
+    live_url: "https://greenlit-cv.vercel.app/",
     image_url: "",
     category: "ai-engineering",
     tags: ["full-stack"],
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     description:
       "A reasoning and judgment architecture for AI — not just a folder of prompts. 50 personas, 12 workflows, layered foundation standards. Model-agnostic. Built to make AI interactions produce better thinking, not just better outputs.",
     technologies: ["Markdown", "LLM", "Open Source"],
-    github_url: "https://github.com/WBHankins93/master-prompts",
+    github_url: "https://github.com/WBHankins93/prompt-library",
     image_url: "",
     category: "ai-engineering",
     featured: true,
@@ -176,7 +176,7 @@ export const projects: Project[] = [
       "Live e-commerce and booking platform for an event decor business. Full-stack solution built with Next.js, TypeScript, hosted on Vercel.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Sanity CMS"],
     github_url: "https://github.com/WBHankins93/nealy-event-decor",
-    live_url: "https://nealy-event-decor.vercel.app/",
+    live_url: "https://www.nealyevents.com/",
     image_url: "",
     category: "web-dev",
     tags: ["client-work"],
@@ -196,7 +196,6 @@ export const projects: Project[] = [
     description:
       "Summarizes Terraform plan output directly in PR comments. Makes infra reviews actually readable — no more digging through 300-line diffs.",
     technologies: ["Python", "GitHub Actions", "Terraform", "API"],
-    github_url: "https://github.com/WBHankins93/tf-plan-checker",
     image_url: "",
     category: "python",
     featured: false,
@@ -251,7 +250,7 @@ export const projects: Project[] = [
       "Agency website for my web consultancy. Modern responsive design, dynamic case study integration, built to convert.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/sproutflow-flagship",
-    live_url: "https://sproutflow.vercel.app",
+    live_url: "https://www.sproutflow-studio.com/",
     image_url: "",
     category: "web-dev",
     featured: false,
@@ -287,7 +286,7 @@ export const projects: Project[] = [
     description:
       "E-commerce store for EDM fashion with membership features. Custom Shopify theme development.",
     technologies: ["Shopify", "Liquid", "E-commerce", "Theme Development"],
-    github_url: "https://github.com/WBHankins93/big-butt-association",
+    github_url: "https://github.com/WBHankins93/bekky",
     live_url: "https://bigbuttassociation.com/",
     image_url: "",
     category: "web-dev",
