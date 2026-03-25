@@ -72,7 +72,6 @@ const formatCategoryLabel = (category: Project["category"]) =>
 
 export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | CategoryKey>("all");
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
   const [expandedTags, setExpandedTags] = useState<Set<string>>(new Set());
   const [tagCarouselPages, setTagCarouselPages] = useState<Record<string, number>>({});
@@ -110,60 +109,6 @@ export default function ProjectsSection() {
     
     return 0;
   });
-
-  // Helper function to get brighter gradient for hover state
-  const getBrightGradient = (category: CategoryKey): string => {
-    const brightGradients: Record<CategoryKey, string> = {
-      infrastructure: "from-emerald-100 to-teal-100",
-      automation: "from-amber-100 to-yellow-100",
-      monitoring: "from-cyan-100 to-sky-100",
-      "ci-cd": "from-blue-100 to-indigo-100",
-      security: "from-orange-100 to-red-100",
-      "web-dev": "from-fuchsia-100 to-pink-100",
-      education: "from-indigo-100 to-purple-100",
-      containers: "from-purple-100 to-violet-100",
-      "ai-engineering": "from-rose-100 to-pink-100",
-      python: "from-yellow-100 to-amber-100",
-      "client-work": "from-teal-100 to-emerald-100",
-    };
-    return brightGradients[category];
-  };
-
-  // Helper function to get brighter ring for hover state
-  const getBrightRing = (category: CategoryKey): string => {
-    const brightRings: Record<CategoryKey, string> = {
-      infrastructure: "ring-emerald-300",
-      automation: "ring-amber-300",
-      monitoring: "ring-cyan-300",
-      "ci-cd": "ring-blue-300",
-      security: "ring-orange-300",
-      "web-dev": "ring-fuchsia-300",
-      education: "ring-indigo-300",
-      containers: "ring-purple-300",
-      "ai-engineering": "ring-rose-300",
-      python: "ring-yellow-300",
-      "client-work": "ring-teal-300",
-    };
-    return brightRings[category];
-  };
-
-  // Helper function to get shadow color for glow effect
-  const getShadowColor = (category: CategoryKey): string => {
-    const shadowColors: Record<CategoryKey, string> = {
-      infrastructure: "shadow-emerald-300/50",
-      automation: "shadow-amber-300/50",
-      monitoring: "shadow-cyan-300/50",
-      "ci-cd": "shadow-blue-300/50",
-      security: "shadow-orange-300/50",
-      "web-dev": "shadow-fuchsia-300/50",
-      education: "shadow-indigo-300/50",
-      containers: "shadow-purple-300/50",
-      "ai-engineering": "shadow-rose-300/50",
-      python: "shadow-yellow-300/50",
-      "client-work": "shadow-teal-300/50",
-    };
-    return shadowColors[category];
-  };
 
   const toggleProject = (projectId: string) => {
     setExpandedProjects(prev => {
@@ -470,257 +415,136 @@ export default function ProjectsSection() {
                   })}
                 </div>
 
-                {/* Desktop Grid View - Masonry Layout */}
+                {/* Desktop grid — static cards (no flip) */}
                 <motion.div
                   key={selectedCategory}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: TIMING.fast / 1000 }}
-                  className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3"
-                  style={{ gridAutoRows: 'minmax(340px, 340px)' }}
+                  className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 items-stretch"
                 >
                   {sortedProjects.map((project, idx) => {
                     const c = cat(project.category);
-                    const techs = project.technologies ?? [];
-                    // Initial grid load stagger: Row 1 (0,1,2): 0ms, 100ms, 200ms; Row 2 (3,4): 150ms, 250ms
-                    const row = Math.floor(idx / 5); // Assuming 5 columns max
+                    const row = Math.floor(idx / 5);
                     const col = idx % 5;
-                    const initialDelay = (row * 150 + col * 100) / 1000; // Convert to seconds
-                    
+                    const initialDelay = (row * 150 + col * 100) / 1000;
+                    const hasGithub = Boolean(project.github_url);
+                    const hasLive = Boolean(project.live_url?.trim());
+                    const hasPublicLink = hasGithub || hasLive;
+
                     return (
                       <motion.div
                         key={project.id}
                         layout
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
                         transition={{
                           duration: TIMING.normal / 1000,
                           delay: initialDelay,
                           ease: EASE.easeOut,
                         }}
-                        whileHover={prefersReducedMotion ? {} : {
-                          y: -8, // Lift 8px
-                          transition: SPRING.gentle,
-                        }}
-                        onHoverStart={() => setHoveredProject(project.id)}
-                        onHoverEnd={() => setHoveredProject(null)}
-                        className="group h-full"
+                        className="group flex h-full min-h-0"
                       >
-                        {/* Card Flip Container */}
-                        <div 
-                          className="relative w-full h-full"
-                          style={{ 
-                            perspective: '1000px',
-                            height: '100%'
-                          }}
+                        <Card
+                          className={clsx(
+                            "flex w-full flex-col rounded-2xl border-2 shadow-md transition-shadow duration-200",
+                            "hover:shadow-lg",
+                            `bg-gradient-to-br ${c.grad}`,
+                            `ring-2 ${c.ring}`
+                          )}
                         >
-                          <div
-                            className="relative w-full h-full transition-transform duration-500"
-                            style={{
-                              transformStyle: 'preserve-3d',
-                              transform: hoveredProject === project.id ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                              height: '100%'
-                            }}
-                          >
-                            {/* Front of Card - Description */}
-                            <motion.div
-                              whileHover={prefersReducedMotion ? {} : {
-                                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                              }}
-                              transition={SPRING.gentle}
-                            >
-                              <Card 
-                                className={clsx(
-                                  "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
-                                  "border-2 shadow-lg",
-                                  `bg-gradient-to-br ${c.grad}`,
-                                  `ring-2 ${c.ring}`
-                                )}
-                                style={{
-                                  backfaceVisibility: 'hidden',
-                                  WebkitBackfaceVisibility: 'hidden',
-                                  transform: 'rotateY(0deg)'
-                                }}
-                              >
-                              <CardHeader className="p-2.5 flex-shrink-0">
-                            {/* Category & Badges */}
-                            <div className="flex items-center gap-1 mb-1.5 flex-wrap">
+                          <CardHeader className="flex-shrink-0 space-y-1.5 p-3">
+                            <div className="flex flex-wrap items-center gap-1">
                               <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
-                              <span className={clsx(
-                                "text-[10px] font-semibold uppercase tracking-wide",
-                                (project.featured || project.showcase) ? c.accent : "text-slate-500"
-                              )}>
+                              <span
+                                className={clsx(
+                                  "text-[10px] font-semibold uppercase tracking-wide",
+                                  project.featured || project.showcase ? c.accent : "text-slate-500"
+                                )}
+                              >
                                 {formatCategoryLabel(project.category)}
                               </span>
-                              
                               {project.showcase && (
-                                <motion.div
-                                  animate={prefersReducedMotion ? {} : {
-                                    scale: [1, 1.05, 1],
-                                  }}
-                                  transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                  }}
-                                  className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-[10px] font-medium rounded-full ring-1 ring-amber-200/60"
-                                >
-                                  <Star className="w-2.5 h-2.5 fill-current" />
+                                <div className="flex items-center gap-0.5 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 ring-1 ring-amber-200/60">
+                                  <Star className="h-2.5 w-2.5 fill-current" />
                                   Showcase
-                                </motion.div>
+                                </div>
                               )}
-                              
                               {project.featured && !project.showcase && (
-                                <motion.div
-                                  animate={prefersReducedMotion ? {} : {
-                                    scale: [1, 1.05, 1],
-                                  }}
-                                  transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                  }}
-                                  className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60"
-                                >
-                                  <Star className="w-2.5 h-2.5" />
+                                <div className="flex items-center gap-0.5 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700 ring-1 ring-blue-200/60">
+                                  <Star className="h-2.5 w-2.5" />
                                   Featured
-                                </motion.div>
+                                </div>
                               )}
-                              
-                              {project.projectType === 'Client Work' && (
-                                <div className="flex items-center gap-0.5 px-1.5 py-0.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-[10px] font-medium rounded-full ring-1 ring-blue-200/60">
-                                  <Briefcase className="w-2.5 h-2.5" />
+                              {project.projectType === "Client Work" && (
+                                <div className="flex items-center gap-0.5 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700 ring-1 ring-blue-200/60">
+                                  <Briefcase className="h-2.5 w-2.5" />
                                   Client Work
                                 </div>
                               )}
                             </div>
 
-                            {/* Title */}
-                            <h3 className={clsx(
-                              "font-bold text-sm leading-tight mb-1.5",
-                              (project.featured || project.showcase) 
-                                ? "text-slate-900 group-hover:text-slate-950" 
-                                : "text-slate-900 group-hover:text-slate-950"
-                            )}>
-                              {project.name}
-                            </h3>
+                            <h3 className="text-sm font-bold leading-tight text-slate-900">{project.name}</h3>
 
-                            {/* Type & Status Badges */}
-                            <div className="flex gap-1 mb-1.5">
-                              <span className={clsx(
-                                "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
-                                getProjectTypeStyle(project.projectType)
-                              )}>
+                            <div className="flex flex-wrap gap-1">
+                              <span
+                                className={clsx(
+                                  "rounded-full px-1.5 py-0.5 text-[10px] font-medium ring-1",
+                                  getProjectTypeStyle(project.projectType)
+                                )}
+                              >
                                 {project.projectType}
                               </span>
-                              <motion.span
+                              <span
                                 className={clsx(
-                                  "px-1.5 py-0.5 text-[10px] font-medium rounded-full ring-1",
+                                  "rounded-full px-1.5 py-0.5 text-[10px] font-medium ring-1",
                                   getStatusStyle(project.status)
                                 )}
-                                animate={prefersReducedMotion ? {} : {
-                                  opacity: [1, 0.8, 1],
-                                }}
-                                transition={{
-                                  duration: 3,
-                                  repeat: Infinity,
-                                  ease: "easeInOut",
-                                }}
                               >
                                 {project.status}
-                              </motion.span>
+                              </span>
                             </div>
 
-                            {/* Full Description - No Scroll, Fixed Height */}
-                            <div className="mb-0 flex-shrink-0" style={{ height: '4.75rem' }}>
-                              <p className="text-slate-600 leading-relaxed text-xs">
-                                {project.description}
-                              </p>
-                            </div>
+                            <p className="text-xs leading-relaxed text-slate-600 line-clamp-6">{project.description}</p>
                           </CardHeader>
 
-                          <CardContent className="px-2.5 pb-2.5 pt-0 flex flex-col flex-1 min-h-0">
-                            {/* Icon-Only Buttons Footer - Always at Bottom */}
-                            <div className="flex items-center gap-1.5 mt-auto pt-1.5 border-t border-slate-100 flex-shrink-0">
-                              {project.github_url && (
+                          <CardContent className="mt-auto flex flex-col border-t border-slate-200/70 p-3 pt-2.5">
+                            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm font-medium">
+                              {hasGithub && (
                                 <a
                                   href={project.github_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200"
-                                  title="View Code"
+                                  className="inline-flex items-center gap-1 text-slate-800 underline decoration-slate-300 underline-offset-2 transition-colors hover:text-emerald-700 hover:decoration-emerald-400"
                                 >
-                                  <Code2 className="w-3.5 h-3.5" />
+                                  <Code2 className="h-3.5 w-3.5 shrink-0" />
+                                  GitHub
                                 </a>
                               )}
-                              
-                              {project.live_url && project.live_url.trim() !== '' && (
+                              {hasLive && (
                                 <a
                                   href={project.live_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors duration-200"
-                                  title="Live Demo"
+                                  className="inline-flex items-center gap-1 text-slate-800 underline decoration-slate-300 underline-offset-2 transition-colors hover:text-emerald-700 hover:decoration-emerald-400"
                                 >
-                                  <Eye className="w-3.5 h-3.5" />
+                                  <Eye className="h-3.5 w-3.5 shrink-0" />
+                                  Live site
+                                </a>
+                              )}
+                              {!hasPublicLink && (
+                                <a
+                                  href="/contact"
+                                  className="text-slate-700 underline decoration-slate-300 underline-offset-2 transition-colors hover:text-slate-900"
+                                >
+                                  Get in touch
                                 </a>
                               )}
                             </div>
                           </CardContent>
-                            </Card>
-                            </motion.div>
-
-                            {/* Back of Card - Tools/Concepts */}
-                            <Card
-                              className={clsx(
-                                "absolute inset-0 rounded-2xl transition-all duration-300 overflow-hidden flex flex-col",
-                                "border-2 shadow-lg",
-                                `bg-gradient-to-br ${getBrightGradient(project.category)}`,
-                                `ring-4 ${getBrightRing(project.category)}`,
-                                `shadow-2xl ${getShadowColor(project.category)}`
-                              )}
-                              style={{
-                                backfaceVisibility: 'hidden',
-                                WebkitBackfaceVisibility: 'hidden',
-                                transform: 'rotateY(180deg)'
-                              }}
-                            >
-                              <CardHeader className="p-2.5 flex-shrink-0">
-                                {/* Category & Title on Back */}
-                                <div className="flex items-center gap-1 mb-1.5 flex-wrap">
-                                  <span className={clsx("inline-block h-1.5 w-1.5 rounded-full", c.dot)} />
-                                  <span className={clsx("text-[10px] font-semibold uppercase tracking-wide", c.accent)}>
-                                    {formatCategoryLabel(project.category)}
-                                  </span>
-                                </div>
-                                <h3 className="font-bold text-sm leading-tight mb-3 text-slate-900">
-                                  {project.name}
-                                </h3>
-                              </CardHeader>
-
-                              <CardContent className="px-2.5 pb-2.5 pt-2.5 flex flex-col flex-1 min-h-0 overflow-y-auto">
-                                {/* All Tools/Concepts */}
-                                <div className="flex flex-wrap gap-2.5">
-                                  {techs.map((tech, index) => (
-                                    <span
-                                      key={index}
-                                      className={clsx(
-                                        "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
-                                        c.pill,
-                                        "ring-1"
-                                      )}
-                                    >
-                                      <span className={clsx("h-1 w-1 rounded-full", c.dot)} />
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </div>
-                        </div>
+                        </Card>
                       </motion.div>
                     );
                   })}
