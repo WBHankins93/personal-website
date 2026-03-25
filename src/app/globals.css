@@ -193,6 +193,7 @@
   content: '';
   position: absolute;
   inset: -1px;
+  pointer-events: none;
   border-radius: 15px;
   padding: 1px;
   background: linear-gradient(135deg, transparent 30%, rgba(0,255,65,0.10) 50%, transparent 70%);
@@ -212,6 +213,7 @@
 .gradient-border-card::after {
   content: '';
   position: absolute;
+  pointer-events: none;
   top: 0;
   left: 20%;
   right: 20%;

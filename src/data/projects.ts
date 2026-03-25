@@ -191,22 +191,6 @@ export const projects: Project[] = [
 
   // ─── PYTHON PROJECTS ─────────────────────────────────────────────────────────
   {
-    id: "python-pr-summary-bot",
-    name: "Python PR Summary Bot",
-    description:
-      "Summarizes Terraform plan output directly in PR comments. Makes infra reviews actually readable — no more digging through 300-line diffs.",
-    technologies: ["Python", "GitHub Actions", "Terraform", "API"],
-    image_url: "",
-    category: "python",
-    featured: false,
-    techCount: 4,
-    projectType: 'Production',
-    status: 'Active',
-    architecture: 'Serverless',
-    scale: 'Startup',
-    environment: 'AWS'
-  },
-  {
     id: "python-go-sre-utilities",
     name: "Python & Go SRE Utilities",
     description:
@@ -431,7 +415,6 @@ export const projects: Project[] = [
     description:
       "Automated VPC & VSI deployment using Terraform, reducing provisioning time from 2 weeks to 2.7 hours. Delivered for CenterPoint Energy on IBM Cloud.",
     technologies: ["Terraform", "VPC", "VSI", "Automation", "IBM Cloud"],
-    github_url: "",
     image_url: "",
     category: "client-work",
     tags: ["infrastructure"],
@@ -449,7 +432,6 @@ export const projects: Project[] = [
     description:
       "Architected and delivered cloud environments for Fortune 500 clients including NBC Universal, Citibank, and AT&T. Contributed to the $10.1M SAP RISE deal.",
     technologies: ["IBM Cloud", "Solutions Architecture", "Terraform", "Pre-Sales", "Enterprise"],
-    github_url: "",
     image_url: "",
     category: "client-work",
     featured: false,
@@ -466,7 +448,6 @@ export const projects: Project[] = [
     description:
       "Integrated IBM watsonx.ai into AT&T's platform, enabling AI-driven analytics and enhanced customer service. Led technical discovery and POC delivery.",
     technologies: ["Watsonx.ai", "IBM Cloud", "OpenShift", "Next.js", "API Integration"],
-    github_url: "",
     image_url: "",
     category: "client-work",
     tags: ["ai-engineering"],
