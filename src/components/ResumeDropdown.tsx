@@ -12,7 +12,7 @@ const resumes = [
   {
     label: 'Full-Stack Engineer',
     subtitle: 'Product development, cloud platforms, and AI tooling.',
-    href: '/Ben_Hankins_FS_final.pdf',
+    href: '/Ben_Hankins_FSE_final.pdf',
   },
 ];
 

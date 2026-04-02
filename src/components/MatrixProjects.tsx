@@ -166,7 +166,7 @@ function ShowcaseCard({ project }: { project: ShowcaseProject }) {
         <h3 className="font-heading text-[1.15rem] font-semibold mb-2 text-mtext-primary">
           {project.name}
         </h3>
-        <p className="text-[0.85rem] text-mtext-dim leading-relaxed mb-4">
+        <p className="font-body text-[0.85rem] text-mtext-light leading-relaxed mb-4">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-1.5 mt-auto mb-4">
@@ -235,7 +235,7 @@ function CompactCard({ project }: { project: CompactProject }) {
       </div>
 
       {/* Tagline */}
-      <p className="text-[0.8rem] text-mtext-muted leading-normal mb-3">
+      <p className="font-body text-[0.8rem] text-mtext-light leading-relaxed mb-3">
         {project.tagline}
       </p>
 

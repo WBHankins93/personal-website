@@ -148,7 +148,7 @@ function ProjectCard({ project }: { project: Project }) {
         <h3 className="font-heading text-[0.95rem] font-semibold mb-1.5 text-mtext-primary">
           {project.name}
         </h3>
-        <p className="text-[0.78rem] text-mtext-muted leading-relaxed mb-3 line-clamp-3">
+        <p className="font-body text-[0.78rem] text-mtext-light leading-relaxed mb-3 line-clamp-3">
           {project.description}
         </p>
 

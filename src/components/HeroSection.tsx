@@ -262,10 +262,10 @@ export default function HeroSection() {
                 className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:flex-1 md:flex-initial md:w-auto md:min-w-0"
               >
                 <a
-                  href="/resumes/Ben_Hankins_FS_final.pdf"
+                  href="/Ben_Hankins_FSE_final.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  download="Ben_Hankins_FS_final.pdf"
+                  download="Ben_Hankins_FSE_final.pdf"
                 >
                   Resume — Full-Stack
                   <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />

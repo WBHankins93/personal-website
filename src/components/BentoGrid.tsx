@@ -128,8 +128,8 @@ function Card({ card }: { card: BentoCard }) {
 
       {/* Description */}
       <p
-        className={`text-[0.85rem] leading-relaxed ${
-          card.isHero ? 'text-mtext-dim max-w-[650px]' : 'text-mtext-muted max-w-[480px]'
+        className={`font-body text-[0.85rem] text-mtext-light leading-relaxed ${
+          card.isHero ? 'max-w-[650px]' : 'max-w-[480px]'
         }`}
       >
         {card.description}
