@@ -2,6 +2,33 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
+import {
+  Bot,
+  BriefcaseBusiness,
+  Building2,
+  CloudCog,
+  Code2,
+  Component,
+  Cpu,
+  FlaskConical,
+  FolderKanban,
+  Gauge,
+  GraduationCap,
+  Handshake,
+  HeartPulse,
+  LayoutTemplate,
+  Library,
+  NotebookText,
+  Orbit,
+  Puzzle,
+  Rocket,
+  ScanSearch,
+  ShieldCheck,
+  Sparkles,
+  TerminalSquare,
+  Workflow,
+} from 'lucide-react';
 import { projects, type Project } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
@@ -90,9 +117,37 @@ function statusColor(status: Project['status']): string {
   }
 }
 
+const projectIcons: Record<string, LucideIcon> = {
+  greenlit: Sparkles,
+  'ai-business-plan-generator': Bot,
+  'prompt-library': Library,
+  'job-extractor': ScanSearch,
+  'terraform-infra-platform': CloudCog,
+  'devops-studio': Workflow,
+  'implementation-studio': Puzzle,
+  'solutions-playbook': NotebookText,
+  'nealy-event-decor': BriefcaseBusiness,
+  'python-go-sre-utilities': TerminalSquare,
+  'mlops-sre-mini': Cpu,
+  'sproutflow-flagship': Rocket,
+  'second-line-psychiatry': HeartPulse,
+  'big-butt-association': Building2,
+  'personal-website': LayoutTemplate,
+  'terraform-aws-modules': Component,
+  'gcp-gke-gitops': Orbit,
+  'deployment-patterns': FolderKanban,
+  'helm-charts': Gauge,
+  'github-action-templates': Code2,
+  'platform-engineering-lab': GraduationCap,
+  'automated-vpc-deployment-centerpoint': ShieldCheck,
+  'enterprise-cloud-delivery-ibm': Handshake,
+  'att-watsonxai-integration': FlaskConical,
+};
+
 function ProjectCard({ project }: { project: Project }) {
   const prefersReducedMotion = useReducedMotion();
   const isNDA = !project.github_url && !project.live_url;
+  const Icon = projectIcons[project.id];
 
   return (
     <motion.div
@@ -113,47 +168,38 @@ function ProjectCard({ project }: { project: Project }) {
             }
       }
     >
-      {/* Image placeholder */}
-      <div
-        className="w-full h-[140px] flex items-center justify-center relative"
-        style={{ background: 'linear-gradient(135deg, #060f06, #0a1a08, #081208)' }}
-      >
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '30px 30px',
-          }}
-        />
-        {/* Category badge */}
-        <div className="absolute top-3 left-3 font-mono text-[0.5rem] tracking-[0.08em] uppercase bg-matrix text-mbg-primary py-[0.15rem] px-2 rounded-[3px] font-medium z-[2]">
-          {categoryLabel[project.category] ?? project.category}
-        </div>
-        {/* Status badge */}
-        <span
-          className="absolute top-3 right-3 font-mono text-[0.5rem] tracking-[0.08em] uppercase py-[0.15rem] px-2 rounded-[3px] font-medium z-[2] border"
-          style={{
-            color: statusColor(project.status),
-            borderColor: statusColor(project.status),
-            background: 'rgba(0,0,0,0.5)',
-          }}
-        >
-          {project.status}
-        </span>
-      </div>
-
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-heading text-[0.95rem] font-semibold mb-1.5 text-mtext-primary">
+      <div className="p-5 flex flex-col flex-1 gap-3">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <div className="h-9 w-9 rounded-[8px] border border-mborder-hover bg-[rgba(0,255,65,0.07)] flex items-center justify-center shrink-0">
+              <Icon className="h-4 w-4 text-matrix-light" />
+            </div>
+            <div className="font-mono text-[0.52rem] tracking-[0.08em] uppercase bg-matrix text-mbg-primary py-[0.15rem] px-2 rounded-[3px] font-medium">
+              {categoryLabel[project.category] ?? project.category}
+            </div>
+          </div>
+          <span
+            className="font-mono text-[0.5rem] tracking-[0.08em] uppercase py-[0.15rem] px-2 rounded-[3px] font-medium border shrink-0"
+            style={{
+              color: statusColor(project.status),
+              borderColor: statusColor(project.status),
+              background: 'rgba(0,0,0,0.5)',
+            }}
+          >
+            {project.status}
+          </span>
+        </div>
+
+        <h3 className="font-heading text-[0.95rem] font-semibold text-mtext-primary">
           {project.name}
         </h3>
-        <p className="font-body text-[0.78rem] text-mtext-light leading-relaxed mb-3 line-clamp-3">
+        <p className="font-body text-[0.78rem] text-mtext-light leading-relaxed line-clamp-4 min-h-[4.8rem]">
           {project.description}
         </p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-1 mt-auto mb-3">
+        <div className="flex flex-wrap gap-1 mt-auto">
           {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
@@ -175,14 +221,14 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.live_url || project.github_url || '#'}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-heading text-[0.75rem] text-matrix no-underline flex items-center gap-1.5 transition-[gap] duration-300 hover:gap-3"
+            className="font-heading text-[0.75rem] text-matrix no-underline flex items-center gap-1.5 transition-[gap] duration-300 hover:gap-3 pt-1"
           >
             {project.live_url ? 'Visit Site →' : 'GitHub →'}
           </a>
         ) : (
           <a
             href="/contact"
-            className="font-heading text-[0.75rem] text-mtext-dim no-underline flex items-center gap-1.5 transition-colors duration-300 hover:text-mtext-primary"
+            className="font-heading text-[0.75rem] text-mtext-dim no-underline flex items-center gap-1.5 transition-colors duration-300 hover:text-mtext-primary pt-1"
           >
             Get in touch to learn more →
           </a>
