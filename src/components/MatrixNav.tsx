@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useScrollTrigger } from '@/hooks/useScrollTrigger';
 import ResumeDropdown from './ResumeDropdown';
@@ -39,7 +40,13 @@ export default function MatrixNav() {
               background: 'radial-gradient(circle, rgba(0,255,65,0.08) 0%, transparent 70%)',
             }}
           />
-          B
+          <Image
+            src="/b-logo-updated-photoroom.png"
+            alt="Ben Hankins monogram"
+            width={22}
+            height={22}
+            className="h-[22px] w-[22px]"
+          />
         </div>
         Ben Hankins
       </a>
