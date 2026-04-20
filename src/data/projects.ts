@@ -30,7 +30,7 @@ export const projects: Project[] = [
     description:
       "AI resume coaching platform with industry-specific feedback, ATS scoring, and bullet rewrites. Built during my own job search to solve a problem I was actually experiencing.",
     technologies: ["Next.js", "Supabase", "Google Gemini", "Anthropic"],
-    live_url: "https://greenlit-cv.vercel.app/",
+    live_url: "https://greenlit.cv",
     image_url: "",
     category: "ai-engineering",
     tags: ["full-stack"],

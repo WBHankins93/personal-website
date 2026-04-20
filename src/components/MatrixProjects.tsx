@@ -39,7 +39,7 @@ const showcaseRow1: ShowcaseProject = {
   statusBadge: 'Beta · Invite Only',
   statusColor: 'rgba(255,180,0,0.85)',
   techs: ['Next.js', 'TypeScript', 'AI/LLM', 'Scoring Engine', 'Vercel'],
-  link: 'https://greenlit-cv.vercel.app/',
+  link: 'https://greenlit.cv',
   linkLabel: 'View App →',
   gradient: 'linear-gradient(135deg, #060f06, #0a1a08, #081208)',
 };
