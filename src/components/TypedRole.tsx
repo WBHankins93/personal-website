@@ -8,7 +8,7 @@ const phrases = [
   'cloud infrastructure',
   'AI-native systems',
   'full-stack platforms',
-  'vibe-coded applications',
+  'solutions that close deals',
 ];
 
 export default function TypedRole() {
