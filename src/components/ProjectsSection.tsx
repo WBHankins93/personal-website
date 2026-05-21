@@ -335,6 +335,12 @@ export default function ProjectsSection() {
                                     ? "bg-white/40 backdrop-blur-sm border-slate-200/60" 
                                     : "border-slate-200/60"
                                 )}>
+                                  {project.image_url && (
+                                  <div className="mb-3 overflow-hidden rounded-xl border border-slate-200/70">
+                                    <Image src={project.image_url} alt={`${project.name} preview`} width={1200} height={630} className="h-28 w-full object-cover" />
+                                  </div>
+                                )}
+
                                   {/* Type & Status Badges */}
                                   <div className="flex gap-2 flex-wrap">
                                     <span className={clsx(
@@ -485,6 +491,12 @@ export default function ProjectsSection() {
                                 </div>
                               )}
                             </div>
+
+                            {project.image_url && (
+                              <div className="mb-2 overflow-hidden rounded-xl border border-slate-200/70">
+                                <Image src={project.image_url} alt={`${project.name} preview`} width={1200} height={630} className="h-24 w-full object-cover" />
+                              </div>
+                            )}
 
                             <h3 className="text-sm font-bold leading-tight text-slate-900">{project.name}</h3>
 
