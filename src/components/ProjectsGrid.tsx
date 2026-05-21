@@ -12,6 +12,7 @@ import {
   Component,
   Cpu,
   FlaskConical,
+  Folder,
   FolderKanban,
   Gauge,
   GraduationCap,
