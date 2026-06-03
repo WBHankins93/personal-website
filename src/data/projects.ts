@@ -156,7 +156,7 @@ export const projects: Project[] = [
     id: "solutions-playbook",
     name: "Solutions Playbook",
     description:
-      "Operational SE framework with 41 files covering the full customer engagement lifecycle. Structured around practical SE workflows and real-world moments of need.",
+      "Operational framework for Solutions Engineers and Architects with 41 files covering the full customer engagement lifecycle. Structured around practical SE workflows and real-world moments of need.",
     technologies: ["Solutions Engineering", "Customer Success", "Technical Sales", "Documentation"],
     github_url: "https://github.com/WBHankins93/solutions-playbook",
     image_url: "",
@@ -231,7 +231,7 @@ export const projects: Project[] = [
     id: "sproutflow-flagship",
     name: "Sproutflow Studio",
     description:
-      "Agency website for my web consultancy. Modern responsive design, dynamic case study integration, built to convert.",
+      "Technical consultancy delivering end-to-end web architecture, cloud infrastructure, and AI integration solutions. 6 client websites shipped from discovery through production deployment.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     github_url: "https://github.com/WBHankins93/sproutflow-flagship",
     live_url: "https://www.sproutflow-studio.com/",

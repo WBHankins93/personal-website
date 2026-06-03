@@ -16,7 +16,7 @@ export default function MatrixFooter() {
           Let&apos;s build something.
         </h2>
         <p className="text-base text-mtext-muted mb-8 relative">
-          Currently open to full-stack, solutions engineering, and AI-focused roles.
+          Currently open to Solutions Architect, Solutions Engineer, and GTM Engineer roles.
         </p>
         <a
           href="mailto:benhankins.work@gmail.com"

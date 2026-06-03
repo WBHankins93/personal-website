@@ -18,8 +18,8 @@ const capabilities: BentoCard[] = [
     icon: '⟡',
     title: 'Customer-Facing Technical Leadership',
     description:
-      'From enterprise architecture workshops with NBC Universal and Citibank to shipping 5 client applications through Sproutflow — I bridge the gap between what engineering builds and what customers need.',
-    tags: ['$10.1M Deal Closed', '12 Enterprise Clients', '5 Apps Shipped'],
+      'From enterprise architecture workshops with NBC Universal and Citibank to shipping 6 client websites through Sproutflow — I bridge the gap between what engineering builds and what customers need.',
+    tags: ['$10.1M Deal Closed', '12 Enterprise Clients', '6 Websites Shipped'],
     isHero: true,
   },
   {

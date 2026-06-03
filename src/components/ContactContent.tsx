@@ -249,7 +249,7 @@ export default function ContactContent() {
               </span>
             </div>
             <p className="font-body text-[0.8rem] text-mtext-muted leading-relaxed">
-              Currently open to full-stack, solutions engineering, and AI-focused roles.
+              Currently open to Solutions Architect, Solutions Engineer, and GTM Engineer roles.
             </p>
           </div>
         </motion.aside>

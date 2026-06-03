@@ -30,8 +30,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ben Hankins | Solutions Engineer & Full-Stack Builder",
-  description: "Solutions Engineer helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.",
+  title: "Ben Hankins | Solutions Architect & Technical Strategist",
+  description: "Solutions Architect helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.",
   icons: {
     icon: "/b-logo-updated-photoroom.png",
     shortcut: "/b-logo-updated-photoroom.png",

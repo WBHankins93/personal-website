@@ -94,7 +94,7 @@ export default function AboutSection() {
 
   const quickFacts = [
     "New Orleans & PNW",
-    "6+ years building",
+    "7+ years building",
     "Founder, Sproutflow Studio",
   ];
 

@@ -6,7 +6,7 @@ import MatrixFooter from '@/components/MatrixFooter';
 export const metadata: Metadata = {
   title: 'Contact | Ben Hankins',
   description:
-    'Get in touch with Ben Hankins — open to full-stack, solutions engineering, and AI-focused roles.',
+    'Get in touch with Ben Hankins — open to Solutions Architect, Solutions Engineer, and GTM Engineer roles.',
 };
 
 export default function ContactPage() {

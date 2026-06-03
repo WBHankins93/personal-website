@@ -5,14 +5,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const resumes = [
   {
-    label: 'Solutions Engineer',
-    subtitle: 'Enterprise infrastructure, pre-sales, and technical discovery.',
-    href: '/Ben_Hankins_SE_final.pdf',
-  },
-  {
-    label: 'Full-Stack Engineer',
-    subtitle: 'Product development, cloud platforms, and AI tooling.',
-    href: '/Ben_Hankins_FSE_final.pdf',
+    label: 'Solutions Architect',
+    subtitle: 'Enterprise architecture, GTM strategy, and production delivery.',
+    href: '/Ben_Hankins_SA_Resume.pdf',
   },
 ];
 
@@ -80,6 +75,7 @@ export default function ResumeDropdown({ trigger, align = 'left', className }: R
                 href={resume.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                download="Ben_Hankins_SA_Resume.pdf"
                 className="group block no-underline rounded-[5px] px-4 py-3 transition-colors duration-150 hover:bg-[rgba(0,255,65,0.06)]"
               >
                 <div className="font-heading text-[0.8rem] font-medium text-mtext-primary group-hover:text-matrix-light transition-colors duration-150 mb-0.5">
