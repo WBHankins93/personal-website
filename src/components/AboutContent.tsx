@@ -120,7 +120,7 @@ export default function AboutContent() {
             { num: '$10.1M', label: 'Enterprise deal contributed', detail: 'IBM SAP RISE' },
             { num: '99.9%', label: 'Uptime maintained', detail: 'Production infra at Prove AI' },
             { num: '5+', label: 'Client apps shipped', detail: 'Sproutflow Studio' },
-            { num: '6+', label: 'Years in the field', detail: '2019 – present' },
+            { num: '7+', label: 'Years in the field', detail: '2019 – present' },
           ].map((s) => (
             <div
               key={s.label}

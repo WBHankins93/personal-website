@@ -20,7 +20,7 @@ const stats = [
   { num: '$10.1M', label: 'Deal Contributed' },
   { num: '99.9%', label: 'Uptime Maintained' },
   { num: '80%', label: 'Faster Deploys' },
-  { num: '6+', label: 'Years Experience' },
+  { num: '7+', label: 'Years Experience' },
 ];
 
 export default function MatrixHero() {
@@ -83,8 +83,8 @@ export default function MatrixHero() {
           {...anim(0.75)}
         >
           From enterprise architecture at IBM to production reliability at Prove AI to shipping
-          client apps through Sproutflow — 6+ years of turning complex problems into working
-          software.
+          client solutions through Sproutflow — 7+ years turning technical complexity into signed
+          deals and production deployments.
         </motion.p>
 
         {/* CTAs */}
@@ -115,7 +115,7 @@ export default function MatrixHero() {
           className="font-body text-[0.8rem] text-mtext-muted mt-3 tracking-[0.01em]"
           {...anim(0.9)}
         >
-          Currently open to full-stack, solutions engineering, and AI-focused roles.
+          Currently open to Solutions Architect, Solutions Engineer, and GTM Engineer roles.
         </motion.p>
 
         {/* Stats row */}

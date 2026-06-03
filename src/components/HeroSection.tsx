@@ -233,7 +233,7 @@ export default function HeroSection() {
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-4xl mx-auto font-body px-4"
             variants={taglineVariants}
           >
-            Full-stack engineer with enterprise roots — I build customer-facing products, AI-native applications, and the systems that hold them together.
+            From enterprise architecture at IBM to production reliability at Prove AI to shipping client solutions through Sproutflow — 7+ years turning technical complexity into signed deals and production deployments.
           </motion.p>
 
           {/* CTA Buttons: Github + dual resumes; stacked below md, row on md+ */}
@@ -255,38 +255,21 @@ export default function HeroSection() {
                 <Github className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
             </Button>
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:flex-nowrap justify-stretch sm:justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:flex-1 md:flex-initial md:w-auto md:min-w-0"
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full md:w-auto shrink-0"
+            >
+              <a
+                href="/Ben_Hankins_SA_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Ben_Hankins_SA_Resume.pdf"
               >
-                <a
-                  href="/Ben_Hankins_FSE_final.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Ben_Hankins_FSE_final.pdf"
-                >
-                  Resume — Full-Stack
-                  <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#E07A5F] hover:bg-opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg group font-heading shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:flex-1 md:flex-initial md:w-auto md:min-w-0"
-              >
-                <a
-                  href="/resumes/Ben_Hankins_SE_final.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Ben_Hankins_SE_final.pdf"
-                >
-                  Resume — Solutions Engineering
-                  <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
-                </a>
-              </Button>
-            </div>
+                Resume
+                <FileText className="ml-2 w-5 h-5 shrink-0 group-hover:scale-110 transition-transform" />
+              </a>
+            </Button>
           </motion.div>
 
           {/* Enhanced Stats Grid - Customer Impact Focus with stagger */}
@@ -310,7 +293,7 @@ export default function HeroSection() {
               <Stat title="15+" subtitle="Client Presentations" color="text-blue-400" />
             </motion.div>
             <motion.div variants={statItemVariants}>
-              <Stat title="6+" subtitle="Years Experience" color="text-purple-400" />
+              <Stat title="7+" subtitle="Years Experience" color="text-purple-400" />
             </motion.div>
             <motion.div variants={statItemVariants}>
               <Stat title="85%" subtitle="Faster Deployments" color="text-pink-400" />

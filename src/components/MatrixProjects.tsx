@@ -47,7 +47,7 @@ const showcaseRow1: ShowcaseProject = {
 const showcaseRow2: ShowcaseProject = {
   name: 'Sproutflow Studio',
   description:
-    'Web design studio serving small businesses. 5 client applications shipped end-to-end, from discovery through production deployment.',
+    'Technical consultancy delivering end-to-end web architecture, cloud infrastructure, and AI integration solutions. 6 client websites shipped from discovery through production deployment.',
   badge: 'Full-Stack',
   statusBadge: 'Live',
   statusColor: '#00FF41',
@@ -80,7 +80,7 @@ const compactRow2: CompactProject[] = [
   {
     name: 'Solutions Playbook',
     tagline:
-      'Operational SE framework — 41 files covering the full customer lifecycle',
+      'Operational framework for Solutions Engineers and Architects — 41 files covering the full customer lifecycle',
     techs: ['Solutions Engineering', 'Framework'],
     link: 'https://github.com/WBHankins93/solutions-playbook',
     linkLabel: 'GitHub →',

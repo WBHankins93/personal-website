@@ -16,18 +16,18 @@ describe("CVModal", () => {
     expect(iframe.tagName).toBe("IFRAME");
     expect(iframe).toHaveAttribute(
       "src",
-      expect.stringContaining("/Ben_Hankins_Master_Resume.pdf")
+      expect.stringContaining("/Ben_Hankins_SA_Resume.pdf")
     );
   });
 
-  it("should have a download link that correctly points to '/current-solutions-engineer-resume.pdf'", () => {
+  it("should have a download link that correctly points to the Solutions Architect resume", () => {
     render(<CVModal isOpen={true} onClose={mockOnClose} />);
 
     const downloadLink = screen.getByRole("link", { name: /download pdf/i });
     expect(downloadLink).toBeInTheDocument();
     expect(downloadLink).toHaveAttribute(
       "href",
-      "/Ben_Hankins_Master_Resume.pdf"
+      "/Ben_Hankins_SA_Resume.pdf"
     );
     expect(downloadLink).toHaveAttribute("download");
   });
