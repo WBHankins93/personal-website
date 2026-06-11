@@ -29,9 +29,35 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+const siteDescription =
+  "Solutions Architect helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://benhankins.vercel.app"),
   title: "Ben Hankins | Solutions Architect & Technical Strategist",
-  description: "Solutions Architect helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.",
+  description: siteDescription,
+  openGraph: {
+    title: "Ben Hankins | Solutions Architect & Technical Strategist",
+    description: siteDescription,
+    url: "/",
+    siteName: "Ben Hankins",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/projects/personal-website.jpg",
+        width: 1200,
+        height: 750,
+        alt: "Ben Hankins portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ben Hankins | Solutions Architect & Technical Strategist",
+    description: siteDescription,
+    images: ["/projects/personal-website.jpg"],
+  },
   icons: {
     icon: "/b-logo-updated-photoroom.png",
     shortcut: "/b-logo-updated-photoroom.png",
