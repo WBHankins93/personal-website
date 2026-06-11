@@ -43,9 +43,10 @@ export default function MatrixNav() {
           <Image
             src="/b-logo-updated-photoroom.png"
             alt="Ben Hankins monogram"
-            width={22}
-            height={22}
-            className="h-[22px] w-[22px]"
+            width={184}
+            height={186}
+            priority
+            className="h-[22px] w-auto"
           />
         </div>
         Ben Hankins

@@ -118,10 +118,10 @@ const projectIcons: Record<string, LucideIcon> = {
   'att-watsonxai-integration': FlaskConical,
 };
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) {
   const prefersReducedMotion = useReducedMotion();
   const isNDA = !project.github_url && !project.live_url;
-  const Icon = projectIcons[project.id];
+  const Icon = projectIcons[project.id] ?? FolderKanban;
 
   return (
     <motion.div
@@ -152,6 +152,7 @@ function ProjectCard({ project }: { project: Project }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover object-top"
             unoptimized={project.image_url.endsWith('.svg')}
+            priority={eager}
           />
         </div>
       )}
@@ -275,8 +276,8 @@ export default function ProjectsGrid() {
         layout
       >
         <AnimatePresence mode="popLayout">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filtered.map((project, index) => (
+            <ProjectCard key={project.id} project={project} eager={index < 3} />
           ))}
         </AnimatePresence>
       </motion.div>

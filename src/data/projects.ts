@@ -17,7 +17,7 @@ export type Project = {
   status: 'Active' | 'Complete' | 'Maintained' | 'Archived' | 'Live Beta';
   architecture: 'Microservices' | 'Monolith' | 'Serverless' | 'Infrastructure' | 'JAMstack';
   scale: 'Enterprise' | 'Startup' | 'Personal' | 'Small Business';
-  environment: 'AWS' | 'Multi-cloud' | 'On-prem' | 'GCP' | 'IBM Cloud' | 'Vercel';
+  environment: 'AWS' | 'Multi-cloud' | 'On-prem' | 'GCP' | 'IBM Cloud' | 'Vercel' | 'Shopify';
 };
 
 // Ordering: showcase: true → featured: true → everything else
@@ -281,7 +281,7 @@ export const projects: Project[] = [
     status: 'Active',
     architecture: 'JAMstack',
     scale: 'Small Business',
-    environment: 'Vercel'
+    environment: 'Shopify'
   },
   {
     id: "personal-website",
