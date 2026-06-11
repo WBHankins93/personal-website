@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import {
@@ -168,6 +169,20 @@ function ProjectCard({ project }: { project: Project }) {
             }
       }
     >
+      {/* Image header */}
+      {project.image_url && (
+        <div className="relative w-full h-[150px] overflow-hidden border-b border-mborder-subtle">
+          <Image
+            src={project.image_url}
+            alt={`${project.name} preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover object-top"
+            unoptimized={project.image_url.endsWith('.svg')}
+          />
+        </div>
+      )}
+
       {/* Content */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-3">

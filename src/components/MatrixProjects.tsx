@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { SPRING } from '@/lib/animation-configs/spring';
@@ -18,6 +19,7 @@ interface ShowcaseProject {
   link: string;
   linkLabel: string;
   gradient: string;
+  image: string;
 }
 
 interface CompactProject {
@@ -42,6 +44,7 @@ const showcaseRow1: ShowcaseProject = {
   link: 'https://greenlit.cv',
   linkLabel: 'View App →',
   gradient: 'linear-gradient(135deg, #060f06, #0a1a08, #081208)',
+  image: '/projects/greenlit.jpg',
 };
 
 const showcaseRow2: ShowcaseProject = {
@@ -55,6 +58,7 @@ const showcaseRow2: ShowcaseProject = {
   link: 'https://www.sproutflow-studio.com',
   linkLabel: 'Visit Site →',
   gradient: 'linear-gradient(135deg, #080f08, #0a1a0a, #0a150a)',
+  image: '/projects/sproutflow.jpg',
 };
 
 const compactRow1: CompactProject[] = [
@@ -129,19 +133,18 @@ function ShowcaseCard({ project }: { project: ShowcaseProject }) {
     >
       {/* Image area */}
       <div
-        className="w-full h-[220px] flex items-center justify-center font-mono text-[0.7rem] text-mtext-muted tracking-[0.08em] uppercase relative transition-[filter] duration-[400ms]"
+        className="w-full h-[220px] relative transition-[filter] duration-[400ms] overflow-hidden"
         style={{ background: project.gradient }}
       >
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
+        <Image
+          src={project.image}
+          alt={`${project.name} screenshot`}
+          fill
+          sizes="(max-width: 1024px) 100vw, 60vw"
+          className="object-cover object-top"
         />
-        <span className="relative z-[1]">Project Screenshot</span>
+        {/* Subtle dark fade so badges stay readable */}
+        <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-black/40 to-transparent z-[1]" />
 
         {/* Category badge */}
         <div className="absolute top-3 left-3 font-mono text-[0.55rem] tracking-[0.08em] uppercase bg-matrix text-mbg-primary py-[0.2rem] px-2.5 rounded-[3px] font-medium z-[2]">
