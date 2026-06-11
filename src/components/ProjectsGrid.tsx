@@ -31,6 +31,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { projects, type Project } from '@/data/projects';
+import { categoryLabel, statusColor } from '@/lib/project-display';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 type Filter = 'all' | 'full-stack' | 'ai-engineering' | 'python' | 'infrastructure' | 'client-work';
@@ -88,34 +89,6 @@ function filterProjects(filter: Filter): Project[] {
       result = projects;
   }
   return sortProjects(result);
-}
-
-const categoryLabel: Record<string, string> = {
-  'web-dev': 'Full-Stack',
-  'ai-engineering': 'AI Engineering',
-  python: 'Python',
-  infrastructure: 'Infrastructure',
-  'ci-cd': 'CI/CD',
-  education: 'Education',
-  'client-work': 'Client Work',
-  monitoring: 'Monitoring',
-  security: 'Security',
-  automation: 'Automation',
-};
-
-function statusColor(status: Project['status']): string {
-  switch (status) {
-    case 'Active':
-    case 'Maintained':
-      return '#00FF41';
-    case 'Live Beta':
-      return 'rgba(255,180,0,0.85)';
-    case 'Complete':
-    case 'Archived':
-      return 'rgba(255,255,255,0.35)';
-    default:
-      return '#999';
-  }
 }
 
 const projectIcons: Record<string, LucideIcon> = {
