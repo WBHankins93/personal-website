@@ -459,4 +459,133 @@ export const projects: Project[] = [
     scale: 'Enterprise',
     environment: 'IBM Cloud'
   },
+  {
+    id: "hiddenlayer-litellm-pii-guardrail",
+    name: "HiddenLayer LiteLLM PII Guardrail",
+    description:
+      "LiteLLM-integrated PII guardrail patterns for safer LLM application traffic and prompt/response inspection.",
+    technologies: ["Python", "LiteLLM", "Security", "LLM"],
+    github_url: "https://github.com/WBHankins93/hiddenlayer-litellm-pii-guardrail",
+    image_url: "/projects/hiddenlayer-litellm-pii-guardrail.svg",
+    category: "security",
+    techCount: 4,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "interview-question-generator",
+    name: "Interview Question Generator",
+    description:
+      "Generates targeted interview question sets by role and level to streamline prep workflows.",
+    technologies: ["Python", "OpenAI", "Automation"],
+    github_url: "https://github.com/WBHankins93/interview-question-generator",
+    image_url: "/projects/interview-question-generator.svg",
+    category: "python",
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "react-post-hog",
+    name: "React PostHog",
+    description:
+      "Reusable React instrumentation patterns for PostHog analytics and feature flag integration.",
+    technologies: ["React", "TypeScript", "PostHog"],
+    github_url: "https://github.com/WBHankins93/react-post-hog",
+    image_url: "/projects/react-post-hog.svg",
+    category: "web-dev",
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Personal',
+    environment: 'Vercel'
+  },
+  {
+    id: "welding-business",
+    name: "Welding Business",
+    description:
+      "Small-business website and delivery patterns for a welding services brand.",
+    technologies: ["Next.js", "TypeScript", "Tailwind"],
+    github_url: "https://github.com/WBHankins93/welding-business",
+    image_url: "/projects/welding-business.svg",
+    category: "web-dev",
+    techCount: 3,
+    projectType: 'Production',
+    status: 'Active',
+    architecture: 'JAMstack',
+    scale: 'Small Business',
+    environment: 'Vercel'
+  },
+  {
+    id: "nps",
+    name: "NPS",
+    description:
+      "Net Promoter Score collection and reporting utilities for lightweight product feedback loops.",
+    technologies: ["Python", "Analytics", "Automation"],
+    github_url: "https://github.com/WBHankins93/nps",
+    image_url: "/projects/nps.svg",
+    category: "automation",
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Maintained',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "stock-rocket",
+    name: "Stock Rocket",
+    description:
+      "Market-data experimentation project for tracking momentum and stock signal ideas.",
+    technologies: ["Python", "Data", "Automation"],
+    github_url: "https://github.com/WBHankins93/stock-rocket",
+    image_url: "/projects/stock-rocket.svg",
+    category: "python",
+    techCount: 3,
+    projectType: 'Learning',
+    status: 'Maintained',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+  {
+    id: "cluster-guardians",
+    name: "Cluster Guardians",
+    description:
+      "Kubernetes reliability and guardrail experiments for safer cluster operations.",
+    technologies: ["Kubernetes", "Helm", "SRE"],
+    github_url: "https://github.com/WBHankins93/cluster-guardians",
+    image_url: "/projects/cluster-guardians.svg",
+    category: "monitoring",
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Maintained',
+    architecture: 'Infrastructure',
+    scale: 'Personal',
+    environment: 'AWS'
+  },
+  {
+    id: "umbrella",
+    name: "Umbrella",
+    description:
+      "Repository for shared experiments and reusable implementation patterns across projects.",
+    technologies: ["TypeScript", "Automation", "Patterns"],
+    github_url: "https://github.com/WBHankins93/umbrella",
+    image_url: "/projects/umbrella.svg",
+    category: "automation",
+    techCount: 3,
+    projectType: 'Open Source',
+    status: 'Maintained',
+    architecture: 'Monolith',
+    scale: 'Personal',
+    environment: 'Multi-cloud'
+  },
+
 ];

@@ -116,6 +116,14 @@ const projectIcons: Record<string, LucideIcon> = {
   'automated-vpc-deployment-centerpoint': ShieldCheck,
   'enterprise-cloud-delivery-ibm': Handshake,
   'att-watsonxai-integration': FlaskConical,
+  'hiddenlayer-litellm-pii-guardrail': ShieldCheck,
+  'interview-question-generator': Bot,
+  'react-post-hog': LayoutTemplate,
+  'welding-business': BriefcaseBusiness,
+  nps: Gauge,
+  'stock-rocket': Rocket,
+  'cluster-guardians': ShieldCheck,
+  umbrella: FolderKanban,
 };
 
 function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) {
