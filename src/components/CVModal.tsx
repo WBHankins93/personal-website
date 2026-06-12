@@ -107,6 +107,7 @@ export default function CVModal({
           <div className="p-4 md:p-6 border-t border-slate-200/60 flex justify-center md:justify-end bg-gradient-to-br from-slate-50/50 to-white flex-shrink-0">
             <a
               href="/Ben_Hankins_SA_Resume.pdf"
+              download="Ben_Hankins_SA_Resume.pdf"
               onClick={handleDownload}
               className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all text-sm md:text-base shadow-lg hover:shadow-xl ring-1 ring-blue-600/20 cursor-pointer"
             >

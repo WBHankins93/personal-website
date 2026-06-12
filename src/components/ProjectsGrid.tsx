@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import {
@@ -12,7 +13,6 @@ import {
   Component,
   Cpu,
   FlaskConical,
-  Folder,
   FolderKanban,
   Gauge,
   GraduationCap,
@@ -31,6 +31,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { projects, type Project } from '@/data/projects';
+import { categoryLabel, statusColor } from '@/lib/project-display';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 type Filter = 'all' | 'full-stack' | 'ai-engineering' | 'python' | 'infrastructure' | 'client-work';
@@ -90,34 +91,6 @@ function filterProjects(filter: Filter): Project[] {
   return sortProjects(result);
 }
 
-const categoryLabel: Record<string, string> = {
-  'web-dev': 'Full-Stack',
-  'ai-engineering': 'AI Engineering',
-  python: 'Python',
-  infrastructure: 'Infrastructure',
-  'ci-cd': 'CI/CD',
-  education: 'Education',
-  'client-work': 'Client Work',
-  monitoring: 'Monitoring',
-  security: 'Security',
-  automation: 'Automation',
-};
-
-function statusColor(status: Project['status']): string {
-  switch (status) {
-    case 'Active':
-    case 'Maintained':
-      return '#00FF41';
-    case 'Live Beta':
-      return 'rgba(255,180,0,0.85)';
-    case 'Complete':
-    case 'Archived':
-      return 'rgba(255,255,255,0.35)';
-    default:
-      return '#999';
-  }
-}
-
 const projectIcons: Record<string, LucideIcon> = {
   greenlit: Sparkles,
   'ai-business-plan-generator': Bot,
@@ -153,10 +126,10 @@ const projectIcons: Record<string, LucideIcon> = {
   umbrella: FolderKanban,
 };
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, eager }: { project: Project; eager?: boolean }) {
   const prefersReducedMotion = useReducedMotion();
   const isNDA = !project.github_url && !project.live_url;
-  const Icon = projectIcons[project.id] ?? Folder;
+  const Icon = projectIcons[project.id] ?? FolderKanban;
 
   return (
     <motion.div
@@ -177,6 +150,21 @@ function ProjectCard({ project }: { project: Project }) {
             }
       }
     >
+      {/* Image header */}
+      {project.image_url && (
+        <div className="relative w-full h-[150px] overflow-hidden border-b border-mborder-subtle">
+          <Image
+            src={project.image_url}
+            alt={`${project.name} preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover object-top"
+            unoptimized={project.image_url.endsWith('.svg')}
+            priority={eager}
+          />
+        </div>
+      )}
+
       {/* Content */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-3">
@@ -296,8 +284,8 @@ export default function ProjectsGrid() {
         layout
       >
         <AnimatePresence mode="popLayout">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filtered.map((project, index) => (
+            <ProjectCard key={project.id} project={project} eager={index < 3} />
           ))}
         </AnimatePresence>
       </motion.div>
