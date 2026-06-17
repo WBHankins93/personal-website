@@ -22,7 +22,7 @@ export default function Nav() {
       className={[
         "fixed top-0 inset-x-0 z-[100] transition-colors duration-300",
         isScrolled
-          ? "bg-paper/90 backdrop-blur-sm border-b border-line"
+          ? "bg-paper border-b border-line"
           : "bg-transparent border-b border-transparent",
       ].join(" ")}
     >
