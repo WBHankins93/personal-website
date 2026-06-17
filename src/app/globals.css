@@ -194,6 +194,13 @@
   scroll-margin-top: 5.5rem;
 }
 
+/* Smooth anchor scrolling for the editorial homepage (motion-safe only) */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.editorial) {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Matrix green gradient text utility */
 .matrix-gradient-text {
   background: linear-gradient(180deg, #00FF41 30%, #009926 100%);
