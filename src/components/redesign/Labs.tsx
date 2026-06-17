@@ -1,0 +1,62 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { labs, sproutflowCallout } from "@/data/labs";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { EASE } from "@/lib/animation-configs/ease";
+
+export default function Labs() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section id="labs" className="px-6 md:px-8 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-accent">
+          Open Source &amp; Labs
+        </p>
+        <h2 className="mt-3 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[24ch]">
+          Where I keep the curiosity sharp.
+        </h2>
+
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {labs.map((lab, i) => (
+            <motion.a
+              key={lab.name}
+              href={lab.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col rounded-xl border border-line bg-paper p-6 no-underline transition-colors hover:border-line-strong"
+              initial={reduce ? false : { opacity: 0, y: 14 }}
+              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, delay: i * 0.05, ease: EASE.easeOut }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-heading font-semibold text-ink text-[1.05rem]">
+                  {lab.name}
+                </h3>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-muted transition-colors group-hover:text-accent" />
+              </div>
+              <p className="mt-2 font-body text-ink-soft leading-relaxed text-[0.95rem]">
+                {lab.description}
+              </p>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Single Sproutflow Studio callout */}
+        <p className="mt-8 font-body text-ink-soft text-[0.95rem]">
+          <a
+            href={sproutflowCallout.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-heading font-medium text-accent hover:text-accent-hover no-underline"
+          >
+            {sproutflowCallout.label} <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </p>
+      </div>
+    </section>
+  );
+}

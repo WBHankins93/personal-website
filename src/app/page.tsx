@@ -1,26 +1,25 @@
-"use client";
-
-import MatrixNav from "@/components/MatrixNav";
-import MatrixHero from "@/components/MatrixHero";
-import TechTicker from "@/components/TechTicker";
-import BentoGrid from "@/components/BentoGrid";
-import Divider from "@/components/Divider";
-import MatrixProjects from "@/components/MatrixProjects";
-import MatrixFooter from "@/components/MatrixFooter";
+import Nav from "@/components/redesign/Nav";
+import Hero from "@/components/redesign/Hero";
+import WhatIBuild from "@/components/redesign/WhatIBuild";
+import ProductCarousel from "@/components/redesign/ProductCarousel";
+import Experience from "@/components/redesign/Experience";
+import Labs from "@/components/redesign/Labs";
+import Contact from "@/components/redesign/Contact";
+import Footer from "@/components/redesign/Footer";
 
 export default function HomePage() {
   return (
-    <main>
-      <div className="relative z-[1]">
-        <MatrixNav />
-        <MatrixHero />
-        <TechTicker />
-        <BentoGrid />
-        <Divider />
-        <MatrixProjects />
-        <Divider />
-        <MatrixFooter />
-      </div>
-    </main>
+    <div className="editorial relative z-[1] min-h-screen">
+      <Nav />
+      <main>
+        <Hero />
+        <WhatIBuild />
+        <ProductCarousel />
+        <Experience />
+        <Labs />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 }
