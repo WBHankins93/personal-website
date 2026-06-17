@@ -69,6 +69,31 @@
   --animate-ticker-scroll: ticker-scroll 35s linear infinite;
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
   --animate-cursor-blink: cursor-blink 1s step-end infinite;
+
+  /* ─── Editorial redesign system (light base, single accent) ───────────────
+     Clean editorial direction. High-contrast ink on a light paper base with a
+     single restrained accent used only for CTAs, status, and key highlights. */
+  --color-paper: #FFFFFF;
+  --color-paper-alt: #F7F8FA;       /* subtle section banding */
+  --color-ink: #111418;             /* primary text / headlines */
+  --color-ink-soft: #3C4350;        /* body copy */
+  --color-ink-muted: #6B7280;       /* labels, captions, eyebrows */
+  --color-line: #E6E8EC;            /* hairline borders */
+  --color-line-strong: #D3D7DE;     /* hover / emphasized borders */
+
+  --color-accent: #1B6CA8;          /* the single accent */
+  --color-accent-hover: #155A8C;
+  --color-accent-soft: #EAF2F8;     /* accent tint backgrounds */
+
+  /* Status badge palette (color-coded product states) */
+  --color-status-beta: #1B6CA8;     /* Live Beta — accent teal */
+  --color-status-beta-bg: #EAF2F8;
+  --color-status-dev: #B45309;      /* In Development — amber */
+  --color-status-dev-bg: #FEF3E2;
+  --color-status-prod: #15803D;     /* Production · Private — green */
+  --color-status-prod-bg: #E7F5EC;
+  --color-status-proto: #5B6470;    /* Functional Prototype — gray */
+  --color-status-proto-bg: #F1F2F4;
 }
 
 :root {
@@ -142,6 +167,32 @@
 .font-body { font-family: var(--font-body), sans-serif !important; }
 .font-mono { font-family: var(--font-mono), monospace !important; }
 .font-sixtyfour { font-family: var(--font-sixtyfour), monospace !important; }
+
+/* ─── Editorial redesign scope ────────────────────────────────────────────
+   Applied to the redesigned homepage root so the light editorial system is
+   fully self-contained and does not depend on the dark body defaults. */
+.editorial {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  cursor: auto;
+  font-family: var(--font-body), sans-serif;
+}
+.editorial a,
+.editorial button {
+  cursor: pointer;
+}
+.editorial h1,
+.editorial h2,
+.editorial h3,
+.editorial h4,
+.editorial h5,
+.editorial h6 {
+  font-family: var(--font-heading), sans-serif;
+}
+/* Offset anchored sections so the fixed nav doesn't overlap headings */
+.editorial [id] {
+  scroll-margin-top: 5.5rem;
+}
 
 /* Matrix green gradient text utility */
 .matrix-gradient-text {
