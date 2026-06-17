@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Space_Grotesk, Source_Sans_3, Sixtyfour, JetBrains_Mono } from "next/font/google";
-import FluidBlobWrapper from "@/components/FluidBlobWrapper";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -47,7 +46,6 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} ${sixtyfour.variable} antialiased`}
       >
-        <FluidBlobWrapper />
         {children}
       </body>
     </html>
