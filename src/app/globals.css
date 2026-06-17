@@ -166,7 +166,6 @@
 .font-heading { font-family: var(--font-heading), sans-serif !important; }
 .font-body { font-family: var(--font-body), sans-serif !important; }
 .font-mono { font-family: var(--font-mono), monospace !important; }
-.font-sixtyfour { font-family: var(--font-sixtyfour), monospace !important; }
 
 /* ─── Editorial redesign scope ────────────────────────────────────────────
    Applied to the redesigned homepage root so the light editorial system is
