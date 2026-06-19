@@ -2,8 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Space_Grotesk, Source_Sans_3, Sixtyfour, JetBrains_Mono } from "next/font/google";
-import FluidBlobWrapper from "@/components/FluidBlobWrapper";
+import { Space_Grotesk, Source_Sans_3, JetBrains_Mono } from "next/font/google";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -17,52 +16,81 @@ const sourceSans3 = Source_Sans_3({
   variable: "--font-body",
 });
 
-const sixtyfour = Sixtyfour({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sixtyfour',
-});
-
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
 });
 
-const siteDescription =
-  "Solutions Architect helping enterprise teams solve complex cloud and platform challenges. Expert in technical pre-sales, proof-of-concept delivery, and infrastructure automation across AWS, GCP, and multi-cloud environments.";
+const SITE_URL = "https://www.benhankins.dev";
+const TITLE = "Ben Hankins — Solutions Architect & Software Builder";
+const DESCRIPTION =
+  "Ben Hankins is a Solutions Architect who builds production software. 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering — with shipped products like Greenlit and Clipboard to show for it.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://benhankins.vercel.app"),
-  title: "Ben Hankins | Solutions Architect & Technical Strategist",
-  description: siteDescription,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s | Ben Hankins",
+  },
+  description: DESCRIPTION,
+  applicationName: "Ben Hankins",
+  authors: [{ name: "Ben Hankins", url: SITE_URL }],
+  creator: "Ben Hankins",
+  publisher: "Ben Hankins",
+  keywords: [
+    "Ben Hankins",
+    "Solutions Architect",
+    "Solutions Engineer",
+    "GTM Engineer",
+    "cloud infrastructure",
+    "Kubernetes",
+    "platform engineering",
+    "AI engineering",
+    "Next.js",
+    "TypeScript",
+    "enterprise architecture",
+    "technical pre-sales",
+    "software builder",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Ben Hankins | Solutions Architect & Technical Strategist",
-    description: siteDescription,
-    url: "/",
-    siteName: "Ben Hankins",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/projects/personal-website.jpg",
-        width: 1200,
-        height: 750,
-        alt: "Ben Hankins portfolio",
-      },
-    ],
+    url: SITE_URL,
+    siteName: "Ben Hankins",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ben Hankins | Solutions Architect & Technical Strategist",
-    description: siteDescription,
-    images: ["/projects/personal-website.jpg"],
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/b-logo-updated-photoroom.png",
     shortcut: "/b-logo-updated-photoroom.png",
     apple: "/b-logo-updated-photoroom.png",
   },
+  category: "technology",
+};
+
+export const viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light" as const,
 };
 
 export default function RootLayout({
@@ -71,9 +99,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} ${sixtyfour.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <FluidBlobWrapper />
         {children}
       </body>
     </html>

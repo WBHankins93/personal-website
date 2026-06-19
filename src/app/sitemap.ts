@@ -1,11 +1,14 @@
 import type { MetadataRoute } from "next";
 
+const SITE_URL = "https://www.benhankins.dev";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://benhankins.vercel.app";
   return [
-    { url: `${base}/`, changeFrequency: "monthly", priority: 1 },
-    { url: `${base}/projects`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/about`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/contact`, changeFrequency: "yearly", priority: 0.5 },
+    {
+      url: SITE_URL,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
   ];
 }

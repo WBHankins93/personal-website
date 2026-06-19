@@ -20,27 +20,25 @@ npm run build:check  # Type check + build (use before deploy)
 
 **Key Directories**:
 - `src/app/` - Pages using App Router (home, /about, /projects, /contact)
-- `src/components/` - React components
-- `src/data/` - Static data files (projects.ts)
-- `src/lib/` - Utilities including `cn()` helper and animation configs
-- `src/hooks/` - Custom hooks (scroll trigger, reduced motion)
+- `src/components/` - React components, including `ui/` for shadcn-style base components
+- `src/data/` - Static data files (projects.ts, experiences.ts)
+- `src/lib/` - Utilities including `cn()` helper, color system, animation configs
+- `src/hooks/` - Custom hooks (scroll triggers, parallax, reduced motion)
 
 **Component Patterns**:
 - Use `"use client"` directive for interactive components
 - Wrap Three.js/heavy components with `dynamic()` import and `{ ssr: false }` for SSR safety
 - Animation constants are centralized in `src/lib/animation-configs/`
+- Category colors for projects/tech are defined in `src/lib/colors.ts`
 
 **Styling**:
 - Theme variables (Matrix green theme) defined in `src/app/globals.css`
 - Uses `cn()` from `src/lib/utils.ts` for conditional classNames (clsx + tailwind-merge)
 - Path alias: `@/*` maps to `./src/*`
 
-**Assets**:
-- Project card images live in `public/projects/` — JPEG screenshots for live
-  sites, generated terminal-style SVG covers for repo-only/NDA projects
-
 **Accessibility**:
 - Use `useReducedMotion()` hook to respect `prefers-reduced-motion`
+- Components use Radix UI primitives for accessible foundations
 
 ## Pre-commit
 

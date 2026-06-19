@@ -1,8 +1,14 @@
 import type { MetadataRoute } from "next";
 
+const SITE_URL = "https://www.benhankins.dev";
+
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://benhankins.vercel.app/sitemap.xml",
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

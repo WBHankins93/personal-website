@@ -1,22 +1,7 @@
-import type { Metadata } from 'next';
-import MatrixNav from '@/components/MatrixNav';
-import AboutContent from '@/components/AboutContent';
-import MatrixFooter from '@/components/MatrixFooter';
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: 'About | Ben Hankins',
-  description:
-    'Solutions engineer and full-stack developer based in New Orleans. Six years building cloud infrastructure, enterprise software, and AI tools.',
-};
-
+// The site consolidated to a single editorial page. Preserve inbound links
+// and SEO equity by permanently redirecting the old /about route.
 export default function AboutPage() {
-  return (
-    <main>
-      <div className="relative z-[1]">
-        <MatrixNav />
-        <AboutContent />
-        <MatrixFooter />
-      </div>
-    </main>
-  );
+  permanentRedirect("/#experience");
 }

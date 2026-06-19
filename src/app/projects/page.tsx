@@ -1,22 +1,7 @@
-import type { Metadata } from 'next';
-import MatrixNav from '@/components/MatrixNav';
-import ProjectsGrid from '@/components/ProjectsGrid';
-import MatrixFooter from '@/components/MatrixFooter';
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: 'Projects | Ben Hankins',
-  description:
-    'Full-stack, AI engineering, infrastructure, and client work projects by Ben Hankins.',
-};
-
+// The site consolidated to a single editorial page. Preserve inbound links
+// and SEO equity by permanently redirecting the old /projects route.
 export default function ProjectsPage() {
-  return (
-    <main>
-      <div className="relative z-[1]">
-        <MatrixNav />
-        <ProjectsGrid />
-        <MatrixFooter />
-      </div>
-    </main>
-  );
+  permanentRedirect("/#products");
 }

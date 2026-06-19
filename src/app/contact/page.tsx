@@ -1,22 +1,7 @@
-import type { Metadata } from 'next';
-import MatrixNav from '@/components/MatrixNav';
-import ContactContent from '@/components/ContactContent';
-import MatrixFooter from '@/components/MatrixFooter';
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: 'Contact | Ben Hankins',
-  description:
-    'Get in touch with Ben Hankins — open to Solutions Architect, Solutions Engineer, and GTM Engineer roles.',
-};
-
+// The site consolidated to a single editorial page. Preserve inbound links
+// and SEO equity by permanently redirecting the old /contact route.
 export default function ContactPage() {
-  return (
-    <main>
-      <div className="relative z-[1]">
-        <MatrixNav />
-        <ContactContent />
-        <MatrixFooter />
-      </div>
-    </main>
-  );
+  permanentRedirect("/#contact");
 }
