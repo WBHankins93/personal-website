@@ -10,12 +10,14 @@ export default function Experience() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="experience" className="px-6 md:px-8 py-20 md:py-28 bg-paper-alt">
+    <section id="experience" className="px-6 md:px-8 py-16 md:py-20 bg-paper-alt border-b border-line">
       <div className="mx-auto max-w-3xl">
-        <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-accent">
-          Experience
-        </p>
-        <h2 className="mt-3 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
+        <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
+          <span className="text-clay">No. 04</span>
+          <span>— Experience</span>
+          <span className="rule-line" />
+        </div>
+        <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
           Where the track record comes from.
         </h2>
 
@@ -50,7 +52,7 @@ export default function Experience() {
 
         <div className="mt-4">
           <a
-            href="/Ben_Hankins_Resume.pdf"
+            href="/Ben_Hankins_SE_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-line-strong hover:border-ink text-ink font-heading font-medium text-[0.95rem] px-5 py-3 no-underline transition-colors"

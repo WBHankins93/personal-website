@@ -11,20 +11,27 @@ export default function Contact() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" className="px-6 md:px-8 py-24 md:py-32 bg-paper-alt">
+    <section id="contact" className="relative overflow-hidden px-6 md:px-8 py-20 md:py-28 bg-paper-alt">
+      <div className="botanical-wash pointer-events-none absolute inset-0" aria-hidden />
       <motion.div
-        className="mx-auto max-w-3xl text-center"
+        className="relative mx-auto max-w-3xl text-center"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.5, ease: EASE.easeOut }}
       >
-        <h2 className="font-heading font-bold text-ink tracking-tight text-[clamp(2rem,5vw,3.25rem)]">
+        <div className="mb-5 flex items-center justify-center gap-3 font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted">
+          <span className="h-px w-8 bg-line-strong" />
+          <span className="text-clay">No. 06</span>
+          <span>— Contact</span>
+          <span className="h-px w-8 bg-line-strong" />
+        </div>
+        <h2 className="font-heading font-bold text-ink tracking-tight text-[clamp(2.25rem,5.5vw,3.5rem)]">
           Let&apos;s build something.
         </h2>
         <p className="mt-5 mx-auto max-w-[52ch] font-body text-ink-soft leading-relaxed text-[1.05rem]">
-          Open to Solutions Architect, Solutions Engineer, and GTM Engineer
-          roles. Also available for consulting through Sproutflow Studio.
+          Open to Solutions Engineer and GTM Engineer roles. Also available for
+          consulting through Sproutflow Studio.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">

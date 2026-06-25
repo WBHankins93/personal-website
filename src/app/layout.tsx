@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://www.benhankins.dev";
-const TITLE = "Ben Hankins — Solutions Architect & Software Builder";
+const TITLE = "Ben Hankins — Solutions Engineer & Software Builder";
 const DESCRIPTION =
-  "Ben Hankins is a Solutions Architect who builds production software. 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering — with shipped products like Greenlit and Clipboard to show for it.";
+  "Ben Hankins is a Solutions Engineer who builds production software. 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering — with shipped products like Greenlit and Clipboard to show for it.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +40,6 @@ export const metadata: Metadata = {
   publisher: "Ben Hankins",
   keywords: [
     "Ben Hankins",
-    "Solutions Architect",
     "Solutions Engineer",
     "GTM Engineer",
     "cloud infrastructure",
