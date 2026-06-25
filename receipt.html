@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEN HANKINS / PORTFOLIO RECEIPT</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px 60px;
+      min-height: 100vh;
+    }
+
+    .receipt {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    /* ── HEADER ── */
+    .store-name {
+      color: #22c55e;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .subtitle {
+      color: #22c55e;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      opacity: 0.85;
+    }
+
+    .meta-block {
+      font-size: 11px;
+      color: #aaaaaa;
+      margin-bottom: 4px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── DIVIDERS ── */
+    .rule {
+      border: none;
+      border-top: 1px dashed #444444;
+      margin: 12px 0;
+    }
+
+    .rule-solid {
+      border: none;
+      border-top: 1px solid #333333;
+      margin: 14px 0;
+    }
+
+    .rule-double {
+      border: none;
+      border-top: 3px double #22c55e;
+      margin: 16px 0;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      color: #22c55e;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    /* ── LANGUAGES LEDGER ── */
+    .ledger-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+      font-size: 12px;
+    }
+
+    .ledger-label {
+      flex: 0 0 auto;
+      padding-right: 4px;
+    }
+
+    .ledger-dots {
+      flex: 1 1 auto;
+      overflow: hidden;
+      color: #555555;
+      white-space: nowrap;
+      margin: 0 2px;
+    }
+
+    .ledger-dots::after {
+      content: '....................................................................................................';
+      display: block;
+      overflow: hidden;
+    }
+
+    .ledger-value {
+      flex: 0 0 auto;
+      text-align: right;
+      padding-left: 4px;
+      color: #e8e8e8;
+    }
+
+    /* ── STACK LIST ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 16px;
+      font-size: 12px;
+    }
+
+    .stack-item {
+      padding: 1px 0;
+    }
+
+    .stack-num {
+      color: #555555;
+      margin-right: 4px;
+    }
+
+    /* ── FEATURES ── */
+    .feature-item {
+      font-size: 12px;
+      margin-bottom: 3px;
+      line-height: 1.5;
+    }
+
+    .check {
+      color: #22c55e;
+      margin-right: 4px;
+    }
+
+    /* ── ROUTES ── */
+    .route-item {
+      font-size: 12px;
+      margin-bottom: 3px;
+      color: #e8e8e8;
+    }
+
+    .route-arrow {
+      color: #555555;
+      margin-right: 6px;
+    }
+
+    /* ── COMMIT LOG TABLE ── */
+    .commit-table {
+      font-size: 11px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .commit-table thead tr {
+      color: #888888;
+      border-bottom: 1px dashed #444444;
+    }
+
+    .commit-table th {
+      text-align: left;
+      padding: 2px 6px 4px 0;
+      font-weight: normal;
+      letter-spacing: 0.08em;
+    }
+
+    .commit-table td {
+      padding: 2px 6px 2px 0;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .td-hash {
+      color: #22c55e;
+      white-space: nowrap;
+    }
+
+    .td-date {
+      color: #888888;
+      white-space: nowrap;
+    }
+
+    .td-msg {
+      color: #e8e8e8;
+      word-break: break-word;
+    }
+
+    /* ── ACTIVITY TIMELINE ── */
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      font-size: 11px;
+      gap: 8px;
+    }
+
+    .tl-month {
+      flex: 0 0 52px;
+      color: #888888;
+      text-align: right;
+    }
+
+    .tl-bar-wrap {
+      flex: 1 1 auto;
+    }
+
+    .tl-bar {
+      display: inline-block;
+      color: #22c55e;
+      letter-spacing: -1px;
+    }
+
+    .tl-count {
+      flex: 0 0 24px;
+      text-align: right;
+      color: #e8e8e8;
+    }
+
+    /* ── TOTALS ── */
+    .totals-block {
+      font-size: 13px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 2px 0;
+    }
+
+    .total-label {
+      color: #22c55e;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+
+    .total-dots {
+      flex: 1 1 auto;
+      overflow: hidden;
+      color: #333333;
+      margin: 0 4px;
+    }
+
+    .total-dots::after {
+      content: '....................................................................................................';
+      display: block;
+      overflow: hidden;
+    }
+
+    .total-value {
+      color: #22c55e;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .footer-thanks {
+      color: #22c55e;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .footer-gen {
+      color: #555555;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body {
+        background: #0a0a0a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .receipt {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+
+    <!-- HEADER -->
+    <div class="store-name">BEN HANKINS / PORTFOLIO</div>
+    <div class="subtitle">WHAT I ACTUALLY BUILT</div>
+
+    <hr class="rule-solid">
+
+    <div class="meta-block">
+      <div class="meta-row">
+        <span>RECEIPT NO.</span>
+        <span>#dbaefd4</span>
+      </div>
+      <div class="meta-row">
+        <span>DATE</span>
+        <span>2026-06-09</span>
+      </div>
+      <div class="meta-row">
+        <span>CASHIER</span>
+        <span>Ben Hankins</span>
+      </div>
+      <div class="meta-row">
+        <span>REPO</span>
+        <span>personal-website</span>
+      </div>
+      <div class="meta-row">
+        <span>PERIOD</span>
+        <span>2025-07-29 → 2026-06-09</span>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <!-- 1. LANGUAGES -->
+    <div class="section-header">LANGUAGES</div>
+
+    <div class="ledger-row">
+      <span class="ledger-label">TypeScript/TSX</span>
+      <span class="ledger-dots"></span>
+      <span class="ledger-value">44 files</span>
+    </div>
+    <div class="ledger-row">
+      <span class="ledger-label">JSON</span>
+      <span class="ledger-dots"></span>
+      <span class="ledger-value"> 5 files</span>
+    </div>
+    <div class="ledger-row">
+      <span class="ledger-label">JavaScript</span>
+      <span class="ledger-dots"></span>
+      <span class="ledger-value"> 4 files</span>
+    </div>
+    <div class="ledger-row">
+      <span class="ledger-label">CSS</span>
+      <span class="ledger-dots"></span>
+      <span class="ledger-value"> 1 file</span>
+    </div>
+
+    <hr class="rule">
+
+    <!-- 2. STACK -->
+    <div class="section-header">STACK</div>
+
+    <div class="stack-grid">
+      <div class="stack-item"><span class="stack-num">01.</span>Next.js 15 (App Router)</div>
+      <div class="stack-item"><span class="stack-num">02.</span>TypeScript</div>
+      <div class="stack-item"><span class="stack-num">03.</span>Tailwind CSS v4</div>
+      <div class="stack-item"><span class="stack-num">04.</span>Framer Motion</div>
+      <div class="stack-item"><span class="stack-num">05.</span>Three.js</div>
+      <div class="stack-item"><span class="stack-num">06.</span>Radix UI</div>
+      <div class="stack-item"><span class="stack-num">07.</span>shadcn/ui</div>
+      <div class="stack-item"><span class="stack-num">08.</span>Jest</div>
+      <div class="stack-item"><span class="stack-num">09.</span>ESLint</div>
+      <div class="stack-item"><span class="stack-num">10.</span>Husky</div>
+      <div class="stack-item"><span class="stack-num">11.</span>lint-staged</div>
+      <div class="stack-item"><span class="stack-num">12.</span>Vercel</div>
+    </div>
+
+    <hr class="rule">
+
+    <!-- 3. FEATURES SHIPPED -->
+    <div class="section-header">FEATURES SHIPPED</div>
+
+    <div class="feature-item"><span class="check">[✓]</span>Initial portfolio site — Hero, About, Experience, Projects</div>
+    <div class="feature-item"><span class="check">[✓]</span>CVModal with resume PDF view + download</div>
+    <div class="feature-item"><span class="check">[✓]</span>Floating tech particles + WordSphere 3D bg</div>
+    <div class="feature-item"><span class="check">[✓]</span>FluidBlob WebGL background animation</div>
+    <div class="feature-item"><span class="check">[✓]</span>Matrix portfolio redesign — full component architecture</div>
+    <div class="feature-item"><span class="check">[✓]</span>ResumeDropdown: Full-Stack + Solutions Engineering PDFs</div>
+    <div class="feature-item"><span class="check">[✓]</span>/projects route with filterable project grid</div>
+    <div class="feature-item"><span class="check">[✓]</span>/contact route with form + sidebar</div>
+    <div class="feature-item"><span class="check">[✓]</span>/about route with bento Core Capabilities grid</div>
+    <div class="feature-item"><span class="check">[✓]</span>TechTicker animated marquee</div>
+    <div class="feature-item"><span class="check">[✓]</span>BentoGrid asymmetric layout</div>
+    <div class="feature-item"><span class="check">[✓]</span>Mobile-responsive flip cards + mobile layout</div>
+    <div class="feature-item"><span class="check">[✓]</span>TypedRole / TypingAnimation — hero section</div>
+    <div class="feature-item"><span class="check">[✓]</span>Category color system for projects</div>
+    <div class="feature-item"><span class="check">[✓]</span>Custom B logo + favicon</div>
+    <div class="feature-item"><span class="check">[✓]</span>SA / SE positioning updates</div>
+    <div class="feature-item"><span class="check">[✓]</span>ScrollReveal animated component</div>
+    <div class="feature-item"><span class="check">[✓]</span>Interactive experience timeline</div>
+
+    <hr class="rule">
+
+    <!-- 4. ROUTES -->
+    <div class="section-header">ROUTES</div>
+
+    <div class="route-item"><span class="route-arrow">→</span>/</div>
+    <div class="route-item"><span class="route-arrow">→</span>/about</div>
+    <div class="route-item"><span class="route-arrow">→</span>/projects</div>
+    <div class="route-item"><span class="route-arrow">→</span>/contact</div>
+
+    <hr class="rule">
+
+    <!-- 5. COMMIT LOG (HIGHLIGHTS) -->
+    <div class="section-header">COMMIT LOG (HIGHLIGHTS)</div>
+
+    <table class="commit-table">
+      <thead>
+        <tr>
+          <th style="width:62px">HASH</th>
+          <th style="width:86px">DATE</th>
+          <th>MESSAGE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-hash">dbaefd4</td>
+          <td class="td-date">2025-07-29</td>
+          <td class="td-msg">Initial commit from Create Next App</td>
+        </tr>
+        <tr>
+          <td class="td-hash">f718741</td>
+          <td class="td-date">2025-07-30</td>
+          <td class="td-msg">ProjectsSection + CVModal with resume PDF/dl</td>
+        </tr>
+        <tr>
+          <td class="td-hash">9ab77bc</td>
+          <td class="td-date">2025-09-18</td>
+          <td class="td-msg">feat: enhance experience section w/ timeline</td>
+        </tr>
+        <tr>
+          <td class="td-hash">1bbfc3b</td>
+          <td class="td-date">2025-09-20</td>
+          <td class="td-msg">feat: Complete AboutMe redesign w/ interactive</td>
+        </tr>
+        <tr>
+          <td class="td-hash">4a6e23c</td>
+          <td class="td-date">2026-03-19</td>
+          <td class="td-msg">feat: matrix portfolio redesign — full arch</td>
+        </tr>
+        <tr>
+          <td class="td-hash">7d414a8</td>
+          <td class="td-date">2026-03-20</td>
+          <td class="td-msg">feat: add /projects route w/ filterable grid</td>
+        </tr>
+        <tr>
+          <td class="td-hash">8842e8f</td>
+          <td class="td-date">2026-03-20</td>
+          <td class="td-msg">feat: add /contact route with form and sidebar</td>
+        </tr>
+        <tr>
+          <td class="td-hash">2459d44</td>
+          <td class="td-date">2026-03-20</td>
+          <td class="td-msg">feat: About page, project recategorization</td>
+        </tr>
+        <tr>
+          <td class="td-hash">86f015f</td>
+          <td class="td-date">2026-03-25</td>
+          <td class="td-msg">refactor: remove desktop flip cards for simpler</td>
+        </tr>
+        <tr>
+          <td class="td-hash">f276805</td>
+          <td class="td-date">2026-06-03</td>
+          <td class="td-msg">update portfolio solutions architect positioning</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="rule">
+
+    <!-- 6. ACTIVITY TIMELINE -->
+    <!--
+      Max count = 35 (2026-01), bar width scaled to 35 chars.
+      Scale factor = 35 / 35 = 1.0
+      Each █ = 1 commit (capped at 35).
+
+      2025-07:  6  → 6  blocks
+      2025-08:  3  → 3  blocks
+      2025-09: 30  → 30 blocks
+      2025-10:  7  → 7  blocks
+      2025-11:  8  → 8  blocks
+      2025-12: 21  → 21 blocks
+      2026-01: 35  → 35 blocks
+      2026-02: 17  → 17 blocks
+      2026-03: 23  → 23 blocks
+      2026-04:  9  → 9  blocks
+      2026-06:  4  → 4  blocks
+    -->
+    <div class="section-header">ACTIVITY TIMELINE</div>
+
+    <div class="timeline-row">
+      <span class="tl-month">2025-07</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">██████</span></span>
+      <span class="tl-count"> 6</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2025-08</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">███</span></span>
+      <span class="tl-count"> 3</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2025-09</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">██████████████████████████████</span></span>
+      <span class="tl-count">30</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2025-10</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">███████</span></span>
+      <span class="tl-count"> 7</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2025-11</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">████████</span></span>
+      <span class="tl-count"> 8</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2025-12</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">█████████████████████</span></span>
+      <span class="tl-count">21</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2026-01</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">███████████████████████████████████</span></span>
+      <span class="tl-count">35</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2026-02</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">█████████████████</span></span>
+      <span class="tl-count">17</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2026-03</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">███████████████████████</span></span>
+      <span class="tl-count">23</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2026-04</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">█████████</span></span>
+      <span class="tl-count"> 9</span>
+    </div>
+    <div class="timeline-row">
+      <span class="tl-month">2026-06</span>
+      <span class="tl-bar-wrap"><span class="tl-bar">████</span></span>
+      <span class="tl-count"> 4</span>
+    </div>
+
+    <hr class="rule-double">
+
+    <!-- 7. TOTALS -->
+    <div class="section-header">TOTALS</div>
+
+    <div class="totals-block">
+      <div class="total-row">
+        <span class="total-label">COMMITS</span>
+        <span class="total-dots"></span>
+        <span class="total-value">163</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">FILES</span>
+        <span class="total-dots"></span>
+        <span class="total-value"> 64</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">COMPONENTS</span>
+        <span class="total-dots"></span>
+        <span class="total-value"> 35</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">ROUTES</span>
+        <span class="total-dots"></span>
+        <span class="total-value">  4</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">SPAN</span>
+        <span class="total-dots"></span>
+        <span class="total-value">316 days</span>
+      </div>
+    </div>
+
+    <hr class="rule-double">
+
+    <!-- 8. FOOTER -->
+    <div class="footer">
+      <div class="footer-thanks">THANK YOU FOR SHIPPING</div>
+      <div class="footer-gen">generated 2026-06-09</div>
+    </div>
+
+  </div>
+</body>
+</html>
