@@ -28,10 +28,10 @@ export const labs: Lab[] = [
     href: "https://github.com/WBHankins93/implementation-studio",
   },
   {
-    name: "Nealy Event Decor",
+    name: "DevOps Studio",
     description:
-      "Live e-commerce and booking platform for an event decor business.",
-    href: "https://www.nealyevents.com/",
+      "Production-grade DevOps learning platform — hands-on AWS, Terraform, Kubernetes, and observability labs.",
+    href: "https://github.com/WBHankins93/devops-studio",
   },
 ];
 
