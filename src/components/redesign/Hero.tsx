@@ -7,10 +7,21 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE } from "@/lib/animation-configs/ease";
 
 const stats = [
-  { num: "$10.1M", label: "Deal Contributed" },
-  { num: "99.9%", label: "Uptime Maintained" },
+  { num: "$13M", label: "Pipeline Supported" },
+  { num: "9+", label: "Enterprise Accounts" },
   { num: "80%", label: "Faster Deploys" },
-  { num: "7+", label: "Years Experience" },
+  { num: "100%", label: "SOC 2 Type II" },
+];
+
+// Named enterprise accounts engaged across IBM Client Engineering + Prove AI.
+const accounts = [
+  "AT&T",
+  "Boeing",
+  "Cencora",
+  "Kroger",
+  "Norfolk Southern",
+  "CenterPoint Energy",
+  "Hertz",
 ];
 
 export default function Hero() {
@@ -174,6 +185,31 @@ export default function Hero() {
               </div>
             </div>
           ))}
+        </motion.div>
+
+        {/* Trusted-by — named enterprise accounts (the names out-punch a count) */}
+        <motion.div
+          className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:items-baseline sm:gap-5"
+          {...reveal(0.52)}
+        >
+          <span className="font-mono text-[0.62rem] tracking-[0.16em] uppercase text-ink-muted whitespace-nowrap">
+            Trusted on engagements with
+          </span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            {accounts.map((name, i) => (
+              <span
+                key={name}
+                className="flex items-center gap-3 font-heading text-[0.92rem] font-medium text-ink-soft"
+              >
+                {name}
+                {i < accounts.length - 1 && (
+                  <span className="text-line-strong" aria-hidden>
+                    ·
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
