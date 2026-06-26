@@ -9,7 +9,7 @@ export default function WhatIBuild() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="build" className="px-6 md:px-8 py-20 md:py-28 bg-paper-alt">
+    <section id="build" className="px-6 md:px-8 py-16 md:py-20 bg-paper-alt border-b border-line">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -17,10 +17,12 @@ export default function WhatIBuild() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5, ease: EASE.easeOut }}
         >
-          <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-accent">
-            What I Build
-          </p>
-          <h2 className="mt-3 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[20ch]">
+          <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
+            <span className="text-clay">No. 02</span>
+            <span>— What I Build</span>
+            <span className="rule-line" />
+          </div>
+          <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[20ch]">
             Four kinds of work, one throughline.
           </h2>
         </motion.div>

@@ -7,7 +7,7 @@ import { useScrollTrigger } from "@/hooks/useScrollTrigger";
 
 const links = [
   { label: "What I Build", href: "#build" },
-  { label: "Products", href: "#products" },
+  { label: "Work", href: "#products" },
   { label: "Experience", href: "#experience" },
   { label: "Labs", href: "#labs" },
   { label: "Contact", href: "#contact" },
@@ -57,7 +57,7 @@ export default function Nav() {
           ))}
           <li>
             <a
-              href="/Ben_Hankins_Resume.pdf"
+              href="/Ben_Hankins_SE_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="font-heading text-[0.85rem] font-medium text-white no-underline bg-accent hover:bg-accent-hover transition-colors rounded-md px-4 py-2"
@@ -96,7 +96,7 @@ export default function Nav() {
             ))}
             <li>
               <a
-                href="/Ben_Hankins_Resume.pdf"
+                href="/Ben_Hankins_SE_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}

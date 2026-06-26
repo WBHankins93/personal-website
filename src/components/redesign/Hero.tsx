@@ -27,110 +27,153 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative scroll-mt-0 px-6 md:px-8 pt-28 md:pt-32 pb-16 md:pb-24"
+      className="relative scroll-mt-0 overflow-hidden border-b border-line ledger-grid"
     >
-      <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-10 md:gap-14 items-center">
-        {/* Text column */}
-        <div className="order-2 md:order-1">
-          {/* Status badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-line bg-paper-alt px-3.5 py-1.5 mb-6"
-            {...reveal(0.05)}
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-status-prod)]" />
-            <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-ink-muted">
-              Open to Opportunities
-            </span>
-          </motion.div>
+      {/* Atmospheric botanical light */}
+      <div className="botanical-wash pointer-events-none absolute inset-0" aria-hidden />
 
-          {/* Headline */}
-          <motion.h1
-            className="font-heading font-bold text-ink leading-[1.02] tracking-tight"
-            style={{ fontSize: "clamp(2.75rem, 6vw, 4.75rem)" }}
-            {...reveal(0.12)}
-          >
-            Ben Hankins
-          </motion.h1>
+      {/* Vertical edge label — editorial margin mark */}
+      <div
+        className="pointer-events-none absolute right-3 top-32 hidden lg:block font-mono text-[0.6rem] tracking-[0.35em] uppercase text-ink-muted/70 [writing-mode:vertical-rl]"
+        aria-hidden
+      >
+        Solutions Engineer · Builder by default
+      </div>
 
-          {/* Tagline */}
-          <motion.p
-            className="mt-5 font-heading text-ink leading-snug max-w-[36ch]"
-            style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.6rem)", fontWeight: 500 }}
-            {...reveal(0.2)}
-          >
-            Solutions Architect by career. Builder by default. The products are
-            how I stay sharp.
-          </motion.p>
+      <div className="relative mx-auto max-w-6xl px-6 md:px-8 pt-28 md:pt-32 pb-12 md:pb-16">
+        {/* Masthead meta row */}
+        <motion.div
+          className="rule-label font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted"
+          {...reveal(0.04)}
+        >
+          <span className="text-clay">No. 01</span>
+          <span>— Portfolio</span>
+          <span className="rule-line" />
+          <span className="hidden sm:inline">New Orleans, LA</span>
+        </motion.div>
 
-          {/* Subline */}
-          <motion.p
-            className="mt-5 font-body text-ink-soft leading-relaxed max-w-[52ch] text-[1.05rem]"
-            {...reveal(0.28)}
-          >
-            7+ years across enterprise architecture, cloud infrastructure, and
-            customer-facing engineering with production software to show for it.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div className="mt-8 flex flex-wrap items-center gap-3" {...reveal(0.36)}>
-            <a
-              href="#products"
-              className="inline-flex items-center gap-2 rounded-md bg-accent hover:bg-accent-hover transition-colors text-white font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
+        <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-10 items-end">
+          {/* Text column */}
+          <div className="md:col-span-7">
+            <motion.div
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-paper/70 backdrop-blur-sm px-3.5 py-1.5 mb-6"
+              {...reveal(0.08)}
             >
-              View Products <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href="/Ben_Hankins_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-md border border-line-strong hover:border-ink text-ink font-heading font-medium text-[0.95rem] px-5 py-3 no-underline transition-colors"
-            >
-              Resume
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ben-hankins/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="inline-flex items-center gap-2 rounded-md text-ink-soft hover:text-accent font-heading font-medium text-[0.95rem] px-3 py-3 no-underline transition-colors"
-            >
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-          </motion.div>
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-status-prod)] animate-pulse-glow" />
+              <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-ink-muted">
+                Open to Opportunities
+              </span>
+            </motion.div>
 
-          {/* Stat row — above the fold */}
-          <motion.div
-            className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 border-t border-line pt-6 max-w-[40rem]"
-            {...reveal(0.44)}
+            {/* Oversized editorial headline */}
+            <motion.h1
+              className="font-heading font-bold text-ink leading-[0.92] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(3.25rem, 8.5vw, 6.25rem)" }}
+              {...reveal(0.14)}
+            >
+              <span className="block">Ben</span>
+              <span className="block">
+                Hankins<span className="text-clay">.</span>
+              </span>
+            </motion.h1>
+
+            {/* Tagline */}
+            <motion.p
+              className="mt-6 font-heading text-ink leading-snug max-w-[34ch]"
+              style={{ fontSize: "clamp(1.2rem, 2.1vw, 1.55rem)", fontWeight: 500 }}
+              {...reveal(0.22)}
+            >
+              <span className="text-accent">Solutions Engineer</span> by career.
+              Builder by default. The products are how I stay sharp.
+            </motion.p>
+
+            {/* Subline */}
+            <motion.p
+              className="mt-4 font-body text-ink-soft leading-relaxed max-w-[48ch] text-[1.02rem]"
+              {...reveal(0.3)}
+            >
+              7+ years across enterprise architecture, cloud infrastructure, and
+              customer-facing engineering — with production software to show for
+              it.
+            </motion.p>
+
+            {/* CTAs — one solid primary, the rest quiet */}
+            <motion.div
+              className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+              {...reveal(0.38)}
+            >
+              <a
+                href="#products"
+                className="inline-flex items-center gap-2 rounded-md bg-accent hover:bg-accent-hover transition-colors text-paper font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
+              >
+                Explore the Work <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="/Ben_Hankins_SE_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 font-heading font-medium text-[0.95rem] text-ink no-underline border-b border-line-strong hover:border-ink pb-0.5 transition-colors"
+              >
+                Resume
+                <ArrowRight className="h-3.5 w-3.5 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ben-hankins/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex items-center gap-1.5 font-heading font-medium text-[0.95rem] text-ink-muted hover:text-accent no-underline transition-colors"
+              >
+                <Linkedin className="h-4 w-4" /> LinkedIn
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Photo plate — matted field-journal print, bled to the right */}
+          <motion.figure
+            className="md:col-span-5 relative mx-auto md:mx-0 md:ml-auto w-full max-w-[19rem] md:max-w-[20rem]"
+            {...reveal(0.18)}
           >
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div className="font-heading text-[1.5rem] font-semibold text-ink tracking-tight leading-none">
-                  {s.num}
-                </div>
-                <div className="mt-1.5 font-mono text-[0.62rem] tracking-[0.08em] uppercase text-ink-muted">
-                  {s.label}
-                </div>
+            <div className="relative rotate-[-1.5deg] rounded-xl border-[6px] border-paper bg-paper shadow-[0_18px_45px_-22px_rgba(34,27,18,0.55)] ring-1 ring-line">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-paper-alt">
+                <Image
+                  src="/BH-headshot.png"
+                  alt="Ben Hankins"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 304px, 320px"
+                  className="object-cover"
+                />
               </div>
-            ))}
-          </motion.div>
+              {/* Clay index tab */}
+              <span className="absolute -top-3 -left-3 inline-flex items-center justify-center rounded-md bg-clay px-2 py-1 font-mono text-[0.62rem] tracking-[0.1em] uppercase text-paper shadow-sm">
+                Fig. 01
+              </span>
+            </div>
+            <figcaption className="mt-4 rotate-[-1.5deg] font-mono text-[0.66rem] tracking-[0.06em] uppercase text-ink-muted">
+              Ben Hankins — building from New Orleans
+            </figcaption>
+          </motion.figure>
         </div>
 
-        {/* Photo column */}
+        {/* Ledger stat strip — full width, ruled dividers */}
         <motion.div
-          className="order-1 md:order-2 flex justify-center md:justify-end"
-          {...reveal(0.1)}
+          className="mt-14 grid grid-cols-2 sm:grid-cols-4 border-t border-b border-line"
+          {...reveal(0.46)}
         >
-          <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-full md:max-w-[22rem] md:aspect-[4/5] md:h-auto overflow-hidden rounded-2xl border border-line bg-paper-alt">
-            <Image
-              src="/BH-headshot.png"
-              alt="Ben Hankins"
-              fill
-              priority
-              sizes="(max-width: 768px) 288px, 352px"
-              className="object-cover"
-            />
-          </div>
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="border-l border-line px-1 py-5 sm:px-6 [&:nth-child(odd)]:border-l-0 sm:[&:nth-child(odd)]:border-l sm:[&:nth-child(4n+1)]:border-l-0"
+            >
+              <div className="font-heading text-[1.7rem] sm:text-[1.9rem] font-bold text-ink tracking-tight leading-none">
+                {s.num}
+              </div>
+              <div className="mt-2 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-ink-muted">
+                {s.label}
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

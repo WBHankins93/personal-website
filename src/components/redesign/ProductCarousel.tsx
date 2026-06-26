@@ -111,16 +111,18 @@ export default function ProductCarousel() {
   const next = useCallback(() => setIndex((i) => clamp(i + 1)), [clamp]);
 
   return (
-    <section id="products" className="px-6 md:px-8 py-20 md:py-28">
+    <section id="products" className="px-6 md:px-8 py-16 md:py-20 border-b border-line">
       <div className="mx-auto max-w-6xl">
         {/* Header + arrows */}
         <div className="flex items-end justify-between gap-6">
-          <div>
-            <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-accent">
-              Featured Products
-            </p>
-            <h2 className="mt-3 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
-              Software I&apos;ve shipped.
+          <div className="min-w-0 flex-1">
+            <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
+              <span className="text-clay">No. 03</span>
+              <span>— Selected Work</span>
+              <span className="rule-line" />
+            </div>
+            <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
+              Things I&apos;m building.
             </h2>
           </div>
           <div className="hidden sm:flex items-center gap-2">

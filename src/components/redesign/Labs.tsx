@@ -10,12 +10,14 @@ export default function Labs() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="labs" className="px-6 md:px-8 py-20 md:py-28">
+    <section id="labs" className="px-6 md:px-8 py-16 md:py-20 border-b border-line">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-accent">
-          Open Source &amp; Labs
-        </p>
-        <h2 className="mt-3 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[24ch]">
+        <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
+          <span className="text-clay">No. 05</span>
+          <span>— Open Source &amp; Labs</span>
+          <span className="rule-line" />
+        </div>
+        <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[24ch]">
           Where I keep the curiosity sharp.
         </h2>
 

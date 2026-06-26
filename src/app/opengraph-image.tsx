@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 // Dynamic Open Graph / Twitter card — editorial, on-brand with the site.
 export const runtime = "edge";
 export const alt =
-  "Ben Hankins — Solutions Architect who builds production software";
+  "Ben Hankins — Solutions Engineer who builds production software";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -68,7 +68,7 @@ export default function OpenGraphImage() {
               maxWidth: 900,
             }}
           >
-            Solutions Architect by career. Builder by default.
+            Solutions Engineer by career. Builder by default.
           </div>
         </div>
 
