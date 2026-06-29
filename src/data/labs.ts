@@ -8,12 +8,19 @@ export interface Lab {
   href: string;
 }
 
+// The first entry is rendered as the featured card; the rest fill the grid below.
 export const labs: Lab[] = [
   {
     name: "Solutions Playbook",
     description:
       "Operational framework for SEs and SAs — 41 files covering the full customer engagement lifecycle.",
     href: "https://github.com/WBHankins93/solutions-playbook",
+  },
+  {
+    name: "AI Engineering Studio",
+    description:
+      "The AI engineering ecosystem made legible through an SE/SA lens — foundations, decision frames, POC playbooks, and talk tracks across the LLMOps-to-governance stack.",
+    href: "https://github.com/WBHankins93/ai-engineering-studio",
   },
   {
     name: "Prompt Library",

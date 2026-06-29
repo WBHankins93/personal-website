@@ -8,6 +8,7 @@ import { EASE } from "@/lib/animation-configs/ease";
 
 export default function Labs() {
   const reduce = useReducedMotion();
+  const [featured, ...rest] = labs;
 
   return (
     <section id="labs" className="px-6 md:px-8 py-16 md:py-20 border-b border-line">
@@ -21,8 +22,33 @@ export default function Labs() {
           Where I keep the curiosity sharp.
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {labs.map((lab, i) => (
+        {/* Featured: Solutions Playbook spans the full width above the grid */}
+        <motion.a
+          href={featured.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-12 flex flex-col rounded-xl border border-line-strong bg-paper p-7 md:p-8 no-underline transition-colors hover:border-accent"
+          initial={reduce ? false : { opacity: 0, y: 14 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4, ease: EASE.easeOut }}
+        >
+          <span className="font-mono text-[0.65rem] tracking-[0.16em] uppercase text-clay">
+            Flagship
+          </span>
+          <div className="mt-2 flex items-start justify-between gap-3">
+            <h3 className="font-heading font-semibold text-ink text-[1.35rem]">
+              {featured.name}
+            </h3>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-ink-muted transition-colors group-hover:text-accent" />
+          </div>
+          <p className="mt-2 font-body text-ink-soft leading-relaxed text-[1rem] max-w-[60ch]">
+            {featured.description}
+          </p>
+        </motion.a>
+
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {rest.map((lab, i) => (
             <motion.a
               key={lab.name}
               href={lab.href}
