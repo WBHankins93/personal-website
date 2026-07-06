@@ -59,7 +59,7 @@ function ProductCard({ product }: { product: Product }) {
         ))}
       </div>
 
-      {/* CTA / note — pinned to bottom */}
+      {/* CTA / note: pinned to bottom */}
       <div className="mt-auto pt-6">
         {product.cta ? (
           <a
@@ -118,7 +118,7 @@ export default function ProductCarousel() {
           <div className="min-w-0 flex-1">
             <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
               <span className="text-clay">No. 03</span>
-              <span>— Selected Work</span>
+              <span>Selected Work</span>
               <span className="rule-line" />
             </div>
             <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">

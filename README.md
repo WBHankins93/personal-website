@@ -1,4 +1,4 @@
-# Ben Hankins — Personal Website
+# Ben Hankins: Personal Website
 
 > Solutions Engineer | Full-Stack Builder | AI Product Development
 

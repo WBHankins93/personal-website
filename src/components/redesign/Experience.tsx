@@ -14,7 +14,7 @@ export default function Experience() {
       <div className="mx-auto max-w-3xl">
         <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
           <span className="text-clay">No. 04</span>
-          <span>— Experience</span>
+          <span>Experience</span>
           <span className="rule-line" />
         </div>
         <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
@@ -40,9 +40,22 @@ export default function Experience() {
                   {exp.period}
                 </span>
               </div>
-              <p className="mt-0.5 font-heading text-accent text-[0.95rem]">
-                {exp.role}
-              </p>
+              {exp.roleProgression ? (
+                <div className="mt-1">
+                  <p className="font-heading text-accent text-[0.95rem]">
+                    IBM progression
+                  </p>
+                  <ol className="mt-2 grid gap-1 list-decimal pl-5 font-heading text-accent text-[0.95rem]">
+                    {exp.roleProgression.map((role) => (
+                      <li key={role}>{role}</li>
+                    ))}
+                  </ol>
+                </div>
+              ) : (
+                <p className="mt-0.5 font-heading text-accent text-[0.95rem]">
+                  {exp.role}
+                </p>
+              )}
               <p className="mt-3 font-body text-ink-soft leading-relaxed">
                 {exp.summary}
               </p>

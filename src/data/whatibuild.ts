@@ -1,5 +1,5 @@
 // src/data/whatibuild.ts
-// "What I Build" — four categories that teach the visitor how to read the
+// "What I Build": four categories that teach the visitor how to read the
 // rest of the page. Copy is final as written; do not paraphrase.
 
 import { Package, Layers, Bot, Handshake, type LucideIcon } from "lucide-react";

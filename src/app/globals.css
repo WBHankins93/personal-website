@@ -70,36 +70,36 @@
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
   --animate-cursor-blink: cursor-blink 1s step-end infinite;
 
-  /* ─── Editorial redesign system (warm field-journal) ─────────────────────
+  /* Editorial redesign system (warm field-journal)
      Warm bone-paper base with espresso ink. A botanical forest-green primary
      (echoing Sproutflow Studio) plus a terracotta-clay secondary used for
      index numbers, rules, and editorial marks. Texture and hairline rules
      carry the density so negative space never reads as emptiness. */
-  --color-paper: #F6F1E7;           /* warm bone — main base */
-  --color-paper-alt: #ECE4D5;       /* deeper kraft band — visible banding */
+  --color-paper: #F6F1E7;           /* warm bone: main base */
+  --color-paper-alt: #ECE4D5;       /* deeper kraft band: visible banding */
   --color-paper-deep: #E4DAC6;      /* third tone for nested panels */
-  --color-ink: #221B12;             /* espresso — primary text / headlines */
+  --color-ink: #221B12;             /* espresso: primary text / headlines */
   --color-ink-soft: #51483B;        /* body copy */
   --color-ink-muted: #8A7E69;       /* labels, captions, eyebrows */
   --color-line: #DCD2BF;            /* hairline borders */
   --color-line-strong: #C7BAA0;     /* hover / emphasized borders */
 
-  --color-accent: #2C5638;          /* forest green — primary */
+  --color-accent: #2C5638;          /* forest green: primary */
   --color-accent-hover: #21442B;
   --color-accent-soft: #DFE7D8;     /* accent tint backgrounds */
 
-  --color-clay: #B0682F;            /* terracotta — index numbers, marks */
+  --color-clay: #B0682F;            /* terracotta: index numbers, marks */
   --color-clay-hover: #94531F;
   --color-clay-soft: #F0E1D0;       /* clay tint backgrounds */
 
   /* Status badge palette (color-coded product states, warm-shifted) */
-  --color-status-beta: #2F6F73;     /* Live Beta — muted teal */
+  --color-status-beta: #2F6F73;     /* Live Beta: muted teal */
   --color-status-beta-bg: #DEEAE7;
-  --color-status-dev: #9A6B16;      /* In Development — ochre */
+  --color-status-dev: #9A6B16;      /* In Development: ochre */
   --color-status-dev-bg: #F1E6C9;
-  --color-status-prod: #2C5638;     /* Production · Private — forest */
+  --color-status-prod: #2C5638;     /* Demo-ready Private: forest */
   --color-status-prod-bg: #DFE7D8;
-  --color-status-proto: #6E6353;    /* Functional Prototype — warm gray */
+  --color-status-proto: #6E6353;    /* Functional Prototype: warm gray */
   --color-status-proto-bg: #E8E0D1;
 }
 
@@ -169,7 +169,7 @@
   }
 }
 
-/* Explicit font family utilities — these win over base layer */
+/* Explicit font family utilities: these win over base layer */
 .font-heading { font-family: var(--font-heading), sans-serif !important; }
 .font-body { font-family: var(--font-body), sans-serif !important; }
 .font-mono { font-family: var(--font-mono), monospace !important; }
@@ -195,7 +195,7 @@
   background-size: 56px 56px;
 }
 
-/* Soft botanical wash — atmospheric forest-green light, not a flat fill */
+/* Soft botanical wash: atmospheric forest-green light, not a flat fill */
 .botanical-wash {
   background:
     radial-gradient(120% 120% at 92% 8%, rgba(44, 86, 56, 0.16) 0%, transparent 46%),

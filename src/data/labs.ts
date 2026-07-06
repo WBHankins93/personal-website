@@ -1,5 +1,5 @@
 // src/data/labs.ts
-// Open Source & Labs — supporting evidence below the product carousel.
+// Open Source & Labs: supporting evidence below the product carousel.
 // Copy is final as written in the redesign handoff; do not paraphrase.
 
 export interface Lab {
@@ -13,7 +13,7 @@ export const labs: Lab[] = [
   {
     name: "Solutions Playbook",
     description:
-      "Operational framework for SEs and SAs — 41 files covering the full customer engagement lifecycle.",
+      "Operational framework for SEs and SAs: 111 Markdown resources and 13 diagrams covering the full customer engagement lifecycle.",
     href: "https://github.com/WBHankins93/solutions-playbook",
   },
   {
@@ -25,7 +25,7 @@ export const labs: Lab[] = [
   {
     name: "Prompt Library",
     description:
-      "Reasoning and judgment architecture for AI. 50 personas, 12 workflows, layered standards. Model-agnostic.",
+      "Reasoning and judgment architecture for AI. 86 personas, 13 workflows, layered standards. Model-agnostic.",
     href: "https://github.com/WBHankins93/prompt-library",
   },
   {
@@ -42,7 +42,7 @@ export const labs: Lab[] = [
   },
 ];
 
-// Sproutflow Studio — single callout, not a project card.
+// Sproutflow Studio: single callout, not a project card.
 export const sproutflowCallout = {
   label: "Building Sproutflow Studio",
   href: "https://sproutflow-studio.com",

@@ -1,11 +1,11 @@
 // src/data/products.ts
-// Featured Products — the centerpiece carousel on the redesigned homepage.
+// Featured Products: the centerpiece carousel on the redesigned homepage.
 // Copy is final as written in the redesign handoff; do not paraphrase.
 
 export type ProductStatus =
   | "Live Beta"
   | "In Development"
-  | "Production · Private"
+  | "Demo-ready · Private"
   | "Functional Prototype";
 
 export interface Product {
@@ -40,7 +40,7 @@ export const products: Product[] = [
   },
   {
     name: "Clipboard",
-    status: "Production · Private",
+    status: "Demo-ready · Private",
     problem: "Service businesses rely on fragmented systems for daily operations.",
     solution:
       "Multi-tenant operations platform for appointment-based, multi-location businesses. Row-level security, vertical packs, role dashboards.",

@@ -43,7 +43,7 @@ export default function Hero() {
       {/* Atmospheric botanical light */}
       <div className="botanical-wash pointer-events-none absolute inset-0" aria-hidden />
 
-      {/* Vertical edge label — editorial margin mark */}
+      {/* Vertical edge label: editorial margin mark */}
       <div
         className="pointer-events-none absolute right-3 top-32 hidden lg:block font-mono text-[0.6rem] tracking-[0.35em] uppercase text-ink-muted/70 [writing-mode:vertical-rl]"
         aria-hidden
@@ -58,7 +58,7 @@ export default function Hero() {
           {...reveal(0.04)}
         >
           <span className="text-clay">No. 01</span>
-          <span>— Portfolio</span>
+          <span>Portfolio</span>
           <span className="rule-line" />
           <span className="hidden sm:inline">New Orleans, LA</span>
         </motion.div>
@@ -104,11 +104,11 @@ export default function Hero() {
               {...reveal(0.3)}
             >
               7+ years across enterprise architecture, cloud infrastructure, and
-              customer-facing engineering — with production software to show for
+              customer-facing engineering, with production software to show for
               it.
             </motion.p>
 
-            {/* CTAs — one solid primary, the rest quiet */}
+            {/* CTAs: one solid primary, the rest quiet */}
             <motion.div
               className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
               {...reveal(0.38)}
@@ -140,7 +140,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Photo plate — matted field-journal print, bled to the right */}
+          {/* Photo plate: matted field-journal print, bled to the right */}
           <motion.figure
             className="md:col-span-5 relative mx-auto md:mx-0 md:ml-auto w-full max-w-[19rem] md:max-w-[20rem]"
             {...reveal(0.18)}
@@ -162,12 +162,12 @@ export default function Hero() {
               </span>
             </div>
             <figcaption className="mt-4 rotate-[-1.5deg] font-mono text-[0.66rem] tracking-[0.06em] uppercase text-ink-muted">
-              Ben Hankins — building from New Orleans
+              Ben Hankins, building from New Orleans
             </figcaption>
           </motion.figure>
         </div>
 
-        {/* Ledger stat strip — full width, ruled dividers */}
+        {/* Ledger stat strip: full width, ruled dividers */}
         <motion.div
           className="mt-14 grid grid-cols-2 sm:grid-cols-4 border-t border-b border-line"
           {...reveal(0.46)}

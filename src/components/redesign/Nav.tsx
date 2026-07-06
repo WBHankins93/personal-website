@@ -28,7 +28,7 @@ export default function Nav() {
     >
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 md:px-8 h-16">
         {/* Logo / monogram */}
-        <a href="#hero" className="flex items-center gap-2.5 no-underline" aria-label="Ben Hankins — home">
+        <a href="#hero" className="flex items-center gap-2.5 no-underline" aria-label="Ben Hankins home">
           <span className="flex h-8 w-8 items-center justify-center rounded-md border border-line-strong">
             <Image
               src="/b-logo-updated-photoroom.png"

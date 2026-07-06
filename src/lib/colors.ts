@@ -2,10 +2,10 @@
 // Product status badge palette for the editorial redesign.
 // Each product state maps to a color-coded pill using the editorial tokens
 // defined in globals.css.
-//   Live Beta            → accent teal
-//   In Development       → amber
-//   Production · Private → green
-//   Functional Prototype → gray
+//   Live Beta: accent teal
+//   In Development: amber
+//   Production / Demo-ready Private: green
+//   Functional Prototype: gray
 import type { ProductStatus } from "@/data/products";
 
 export const STATUS_STYLE: Record<
@@ -22,7 +22,7 @@ export const STATUS_STYLE: Record<
     bg: "bg-[var(--color-status-dev-bg)]",
     dot: "bg-[var(--color-status-dev)]",
   },
-  "Production · Private": {
+  "Demo-ready · Private": {
     text: "text-[var(--color-status-prod)]",
     bg: "bg-[var(--color-status-prod-bg)]",
     dot: "bg-[var(--color-status-prod)]",

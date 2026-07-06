@@ -15,7 +15,7 @@ export default function Labs() {
       <div className="mx-auto max-w-6xl">
         <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
           <span className="text-clay">No. 05</span>
-          <span>— Open Source &amp; Labs</span>
+          <span>Open Source &amp; Labs</span>
           <span className="rule-line" />
         </div>
         <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)] max-w-[24ch]">

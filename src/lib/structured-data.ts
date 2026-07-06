@@ -18,7 +18,7 @@ export function buildJsonLd() {
         image: `${SITE_URL}/BH-headshot.png`,
         jobTitle: "Solutions Engineer",
         description:
-          "Solutions Engineer who builds production software — 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering.",
+          "Solutions Engineer who builds production software: 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering.",
         sameAs: [
           "https://www.linkedin.com/in/ben-hankins/",
           "https://github.com/WBHankins93",
@@ -51,7 +51,7 @@ export function buildJsonLd() {
         "@type": "ProfilePage",
         "@id": `${SITE_URL}/#profilepage`,
         url: SITE_URL,
-        name: "Ben Hankins — Solutions Engineer & Software Builder",
+        name: "Ben Hankins: Solutions Engineer & Software Builder",
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },

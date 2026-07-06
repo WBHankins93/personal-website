@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
 
-// Dynamic Open Graph / Twitter card — editorial, on-brand with the site.
+// Dynamic Open Graph / Twitter card: editorial, on-brand with the site.
 export const runtime = "edge";
 export const alt =
-  "Ben Hankins — Solutions Engineer who builds production software";
+  "Ben Hankins: Solutions Engineer who builds production software";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

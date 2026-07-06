@@ -23,13 +23,14 @@ export default function Contact() {
         <div className="mb-5 flex items-center justify-center gap-3 font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted">
           <span className="h-px w-8 bg-line-strong" />
           <span className="text-clay">No. 06</span>
-          <span>— Contact</span>
+          <span>Contact</span>
           <span className="h-px w-8 bg-line-strong" />
         </div>
         <h2 className="font-heading font-bold text-ink tracking-tight text-[clamp(2.25rem,5.5vw,3.5rem)]">
           Let&apos;s build something.
         </h2>
         <p className="mt-5 mx-auto max-w-[52ch] font-body text-ink-soft leading-relaxed text-[1.05rem]">
+          {/* TODO: Confirm whether GTM Engineer should remain, or be replaced with Solutions Architect. */}
           Open to Solutions Engineer and GTM Engineer roles. Also available for
           consulting through Sproutflow Studio.
         </p>
