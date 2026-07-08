@@ -10,7 +10,7 @@ const stats = [
   { num: "$13M", label: "Pipeline Supported" },
   { num: "9+", label: "Enterprise Accounts" },
   { num: "80%", label: "Faster Deploys" },
-  { num: "100%", label: "SOC 2 Type II" },
+  { num: "4", label: "Featured Builds" },
 ];
 
 // Named enterprise accounts engaged across IBM Client Engineering + Prove AI.
