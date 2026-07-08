@@ -14,6 +14,8 @@ export interface Product {
   problem: string;
   solution: string;
   stack: string[];
+  /** Key into MARKS (src/lib/marks.tsx) for this product's icon + accent color. */
+  markId: string;
   /** Primary CTA. Omit when the product is private / has no public link. */
   cta?: { label: string; href: string };
   /** Small contextual note shown in place of a CTA (e.g. NDA / attribution). */
@@ -24,6 +26,7 @@ export const products: Product[] = [
   {
     name: "Greenlit",
     status: "Live Beta",
+    markId: "greenlit",
     problem: "Most applicants don't know why their resumes fail ATS screening.",
     solution:
       "AI-powered resume coaching platform with ATS scoring, keyword analysis, and role-specific feedback. Built during my own job search.",
@@ -33,6 +36,7 @@ export const products: Product[] = [
   {
     name: "Treehouse",
     status: "In Development",
+    markId: "treehouse",
     problem: "Important moments get lost between group texts and social media.",
     solution:
       "Private iOS app for close friend groups to preserve memories, plans, birthdays, and life events without the noise of social media.",
@@ -41,6 +45,7 @@ export const products: Product[] = [
   {
     name: "Clipboard",
     status: "Demo-ready · Private",
+    markId: "clipboard",
     problem: "Service businesses rely on fragmented systems for daily operations.",
     solution:
       "Multi-tenant operations platform for appointment-based, multi-location businesses. Row-level security, vertical packs, role dashboards.",
@@ -50,6 +55,7 @@ export const products: Product[] = [
   {
     name: "Business Plan Writer",
     status: "Functional Prototype",
+    markId: "business-plan-writer",
     problem: "Creating investor-ready business plans takes significant time and expertise.",
     solution:
       "5-agent AI pipeline that generates structured business plans from intake data. Provider-agnostic across Groq, Anthropic, and OpenAI.",
