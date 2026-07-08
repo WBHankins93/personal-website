@@ -5,15 +5,23 @@ import { motion, useReducedMotion as useFramerReducedMotion } from "framer-motio
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { products, type Product } from "@/data/products";
 import { STATUS_STYLE } from "@/lib/colors";
+import { MARKS } from "@/lib/marks";
 
 const GAP = 24; // px gap between cards
 
 function ProductCard({ product }: { product: Product }) {
   const s = STATUS_STYLE[product.status];
+  const mark = MARKS[product.markId];
+  const Icon = mark.Icon;
   return (
     <article className="flex h-full flex-col rounded-2xl border border-line bg-paper p-7 md:p-9">
-      {/* Status badge */}
+      {/* Mark + status badge */}
       <div className="flex items-start justify-between gap-4">
+        <span
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${mark.bg} ${mark.text}`}
+        >
+          <Icon className="h-5 w-5" />
+        </span>
         <span
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[0.65rem] tracking-[0.08em] uppercase ${s.bg} ${s.text}`}
         >

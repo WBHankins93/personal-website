@@ -101,6 +101,24 @@
   --color-status-prod-bg: #DFE7D8;
   --color-status-proto: #6E6353;    /* Functional Prototype: warm gray */
   --color-status-proto-bg: #E8E0D1;
+
+  /* Mark palette: per-item identity color for individual products, labs,
+     and build categories, so no two cards share a visual signature.
+     Same muted, warm-shifted family as accent/clay above. */
+  --color-mark-pine: #1F6B5C;
+  --color-mark-pine-soft: #DCEBE6;
+  --color-mark-honey: #B8871F;
+  --color-mark-honey-soft: #F2E7C9;
+  --color-mark-denim: #375B7A;
+  --color-mark-denim-soft: #DCE5EC;
+  --color-mark-plum: #7A3B54;
+  --color-mark-plum-soft: #EDDCE3;
+  --color-mark-slate: #5B6B63;
+  --color-mark-slate-soft: #E1E6E3;
+  --color-mark-rust: #9C4A2E;
+  --color-mark-rust-soft: #EEDCD3;
+  --color-mark-moss: #6B7237;
+  --color-mark-moss-soft: #E6E7D4;
 }
 
 :root {

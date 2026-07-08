@@ -39,7 +39,9 @@ export default function WhatIBuild() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.45, delay: i * 0.06, ease: EASE.easeOut }}
               >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${cat.bg} ${cat.text}`}
+                >
                   <Icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-5 font-heading font-semibold text-ink text-[1.2rem]">
