@@ -10,7 +10,6 @@ const stats = [
   { num: "$13M", label: "Pipeline Supported" },
   { num: "9+", label: "Enterprise Accounts" },
   { num: "80%", label: "Faster Deploys" },
-  { num: "4", label: "Featured Builds" },
 ];
 
 // Named enterprise accounts engaged across IBM Client Engineering + Prove AI.
@@ -169,13 +168,13 @@ export default function Hero() {
 
         {/* Ledger stat strip: full width, ruled dividers */}
         <motion.div
-          className="mt-14 grid grid-cols-2 sm:grid-cols-4 border-t border-b border-line"
+          className="mt-14 grid grid-cols-3 border-t border-b border-line"
           {...reveal(0.46)}
         >
           {stats.map((s) => (
             <div
               key={s.label}
-              className="border-l border-line px-1 py-5 sm:px-6 [&:nth-child(odd)]:border-l-0 sm:[&:nth-child(odd)]:border-l sm:[&:nth-child(4n+1)]:border-l-0"
+              className="border-l border-line px-2 py-5 first:border-l-0 sm:px-6"
             >
               <div className="font-heading text-[1.7rem] sm:text-[1.9rem] font-bold text-ink tracking-tight leading-none">
                 {s.num}
