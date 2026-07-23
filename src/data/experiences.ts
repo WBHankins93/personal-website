@@ -30,8 +30,8 @@ export const experiences: Experience[] = [
     role: "Client Technical Specialist -> Cloud Engineer -> Cloud Infrastructure Engineer",
     roleProgression: [
       "Client Technical Specialist · 2019–2021",
-      "Cloud Engineer · 2021–2022",
-      "Cloud Infrastructure Engineer · 2022–2024",
+      "Cloud Engineer · 2021–2023",
+      "Cloud Infrastructure Engineer · 2023–2024",
     ],
     period: "2019–2024",
     summary:
