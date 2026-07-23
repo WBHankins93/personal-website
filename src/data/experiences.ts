@@ -23,17 +23,17 @@ export const experiences: Experience[] = [
     role: "Site Reliability Engineer",
     period: "Jan 2025–Sep 2025",
     summary:
-      "Led SOC 2 Type II readiness from 34% to 100%, unblocking $2M+ in regulated-industry pipeline. Maintained 99.9% uptime across 4 production Kubernetes clusters. Reduced deployment time 80% through CI/CD automation.",
+      "Drove SOC 2 Type II from a 34% Vanta baseline to a passed audit in six months, standing up company-wide least-privilege IAM and repository security rules where there had been none. Introduced automated CI/CD where deployments had been manual, cutting deploy time ~80%, and kept production stable across 4 Kubernetes clusters with a single incident in nine months.",
   },
   {
     company: "IBM - Client Engineering",
-    role: "Solutions Engineer -> Senior Solutions Engineer -> Cloud Infrastructure Engineer",
+    role: "Client Technical Specialist -> Cloud Engineer -> Cloud Infrastructure Engineer",
     roleProgression: [
-      "Solutions Engineer",
-      "Senior Solutions Engineer",
-      "Cloud Infrastructure Engineer",
+      "Client Technical Specialist · 2019–2021",
+      "Cloud Engineer · 2021–2022",
+      "Cloud Infrastructure Engineer · 2022–2024",
     ],
-    period: "Dec 2019–Aug 2024",
+    period: "2019–2024",
     summary:
       "Led technical discovery, solution design, and demo delivery across enterprise accounts including AT&T, Boeing, Cencora, and Norfolk Southern. Owned the production infrastructure for CenterPoint Energy's $10.1M SAP RISE engagement. Built customer-facing MVPs and POCs with a strong evaluation-to-signing conversion rate.",
   },

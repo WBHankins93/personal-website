@@ -8,7 +8,7 @@ import { EASE } from "@/lib/animation-configs/ease";
 
 const stats = [
   { num: "$13M", label: "Pipeline Supported" },
-  { num: "9+", label: "Enterprise Accounts" },
+  { num: "12", label: "Named Accounts" },
   { num: "80%", label: "Faster Deploys" },
 ];
 
@@ -17,9 +17,14 @@ const accounts = [
   "AT&T",
   "Boeing",
   "Cencora",
+  "Honeywell",
+  "Juniper Networks",
   "Kroger",
+  "NBCUniversal",
   "Norfolk Southern",
+  "PepsiCo",
   "CenterPoint Energy",
+  "Verizon",
   "Hertz",
 ];
 
