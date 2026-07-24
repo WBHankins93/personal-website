@@ -37,4 +37,11 @@ export const experiences: Experience[] = [
     summary:
       "Led technical discovery, solution design, and demo delivery across enterprise accounts including AT&T, Boeing, Cencora, and Norfolk Southern. Owned the production infrastructure for CenterPoint Energy's $10.1M SAP RISE engagement. Built customer-facing MVPs and POCs with a strong evaluation-to-signing conversion rate.",
   },
+  {
+    company: "Kortivity",
+    role: "Front End Developer (Contract)",
+    period: "Jan 2019–Jun 2019",
+    summary:
+      "Designed, built, and maintained a Vue-based Chrome extension that let recruiters pull candidate profiles and contact details, directly supporting the company's core recruiting workflow. The stepping stone into enterprise engineering.",
+  },
 ];
