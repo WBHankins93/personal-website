@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, MousePointer2, Play } from "lucide-react";
 import { featuredProjects, supportingWork, type Project } from "@/data/projects";
 import { MOTION, revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
+import { PROJECT_SIGNAL_CLASS } from "@/lib/project-signals";
 import { ProjectMicroWorld } from "./ProjectMicroWorlds";
 
 const gridPlacement = [
@@ -21,7 +22,7 @@ function MotionToggle({ active, onClick, label }: { active: boolean; onClick: ()
       onClick={onClick}
       aria-pressed={active}
       aria-label={`${active ? "Pause" : "Play"} ${label} animation`}
-      className="absolute right-2.5 top-2.5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper/90 text-ink-muted shadow-sm backdrop-blur-sm transition-colors hover:border-line-strong hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:right-3 md:top-3 md:h-8 md:w-8"
+      className="project-signal-control absolute right-2.5 top-2.5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border bg-paper-card/90 shadow-sm transition-colors hover:bg-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--signal)] md:right-3 md:top-3 md:h-8 md:w-8"
     >
       {active ? <MousePointer2 className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
     </button>
@@ -47,9 +48,9 @@ function ProjectCard({ project, className }: { project: Project; className: stri
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
       }}
-      className={`group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_60px_-42px_rgba(34,27,18,0.68)] focus-within:border-line-strong ${className}`}
+      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_60px_-42px_rgba(34,27,18,0.68)] focus-within:border-line-strong ${className}`}
     >
-      <div className="relative h-60 shrink-0 overflow-hidden border-b border-line bg-paper-alt md:h-64">
+      <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
         <ProjectMicroWorld
           id={project.microWorld}
           play={inView}
@@ -62,8 +63,8 @@ function ProjectCard({ project, className }: { project: Project; className: stri
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-mono text-[0.62rem] uppercase tracking-[0.13em] text-ink-muted">{project.role}</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-paper-alt px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.08em] text-ink-soft">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <span className="project-signal-badge inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.08em]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)]" />
             {project.stage}
           </span>
         </div>
@@ -77,7 +78,7 @@ function ProjectCard({ project, className }: { project: Project; className: stri
 
         <div className="mt-5 flex flex-wrap gap-2">
           {project.proofPoints.map((point) => (
-            <span key={point} className="rounded-md border border-line bg-paper-alt/70 px-2.5 py-1.5 font-mono text-[0.62rem] text-ink-muted">
+            <span key={point} className="project-signal-chip rounded-md border px-2.5 py-1.5 font-mono text-[0.62rem]">
               {point}
             </span>
           ))}
@@ -86,7 +87,7 @@ function ProjectCard({ project, className }: { project: Project; className: stri
         <div className="mt-auto pt-6">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-flex items-center gap-2 font-heading text-[0.95rem] font-semibold text-accent no-underline transition-colors hover:text-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            className="project-signal-link inline-flex items-center gap-2 font-heading text-[0.95rem] font-semibold no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal)]"
           >
             View case study
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -116,9 +117,9 @@ function BreadthCard() {
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
       }}
-      className="group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong md:col-span-4"
+      className="signal-breadth project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong md:col-span-4"
     >
-      <div className="relative h-60 shrink-0 overflow-hidden border-b border-line bg-paper-deep md:h-64">
+      <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
         <ProjectMicroWorld id="breadth" play={inView} active={active} reduced={reduce} />
         {!reduce && <MotionToggle active={engaged} onClick={() => setEngaged((value) => !value)} label="supporting work" />}
       </div>

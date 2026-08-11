@@ -56,9 +56,9 @@ export default function Hero() {
       id="hero"
       className="relative scroll-mt-0 overflow-hidden border-b border-line ledger-grid"
     >
-      {/* Atmospheric botanical light */}
+      {/* Flat signal plate: the hero's field-journal annotation */}
       <motion.div
-        className="botanical-wash pointer-events-none absolute -inset-y-12 inset-x-0"
+        className="pointer-events-none absolute -right-20 top-20 hidden h-[34rem] w-[42%] rotate-3 border border-accent/15 bg-accent-soft/75 md:block"
         style={reduce ? undefined : { y: washY, opacity: washOpacity }}
         aria-hidden
       />

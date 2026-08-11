@@ -40,7 +40,7 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
         animate={running ? { y: [0, -4, 0], rotate: [0, -1, 0] } : undefined}
         transition={loop(running, speed + 1)}
       >
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[conic-gradient(var(--color-mark-pine)_0_82%,var(--color-paper-deep)_82%_100%)] md:h-16 md:w-16">
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[conic-gradient(var(--signal)_0_82%,var(--color-paper-deep)_82%_100%)] md:h-16 md:w-16">
           <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-paper md:h-12 md:w-12">
             <span className="font-heading text-lg font-bold leading-none text-ink">8.2</span>
             <span className="font-mono text-[0.42rem] uppercase tracking-wider text-ink-muted">score</span>
@@ -64,7 +64,7 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
           {[78, 92, 68, 84, 58].map((width, index) => (
             <motion.span
               key={width}
-              className={`block h-1.5 rounded-full ${index === 2 ? "bg-clay/55" : "bg-line-strong"}`}
+              className={`block h-1.5 rounded-full ${index === 2 ? "bg-[var(--signal)] opacity-60" : "bg-line-strong"}`}
               style={{ width: `${width}%` }}
               animate={
                 running && index === 2
@@ -77,7 +77,7 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
         </div>
         <div className="mt-4 flex gap-1.5">
           <span className="rounded bg-[var(--color-status-beta-bg)] px-1.5 py-1 font-mono text-[0.44rem] uppercase text-[var(--color-status-beta)]">ATS</span>
-          <span className="rounded bg-clay-soft px-1.5 py-1 font-mono text-[0.44rem] uppercase text-clay">Evidence</span>
+          <span className="rounded bg-[var(--signal-soft)] px-1.5 py-1 font-mono text-[0.44rem] uppercase text-[var(--signal)]">Evidence</span>
         </div>
         <motion.span
           className="absolute inset-y-0 left-0 w-9 bg-gradient-to-r from-transparent via-[rgba(47,111,115,0.22)] to-transparent"
@@ -94,7 +94,7 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
             animate={running ? { x: [10, 0, 0, 10], opacity: [0.55, 1, 1, 0.55] } : undefined}
             transition={loop(running, speed + 0.7, index * 0.22)}
           >
-            <Check className="h-3 w-3 text-accent" />
+            <Check className="h-3 w-3 text-[var(--signal)]" />
             <span className="font-mono text-[0.48rem] uppercase tracking-wide text-ink-soft">{label}</span>
           </motion.div>
         ))}
@@ -130,7 +130,7 @@ function BusinessPlanWorld({ play, active, reduced }: WorldProps) {
             key={d}
             d={d}
             fill="none"
-            stroke={index === 4 ? "var(--color-clay)" : "var(--color-line-strong)"}
+            stroke={index === 4 ? "var(--signal)" : "var(--color-line-strong)"}
             strokeWidth="0.75"
             strokeDasharray={index === 4 ? "2 2" : undefined}
             animate={running ? { pathLength: [0, 1, 1] } : { pathLength: 1 }}
@@ -159,7 +159,7 @@ function BusinessPlanWorld({ play, active, reduced }: WorldProps) {
       ))}
 
       <motion.div
-        className="absolute bottom-[7%] right-[3%] flex items-center gap-1.5 rounded-full border border-accent/25 bg-[var(--color-accent-soft)] px-2.5 py-1.5 font-mono text-[0.46rem] uppercase tracking-wider text-accent shadow-sm"
+        className="absolute bottom-[7%] right-[3%] flex items-center gap-1.5 rounded-full border border-[var(--signal)] bg-[var(--signal-soft)] px-2.5 py-1.5 font-mono text-[0.46rem] uppercase tracking-wider text-[var(--signal)] shadow-sm"
         animate={running ? { opacity: [0.45, 1, 1, 0.45], x: [4, 0, 0, 4] } : undefined}
         transition={loop(running, duration, 1.1)}
       >
@@ -173,7 +173,7 @@ function LivingPlaybooksWorld({ play, active, reduced }: WorldProps) {
   const running = play && !reduced;
   const duration = active ? 3.4 : 6.4;
   const tracks = [
-    { label: "SE track", color: "bg-[var(--color-accent-soft)] text-accent", items: ["Discovery", "POCs", "Recovery"] },
+    { label: "SE track", color: "bg-[var(--signal-soft)] text-[var(--signal)]", items: ["Discovery", "POCs", "Recovery"] },
     { label: "SA track", color: "bg-[var(--color-mark-denim-soft)] text-[var(--color-mark-denim)]", items: ["Architecture", "Migration", "Compliance"] },
     { label: "Situation", color: "bg-clay-soft text-clay", items: ["Templates", "Diagrams", "Talk tracks"] },
   ];
@@ -207,7 +207,7 @@ function LivingPlaybooksWorld({ play, active, reduced }: WorldProps) {
           </div>
         ))}
         <motion.div
-          className="absolute left-[31%] top-[44%] h-px w-[38%] origin-left bg-clay/60"
+          className="absolute left-[31%] top-[44%] h-px w-[38%] origin-left bg-[var(--signal)] opacity-60"
           animate={running ? { scaleX: [0, 1, 1, 0] } : { scaleX: 1 }}
           transition={loop(running, duration, 0.8)}
         />
@@ -222,7 +222,7 @@ function LivingPlaybooksWorld({ play, active, reduced }: WorldProps) {
 
 function OpenBookMark() {
   const Icon = MARKS["solutions-playbook"].Icon;
-  return <Icon className="h-3.5 w-3.5 text-accent" />;
+  return <Icon className="h-3.5 w-3.5 text-[var(--signal)]" />;
 }
 
 function BreadthWorld({ play, active, reduced }: WorldProps) {
@@ -253,7 +253,7 @@ function BreadthWorld({ play, active, reduced }: WorldProps) {
         );
       })}
       <motion.div
-        className="absolute right-3 top-3 text-clay"
+        className="absolute right-3 top-3 text-[var(--signal)]"
         animate={running ? { rotate: [0, 8, 0], scale: [1, active ? 1.12 : 1.04, 1] } : undefined}
         transition={loop(running, active ? 2.6 : 5.5)}
       >
