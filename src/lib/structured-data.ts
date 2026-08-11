@@ -1,7 +1,7 @@
 // src/lib/structured-data.ts
 // Schema.org JSON-LD for the homepage. Person + WebSite + ProfilePage in a
-// single @graph, with shipped products referenced as the person's works.
-import { products } from "@/data/products";
+// single @graph, with the curated work referenced as the person's works.
+import { featuredProjects } from "@/data/projects";
 
 const SITE_URL = "https://www.benhankins.dev";
 const PERSON_ID = `${SITE_URL}/#person`;
@@ -55,12 +55,12 @@ export function buildJsonLd() {
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },
-        hasPart: products.map((p) => ({
-          "@type": "SoftwareApplication",
-          name: p.name,
-          applicationCategory: "BusinessApplication",
-          description: p.solution,
-          ...(p.cta ? { url: p.cta.href } : {}),
+        hasPart: featuredProjects.map((project) => ({
+          "@type": project.slug === "living-playbooks" ? "CreativeWork" : "SoftwareApplication",
+          name: project.name,
+          description: project.summary,
+          url: `${SITE_URL}/projects/${project.slug}`,
+          sameAs: project.links.map((link) => link.href),
           author: { "@id": PERSON_ID },
         })),
       },

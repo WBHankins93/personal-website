@@ -1,19 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Download } from "lucide-react";
 import { experiences } from "@/data/experiences";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE } from "@/lib/animation-configs/ease";
 
 export default function Experience() {
+  const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 75%", "end 70%"],
+  });
+  const timelineProgress = useSpring(scrollYProgress, {
+    stiffness: 105,
+    damping: 28,
+    mass: 0.35,
+  });
 
   return (
-    <section id="experience" className="px-6 md:px-8 py-16 md:py-20 bg-paper-alt border-b border-line">
+    <section ref={sectionRef} id="experience" className="px-6 md:px-8 py-16 md:py-24 bg-paper-alt border-b border-line">
       <div className="mx-auto max-w-3xl">
         <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
-          <span className="text-clay">No. 04</span>
+          <span className="text-clay">No. 03</span>
           <span>Experience</span>
           <span className="rule-line" />
         </div>
@@ -21,7 +32,13 @@ export default function Experience() {
           Where the track record comes from.
         </h2>
 
-        <ol className="mt-12 relative border-l border-line list-none">
+        <ol className="mt-12 relative list-none">
+          <span className="absolute bottom-0 left-0 top-0 w-px bg-line" aria-hidden />
+          <motion.span
+            className="absolute bottom-0 left-0 top-0 w-px origin-top bg-accent"
+            style={{ scaleY: reduce ? 1 : timelineProgress }}
+            aria-hidden
+          />
           {experiences.map((exp, i) => (
             <motion.li
               key={exp.company}

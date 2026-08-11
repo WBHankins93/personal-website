@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 const SITE_URL = "https://www.benhankins.dev";
 const TITLE = "Ben Hankins: Solutions Engineer & Software Builder";
 const DESCRIPTION =
-  "Ben Hankins is a Solutions Engineer who builds production software. 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering, with shipped products like Greenlit and Clipboard to show for it.";
+  "Ben Hankins is a Solutions Engineer who builds production software and living technical systems, including Greenlit, Business Plan Writer, and Solutions Playbook.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

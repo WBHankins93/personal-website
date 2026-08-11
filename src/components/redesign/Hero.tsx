@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Linkedin } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE } from "@/lib/animation-configs/ease";
@@ -29,7 +30,17 @@ const accounts = [
 ];
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const washYRaw = useTransform(scrollYProgress, [0, 1], [0, 44]);
+  const photoYRaw = useTransform(scrollYProgress, [0, 1], [0, 28]);
+  const washOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.52]);
+  const washY = useSpring(washYRaw, { stiffness: 110, damping: 28, mass: 0.35 });
+  const photoY = useSpring(photoYRaw, { stiffness: 120, damping: 30, mass: 0.4 });
   const reveal = (delay: number) =>
     reduce
       ? {}
@@ -41,11 +52,16 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative scroll-mt-0 overflow-hidden border-b border-line ledger-grid"
     >
       {/* Atmospheric botanical light */}
-      <div className="botanical-wash pointer-events-none absolute inset-0" aria-hidden />
+      <motion.div
+        className="botanical-wash pointer-events-none absolute -inset-y-12 inset-x-0"
+        style={reduce ? undefined : { y: washY, opacity: washOpacity }}
+        aria-hidden
+      />
 
       {/* Vertical edge label: editorial margin mark */}
       <div
@@ -118,7 +134,7 @@ export default function Hero() {
               {...reveal(0.38)}
             >
               <a
-                href="#products"
+                href="#work"
                 className="inline-flex items-center gap-2 rounded-md bg-accent hover:bg-accent-hover transition-colors text-paper font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
               >
                 Explore the Work <ArrowRight className="h-4 w-4" />
@@ -147,6 +163,7 @@ export default function Hero() {
           {/* Photo plate: matted field-journal print, bled to the right */}
           <motion.figure
             className="md:col-span-5 relative mx-auto md:mx-0 md:ml-auto w-full max-w-[19rem] md:max-w-[20rem]"
+            style={reduce ? undefined : { y: photoY }}
             {...reveal(0.18)}
           >
             <div className="relative rotate-[-1.5deg] rounded-xl border-[6px] border-paper bg-paper shadow-[0_18px_45px_-22px_rgba(34,27,18,0.55)] ring-1 ring-line">

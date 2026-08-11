@@ -1,9 +1,7 @@
 import Nav from "@/components/redesign/Nav";
 import Hero from "@/components/redesign/Hero";
-import WhatIBuild from "@/components/redesign/WhatIBuild";
-import ProductCarousel from "@/components/redesign/ProductCarousel";
+import ProjectBento from "@/components/projects/ProjectBento";
 import Experience from "@/components/redesign/Experience";
-import Labs from "@/components/redesign/Labs";
 import Contact from "@/components/redesign/Contact";
 import Footer from "@/components/redesign/Footer";
 import { buildJsonLd } from "@/lib/structured-data";
@@ -18,10 +16,8 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <WhatIBuild />
-        <ProductCarousel />
+        <ProjectBento />
         <Experience />
-        <Labs />
         <Contact />
       </main>
       <Footer />

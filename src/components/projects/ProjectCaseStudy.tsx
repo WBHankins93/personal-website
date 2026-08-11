@@ -1,0 +1,154 @@
+"use client";
+
+import { useRef, useState } from "react";
+import Link from "next/link";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { ArrowLeft, ArrowUpRight, Check, CircleDot, Lightbulb, Route } from "lucide-react";
+import type { Project } from "@/data/projects";
+import { MOTION, revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
+import { ProjectMicroWorld } from "./ProjectMicroWorlds";
+
+function ListSection({ title, items, icon }: { title: string; items: string[]; icon: React.ReactNode }) {
+  const reduce = Boolean(useReducedMotion());
+  return (
+    <motion.section
+      variants={revealVariants}
+      initial={reduce ? false : "hidden"}
+      whileInView={reduce ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.25 }}
+      className="border-t border-line py-10 md:grid md:grid-cols-12 md:gap-8 md:py-14"
+    >
+      <div className="md:col-span-4">
+        <div className="flex items-center gap-2 text-clay">
+          {icon}
+          <h2 className="font-heading text-[1.2rem] font-semibold text-ink">{title}</h2>
+        </div>
+      </div>
+      <ul className="mt-6 grid gap-4 list-none md:col-span-8 md:mt-0">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3 font-body leading-relaxed text-ink-soft">
+            <span className="mt-[0.65em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.section>
+  );
+}
+export default function ProjectCaseStudy({ project }: { project: Project }) {
+  const visualRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(visualRef, { amount: 0.2 });
+  const reduce = Boolean(useReducedMotion());
+  const [active, setActive] = useState(false);
+
+  return (
+    <article className="px-6 pb-20 pt-28 md:px-8 md:pb-28 md:pt-32">
+      <div className="mx-auto max-w-6xl">
+        <motion.div
+          initial={reduce ? false : "hidden"}
+          animate={reduce ? undefined : "visible"}
+          variants={staggerVariants}
+          className="grid gap-9 md:grid-cols-12 md:items-end"
+        >
+          <motion.div variants={revealVariants} className="md:col-span-8">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-ink-muted no-underline transition-colors hover:text-accent"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" /> All projects
+            </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <span className="rounded-full bg-paper-alt px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink-soft">
+                {project.stage}
+              </span>
+              <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink-muted">{project.role}</span>
+            </div>
+            <h1 className="mt-5 max-w-[12ch] font-heading text-[clamp(3rem,8vw,6.5rem)] font-bold leading-[0.92] tracking-[-0.035em] text-ink">
+              {project.name}<span className="text-clay">.</span>
+            </h1>
+          </motion.div>
+          <motion.div variants={revealVariants} className="md:col-span-4">
+            <p className="font-heading text-[1.2rem] font-medium leading-snug text-ink">{project.value}</p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              {project.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-heading text-[0.9rem] font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
+                >
+                  {link.label} <ArrowUpRight className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          ref={visualRef}
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={reduce ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: MOTION.duration.slow, delay: 0.18, ease: MOTION.ease.easeOut }}
+          onMouseEnter={() => setActive(true)}
+          onMouseLeave={() => setActive(false)}
+          className="relative mt-12 h-[22rem] overflow-hidden rounded-2xl border border-line-strong bg-paper-alt shadow-[0_24px_70px_-52px_rgba(34,27,18,0.75)] md:h-[32rem]"
+        >
+          <ProjectMicroWorld id={project.microWorld} play={inView} active={active} reduced={reduce} />
+        </motion.div>
+
+        <div className="mx-auto mt-16 max-w-5xl md:mt-24">
+          <motion.section
+            initial={reduce ? false : "hidden"}
+            whileInView={reduce ? undefined : "visible"}
+            viewport={{ once: true, amount: 0.4 }}
+            variants={revealVariants}
+            className="grid gap-6 pb-12 md:grid-cols-12 md:gap-8 md:pb-16"
+          >
+            <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-clay md:col-span-4">The challenge</h2>
+            <p className="font-body text-[clamp(1.15rem,2.3vw,1.55rem)] leading-relaxed text-ink md:col-span-8">
+              {project.caseStudy.challenge}
+            </p>
+          </motion.section>
+
+          <ListSection title="The system" items={project.caseStudy.system} icon={<Route className="h-4 w-4" />} />
+          <ListSection title="Important decisions" items={project.caseStudy.decisions} icon={<Lightbulb className="h-4 w-4" />} />
+
+          <motion.section
+            initial={reduce ? false : "hidden"}
+            whileInView={reduce ? undefined : "visible"}
+            viewport={{ once: true, amount: 0.25 }}
+            variants={revealVariants}
+            className="border-t border-line py-10 md:py-14"
+          >
+            <div className="flex items-center gap-2">
+              <CircleDot className="h-4 w-4 text-clay" />
+              <h2 className="font-heading text-[1.2rem] font-semibold text-ink">How the work moves</h2>
+            </div>
+            <ol className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line list-none sm:grid-cols-2 lg:grid-cols-5">
+              {project.caseStudy.walkthrough.map((step, index) => (
+                <li key={step} className="bg-paper p-5">
+                  <span className="font-mono text-[0.58rem] uppercase tracking-[0.12em] text-clay">Step {index + 1}</span>
+                  <p className="mt-3 font-heading text-[0.95rem] font-semibold leading-snug text-ink">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </motion.section>
+
+          <ListSection title="Current evidence" items={project.caseStudy.evidence} icon={<Check className="h-4 w-4" />} />
+          <ListSection title="What it taught me" items={project.caseStudy.lessons} icon={<Lightbulb className="h-4 w-4" />} />
+
+          <div className="border-t border-ink pt-10 text-center">
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink-muted">Continue exploring</p>
+            <Link
+              href="/projects"
+              className="mt-4 inline-flex items-center gap-2 font-heading text-[1.15rem] font-semibold text-accent no-underline hover:text-accent-hover"
+            >
+              Return to selected work <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}

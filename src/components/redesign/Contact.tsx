@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Mail, Linkedin, Github } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE } from "@/lib/animation-configs/ease";
@@ -8,11 +9,22 @@ import { EASE } from "@/lib/animation-configs/ease";
 const EMAIL = "benhankins.work@gmail.com";
 
 export default function Contact() {
+  const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const washYRaw = useTransform(scrollYProgress, [0, 1], [-18, 18]);
+  const washY = useSpring(washYRaw, { stiffness: 100, damping: 28, mass: 0.35 });
 
   return (
-    <section id="contact" className="relative overflow-hidden px-6 md:px-8 py-20 md:py-28 bg-paper-alt">
-      <div className="botanical-wash pointer-events-none absolute inset-0" aria-hidden />
+    <section ref={sectionRef} id="contact" className="relative overflow-hidden px-6 md:px-8 py-20 md:py-28 bg-paper-alt">
+      <motion.div
+        className="botanical-wash pointer-events-none absolute -inset-y-8 inset-x-0"
+        style={reduce ? undefined : { y: washY }}
+        aria-hidden
+      />
       <motion.div
         className="relative mx-auto max-w-3xl text-center"
         initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -22,7 +34,7 @@ export default function Contact() {
       >
         <div className="mb-5 flex items-center justify-center gap-3 font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted">
           <span className="h-px w-8 bg-line-strong" />
-          <span className="text-clay">No. 06</span>
+          <span className="text-clay">No. 04</span>
           <span>Contact</span>
           <span className="h-px w-8 bg-line-strong" />
         </div>

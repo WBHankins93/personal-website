@@ -220,6 +220,16 @@
     radial-gradient(90% 90% at 0% 100%, rgba(176, 104, 47, 0.10) 0%, transparent 50%);
 }
 
+/* The project micro-worlds share a quiet drafting grid. Individual scenes
+   provide the character; this keeps the set visually related. */
+.micro-grid {
+  background-image:
+    linear-gradient(to right, rgba(80, 64, 40, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(80, 64, 40, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.28));
+}
+
 /* Editorial section label: index number + small-caps title + extending rule */
 .rule-label {
   display: flex;
@@ -252,6 +262,17 @@
 @media (prefers-reduced-motion: no-preference) {
   html:has(.editorial) {
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial *,
+  .editorial *::before,
+  .editorial *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
