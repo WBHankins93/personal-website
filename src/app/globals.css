@@ -78,19 +78,20 @@
   --color-paper: #F6F1E7;           /* warm bone: main base */
   --color-paper-alt: #ECE4D5;       /* deeper kraft band: visible banding */
   --color-paper-deep: #E4DAC6;      /* third tone for nested panels */
+  --color-paper-card: #FFFDF8;      /* clean stock: cards / diagrams */
   --color-ink: #221B12;             /* espresso: primary text / headlines */
   --color-ink-soft: #51483B;        /* body copy */
-  --color-ink-muted: #8A7E69;       /* labels, captions, eyebrows */
-  --color-line: #DCD2BF;            /* hairline borders */
+  --color-ink-muted: #6F6453;       /* labels, captions, eyebrows — AA on paper */
+  --color-line: #D2C4AD;            /* hairline borders */
   --color-line-strong: #C7BAA0;     /* hover / emphasized borders */
 
-  --color-accent: #2C5638;          /* forest green: primary */
-  --color-accent-hover: #21442B;
-  --color-accent-soft: #DFE7D8;     /* accent tint backgrounds */
+  --color-accent: #183F2A;          /* deep forest: primary */
+  --color-accent-hover: #102F1E;
+  --color-accent-soft: #D8E8D8;     /* accent tint backgrounds */
 
-  --color-clay: #B0682F;            /* terracotta: index numbers, marks */
-  --color-clay-hover: #94531F;
-  --color-clay-soft: #F0E1D0;       /* clay tint backgrounds */
+  --color-clay: #9A4E27;            /* signal clay — AA on paper */
+  --color-clay-hover: #7E391A;
+  --color-clay-soft: #F1D9CC;       /* clay tint backgrounds */
 
   /* Status badge palette (color-coded product states, warm-shifted) */
   --color-status-beta: #2F6F73;     /* Live Beta: muted teal */
@@ -213,11 +214,89 @@
   background-size: 56px 56px;
 }
 
-/* Soft botanical wash: atmospheric forest-green light, not a flat fill */
-.botanical-wash {
-  background:
-    radial-gradient(120% 120% at 92% 8%, rgba(44, 86, 56, 0.16) 0%, transparent 46%),
-    radial-gradient(90% 90% at 0% 100%, rgba(176, 104, 47, 0.10) 0%, transparent 50%);
+/* The project micro-worlds share a quiet drafting grid. Individual scenes
+   provide the character; this keeps the set visually related. */
+.micro-grid {
+  background-image:
+    linear-gradient(to right, rgba(80, 64, 40, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(80, 64, 40, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.28));
+}
+
+/* Project-owned signal inks. The paper is shared; the working diagrams are not. */
+.signal-greenlit {
+  --signal: #1F6B5C;
+  --signal-soft: #D8EEE5;
+}
+
+.signal-business-plan-writer {
+  --signal: #315C9B;
+  --signal-soft: #DCE7F7;
+}
+
+.signal-living-playbooks {
+  --signal: #7A3B54;
+  --signal-soft: #EDDCE3;
+}
+
+.signal-breadth {
+  --signal: #93451F;
+  --signal-soft: #F1D9CC;
+}
+
+.project-signal-card {
+  border-top: 4px solid var(--signal);
+  background: var(--color-paper-card);
+}
+
+.project-signal-stage {
+  background: var(--signal-soft);
+}
+
+.project-signal-stage::before {
+  position: absolute;
+  z-index: 0;
+  inset-block: 0;
+  right: 0;
+  width: 24%;
+  clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%);
+  background: var(--signal);
+  content: "";
+  opacity: 0.09;
+  pointer-events: none;
+}
+
+.project-signal-stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-signal-badge,
+.project-signal-chip {
+  border-color: color-mix(in srgb, var(--signal) 28%, transparent);
+  background: var(--signal-soft);
+  color: var(--signal);
+}
+
+.project-signal-link {
+  color: var(--signal);
+}
+
+.project-signal-link:hover {
+  color: color-mix(in srgb, var(--signal) 78%, #221B12);
+}
+
+.project-signal-control {
+  border-color: color-mix(in srgb, var(--signal) 38%, var(--color-line));
+  color: var(--signal);
+}
+
+.inverse-ledger {
+  background-image:
+    linear-gradient(to right, rgba(246, 241, 231, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(246, 241, 231, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
 /* Editorial section label: index number + small-caps title + extending rule */
@@ -252,6 +331,17 @@
 @media (prefers-reduced-motion: no-preference) {
   html:has(.editorial) {
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial *,
+  .editorial *::before,
+  .editorial *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
