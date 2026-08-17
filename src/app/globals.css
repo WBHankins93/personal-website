@@ -165,7 +165,10 @@
     background: #060606;
     color: #EDEDED;
     cursor: crosshair;
-    overflow-x: hidden;
+    /* `clip` instead of `hidden`: it clamps horizontal overflow without turning
+       the body into a scroll container, so sticky/scroll-linked descendants and
+       momentum scrolling on iOS behave normally. */
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
   }
   a, button {
@@ -267,9 +270,20 @@
   pointer-events: none;
 }
 
+/* Lift stage content above the ::before wedge. `position` is required for
+   z-index to apply, which is why static children get `relative` here. */
 .project-signal-stage > * {
   position: relative;
   z-index: 1;
+}
+
+/* Escape hatch for children that pin themselves to the stage box. This rule is
+   unlayered, so it outranks Tailwind's layered `absolute` utility no matter the
+   specificity — without it, the rule above silently drops such a child back
+   into flow (which is what pushed the motion toggle to the top-left). */
+.project-signal-stage > .stage-pin {
+  position: absolute;
+  z-index: 20;
 }
 
 .project-signal-badge,
@@ -332,6 +346,44 @@
   html:has(.editorial) {
     scroll-behavior: smooth;
   }
+}
+
+/* ─── Scroll-driven motion ────────────────────────────────────────────────
+   These use CSS scroll-driven animations (`animation-timeline: view()`), which
+   the browser runs off the main thread — no scroll listener, no React render,
+   no jank as the page gets longer. Everything is progressive enhancement: with
+   no support, or with reduced motion, elements simply render in their final
+   state, because the animations only ever apply inside the guards below. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Editorial rules that draw themselves in as a section enters. */
+    .scroll-rule {
+      transform-origin: left center;
+      animation: scroll-rule linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 40%;
+    }
+
+    /* Slow counter-drift for artwork inside a framed stage, so the illustration
+       and its card move at different rates as the card crosses the viewport. */
+    .scroll-drift {
+      animation: scroll-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+  }
+}
+
+@keyframes scroll-rule {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* The 1.04 scale gives the drift somewhere to travel without exposing an edge. */
+@keyframes scroll-drift {
+  from { transform: translate3d(0, 2.5%, 0) scale(1.04); }
+  to   { transform: translate3d(0, -2.5%, 0) scale(1.04); }
 }
 
 @media (prefers-reduced-motion: reduce) {

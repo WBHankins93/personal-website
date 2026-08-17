@@ -39,6 +39,7 @@ export default function Hero() {
   const washYRaw = useTransform(scrollYProgress, [0, 1], [0, 44]);
   const photoYRaw = useTransform(scrollYProgress, [0, 1], [0, 28]);
   const washOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.52]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.14], [1, 0]);
   const washY = useSpring(washYRaw, { stiffness: 110, damping: 28, mass: 0.35 });
   const photoY = useSpring(photoYRaw, { stiffness: 120, damping: 30, mass: 0.4 });
   const reveal = (delay: number) =>
@@ -63,14 +64,6 @@ export default function Hero() {
         aria-hidden
       />
 
-      {/* Vertical edge label: editorial margin mark */}
-      <div
-        className="pointer-events-none absolute right-3 top-32 hidden lg:block font-mono text-[0.6rem] tracking-[0.35em] uppercase text-ink-muted/70 [writing-mode:vertical-rl]"
-        aria-hidden
-      >
-        Solutions Engineer · Builder by default
-      </div>
-
       <div className="relative mx-auto max-w-6xl px-6 md:px-8 pt-28 md:pt-32 pb-12 md:pb-16">
         {/* Masthead meta row */}
         <motion.div
@@ -79,7 +72,7 @@ export default function Hero() {
         >
           <span className="text-clay">No. 01</span>
           <span>Portfolio</span>
-          <span className="rule-line" />
+          <span className="rule-line scroll-rule" />
           <span className="hidden sm:inline">New Orleans, LA</span>
         </motion.div>
 
@@ -224,13 +217,37 @@ export default function Hero() {
               >
                 {name}
                 {i < accounts.length - 1 && (
-                  <span className="text-line-strong" aria-hidden>
+                  <span className="text-ink-muted" aria-hidden>
                     ·
                   </span>
                 )}
               </span>
             ))}
           </div>
+        </motion.div>
+
+        {/* Scroll cue: a travelling clay tick down a ruled line, fading out as
+            soon as the reader takes the hint. */}
+        <motion.div
+          className="mt-12 hidden flex-col items-center gap-2.5 md:flex"
+          style={reduce ? undefined : { opacity: cueOpacity }}
+          aria-hidden
+        >
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-ink-muted">
+            Scroll
+          </span>
+          <span className="relative block h-10 w-px overflow-hidden bg-line-strong">
+            <motion.span
+              className="absolute inset-x-0 block h-4 bg-clay"
+              initial={{ y: -16 }}
+              animate={reduce ? { y: -16 } : { y: [-16, 40] }}
+              transition={
+                reduce
+                  ? undefined
+                  : { duration: 1.9, repeat: Infinity, ease: EASE.easeInOut, repeatDelay: 0.35 }
+              }
+            />
+          </span>
         </motion.div>
       </div>
     </section>

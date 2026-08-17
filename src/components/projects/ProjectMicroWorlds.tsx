@@ -65,10 +65,13 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
             <motion.span
               key={width}
               className={`block h-1.5 rounded-full ${index === 2 ? "bg-[var(--signal)] opacity-60" : "bg-line-strong"}`}
-              style={{ width: `${width}%` }}
+              // The growing bar animates scaleX, not width: width would force
+              // layout on every frame of an infinite loop, scaleX stays on the
+              // compositor. 68% → 88% and 68% → 76% become the ratios below.
+              style={{ width: `${width}%`, transformOrigin: "left center" }}
               animate={
                 running && index === 2
-                  ? { width: active ? ["68%", "88%", "88%", "68%"] : ["68%", "76%", "68%"] }
+                  ? { scaleX: active ? [1, 1.294, 1.294, 1] : [1, 1.118, 1] }
                   : undefined
               }
               transition={loop(running, speed, 0.35)}
@@ -175,7 +178,8 @@ function LivingPlaybooksWorld({ play, active, reduced }: WorldProps) {
   const tracks = [
     { label: "SE track", color: "bg-[var(--signal-soft)] text-[var(--signal)]", items: ["Discovery", "POCs", "Recovery"] },
     { label: "SA track", color: "bg-[var(--color-mark-denim-soft)] text-[var(--color-mark-denim)]", items: ["Architecture", "Migration", "Compliance"] },
-    { label: "Situation", color: "bg-clay-soft text-clay", items: ["Templates", "Diagrams", "Talk tracks"] },
+    // clay-hover, not clay: plain clay on clay-soft lands at 4.45:1, just under AA.
+    { label: "Situation", color: "bg-clay-soft text-clay-hover", items: ["Templates", "Diagrams", "Talk tracks"] },
   ];
 
   return (
