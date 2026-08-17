@@ -230,9 +230,23 @@ export const featuredProjects = [...projects].sort((a, b) => a.order - b.order);
 export const supportingWork = [
   { name: "Clipboard", stage: "Private · polishing", capability: "Operations platforms" },
   { name: "Treehouse", stage: "In development", capability: "Mobile products" },
-  { name: "Sproutflow Studio", stage: "Active client work", capability: "Customer solutions" },
-  { name: "AI Engineering Studio", stage: "Live", capability: "AI enablement" },
 ] as const;
+
+export const playbookBranches = [
+  "Solutions Playbook",
+  "AI Engineering Studio",
+  "Implementation Studio",
+  "DevOps Studio",
+] as const;
+
+export const sproutflow = {
+  name: "Sproutflow Studio",
+  href: "https://sproutflow-studio.com",
+  stage: "Active client work",
+  capability: "Customer solutions",
+  summary:
+    "My client-facing practice for turning technical discovery into production software, AI systems, and automation.",
+} as const;
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
