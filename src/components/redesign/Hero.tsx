@@ -44,7 +44,10 @@ export default function Hero() {
   const photoY = useSpring(photoYRaw, { stiffness: 120, damping: 30, mass: 0.4 });
   const reveal = (delay: number) =>
     reduce
-      ? {}
+      ? {
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0 },
+        }
       : {
           initial: { opacity: 0, y: 16 },
           animate: { opacity: 1, y: 0 },
@@ -116,9 +119,8 @@ export default function Hero() {
               className="mt-4 font-body text-ink-soft leading-relaxed max-w-[48ch] text-[1.02rem]"
               {...reveal(0.3)}
             >
-              7+ years across enterprise architecture, cloud infrastructure, and
-              customer-facing engineering, with production software to show for
-              it.
+              7+ years across solutions engineering, cloud infrastructure, and
+              full-stack product development—with production software to show for it.
             </motion.p>
 
             {/* CTAs: one solid primary, the rest quiet */}

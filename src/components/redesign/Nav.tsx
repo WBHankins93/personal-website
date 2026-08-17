@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useScrollTrigger } from "@/hooks/useScrollTrigger";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
@@ -14,6 +14,7 @@ const links = [
   { label: "Work", href: "/#work", section: "work" },
   { label: "Projects", href: "/projects", section: null },
   { label: "Experience", href: "/#experience", section: "experience" },
+  { label: "Sproutflow", href: "https://sproutflow-studio.com", section: null, external: true },
   { label: "Contact", href: "/#contact", section: "contact" },
 ];
 
@@ -59,13 +60,18 @@ export default function Nav() {
               <li key={l.href}>
                 <Link
                   href={l.href}
+                  target={l.external ? "_blank" : undefined}
+                  rel={l.external ? "noopener noreferrer" : undefined}
                   aria-current={isActive ? "true" : undefined}
                   className={[
                     "relative font-heading text-[0.85rem] no-underline transition-colors hover:text-accent",
                     isActive ? "text-accent" : "text-ink-soft",
                   ].join(" ")}
                 >
-                  {l.label}
+                  <span className="inline-flex items-center gap-1">
+                    {l.label}
+                    {l.external && <ArrowUpRight className="h-3 w-3" aria-hidden />}
+                  </span>
                   {/* Underline tracks the section you are reading. */}
                   <span
                     aria-hidden
@@ -117,10 +123,15 @@ export default function Nav() {
               <li key={l.href}>
                 <Link
                   href={l.href}
+                  target={l.external ? "_blank" : undefined}
+                  rel={l.external ? "noopener noreferrer" : undefined}
                   onClick={() => setOpen(false)}
                   className="block py-3 font-heading text-[0.95rem] text-ink-soft no-underline border-b border-line last:border-0"
                 >
-                  {l.label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {l.label}
+                    {l.external && <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />}
+                  </span>
                 </Link>
               </li>
             ))}

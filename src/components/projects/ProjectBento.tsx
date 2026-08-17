@@ -3,16 +3,22 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, MousePointer2, Play } from "lucide-react";
-import { featuredProjects, supportingWork, type Project } from "@/data/projects";
+import { ArrowRight, ArrowUpRight, MousePointer2, Play, Sprout } from "lucide-react";
+import {
+  featuredProjects,
+  playbookBranches,
+  sproutflow,
+  supportingWork,
+  type Project,
+} from "@/data/projects";
 import { revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
 import { PROJECT_SIGNAL_CLASS } from "@/lib/project-signals";
 import { ProjectMicroWorld } from "./ProjectMicroWorlds";
 
 const gridPlacement = [
-  "md:col-span-7",
-  "md:col-span-5",
-  "md:col-span-8",
+  "md:col-span-4",
+  "md:col-span-4",
+  "md:col-span-4",
 ] as const;
 
 function MotionToggle({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
@@ -86,6 +92,17 @@ function ProjectCard({ project, className }: { project: Project; className: stri
           ))}
         </div>
 
+        {project.slug === "living-playbooks" && (
+          <div className="mt-5 border-l-2 border-[var(--signal)] pl-3">
+            <p className="font-mono text-[0.56rem] uppercase tracking-[0.12em] text-ink-muted">
+              The connected playbooks
+            </p>
+            <p className="mt-2 font-heading text-[0.78rem] font-medium leading-relaxed text-ink-soft">
+              {playbookBranches.join(" · ")}
+            </p>
+          </div>
+        )}
+
         <div className="mt-auto pt-6">
           <Link
             href={`/projects/${project.slug}`}
@@ -100,51 +117,72 @@ function ProjectCard({ project, className }: { project: Project; className: stri
   );
 }
 
-function BreadthCard() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { amount: 0.25, margin: "-8% 0px" });
-  const reduce = Boolean(useReducedMotion());
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [engaged, setEngaged] = useState(false);
-  const active = hovered || focused || engaged;
-
+function SproutflowCallout() {
   return (
-    <motion.article
-      ref={ref}
+    <motion.aside
       variants={revealVariants}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
-      }}
-      className="signal-breadth project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong md:col-span-4"
+      className="mt-6 border-y border-line-strong py-8 md:grid md:grid-cols-12 md:items-center md:gap-8"
     >
-      <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
-        <div className="scroll-drift h-full w-full">
-          <ProjectMicroWorld id="breadth" play={inView} active={active} reduced={reduce} />
+      <div className="flex items-start gap-4 md:col-span-7">
+        <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-paper">
+          <Sprout className="h-5 w-5" aria-hidden />
+        </span>
+        <div>
+          <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-accent">
+            {sproutflow.stage}
+          </p>
+          <h3 className="mt-2 font-heading text-[clamp(1.65rem,3vw,2.3rem)] font-bold tracking-tight text-ink">
+            {sproutflow.name}
+          </h3>
         </div>
-        {!reduce && <MotionToggle active={engaged} onClick={() => setEngaged((value) => !value)} label="supporting work" />}
       </div>
-      <div className="flex flex-1 flex-col p-6 md:p-7">
-        <span className="font-mono text-[0.62rem] uppercase tracking-[0.13em] text-ink-muted">Supporting range</span>
-        <h3 className="mt-4 font-heading text-[clamp(1.55rem,3vw,2rem)] font-bold tracking-tight text-ink">
-          Depth, without the dump.
-        </h3>
-        <p className="mt-3 font-body text-[0.98rem] leading-relaxed text-ink-soft">
-          The supporting work stays visible, with its real stage intact, without competing with the three stories that best represent the craft.
+      <div className="mt-5 md:col-span-5 md:mt-0">
+        <p className="font-body text-[1rem] leading-relaxed text-ink-soft">
+          {sproutflow.summary}
         </p>
-        <ul className="mt-5 grid gap-2 list-none">
-          {supportingWork.map((work) => (
-            <li key={work.name} className="flex items-baseline justify-between gap-3 border-b border-line pb-2 last:border-0">
-              <span className="font-heading text-[0.82rem] font-semibold text-ink">{work.name}</span>
-              <span className="text-right font-mono text-[0.52rem] uppercase tracking-wide text-ink-muted">{work.stage}</span>
-            </li>
-          ))}
-        </ul>
+        <a
+          href={sproutflow.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-1.5 border-b border-accent font-heading text-[0.92rem] font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
+        >
+          Visit Sproutflow <ArrowUpRight className="h-4 w-4" aria-hidden />
+        </a>
       </div>
-    </motion.article>
+    </motion.aside>
+  );
+}
+
+function WorkshopList() {
+  return (
+    <motion.div variants={revealVariants} className="mt-10 grid gap-5 md:grid-cols-12 md:gap-8">
+      <div className="md:col-span-4">
+        <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-ink-muted">
+          Also in the workshop
+        </p>
+        <p className="mt-2 max-w-[30ch] font-body text-[0.92rem] leading-relaxed text-ink-soft">
+          Smaller builds, shown at their actual stage.
+        </p>
+      </div>
+      <ul className="list-none border-t border-line-strong md:col-span-8">
+        {supportingWork.map((work) => (
+          <li
+            key={work.name}
+            className="grid gap-1 border-b border-line py-4 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-6"
+          >
+            <div>
+              <span className="font-heading text-[1rem] font-semibold text-ink">{work.name}</span>
+              <span className="ml-3 font-mono text-[0.58rem] uppercase tracking-wide text-ink-muted">
+                {work.capability}
+              </span>
+            </div>
+            <span className="font-mono text-[0.6rem] uppercase tracking-wide text-ink-muted">
+              {work.stage}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
   );
 }
 
@@ -169,12 +207,12 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
               <span className="rule-line scroll-rule" />
             </div>
             <Heading className="mt-4 max-w-[18ch] font-heading text-[clamp(2rem,4.5vw,3.35rem)] font-bold leading-[1.02] tracking-tight text-ink">
-              Three systems. Three different kinds of depth.
+              Selected systems, built end to end.
             </Heading>
           </div>
           {!compactHeader && (
             <p className="max-w-[42ch] font-body text-[1.02rem] leading-relaxed text-ink-soft md:col-span-4 md:justify-self-end">
-              Each project is presented as a small working model: what moves, where judgment lives, and how the pieces hold together.
+              Detailed case studies up front. Client work and active builds follow at the level of detail they need.
             </p>
           )}
         </motion.div>
@@ -189,7 +227,16 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
           {featuredProjects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} className={gridPlacement[index]} />
           ))}
-          <BreadthCard />
+        </motion.div>
+
+        <motion.div
+          variants={staggerVariants}
+          initial={reduce ? false : "hidden"}
+          whileInView={reduce ? undefined : "visible"}
+          viewport={{ once: true, amount: 0.12 }}
+        >
+          <SproutflowCallout />
+          <WorkshopList />
         </motion.div>
       </div>
     </section>

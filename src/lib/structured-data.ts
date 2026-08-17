@@ -18,10 +18,11 @@ export function buildJsonLd() {
         image: `${SITE_URL}/BH-headshot.png`,
         jobTitle: "Solutions Engineer",
         description:
-          "Solutions Engineer who builds production software: 7+ years across enterprise architecture, cloud infrastructure, and customer-facing engineering.",
+          "Solutions Engineer who builds production software: 7+ years across solutions engineering, cloud infrastructure, and full-stack product development.",
         sameAs: [
           "https://www.linkedin.com/in/ben-hankins/",
           "https://github.com/WBHankins93",
+          "https://sproutflow-studio.com",
         ],
         knowsAbout: [
           "Solutions Engineering",

@@ -8,6 +8,7 @@ export interface Experience {
   roleProgression?: string[];
   period: string;
   summary: string;
+  href?: string;
 }
 
 export const experiences: Experience[] = [
@@ -15,6 +16,7 @@ export const experiences: Experience[] = [
     company: "Sproutflow Studio",
     role: "Founder & Solutions Engineer",
     period: "Oct 2025–Present",
+    href: "https://sproutflow-studio.com",
     summary:
       "Run client engagements end-to-end from technical discovery through production deployment. Build AI systems and automation for clients and internal operations. Delivered custom software across healthcare, e-commerce, and service verticals.",
   },

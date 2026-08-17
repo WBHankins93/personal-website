@@ -6,7 +6,7 @@ import ProjectBento from "@/components/projects/ProjectBento";
 export const metadata: Metadata = {
   title: "Selected Projects",
   description:
-    "Selected products and systems by Ben Hankins: Greenlit, Business Plan Writer, and the Living Playbooks ecosystem.",
+    "Selected products, client work, and living technical systems by Ben Hankins.",
   alternates: { canonical: "/projects" },
 };
 

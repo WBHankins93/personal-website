@@ -1,4 +1,11 @@
-import { featuredProjects, getProject, projects, supportingWork } from "./projects";
+import {
+  featuredProjects,
+  getProject,
+  playbookBranches,
+  projects,
+  sproutflow,
+  supportingWork,
+} from "./projects";
 
 describe("project registry", () => {
   it("contains the three flagship projects in editorial order", () => {
@@ -37,5 +44,15 @@ describe("project registry", () => {
   it("keeps supporting work out of the flagship registry", () => {
     const flagshipNames = new Set(projects.map((project) => project.name));
     supportingWork.forEach((work) => expect(flagshipNames.has(work.name)).toBe(false));
+  });
+
+  it("groups AI Engineering Studio with the living playbooks", () => {
+    expect(playbookBranches).toContain("AI Engineering Studio");
+    expect(supportingWork.map((work) => work.name)).not.toContain("AI Engineering Studio");
+  });
+
+  it("keeps Sproutflow separate and publicly linked", () => {
+    expect(sproutflow.href).toBe("https://sproutflow-studio.com");
+    expect(supportingWork.map((work) => work.name)).not.toContain(sproutflow.name);
   });
 });
