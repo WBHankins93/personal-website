@@ -5,19 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useScrollTrigger } from "@/hooks/useScrollTrigger";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { MOTION } from "@/lib/animation-configs/motion";
+import { SECTION_IDS } from "@/lib/sections";
 
 const links = [
-  { label: "Work", href: "/#work" },
-  { label: "Projects", href: "/projects" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Work", href: "/#work", section: "work" },
+  { label: "Projects", href: "/projects", section: null },
+  { label: "Experience", href: "/#experience", section: "experience" },
+  { label: "Contact", href: "/#contact", section: "contact" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const { isScrolled } = useScrollTrigger(8);
+  const activeSection = useActiveSection(SECTION_IDS);
   const reduce = Boolean(useReducedMotion());
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, MOTION.spring.progress);
@@ -50,16 +53,31 @@ export default function Nav() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8 list-none">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="font-heading text-[0.85rem] text-ink-soft no-underline transition-colors hover:text-accent"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l) => {
+            const isActive = l.section !== null && l.section === activeSection;
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={[
+                    "relative font-heading text-[0.85rem] no-underline transition-colors hover:text-accent",
+                    isActive ? "text-accent" : "text-ink-soft",
+                  ].join(" ")}
+                >
+                  {l.label}
+                  {/* Underline tracks the section you are reading. */}
+                  <span
+                    aria-hidden
+                    className={[
+                      "absolute -bottom-1.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-300",
+                      isActive ? "scale-x-100" : "scale-x-0",
+                    ].join(" ")}
+                  />
+                </Link>
+              </li>
+            );
+          })}
           <li>
             <a
               href="/Ben_Hankins_SE_Resume.pdf"

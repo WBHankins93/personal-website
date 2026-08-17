@@ -1,4 +1,5 @@
 import Nav from "@/components/redesign/Nav";
+import ScrollRail from "@/components/redesign/ScrollRail";
 import Hero from "@/components/redesign/Hero";
 import ProjectBento from "@/components/projects/ProjectBento";
 import Experience from "@/components/redesign/Experience";
@@ -14,6 +15,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd()) }}
       />
       <Nav />
+      <ScrollRail />
       <main>
         <Hero />
         <ProjectBento />

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, MousePointer2, Play } from "lucide-react";
 import { featuredProjects, supportingWork, type Project } from "@/data/projects";
-import { MOTION, revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
+import { revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
 import { PROJECT_SIGNAL_CLASS } from "@/lib/project-signals";
 import { ProjectMicroWorld } from "./ProjectMicroWorlds";
 
@@ -22,7 +22,7 @@ function MotionToggle({ active, onClick, label }: { active: boolean; onClick: ()
       onClick={onClick}
       aria-pressed={active}
       aria-label={`${active ? "Pause" : "Play"} ${label} animation`}
-      className="project-signal-control absolute right-2.5 top-2.5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border bg-paper-card/90 shadow-sm transition-colors hover:bg-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--signal)] md:right-3 md:top-3 md:h-8 md:w-8"
+      className="project-signal-control stage-pin absolute right-2.5 top-2.5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border bg-paper-card/90 shadow-sm transition-colors hover:bg-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--signal)] md:right-3 md:top-3 md:h-8 md:w-8"
     >
       {active ? <MousePointer2 className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
     </button>
@@ -51,12 +51,14 @@ function ProjectCard({ project, className }: { project: Project; className: stri
       className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_60px_-42px_rgba(34,27,18,0.68)] focus-within:border-line-strong ${className}`}
     >
       <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
-        <ProjectMicroWorld
-          id={project.microWorld}
-          play={inView}
-          active={active}
-          reduced={reduce}
-        />
+        <div className="scroll-drift h-full w-full">
+          <ProjectMicroWorld
+            id={project.microWorld}
+            play={inView}
+            active={active}
+            reduced={reduce}
+          />
+        </div>
         {!reduce && <MotionToggle active={engaged} onClick={() => setEngaged((value) => !value)} label={project.name} />}
       </div>
 
@@ -120,7 +122,9 @@ function BreadthCard() {
       className="signal-breadth project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong md:col-span-4"
     >
       <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
-        <ProjectMicroWorld id="breadth" play={inView} active={active} reduced={reduce} />
+        <div className="scroll-drift h-full w-full">
+          <ProjectMicroWorld id="breadth" play={inView} active={active} reduced={reduce} />
+        </div>
         {!reduce && <MotionToggle active={engaged} onClick={() => setEngaged((value) => !value)} label="supporting work" />}
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
@@ -162,13 +166,7 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
             <div className="rule-label font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-muted">
               <span className="text-clay">No. 02</span>
               <span>Selected work</span>
-              <motion.span
-                className="rule-line origin-left"
-                initial={reduce ? false : { scaleX: 0 }}
-                whileInView={reduce ? undefined : { scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: MOTION.duration.slow, ease: MOTION.ease.easeOut }}
-              />
+              <span className="rule-line scroll-rule" />
             </div>
             <Heading className="mt-4 max-w-[18ch] font-heading text-[clamp(2rem,4.5vw,3.35rem)] font-bold leading-[1.02] tracking-tight text-ink">
               Three systems. Three different kinds of depth.

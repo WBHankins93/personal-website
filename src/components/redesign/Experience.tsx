@@ -26,7 +26,7 @@ export default function Experience() {
         <div className="rule-label font-mono text-[0.7rem] tracking-[0.16em] uppercase text-ink-muted">
           <span className="text-clay">No. 03</span>
           <span>Experience</span>
-          <span className="rule-line" />
+          <span className="rule-line scroll-rule" />
         </div>
         <h2 className="mt-4 font-heading font-bold text-ink tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
           Where the track record comes from.
