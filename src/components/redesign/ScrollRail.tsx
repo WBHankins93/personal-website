@@ -62,7 +62,10 @@ export default function ScrollRail() {
 
                 <span
                   className={[
-                    "font-mono text-[0.62rem] tabular-nums transition-colors duration-200",
+                    // No colour transition: the chip's ground swaps between light
+                    // and dark the instant the section changes, so a fading mark
+                    // would spend ~200ms dark-on-dark at the boundary.
+                    "font-mono text-[0.62rem] tabular-nums",
                     onDark
                       ? isActive
                         ? "text-[#F3B18C]"
@@ -78,7 +81,8 @@ export default function ScrollRail() {
                 <span
                   aria-hidden
                   className={[
-                    "h-px transition-all duration-300",
+                    // width only, for the same reason as above
+                    "h-px transition-[width] duration-300",
                     isActive ? "w-5" : "w-2.5 group-hover:w-4",
                     onDark
                       ? isActive

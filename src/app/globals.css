@@ -313,17 +313,17 @@
   background-size: 56px 56px;
 }
 
-/* Topographic tree rings for the closing green field. The uneven contour is a
-   direct extension of the site's field-journal language, fading into the grid
-   instead of reading as a separate illustration tile. */
+/* Tree rings for the closing green field. The artwork lives in
+   public/tree-rings.svg and is painted as a background image, so its path data
+   is a cached static asset rather than client JS. The mask fades it into the
+   ledger grid on the left so it never competes with the headline. */
 .tree-ring-field {
-  opacity: 0.2;
-  mask-image: linear-gradient(to left, #000 44%, rgba(0, 0, 0, 0.72) 72%, transparent 100%);
-}
-
-.tree-ring-field path {
-  vector-effect: non-scaling-stroke;
-  stroke-width: 1.15;
+  background-image: url("/tree-rings.svg");
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.26;
+  mask-image: linear-gradient(to left, #000 46%, rgba(0, 0, 0, 0.7) 74%, transparent 100%);
 }
 
 /* Editorial section label: index number + small-caps title + extending rule */
