@@ -50,7 +50,7 @@ export const projects: Project[] = [
     stage: "Live beta · redesign underway",
     role: "Founder · product, architecture, and UX",
     value:
-      "Industry-aware resume coaching that shows job seekers what is weakening their application—and what to improve next.",
+      "Industry-aware resume coaching that shows job seekers what is weakening their application, and what to improve next.",
     summary:
       "A live ATS scanning, coaching, and resume-building product designed around specific evidence instead of generic AI advice.",
     proofPoints: [

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, MousePointer2, Play, Sprout } from "lucide-react";
 import {
   featuredProjects,
@@ -11,7 +11,7 @@ import {
   supportingWork,
   type Project,
 } from "@/data/projects";
-import { revealVariants, staggerVariants } from "@/lib/animation-configs/motion";
+import { MARKS } from "@/lib/marks";
 import { PROJECT_SIGNAL_CLASS } from "@/lib/project-signals";
 import { ProjectMicroWorld } from "./ProjectMicroWorlds";
 
@@ -35,7 +35,7 @@ function MotionToggle({ active, onClick, label }: { active: boolean; onClick: ()
   );
 }
 
-function ProjectCard({ project, className }: { project: Project; className: string }) {
+function ProjectCard({ project, className, index }: { project: Project; className: string; index: number }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { amount: 0.25, margin: "-8% 0px" });
   const reduce = Boolean(useReducedMotion());
@@ -43,19 +43,24 @@ function ProjectCard({ project, className }: { project: Project; className: stri
   const [focused, setFocused] = useState(false);
   const [engaged, setEngaged] = useState(false);
   const active = hovered || focused || engaged;
+  const mark = MARKS[project.markId];
+  const MarkIcon = mark?.Icon;
 
   return (
-    <motion.article
+    <article
       ref={ref}
-      variants={revealVariants}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocusCapture={() => setFocused(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
       }}
-      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card group relative flex min-h-[31rem] flex-col overflow-hidden rounded-2xl border border-line shadow-[0_18px_45px_-38px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_60px_-42px_rgba(34,27,18,0.68)] focus-within:border-line-strong ${className}`}
+      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card plate-frame work-card group relative flex min-h-[31rem] flex-col overflow-hidden focus-within:border-line-strong ${className}`}
     >
+      {/* fig-tag: half-overlaps the plate-frame's top edge with a real,
+          sequential label tied to this card's position in the grid. */}
+      <span className="fig-tag">FIG. 02.{index + 1} · WORK</span>
+
       <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
         <div className="scroll-drift h-full w-full">
           <ProjectMicroWorld
@@ -77,7 +82,16 @@ function ProjectCard({ project, className }: { project: Project; className: stri
           </span>
         </div>
 
-        <h3 className="mt-4 font-heading text-[clamp(1.55rem,3vw,2.1rem)] font-bold tracking-tight text-ink">
+        {/* Hand-drawn product mark — never a stock icon at this size
+            (docs/DESIGN.md Migration Note #2). Colored by the card's actual
+            status ink, not an arbitrary per-product hue. */}
+        {MarkIcon && (
+          <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-xs border border-line bg-plate text-[var(--signal)]">
+            <MarkIcon className="h-[18px] w-[18px]" />
+          </span>
+        )}
+
+        <h3 className="mt-3 font-heading text-[clamp(1.55rem,3vw,2.1rem)] font-bold tracking-tight text-ink">
           {project.name}
         </h3>
         <p className="mt-3 max-w-[58ch] font-body text-[0.98rem] leading-relaxed text-ink-soft">
@@ -113,16 +127,13 @@ function ProjectCard({ project, className }: { project: Project; className: stri
           </Link>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 function SproutflowCallout() {
   return (
-    <motion.aside
-      variants={revealVariants}
-      className="mt-6 border-y border-line-strong py-8 md:grid md:grid-cols-12 md:items-center md:gap-8"
-    >
+    <aside className="mt-6 border-y border-line-strong py-8 md:grid md:grid-cols-12 md:items-center md:gap-8">
       <div className="flex items-start gap-4 md:col-span-7">
         <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-paper">
           <Sprout className="h-5 w-5" aria-hidden />
@@ -149,13 +160,13 @@ function SproutflowCallout() {
           Visit Sproutflow <ArrowUpRight className="h-4 w-4" aria-hidden />
         </a>
       </div>
-    </motion.aside>
+    </aside>
   );
 }
 
 function WorkshopList() {
   return (
-    <motion.div variants={revealVariants} className="mt-10 grid gap-5 md:grid-cols-12 md:gap-8">
+    <div className="mt-10 grid gap-5 md:grid-cols-12 md:gap-8">
       <div className="md:col-span-4">
         <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-ink-muted">
           Also in the workshop
@@ -182,24 +193,19 @@ function WorkshopList() {
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }
 
 export default function ProjectBento({ compactHeader = false }: { compactHeader?: boolean }) {
-  const reduce = Boolean(useReducedMotion());
-  const Heading = compactHeader ? motion.h1 : motion.h2;
+  const Heading = compactHeader ? "h1" : "h2";
 
   return (
     <section id="work" className="border-b border-line px-6 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={reduce ? false : "hidden"}
-          whileInView={reduce ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.45 }}
-          variants={revealVariants}
-          className={compactHeader ? "max-w-3xl" : "grid gap-8 md:grid-cols-12 md:items-end"}
-        >
+        {/* No scroll-reveal: every card below the fold renders visible by
+            default (docs/DESIGN.md Migration Note #1). */}
+        <div className={compactHeader ? "max-w-3xl" : "grid gap-8 md:grid-cols-12 md:items-end"}>
           <div className={compactHeader ? "" : "md:col-span-8"}>
             <div className="rule-label font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-muted">
               <span className="text-clay">No. 02</span>
@@ -215,29 +221,18 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
               Detailed case studies up front. Client work and active builds follow at the level of detail they need.
             </p>
           )}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={staggerVariants}
-          initial={reduce ? false : "hidden"}
-          whileInView={reduce ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.08 }}
-          className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5"
-        >
+        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5">
           {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} className={gridPlacement[index]} />
+            <ProjectCard key={project.slug} project={project} className={gridPlacement[index]} index={index} />
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={staggerVariants}
-          initial={reduce ? false : "hidden"}
-          whileInView={reduce ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.12 }}
-        >
+        <div>
           <SproutflowCallout />
           <WorkshopList />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

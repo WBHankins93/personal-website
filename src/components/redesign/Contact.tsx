@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Mail, Linkedin, Github } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { EASE } from "@/lib/animation-configs/ease";
 
 const EMAIL = "benhankins.work@gmail.com";
 
@@ -27,14 +26,9 @@ export default function Contact() {
         style={reduce ? undefined : { y: washY }}
         aria-hidden
       />
-      <motion.div
-        className="relative mx-auto max-w-3xl text-center"
-        initial={reduce ? false : { opacity: 0, y: 16 }}
-        animate={reduce ? { opacity: 1, y: 0 } : undefined}
-        whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5, ease: EASE.easeOut }}
-      >
+      {/* No scroll-reveal: contact is below the fold and renders visible by
+          default (docs/DESIGN.md Migration Note #1). */}
+      <div className="relative mx-auto max-w-3xl text-center">
         <div className="mb-5 flex items-center justify-center gap-3 font-mono text-[0.7rem] tracking-[0.18em] uppercase text-paper/70">
           <span className="h-px w-8 bg-paper/30" />
           <span className="text-[#F3B18C]">No. 04</span>
@@ -45,9 +39,8 @@ export default function Contact() {
           Let&apos;s build something.
         </h2>
         <p className="mx-auto mt-5 max-w-[52ch] font-body text-[1.05rem] leading-relaxed text-paper/75">
-          {/* TODO: Confirm whether GTM Engineer should remain, or be replaced with Solutions Architect. */}
-          Open to Solutions Engineer and GTM Engineer roles. Also available for
-          consulting through{" "}
+          Open to Solutions Engineer, Sales Engineer, and Forward Deployed
+          Engineer roles. Also available for consulting through{" "}
           <a
             href="https://sproutflow-studio.com"
             target="_blank"
@@ -62,7 +55,7 @@ export default function Contact() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href={`mailto:${EMAIL}`}
-            className="inline-flex items-center gap-2 rounded-md bg-paper px-5 py-3 font-heading text-[0.95rem] font-medium text-accent no-underline transition-colors hover:bg-paper-alt"
+            className="inline-flex items-center gap-2 rounded-sm bg-paper px-5 py-3 font-heading text-[0.95rem] font-medium text-accent no-underline transition-colors hover:bg-paper-alt"
           >
             <Mail className="h-4 w-4" /> Email
           </a>
@@ -70,7 +63,7 @@ export default function Contact() {
             href="https://www.linkedin.com/in/ben-hankins/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-paper/35 px-5 py-3 font-heading text-[0.95rem] font-medium text-paper no-underline transition-colors hover:border-paper hover:bg-paper/10"
+            className="inline-flex items-center gap-2 rounded-sm border border-paper/35 px-5 py-3 font-heading text-[0.95rem] font-medium text-paper no-underline transition-colors hover:border-paper hover:bg-paper/10"
           >
             <Linkedin className="h-4 w-4" /> LinkedIn
           </a>
@@ -78,12 +71,12 @@ export default function Contact() {
             href="https://github.com/WBHankins93"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-paper/35 px-5 py-3 font-heading text-[0.95rem] font-medium text-paper no-underline transition-colors hover:border-paper hover:bg-paper/10"
+            className="inline-flex items-center gap-2 rounded-sm border border-paper/35 px-5 py-3 font-heading text-[0.95rem] font-medium text-paper no-underline transition-colors hover:border-paper hover:bg-paper/10"
           >
             <Github className="h-4 w-4" /> GitHub
           </a>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
