@@ -12,7 +12,6 @@ import { SECTION_IDS } from "@/lib/sections";
 
 const links = [
   { label: "Work", href: "/#work", section: "work" },
-  { label: "Projects", href: "/projects", section: null },
   { label: "Experience", href: "/#experience", section: "experience" },
   { label: "Sproutflow", href: "https://sproutflow-studio.com", section: null, external: true },
   { label: "Contact", href: "/#contact", section: "contact" },
@@ -64,7 +63,7 @@ export default function Nav() {
                   rel={l.external ? "noopener noreferrer" : undefined}
                   aria-current={isActive ? "true" : undefined}
                   className={[
-                    "relative font-heading text-[0.85rem] no-underline transition-colors hover:text-accent",
+                    "relative font-body text-[0.85rem] font-medium no-underline transition-colors hover:text-accent",
                     isActive ? "text-accent" : "text-ink-soft",
                   ].join(" ")}
                 >
@@ -89,7 +88,7 @@ export default function Nav() {
               href="/Ben_Hankins_SE_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-heading text-[0.85rem] font-medium text-white no-underline bg-accent hover:bg-accent-hover transition-colors rounded-md px-4 py-2"
+              className="font-body text-[0.85rem] font-semibold text-white no-underline bg-accent hover:bg-accent-hover transition-colors rounded-md px-4 py-2"
             >
               Resume
             </a>
@@ -126,7 +125,7 @@ export default function Nav() {
                   target={l.external ? "_blank" : undefined}
                   rel={l.external ? "noopener noreferrer" : undefined}
                   onClick={() => setOpen(false)}
-                  className="block py-3 font-heading text-[0.95rem] text-ink-soft no-underline border-b border-line last:border-0"
+                  className="block py-3 font-body text-[0.95rem] font-medium text-ink-soft no-underline border-b border-line last:border-0"
                 >
                   <span className="inline-flex items-center gap-1.5">
                     {l.label}
@@ -141,7 +140,7 @@ export default function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="block mt-3 mb-1 text-center font-heading text-[0.9rem] font-medium text-white no-underline bg-accent rounded-md px-4 py-2.5"
+                className="block mt-3 mb-1 text-center font-body text-[0.9rem] font-semibold text-white no-underline bg-accent rounded-md px-4 py-2.5"
               >
                 Resume
               </a>

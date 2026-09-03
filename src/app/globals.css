@@ -332,6 +332,17 @@
   color: var(--signal);
 }
 
+/* logo-ticker: the hero's compact "trusted on engagements with" row.
+   Edge-masked so logos fade in/out of view instead of hard-cutting, and
+   paused on hover so a visitor can actually read a name they land on. */
+.logo-ticker {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.logo-ticker:hover .logo-ticker-track {
+  animation-play-state: paused;
+}
+
 /* ─── v3 component system (docs/DESIGN.md) ──────────────────────────────── */
 
 /* plate-frame: base card/hero treatment. Ink border, sharp corners,

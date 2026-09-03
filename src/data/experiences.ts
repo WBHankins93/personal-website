@@ -9,6 +9,8 @@ export interface Experience {
   period: string;
   summary: string;
   href?: string;
+  /** Path to the company's logo mark, when one exists (see public/logos and public/kortivity-logo.png). */
+  logo?: string;
 }
 
 export const experiences: Experience[] = [
@@ -36,13 +38,15 @@ export const experiences: Experience[] = [
       "Cloud Infrastructure Engineer · 2023–2024",
     ],
     period: "2019–2024",
+    logo: "/logos/ibm.svg",
     summary:
       "Led technical discovery, solution design, and demo delivery across enterprise accounts including AT&T, Boeing, Cencora, and Norfolk Southern. Owned the production infrastructure for CenterPoint Energy's $10.1M SAP RISE engagement. Built customer-facing MVPs and POCs with a strong evaluation-to-signing conversion rate.",
   },
   {
     company: "Kortivity",
-    role: "Front End Developer (Contract)",
+    role: "Front End Developer",
     period: "Jan 2019–Jun 2019",
+    logo: "/kortivity-logo.png",
     summary:
       "Designed, built, and maintained a Vue-based Chrome extension that let recruiters pull candidate profiles and contact details, directly supporting the company's core recruiting workflow. The stepping stone into enterprise engineering.",
   },

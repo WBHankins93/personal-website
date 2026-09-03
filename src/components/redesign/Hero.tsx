@@ -14,19 +14,21 @@ const stats = [
 ];
 
 // Named enterprise accounts engaged across IBM Client Engineering + Prove AI.
-const accounts = [
-  "AT&T",
-  "Boeing",
-  "Cencora",
-  "Honeywell",
-  "Juniper Networks",
-  "Kroger",
-  "NBCUniversal",
-  "Norfolk Southern",
-  "PepsiCo",
-  "CenterPoint Energy",
-  "Verizon",
-  "Hertz",
+// Logos sourced from Wikimedia Commons (official marks, public domain / freely
+// licensed for editorial "engagements with" use — see public/logos).
+const trustedLogos = [
+  { name: "AT&T", src: "/logos/att.svg" },
+  { name: "Boeing", src: "/logos/boeing.svg" },
+  { name: "Cencora", src: "/logos/cencora.png" },
+  { name: "Honeywell", src: "/logos/honeywell.svg" },
+  { name: "Juniper Networks", src: "/logos/juniper.svg" },
+  { name: "Kroger", src: "/logos/kroger.svg" },
+  { name: "NBCUniversal", src: "/logos/nbcuniversal.svg" },
+  { name: "Norfolk Southern", src: "/logos/norfolk-southern.svg" },
+  { name: "PepsiCo", src: "/logos/pepsico.svg" },
+  { name: "CenterPoint Energy", src: "/logos/centerpoint.svg" },
+  { name: "Verizon", src: "/logos/verizon.svg" },
+  { name: "Hertz", src: "/logos/hertz.svg" },
 ];
 
 export default function Hero() {
@@ -193,7 +195,7 @@ export default function Hero() {
               {/* rotated-stamp: the one per this page — real status language,
                   not decoration. */}
               <span className="rotated-stamp absolute -bottom-5 -right-4 hidden text-[0.56rem] sm:inline-flex">
-                Est. 2019
+                Est. 2025
               </span>
             </div>
             <figcaption className="mt-4 rotate-[-1.5deg] font-mono text-[0.66rem] tracking-[0.06em] uppercase text-ink-muted">
@@ -222,28 +224,33 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Trusted-by — named enterprise accounts (the names out-punch a count) */}
-        <motion.div
-          className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:items-baseline sm:gap-5"
-          {...reveal(0.52)}
-        >
+        {/* Trusted-by — a compact, single-line logo ticker instead of a
+            two-line name list. Logos render desaturated (grayscale) so
+            their brand colors don't add a fourth accent hue to the page;
+            they resolve to full color on hover. Duplicated once for a
+            seamless loop via the existing `ticker-scroll` keyframe. */}
+        <motion.div className="mt-6 flex items-center gap-4" {...reveal(0.52)}>
           <span className="font-mono text-[0.62rem] tracking-[0.16em] uppercase text-ink-muted whitespace-nowrap">
-            Trusted on engagements with
+            Trusted on
+            <br className="sm:hidden" /> engagements with
           </span>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {accounts.map((name, i) => (
-              <span
-                key={name}
-                className="flex items-center gap-3 font-heading text-[0.92rem] font-medium text-ink-soft"
-              >
-                {name}
-                {i < accounts.length - 1 && (
-                  <span className="text-ink-muted" aria-hidden>
-                    ·
-                  </span>
-                )}
-              </span>
-            ))}
+          <div className="logo-ticker relative min-w-0 flex-1 overflow-hidden">
+            <div
+              className={`logo-ticker-track flex w-max items-center gap-9 ${
+                reduce ? "" : "animate-ticker-scroll"
+              }`}
+            >
+              {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+                // eslint-disable-next-line @next/next/no-img-element -- variable-width logo row, next/image needs fixed dims per logo
+                <img
+                  key={`${logo.name}-${i}`}
+                  src={logo.src}
+                  alt={i < trustedLogos.length ? logo.name : ""}
+                  aria-hidden={i >= trustedLogos.length}
+                  className="h-5 w-auto shrink-0 object-contain grayscale opacity-50 transition-all duration-300 hover:opacity-90 hover:grayscale-0 md:h-6"
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 

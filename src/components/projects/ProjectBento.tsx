@@ -55,13 +55,16 @@ function ProjectCard({ project, className, index }: { project: Project; classNam
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
       }}
-      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card plate-frame work-card group relative flex min-h-[31rem] flex-col overflow-hidden focus-within:border-line-strong ${className}`}
+      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card plate-frame work-card group relative flex min-h-[31rem] flex-col focus-within:border-line-strong ${className}`}
     >
       {/* fig-tag: half-overlaps the plate-frame's top edge with a real,
-          sequential label tied to this card's position in the grid. */}
+          sequential label tied to this card's position in the grid. The
+          card itself must NOT clip overflow here, or the tag's -50%
+          translateY gets cut into a flush bar instead of a floating pill
+          (the stage below has its own overflow-hidden for the artwork). */}
       <span className="fig-tag">FIG. 02.{index + 1} · WORK</span>
 
-      <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden border-b border-line md:h-64">
+      <div className="project-signal-stage relative h-60 shrink-0 overflow-hidden rounded-t-[1px] border-b border-line md:h-64">
         <div className="scroll-drift h-full w-full">
           <ProjectMicroWorld
             id={project.microWorld}

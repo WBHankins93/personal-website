@@ -1,10 +1,27 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Download } from "lucide-react";
+import { ArrowUpRight, Download, Sprout } from "lucide-react";
 import { experiences } from "@/data/experiences";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+function CompanyMark({ company, logo }: { company: string; logo?: string }) {
+  return (
+    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xs border border-line bg-plate p-1.5">
+      {logo ? (
+        <Image src={logo} alt="" width={28} height={28} className="h-full w-full object-contain" />
+      ) : company === "Sproutflow Studio" ? (
+        <Sprout className="h-4 w-4 text-forest" aria-hidden />
+      ) : (
+        <span className="font-mono text-[0.7rem] font-semibold text-ink-muted" aria-hidden>
+          {company.charAt(0)}
+        </span>
+      )}
+    </span>
+  );
+}
 
 export default function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -43,15 +60,13 @@ export default function Experience() {
             A career connecting technical discovery, solution design, cloud infrastructure, and the work of actually shipping.
           </p>
 
-          <div className="ledger-grid mt-8 border-y border-line-strong py-5">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-ink-muted">
-                Throughline
-              </span>
-              <span className="h-px flex-1 bg-line-strong" />
-              <ArrowDownRight className="h-4 w-4 text-clay" aria-hidden />
-            </div>
-            <p className="mt-3 font-heading text-[0.95rem] font-semibold leading-relaxed text-ink">
+          <div className="mt-8 max-w-[30ch] border-l-2 border-clay pl-5">
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-ink-muted">
+              Throughline
+            </span>
+            {/* display-italic-accent (docs/DESIGN.md): one whimsical line per
+                page, max — this is that line. */}
+            <p className="mt-2 font-heading text-[1.35rem] italic leading-snug text-forest-deep">
               Find the real problem, design the system for it, and stay until it&apos;s actually running.
             </p>
           </div>
@@ -86,21 +101,24 @@ export default function Experience() {
                 </span>
 
                 <div className="relative flex flex-wrap items-start justify-between gap-x-6 gap-y-2 pr-12">
-                  <div>
-                    {exp.href ? (
-                      <a
-                        href={exp.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-heading text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
-                      >
-                        {exp.company}
-                        <ArrowUpRight className="h-4 w-4" aria-hidden />
-                      </a>
-                    ) : (
-                      <h3 className="font-heading text-[1.25rem] font-bold text-ink">{exp.company}</h3>
-                    )}
-                    <p className="mt-1 font-heading text-[0.95rem] font-medium text-accent">{exp.role}</p>
+                  <div className="flex items-start gap-3">
+                    <CompanyMark company={exp.company} logo={exp.logo} />
+                    <div>
+                      {exp.href ? (
+                        <a
+                          href={exp.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 font-heading text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
+                        >
+                          {exp.company}
+                          <ArrowUpRight className="h-4 w-4" aria-hidden />
+                        </a>
+                      ) : (
+                        <h3 className="font-heading text-[1.25rem] font-bold text-ink">{exp.company}</h3>
+                      )}
+                      <p className="mt-1 font-heading text-[0.95rem] font-medium text-accent">{exp.role}</p>
+                    </div>
                   </div>
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.06em] text-ink-muted whitespace-nowrap">
                     {exp.period}

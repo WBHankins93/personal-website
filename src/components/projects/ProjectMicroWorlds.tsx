@@ -210,11 +210,6 @@ function LivingPlaybooksWorld({ play, active, reduced }: WorldProps) {
             </div>
           </div>
         ))}
-        <motion.div
-          className="absolute left-[31%] top-[44%] h-px w-[38%] origin-left bg-[var(--signal)] opacity-60"
-          animate={running ? { scaleX: [0, 1, 1, 0] } : { scaleX: 1 }}
-          transition={loop(running, duration, 0.8)}
-        />
       </motion.div>
       <div className="absolute bottom-3 right-4 flex items-center gap-2 rounded-full border border-line bg-paper/90 px-3 py-1.5 shadow-sm">
         <OpenBookMark />
