@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 435.7 435.7">
+  <style>
+    /* Fill pinned to the dark navy variant regardless of OS color scheme —
+       this badge always sits on a light plate background, so the site's
+       own dark-mode toggle (which doesn't exist) would otherwise make this
+       render white-on-white. */
+    path { fill: #07102A; }
+  </style>
+  <path d="M357.8,0c43.1,0,78,34.9,78,78v279.8c0,43.1-34.9,78-78,78H78C34.9,435.7,0,400.8,0,357.8V78C0,34.9,34.9,0,78,0h279.8ZM78,26c-28.7,0-52,23.3-52,52v281.1c.7,27.6,23,49.9,50.7,50.6h1.3s279.8,0,279.8,0h1.3c28.1-.7,50.7-23.7,50.7-52V78c0-28.7-23.3-52-52-52H78Z"/>
+  <path d="M149.1,107.1v221.5h-23.3c-1.5,0-2.7-1.2-2.7-2.7V109.9c0-1.5,1.2-2.7,2.7-2.7h23.3ZM332.2,250.7c0,1.5-1.2,2.7-2.7,2.7h-135.2v72.5c0,1.5-1.2,2.7-2.7,2.7h-23.3v-101.2h164v23.3ZM191.5,107.1c1.5,0,2.7,1.2,2.7,2.7v72.5h135.2c1.5,0,2.7,1.2,2.7,2.7v23.3h-164v-101.2h23.3Z"/>
+</svg>

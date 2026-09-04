@@ -123,7 +123,7 @@ function ProjectCard({ project, className, index }: { project: Project; classNam
         <div className="mt-auto pt-6">
           <Link
             href={`/projects/${project.slug}`}
-            className="project-signal-link inline-flex items-center gap-2 font-heading text-[0.95rem] font-semibold no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal)]"
+            className="project-signal-link inline-flex items-center gap-2 font-body text-[0.95rem] font-semibold no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--signal)]"
           >
             View case study
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -158,7 +158,7 @@ function SproutflowCallout() {
           href={sproutflow.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-1.5 border-b border-accent font-heading text-[0.92rem] font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
+          className="mt-4 inline-flex items-center gap-1.5 border-b border-accent font-body text-[0.92rem] font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
         >
           Visit Sproutflow <ArrowUpRight className="h-4 w-4" aria-hidden />
         </a>
@@ -204,7 +204,7 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
   const Heading = compactHeader ? "h1" : "h2";
 
   return (
-    <section id="work" className="border-b border-line px-6 py-16 md:px-8 md:py-24">
+    <section id="work" className="border-b border-line bg-paper-alt px-6 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
         {/* No scroll-reveal: every card below the fold renders visible by
             default (docs/DESIGN.md Migration Note #1). */}
