@@ -42,7 +42,7 @@ function GreenlitWorld({ play, active, reduced }: WorldProps) {
       >
         <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[conic-gradient(var(--signal)_0_82%,var(--color-paper-deep)_82%_100%)] md:h-16 md:w-16">
           <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-paper md:h-12 md:w-12">
-            <span className="font-heading text-lg font-bold leading-none text-ink">8.2</span>
+            <span className="font-body text-lg font-bold leading-none text-ink">8.2</span>
             <span className="font-mono text-[0.42rem] uppercase tracking-wider text-ink-muted">score</span>
           </div>
         </div>
@@ -244,7 +244,7 @@ function BreadthWorld({ play, active, reduced }: WorldProps) {
               <Icon className="h-3.5 w-3.5" />
             </span>
             <div className="min-w-0">
-              <p className="truncate font-heading text-[0.68rem] font-semibold text-ink">{work.name}</p>
+              <p className="truncate font-body text-[0.68rem] font-semibold text-ink">{work.name}</p>
               <p className="truncate font-mono text-[0.43rem] uppercase tracking-wide text-ink-muted">{work.capability}</p>
             </div>
             <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-line-strong" />

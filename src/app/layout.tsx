@@ -4,24 +4,27 @@ import "./globals.css";
 
 import { Old_Standard_TT, Work_Sans, Space_Mono } from "next/font/google";
 
-// v3 "specimen and signal" type system (docs/DESIGN.md): Old Standard TT
-// replaces Space Grotesk for display type — a genuine 19th-century
-// encyclopedia serif instead of one of the two default AI-tool display
-// faces the live-site audit flagged. Both weights are loaded since the
-// spec uses 700 for headlines and 400 italic for the one whimsical accent
-// line per page.
+// Old Standard TT — a genuine 19th-century encyclopedia serif — is now
+// reserved for exactly two signature spots per the round-3 feedback: the
+// hero name and the stat numbers. Everywhere else that used to reach for
+// it (section headings, card titles, buttons, nav) moved to Work Sans, so
+// this one dominant sans + one reserved serif accent reads as consistent
+// rather than "everything is the fancy font." (Same pattern PitchBook uses:
+// one sans family throughout, a serif reserved for a single H1 moment.)
 const oldStandardTT = Old_Standard_TT({
   subsets: ["latin"],
   weight: ["400", "700"],
-  style: ["normal", "italic"],
   variable: "--font-heading",
 });
 
-// Work Sans replaces Source Sans 3 for body copy — optional polish per the
-// spec, cheap enough to take here.
+// Work Sans is now the site's workhorse typeface — nav, headings, card
+// titles, buttons, and body copy all run through it, with weight (not a
+// font-family switch) doing the work of hierarchy. Loads the full working
+// range used across the site: 400 body, 500 medium labels/links, 600
+// semibold subheads/CTAs, 700 bold headings.
 const workSans = Work_Sans({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
