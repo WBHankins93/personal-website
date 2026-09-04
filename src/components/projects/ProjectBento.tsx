@@ -94,7 +94,7 @@ function ProjectCard({ project, className, index }: { project: Project; classNam
           </span>
         )}
 
-        <h3 className="mt-3 font-heading text-[clamp(1.55rem,3vw,2.1rem)] font-bold tracking-tight text-ink">
+        <h3 className="mt-3 font-body text-[clamp(1.55rem,3vw,2.1rem)] font-bold tracking-tight text-ink">
           {project.name}
         </h3>
         <p className="mt-3 max-w-[58ch] font-body text-[0.98rem] leading-relaxed text-ink-soft">
@@ -114,7 +114,7 @@ function ProjectCard({ project, className, index }: { project: Project; classNam
             <p className="font-mono text-[0.56rem] uppercase tracking-[0.12em] text-ink-muted">
               The connected playbooks
             </p>
-            <p className="mt-2 font-heading text-[0.78rem] font-medium leading-relaxed text-ink-soft">
+            <p className="mt-2 font-body text-[0.78rem] font-medium leading-relaxed text-ink-soft">
               {playbookBranches.join(" · ")}
             </p>
           </div>
@@ -145,7 +145,7 @@ function SproutflowCallout() {
           <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-accent">
             {sproutflow.stage}
           </p>
-          <h3 className="mt-2 font-heading text-[clamp(1.65rem,3vw,2.3rem)] font-bold tracking-tight text-ink">
+          <h3 className="mt-2 font-body text-[clamp(1.65rem,3vw,2.3rem)] font-bold tracking-tight text-ink">
             {sproutflow.name}
           </h3>
         </div>
@@ -185,7 +185,7 @@ function WorkshopList() {
             className="grid gap-1 border-b border-line py-4 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-6"
           >
             <div>
-              <span className="font-heading text-[1rem] font-semibold text-ink">{work.name}</span>
+              <span className="font-body text-[1rem] font-semibold text-ink">{work.name}</span>
               <span className="ml-3 font-mono text-[0.58rem] uppercase tracking-wide text-ink-muted">
                 {work.capability}
               </span>
@@ -215,7 +215,7 @@ export default function ProjectBento({ compactHeader = false }: { compactHeader?
               <span>Selected work</span>
               <span className="rule-line scroll-rule" />
             </div>
-            <Heading className="mt-4 max-w-[18ch] font-heading text-[clamp(2rem,4.5vw,3.35rem)] font-bold leading-[1.02] tracking-tight text-ink">
+            <Heading className="mt-4 max-w-[18ch] font-body text-[clamp(2rem,4.5vw,3.35rem)] font-bold leading-[1.02] tracking-tight text-ink">
               Selected systems, built end to end.
             </Heading>
           </div>

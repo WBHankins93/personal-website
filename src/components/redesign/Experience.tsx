@@ -53,7 +53,7 @@ export default function Experience() {
             <span>Experience</span>
             <span className="rule-line scroll-rule" />
           </div>
-          <h2 className="mt-5 max-w-[11ch] font-heading text-[clamp(2.2rem,4vw,3.6rem)] font-bold leading-[0.98] tracking-tight text-ink">
+          <h2 className="mt-5 max-w-[11ch] font-body text-[clamp(2.2rem,4vw,3.6rem)] font-bold leading-[0.98] tracking-tight text-ink">
             From customer room to production.
           </h2>
           <p className="mt-5 max-w-[38ch] font-body text-[1rem] leading-relaxed text-ink-soft">
@@ -64,9 +64,7 @@ export default function Experience() {
             <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-ink-muted">
               Throughline
             </span>
-            {/* display-italic-accent (docs/DESIGN.md): one whimsical line per
-                page, max — this is that line. */}
-            <p className="mt-2 font-heading text-[1.35rem] italic leading-snug text-forest-deep">
+            <p className="mt-2 font-body text-[1.35rem] font-semibold leading-snug text-forest-deep">
               Find the real problem, design the system for it, and stay until it&apos;s actually running.
             </p>
           </div>
@@ -94,7 +92,7 @@ export default function Experience() {
               <span className="absolute -left-[5.5px] top-7 h-[11px] w-[11px] rounded-full border-2 border-accent bg-paper-alt ring-4 ring-paper-alt" />
               <article className="group plate-frame work-card relative overflow-hidden p-5 md:p-7">
                 <span
-                  className="pointer-events-none absolute -right-1 -top-5 font-heading text-[5.5rem] font-bold leading-none text-paper-deep/65"
+                  className="pointer-events-none absolute -right-1 -top-5 font-body text-[5.5rem] font-bold leading-none text-paper-deep/65"
                   aria-hidden
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -109,15 +107,15 @@ export default function Experience() {
                           href={exp.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 font-heading text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
+                          className="inline-flex items-center gap-1.5 font-body text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
                         >
                           {exp.company}
                           <ArrowUpRight className="h-4 w-4" aria-hidden />
                         </a>
                       ) : (
-                        <h3 className="font-heading text-[1.25rem] font-bold text-ink">{exp.company}</h3>
+                        <h3 className="font-body text-[1.25rem] font-bold text-ink">{exp.company}</h3>
                       )}
-                      <p className="mt-1 font-heading text-[0.95rem] font-medium text-accent">{exp.role}</p>
+                      <p className="mt-1 font-body text-[0.95rem] font-medium text-accent">{exp.role}</p>
                     </div>
                   </div>
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.06em] text-ink-muted whitespace-nowrap">
