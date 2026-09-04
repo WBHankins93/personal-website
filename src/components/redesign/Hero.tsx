@@ -14,19 +14,21 @@ const stats = [
 ];
 
 // Named enterprise accounts engaged across IBM Client Engineering + Prove AI.
-const accounts = [
-  "AT&T",
-  "Boeing",
-  "Cencora",
-  "Honeywell",
-  "Juniper Networks",
-  "Kroger",
-  "NBCUniversal",
-  "Norfolk Southern",
-  "PepsiCo",
-  "CenterPoint Energy",
-  "Verizon",
-  "Hertz",
+// Logos sourced from Wikimedia Commons (official marks, public domain / freely
+// licensed for editorial "engagements with" use — see public/logos).
+const trustedLogos = [
+  { name: "AT&T", src: "/logos/att.svg" },
+  { name: "Boeing", src: "/logos/boeing.svg" },
+  { name: "Cencora", src: "/logos/cencora.png" },
+  { name: "Honeywell", src: "/logos/honeywell.svg" },
+  { name: "Juniper Networks", src: "/logos/juniper.svg" },
+  { name: "Kroger", src: "/logos/kroger.svg" },
+  { name: "NBCUniversal", src: "/logos/nbcuniversal.svg" },
+  { name: "Norfolk Southern", src: "/logos/norfolk-southern.svg" },
+  { name: "PepsiCo", src: "/logos/pepsico.svg" },
+  { name: "CenterPoint Energy", src: "/logos/centerpoint.svg" },
+  { name: "Verizon", src: "/logos/verizon.svg" },
+  { name: "Hertz", src: "/logos/hertz.svg" },
 ];
 
 export default function Hero() {
@@ -82,14 +84,24 @@ export default function Hero() {
         <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-10 items-end">
           {/* Text column */}
           <div className="md:col-span-7">
+            {/* terminal-moment: hero only, per docs/DESIGN.md — do not repeat
+                this pattern elsewhere on the page. */}
             <motion.div
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-paper/70 backdrop-blur-sm px-3.5 py-1.5 mb-6"
+              className="terminal-moment gap-2 rounded-sm px-3.5 py-1.5 mb-6 text-[0.7rem] tracking-[0.03em]"
               {...reveal(0.08)}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-status-prod)] animate-pulse-glow" />
-              <span className="font-mono text-[0.7rem] tracking-[0.1em] uppercase text-ink-muted">
-                Open to Opportunities
+              <span aria-hidden className="text-plate/55">
+                $
               </span>
+              <span>open_to_opportunities:</span>
+              {/* plate, not rust-bright: rust-bright is decorative/cursor-only
+                  per docs/DESIGN.md — it fails normal-text contrast on
+                  forest-deep (3.28:1), so real terminal text stays plate. */}
+              <span className="font-bold">true</span>
+              <span
+                aria-hidden
+                className={reduce ? "terminal-cursor" : "terminal-cursor terminal-cursor--blink"}
+              />
             </motion.div>
 
             {/* Oversized editorial headline */}
@@ -98,9 +110,15 @@ export default function Hero() {
               style={{ fontSize: "clamp(3.25rem, 8.5vw, 6.25rem)" }}
               {...reveal(0.14)}
             >
-              <span className="block">Ben</span>
               <span className="block">
-                Hankins<span className="text-clay">.</span>
+                Ben
+                {/* Visually hidden so the accessible name reads "Ben Hankins."
+                    instead of "BenHankins." — the two lines still stack
+                    visually via `block`. */}
+                <span className="sr-only"> </span>
+              </span>
+              <span className="block">
+                Hankins<span className="text-rust">.</span>
               </span>
             </motion.h1>
 
@@ -120,7 +138,7 @@ export default function Hero() {
               {...reveal(0.3)}
             >
               7+ years across solutions engineering, cloud infrastructure, and
-              full-stack product development—with production software to show for it.
+              full-stack product development, with production software to show for it.
             </motion.p>
 
             {/* CTAs: one solid primary, the rest quiet */}
@@ -130,7 +148,7 @@ export default function Hero() {
             >
               <a
                 href="#work"
-                className="inline-flex items-center gap-2 rounded-md bg-accent hover:bg-accent-hover transition-colors text-paper font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
+                className="button-primary inline-flex items-center gap-2 font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
               >
                 Explore the Work <ArrowRight className="h-4 w-4" />
               </a>
@@ -161,20 +179,23 @@ export default function Hero() {
             style={reduce ? undefined : { y: photoY }}
             {...reveal(0.18)}
           >
-            <div className="relative rotate-[-1.5deg] rounded-xl border-[6px] border-paper bg-paper shadow-[0_18px_45px_-22px_rgba(34,27,18,0.55)] ring-1 ring-line">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-paper-alt">
+            <div className="plate-frame rotate-[-1.5deg] p-2 shadow-[0_18px_45px_-22px_rgba(33,28,21,0.55)]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1px] bg-paper-alt">
                 <Image
                   src="/BH-headshot.png"
-                  alt="Ben Hankins"
+                  alt="Portrait of Ben Hankins, solutions engineer and software builder, outdoors in New Orleans"
                   fill
                   priority
                   sizes="(max-width: 768px) 304px, 320px"
                   className="object-cover"
                 />
               </div>
-              {/* Clay index tab */}
-              <span className="absolute -top-3 -left-3 inline-flex items-center justify-center rounded-md bg-clay px-2 py-1 font-mono text-[0.62rem] tracking-[0.1em] uppercase text-paper shadow-sm">
-                Fig. 01
+              {/* fig-tag: half-overlaps the plate-frame's top edge */}
+              <span className="fig-tag">Fig. 01 · Specimen</span>
+              {/* rotated-stamp: the one per this page — real status language,
+                  not decoration. */}
+              <span className="rotated-stamp absolute -bottom-5 -right-4 hidden text-[0.56rem] sm:inline-flex">
+                Est. 2025
               </span>
             </div>
             <figcaption className="mt-4 rotate-[-1.5deg] font-mono text-[0.66rem] tracking-[0.06em] uppercase text-ink-muted">
@@ -193,7 +214,7 @@ export default function Hero() {
               key={s.label}
               className="border-l border-line px-2 py-5 first:border-l-0 sm:px-6"
             >
-              <div className="font-heading text-[1.7rem] sm:text-[1.9rem] font-bold text-ink tracking-tight leading-none">
+              <div className="font-heading text-[1.7rem] sm:text-[1.9rem] font-bold text-forest-deep tracking-tight leading-none">
                 {s.num}
               </div>
               <div className="mt-2 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-ink-muted">
@@ -203,28 +224,33 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Trusted-by — named enterprise accounts (the names out-punch a count) */}
-        <motion.div
-          className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:items-baseline sm:gap-5"
-          {...reveal(0.52)}
-        >
+        {/* Trusted-by — a compact, single-line logo ticker instead of a
+            two-line name list. Logos render desaturated (grayscale) so
+            their brand colors don't add a fourth accent hue to the page;
+            they resolve to full color on hover. Duplicated once for a
+            seamless loop via the existing `ticker-scroll` keyframe. */}
+        <motion.div className="mt-6 flex items-center gap-4" {...reveal(0.52)}>
           <span className="font-mono text-[0.62rem] tracking-[0.16em] uppercase text-ink-muted whitespace-nowrap">
-            Trusted on engagements with
+            Trusted on
+            <br className="sm:hidden" /> engagements with
           </span>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {accounts.map((name, i) => (
-              <span
-                key={name}
-                className="flex items-center gap-3 font-heading text-[0.92rem] font-medium text-ink-soft"
-              >
-                {name}
-                {i < accounts.length - 1 && (
-                  <span className="text-ink-muted" aria-hidden>
-                    ·
-                  </span>
-                )}
-              </span>
-            ))}
+          <div className="logo-ticker relative min-w-0 flex-1 overflow-hidden">
+            <div
+              className={`logo-ticker-track flex w-max items-center gap-9 ${
+                reduce ? "" : "animate-ticker-scroll"
+              }`}
+            >
+              {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+                // eslint-disable-next-line @next/next/no-img-element -- variable-width logo row, next/image needs fixed dims per logo
+                <img
+                  key={`${logo.name}-${i}`}
+                  src={logo.src}
+                  alt={i < trustedLogos.length ? logo.name : ""}
+                  aria-hidden={i >= trustedLogos.length}
+                  className="h-5 w-auto shrink-0 object-contain grayscale opacity-50 transition-all duration-300 hover:opacity-90 hover:grayscale-0 md:h-6"
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 

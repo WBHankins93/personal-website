@@ -35,7 +35,12 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
+  /* v3 "specimen and signal" radius scale (docs/DESIGN.md `rounded`).
+     No shadcn/ui primitives exist in this repo yet, so it's safe to make
+     these the literal 2px/3px the spec calls for instead of deriving them
+     from a base --radius. */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
@@ -70,38 +75,50 @@
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
   --animate-cursor-blink: cursor-blink 1s step-end infinite;
 
-  /* Editorial redesign system (warm field-journal)
-     Warm bone-paper base with espresso ink. A botanical forest-green primary
-     (echoing Sproutflow Studio) plus a terracotta-clay secondary used for
-     index numbers, rules, and editorial marks. Texture and hairline rules
-     carry the density so negative space never reads as emptiness. */
+  /* Editorial redesign system (warm field-journal), recolored to the v3
+     "specimen and signal" palette in docs/DESIGN.md. Warm parchment base
+     with espresso ink, a near-black forest green carrying real weight
+     (buttons, headline color, plate borders), and a terracotta rust used
+     as the site's one deliberate energy color. `accent`/`clay` are kept as
+     aliases of `forest`/`rust` so existing markup keeps working — forest
+     and rust are the canonical names for anything new. Values below are
+     the exact hexes DESIGN.md verified for WCAG contrast; don't drift them. */
   --color-paper: #F6F1E7;           /* warm bone: main base */
   --color-paper-alt: #ECE4D5;       /* deeper kraft band: visible banding */
   --color-paper-deep: #E4DAC6;      /* third tone for nested panels */
   --color-paper-card: #FFFDF8;      /* clean stock: cards / diagrams */
-  --color-ink: #221B12;             /* espresso: primary text / headlines */
+  --color-plate: #FBF6EC;           /* card surface for plate-frame / fig-tag / terminal-moment text */
+  --color-ink: #211C15;             /* espresso: primary text / headlines — AAA on paper (15.02:1) */
   --color-ink-soft: #51483B;        /* body copy */
-  --color-ink-muted: #6F6453;       /* labels, captions, eyebrows — AA on paper */
-  --color-line: #D2C4AD;            /* hairline borders */
+  --color-ink-muted: #6B5F4A;       /* labels, captions, eyebrows — AA on paper (5.55:1) */
+  --color-line: #D8C7A4;            /* hairline borders */
   --color-line-strong: #C7BAA0;     /* hover / emphasized borders */
 
-  --color-accent: #183F2A;          /* deep forest: primary */
-  --color-accent-hover: #102F1E;
+  --color-forest: #183F2A;          /* deep forest: primary — AAA on paper (10.46:1) */
+  --color-forest-deep: #0F2B1C;     /* forest hover / dark panels (footer, terminal-moment) */
+  --color-accent: var(--color-forest);
+  --color-accent-hover: var(--color-forest-deep);
   --color-accent-soft: #D8E8D8;     /* accent tint backgrounds */
 
-  --color-clay: #9A4E27;            /* signal clay — AA on paper */
+  --color-rust: #9A4E27;            /* signal rust — AA on paper (5.34:1); budget it */
+  --color-rust-bright: #B85A2C;     /* decorative / large-text / cursor ONLY — 4.11:1 on paper, 3.28:1 on forest-deep, fails body text */
+  --color-clay: var(--color-rust);
   --color-clay-hover: #7E391A;
   --color-clay-soft: #F1D9CC;       /* clay tint backgrounds */
 
-  /* Status badge palette (color-coded product states, warm-shifted) */
-  --color-status-beta: #2F6F73;     /* Live Beta: muted teal */
-  --color-status-beta-bg: #DEEAE7;
-  --color-status-dev: #9A6B16;      /* In Development: ochre */
-  --color-status-dev-bg: #F1E6C9;
-  --color-status-prod: #2C5638;     /* Demo-ready Private: forest */
-  --color-status-prod-bg: #DFE7D8;
-  --color-status-proto: #6E6353;    /* Functional Prototype: warm gray */
-  --color-status-proto-bg: #E8E0D1;
+  --color-teal: #1F6B5C;            /* sparing tertiary accent — AA on paper (5.63:1) */
+
+  /* Status badge palette (color-coded product states). Reined in to the v3
+     three-family-plus-teal system: live work reads forest, beta reads teal,
+     everything else reads neutral ink-muted — no more ochre/blue one-offs. */
+  --color-status-beta: var(--color-teal);       /* Live beta */
+  --color-status-beta-bg: var(--color-plate);
+  --color-status-dev: var(--color-ink-muted);   /* In development */
+  --color-status-dev-bg: var(--color-plate);
+  --color-status-prod: var(--color-forest);     /* Live / production */
+  --color-status-prod-bg: var(--color-plate);
+  --color-status-proto: var(--color-ink-muted); /* Internal / prototype */
+  --color-status-proto-bg: var(--color-plate);
 
   /* Mark palette: per-item identity color for individual products, labs,
      and build categories, so no two cards share a visual signature.
@@ -227,25 +244,34 @@
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.28));
 }
 
-/* Project-owned signal inks. The paper is shared; the working diagrams are not. */
+/* Project-owned signal inks, tied to each project's actual status language
+   (DESIGN.md Migration Note #4) instead of an arbitrary per-card hue — the
+   mint/blue/mauve pastels that used to live here (rgb(216,238,229),
+   rgb(220,231,247), rgb(237,220,227)) are gone. `--signal-soft` is now the
+   shared plate surface for every card, so the only thing that still varies
+   by project is the status-colored ink (border, badge text, icon accents). */
 .signal-greenlit {
-  --signal: #1F6B5C;
-  --signal-soft: #D8EEE5;
+  /* Live beta · redesign underway -> beta */
+  --signal: var(--color-teal);
+  --signal-soft: var(--color-plate);
 }
 
 .signal-business-plan-writer {
-  --signal: #315C9B;
-  --signal-soft: #DCE7F7;
+  /* Internal release candidate -> internal / not yet public */
+  --signal: var(--color-ink-muted);
+  --signal-soft: var(--color-plate);
 }
 
 .signal-living-playbooks {
-  --signal: #7A3B54;
-  --signal-soft: #EDDCE3;
+  /* Live · continuously maintained -> live */
+  --signal: var(--color-forest);
+  --signal-soft: var(--color-plate);
 }
 
 .signal-breadth {
-  --signal: #93451F;
-  --signal-soft: #F1D9CC;
+  /* Supporting/workshop builds, not yet a featured card */
+  --signal: var(--color-rust);
+  --signal-soft: var(--color-plate);
 }
 
 .project-signal-card {
@@ -298,12 +324,150 @@
 }
 
 .project-signal-link:hover {
-  color: color-mix(in srgb, var(--signal) 78%, #221B12);
+  color: color-mix(in srgb, var(--signal) 78%, #211C15);
 }
 
 .project-signal-control {
   border-color: color-mix(in srgb, var(--signal) 38%, var(--color-line));
   color: var(--signal);
+}
+
+/* logo-ticker: the hero's compact "trusted on engagements with" row.
+   Edge-masked so logos fade in/out of view instead of hard-cutting, and
+   paused on hover so a visitor can actually read a name they land on. */
+.logo-ticker {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.logo-ticker:hover .logo-ticker-track {
+  animation-play-state: paused;
+}
+
+/* ─── v3 component system (docs/DESIGN.md) ──────────────────────────────── */
+
+/* plate-frame: base card/hero treatment. Ink border, sharp corners,
+   ink-muted corner brackets top-left and bottom-right at 55% opacity. This
+   is the live site's existing "Fig. 01" photo-plate idea, made a reusable
+   component instead of a one-off. */
+.plate-frame {
+  position: relative;
+  background-color: var(--color-plate);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-xs);
+}
+.plate-frame::before,
+.plate-frame::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.plate-frame::before {
+  top: -1.5px;
+  left: -1.5px;
+  border-top: 1.5px solid var(--color-ink-muted);
+  border-left: 1.5px solid var(--color-ink-muted);
+}
+.plate-frame::after {
+  bottom: -1.5px;
+  right: -1.5px;
+  border-bottom: 1.5px solid var(--color-ink-muted);
+  border-right: 1.5px solid var(--color-ink-muted);
+}
+
+/* fig-tag: small forest-deep pill, plate-colored monospace text, half
+   overlapping the top edge of a plate-frame. Give the parent
+   `position: relative` (plate-frame already does) and pass a real,
+   sequential label — "FIG. 02 · REVISION", not decoration. */
+.fig-tag {
+  position: absolute;
+  top: 0;
+  left: 14px;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  background-color: var(--color-forest-deep);
+  color: var(--color-plate);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+}
+
+/* rotated-stamp: rust circle outline, rust monospace text, rotated. One per
+   page maximum — this is punctuation, not a pattern to repeat. */
+.rotated-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1.5px solid var(--color-rust);
+  border-radius: 9999px;
+  background-color: var(--color-plate);
+  color: var(--color-rust);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  transform: rotate(-9deg);
+}
+
+/* terminal-moment: forest-deep background, plate-colored monospace text,
+   one blinking rust-bright cursor. Hero only — do not repeat elsewhere. */
+.terminal-moment {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-forest-deep);
+  color: var(--color-plate);
+  font-family: var(--font-mono), monospace;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.15em;
+  background-color: var(--color-rust-bright);
+  vertical-align: -0.15em;
+}
+
+.terminal-cursor--blink {
+  animation: terminal-cursor-blink 1.1s steps(1) infinite;
+}
+
+@keyframes terminal-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* button-primary: forest fill, plate text, sharp `--radius-sm` corners,
+   darkens to forest-deep on hover. */
+.button-primary {
+  background-color: var(--color-forest);
+  color: var(--color-plate);
+  border-radius: var(--radius-sm);
+  transition: background-color 180ms ease;
+}
+.button-primary:hover {
+  background-color: var(--color-forest-deep);
+}
+
+/* work-card: plate background, ink border, sharp corners, one whimsical
+   hover lift+rotate. Composes with plate-frame for the border/corner
+   treatment; this adds the hover motion on top. */
+.work-card {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+@media (hover: hover) {
+  .work-card:hover {
+    transform: translateY(-3px) rotate(-0.3deg);
+  }
 }
 
 .inverse-ledger {

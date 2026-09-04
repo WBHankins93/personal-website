@@ -9,16 +9,12 @@ import { MOTION, revealVariants, staggerVariants } from "@/lib/animation-configs
 import { PROJECT_SIGNAL_CLASS } from "@/lib/project-signals";
 import { ProjectMicroWorld } from "./ProjectMicroWorlds";
 
+// No scroll-reveal below the fold (docs/DESIGN.md Migration Note #1): these
+// sections render visible by default instead of sitting at opacity:0 behind
+// a `whileInView` gate.
 function ListSection({ title, items, icon }: { title: string; items: string[]; icon: React.ReactNode }) {
-  const reduce = Boolean(useReducedMotion());
   return (
-    <motion.section
-      variants={revealVariants}
-      initial={reduce ? false : "hidden"}
-      whileInView={reduce ? undefined : "visible"}
-      viewport={{ once: true, amount: 0.25 }}
-      className="border-t border-line py-10 md:grid md:grid-cols-12 md:gap-8 md:py-14"
-    >
+    <section className="border-t border-line py-10 md:grid md:grid-cols-12 md:gap-8 md:py-14">
       <div className="md:col-span-4">
         <div className="flex items-center gap-2 text-[var(--signal)]">
           {icon}
@@ -33,7 +29,7 @@ function ListSection({ title, items, icon }: { title: string; items: string[]; i
           </li>
         ))}
       </ul>
-    </motion.section>
+    </section>
   );
 }
 export default function ProjectCaseStudy({ project }: { project: Project }) {
@@ -93,40 +89,29 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           transition={{ duration: MOTION.duration.slow, delay: 0.18, ease: MOTION.ease.easeOut }}
           onMouseEnter={() => setActive(true)}
           onMouseLeave={() => setActive(false)}
-          className="project-signal-stage relative mt-12 h-[22rem] overflow-hidden rounded-2xl border border-line-strong shadow-[0_24px_70px_-52px_rgba(34,27,18,0.75)] md:h-[32rem]"
+          className="project-signal-stage relative mt-12 h-[22rem] overflow-hidden rounded-xs border border-line-strong shadow-[0_24px_70px_-52px_rgba(34,27,18,0.75)] md:h-[32rem]"
         >
           <ProjectMicroWorld id={project.microWorld} play={inView} active={active} reduced={reduce} />
         </motion.div>
 
         <div className="mx-auto mt-16 max-w-5xl md:mt-24">
-          <motion.section
-            initial={reduce ? false : "hidden"}
-            whileInView={reduce ? undefined : "visible"}
-            viewport={{ once: true, amount: 0.4 }}
-            variants={revealVariants}
-            className="grid gap-6 pb-12 md:grid-cols-12 md:gap-8 md:pb-16"
-          >
+          {/* No scroll-reveal below the fold — see the note on ListSection above. */}
+          <section className="grid gap-6 pb-12 md:grid-cols-12 md:gap-8 md:pb-16">
             <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-[var(--signal)] md:col-span-4">The challenge</h2>
             <p className="font-body text-[clamp(1.15rem,2.3vw,1.55rem)] leading-relaxed text-ink md:col-span-8">
               {project.caseStudy.challenge}
             </p>
-          </motion.section>
+          </section>
 
           <ListSection title="The system" items={project.caseStudy.system} icon={<Route className="h-4 w-4" />} />
           <ListSection title="Important decisions" items={project.caseStudy.decisions} icon={<Lightbulb className="h-4 w-4" />} />
 
-          <motion.section
-            initial={reduce ? false : "hidden"}
-            whileInView={reduce ? undefined : "visible"}
-            viewport={{ once: true, amount: 0.25 }}
-            variants={revealVariants}
-            className="border-t border-line py-10 md:py-14"
-          >
+          <section className="border-t border-line py-10 md:py-14">
             <div className="flex items-center gap-2">
               <CircleDot className="h-4 w-4 text-[var(--signal)]" />
               <h2 className="font-heading text-[1.2rem] font-semibold text-ink">How the work moves</h2>
             </div>
-            <ol className="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line list-none sm:grid-cols-2 lg:grid-cols-5">
+            <ol className="mt-8 grid gap-px overflow-hidden rounded-xs border border-line bg-line list-none sm:grid-cols-2 lg:grid-cols-5">
               {project.caseStudy.walkthrough.map((step, index) => (
                 <li key={step} className="bg-paper p-5">
                   <span className="font-mono text-[0.58rem] uppercase tracking-[0.12em] text-[var(--signal)]">Step {index + 1}</span>
@@ -134,7 +119,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 </li>
               ))}
             </ol>
-          </motion.section>
+          </section>
 
           <ListSection title="Current evidence" items={project.caseStudy.evidence} icon={<Check className="h-4 w-4" />} />
           <ListSection title="What it taught me" items={project.caseStudy.lessons} icon={<Lightbulb className="h-4 w-4" />} />

@@ -2,23 +2,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Space_Grotesk, Source_Sans_3, JetBrains_Mono } from "next/font/google";
+import { Old_Standard_TT, Work_Sans, Space_Mono } from "next/font/google";
 
-const spaceGrotesk = Space_Grotesk({
+// v3 "specimen and signal" type system (docs/DESIGN.md): Old Standard TT
+// replaces Space Grotesk for display type — a genuine 19th-century
+// encyclopedia serif instead of one of the two default AI-tool display
+// faces the live-site audit flagged. Both weights are loaded since the
+// spec uses 700 for headlines and 400 italic for the one whimsical accent
+// line per page.
+const oldStandardTT = Old_Standard_TT({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   variable: "--font-heading",
 });
 
-const sourceSans3 = Source_Sans_3({
+// Work Sans replaces Source Sans 3 for body copy — optional polish per the
+// spec, cheap enough to take here.
+const workSans = Work_Sans({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-body",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+// Space Mono is the spec default for anything data-shaped (eyebrows, stat
+// labels, FIG. tags, the terminal moment), replacing JetBrains Mono.
+const spaceMono = Space_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
   variable: "--font-mono",
 });
 
@@ -41,8 +52,8 @@ export const metadata: Metadata = {
   keywords: [
     "Ben Hankins",
     "Solutions Engineer",
-    // TODO: Confirm whether GTM Engineer should remain, or be replaced with Solutions Architect.
-    "GTM Engineer",
+    "Sales Engineer",
+    "Forward Deployed Engineer",
     "cloud infrastructure",
     "Kubernetes",
     "platform engineering",
@@ -99,7 +110,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${oldStandardTT.variable} ${workSans.variable} ${spaceMono.variable} antialiased`}
       >
         {children}
       </body>

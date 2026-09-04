@@ -1,11 +1,27 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Download } from "lucide-react";
+import { ArrowUpRight, Download, Sprout } from "lucide-react";
 import { experiences } from "@/data/experiences";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { EASE } from "@/lib/animation-configs/ease";
+
+function CompanyMark({ company, logo }: { company: string; logo?: string }) {
+  return (
+    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xs border border-line bg-plate p-1.5">
+      {logo ? (
+        <Image src={logo} alt="" width={28} height={28} className="h-full w-full object-contain" />
+      ) : company === "Sproutflow Studio" ? (
+        <Sprout className="h-4 w-4 text-forest" aria-hidden />
+      ) : (
+        <span className="font-mono text-[0.7rem] font-semibold text-ink-muted" aria-hidden>
+          {company.charAt(0)}
+        </span>
+      )}
+    </span>
+  );
+}
 
 export default function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,14 +43,11 @@ export default function Experience() {
       className="border-b border-line bg-paper-alt px-6 py-16 md:px-8 md:py-24"
     >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:gap-16">
-        <motion.header
-          className="self-start lg:sticky lg:top-28 lg:col-span-4"
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={reduce ? { opacity: 1, y: 0 } : undefined}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: EASE.easeOut }}
-        >
+        {/* No scroll-reveal here: everything below the fold renders visible
+            by default (docs/DESIGN.md Migration Note #1). A sticky header
+            gated on `whileInView` could sit at opacity:0 indefinitely once
+            it stopped fully re-entering the viewport threshold. */}
+        <header className="self-start lg:sticky lg:top-28 lg:col-span-4">
           <div className="rule-label font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink-muted">
             <span className="text-clay">No. 03</span>
             <span>Experience</span>
@@ -47,16 +60,14 @@ export default function Experience() {
             A career connecting technical discovery, solution design, cloud infrastructure, and the work of actually shipping.
           </p>
 
-          <div className="ledger-grid mt-8 border-y border-line-strong py-5">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-ink-muted">
-                Throughline
-              </span>
-              <span className="h-px flex-1 bg-line-strong" />
-              <ArrowDownRight className="h-4 w-4 text-clay" aria-hidden />
-            </div>
-            <p className="mt-3 font-heading text-[0.95rem] font-semibold leading-relaxed text-ink">
-              Discover the problem. Design the system. Own the outcome.
+          <div className="mt-8 max-w-[30ch] border-l-2 border-clay pl-5">
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-ink-muted">
+              Throughline
+            </span>
+            {/* display-italic-accent (docs/DESIGN.md): one whimsical line per
+                page, max — this is that line. */}
+            <p className="mt-2 font-heading text-[1.35rem] italic leading-snug text-forest-deep">
+              Find the real problem, design the system for it, and stay until it&apos;s actually running.
             </p>
           </div>
 
@@ -68,7 +79,7 @@ export default function Experience() {
           >
             <Download className="h-4 w-4" aria-hidden /> Download resume
           </a>
-        </motion.header>
+        </header>
 
         <ol className="relative list-none lg:col-span-8">
           <span className="absolute bottom-0 left-0 top-0 w-px bg-line-strong" aria-hidden />
@@ -79,17 +90,9 @@ export default function Experience() {
           />
 
           {experiences.map((exp, i) => (
-            <motion.li
-              key={exp.company}
-              className="relative pb-5 pl-6 last:pb-0 md:pl-9"
-              initial={reduce ? false : { opacity: 0, y: 18 }}
-              animate={reduce ? { opacity: 1, y: 0 } : undefined}
-              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.48, delay: i * 0.05, ease: EASE.easeOut }}
-            >
+            <li key={exp.company} className="relative pb-5 pl-6 last:pb-0 md:pl-9">
               <span className="absolute -left-[5.5px] top-7 h-[11px] w-[11px] rounded-full border-2 border-accent bg-paper-alt ring-4 ring-paper-alt" />
-              <article className="group relative overflow-hidden rounded-xl border border-line bg-paper-card p-5 shadow-[0_18px_45px_-40px_rgba(34,27,18,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_55px_-42px_rgba(34,27,18,0.72)] md:p-7">
+              <article className="group plate-frame work-card relative overflow-hidden p-5 md:p-7">
                 <span
                   className="pointer-events-none absolute -right-1 -top-5 font-heading text-[5.5rem] font-bold leading-none text-paper-deep/65"
                   aria-hidden
@@ -98,21 +101,24 @@ export default function Experience() {
                 </span>
 
                 <div className="relative flex flex-wrap items-start justify-between gap-x-6 gap-y-2 pr-12">
-                  <div>
-                    {exp.href ? (
-                      <a
-                        href={exp.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-heading text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
-                      >
-                        {exp.company}
-                        <ArrowUpRight className="h-4 w-4" aria-hidden />
-                      </a>
-                    ) : (
-                      <h3 className="font-heading text-[1.25rem] font-bold text-ink">{exp.company}</h3>
-                    )}
-                    <p className="mt-1 font-heading text-[0.95rem] font-medium text-accent">{exp.role}</p>
+                  <div className="flex items-start gap-3">
+                    <CompanyMark company={exp.company} logo={exp.logo} />
+                    <div>
+                      {exp.href ? (
+                        <a
+                          href={exp.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 font-heading text-[1.25rem] font-bold text-ink no-underline transition-colors hover:text-accent"
+                        >
+                          {exp.company}
+                          <ArrowUpRight className="h-4 w-4" aria-hidden />
+                        </a>
+                      ) : (
+                        <h3 className="font-heading text-[1.25rem] font-bold text-ink">{exp.company}</h3>
+                      )}
+                      <p className="mt-1 font-heading text-[0.95rem] font-medium text-accent">{exp.role}</p>
+                    </div>
                   </div>
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.06em] text-ink-muted whitespace-nowrap">
                     {exp.period}
@@ -145,7 +151,7 @@ export default function Experience() {
                   </a>
                 )}
               </article>
-            </motion.li>
+            </li>
           ))}
         </ol>
       </div>
