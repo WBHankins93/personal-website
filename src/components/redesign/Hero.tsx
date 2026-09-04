@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Linkedin } from "lucide-react";
+import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE } from "@/lib/animation-configs/ease";
 
@@ -124,7 +124,7 @@ export default function Hero() {
 
             {/* Tagline */}
             <motion.p
-              className="mt-6 font-heading text-ink leading-snug max-w-[34ch]"
+              className="mt-6 font-body text-ink leading-snug max-w-[34ch]"
               style={{ fontSize: "clamp(1.2rem, 2.1vw, 1.55rem)", fontWeight: 500 }}
               {...reveal(0.22)}
             >
@@ -148,7 +148,7 @@ export default function Hero() {
             >
               <a
                 href="#work"
-                className="button-primary inline-flex items-center gap-2 font-heading font-medium text-[0.95rem] px-5 py-3 no-underline"
+                className="button-primary inline-flex items-center gap-2 font-body font-semibold text-[0.95rem] px-5 py-3 no-underline"
               >
                 Explore the Work <ArrowRight className="h-4 w-4" />
               </a>
@@ -156,7 +156,7 @@ export default function Hero() {
                 href="/Ben_Hankins_SE_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 font-heading font-medium text-[0.95rem] text-ink no-underline border-b border-line-strong hover:border-ink pb-0.5 transition-colors"
+                className="group inline-flex items-center gap-1.5 font-body font-semibold text-[0.95rem] text-ink no-underline border-b border-line-strong hover:border-ink pb-0.5 transition-colors"
               >
                 Resume
                 <ArrowRight className="h-3.5 w-3.5 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -166,9 +166,18 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="inline-flex items-center gap-1.5 font-heading font-medium text-[0.95rem] text-ink-muted hover:text-accent no-underline transition-colors"
+                className="inline-flex items-center text-ink-muted hover:text-accent transition-colors"
               >
-                <Linkedin className="h-4 w-4" /> LinkedIn
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a
+                href="https://github.com/WBHankins93"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="inline-flex items-center gap-1.5 font-body font-semibold text-[0.95rem] text-ink-muted hover:text-accent no-underline transition-colors"
+              >
+                <Github className="h-4 w-4" /> GitHub
               </a>
             </motion.div>
           </div>
@@ -192,11 +201,6 @@ export default function Hero() {
               </div>
               {/* fig-tag: half-overlaps the plate-frame's top edge */}
               <span className="fig-tag">Fig. 01 · Specimen</span>
-              {/* rotated-stamp: the one per this page — real status language,
-                  not decoration. */}
-              <span className="rotated-stamp absolute -bottom-5 -right-4 hidden text-[0.56rem] sm:inline-flex">
-                Est. 2025
-              </span>
             </div>
             <figcaption className="mt-4 rotate-[-1.5deg] font-mono text-[0.66rem] tracking-[0.06em] uppercase text-ink-muted">
               Ben Hankins, building from New Orleans
@@ -241,14 +245,21 @@ export default function Hero() {
               }`}
             >
               {[...trustedLogos, ...trustedLogos].map((logo, i) => (
-                // eslint-disable-next-line @next/next/no-img-element -- variable-width logo row, next/image needs fixed dims per logo
-                <img
+                // Fixed-size slot per logo (not just a fixed height) so a wide
+                // wordmark (NBCUniversal) and a compact mark (Kroger) read at
+                // the same visual weight instead of wildly different widths.
+                <span
                   key={`${logo.name}-${i}`}
-                  src={logo.src}
-                  alt={i < trustedLogos.length ? logo.name : ""}
-                  aria-hidden={i >= trustedLogos.length}
-                  className="h-5 w-auto shrink-0 object-contain grayscale opacity-50 transition-all duration-300 hover:opacity-90 hover:grayscale-0 md:h-6"
-                />
+                  className="flex h-6 w-16 shrink-0 items-center justify-center md:h-7 md:w-20"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element -- variable-aspect logo row, next/image needs fixed dims per logo */}
+                  <img
+                    src={logo.src}
+                    alt={i < trustedLogos.length ? logo.name : ""}
+                    aria-hidden={i >= trustedLogos.length}
+                    className="max-h-full max-w-full object-contain grayscale opacity-50 transition-all duration-300 hover:opacity-90 hover:grayscale-0"
+                  />
+                </span>
               ))}
             </div>
           </div>

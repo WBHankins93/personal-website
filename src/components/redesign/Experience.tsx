@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Download, Sprout } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { experiences } from "@/data/experiences";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -12,9 +12,9 @@ function CompanyMark({ company, logo }: { company: string; logo?: string }) {
     <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xs border border-line bg-plate p-1.5">
       {logo ? (
         <Image src={logo} alt="" width={28} height={28} className="h-full w-full object-contain" />
-      ) : company === "Sproutflow Studio" ? (
-        <Sprout className="h-4 w-4 text-forest" aria-hidden />
       ) : (
+        // No public logo mark exists for this company yet — a plain
+        // monogram beats a placeholder icon that isn't actually theirs.
         <span className="font-mono text-[0.7rem] font-semibold text-ink-muted" aria-hidden>
           {company.charAt(0)}
         </span>
@@ -75,7 +75,7 @@ export default function Experience() {
             href="/Ben_Hankins_SE_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 border-b border-ink pb-0.5 font-heading text-[0.92rem] font-semibold text-ink no-underline transition-colors hover:border-accent hover:text-accent"
+            className="mt-7 inline-flex items-center gap-2 border-b border-ink pb-0.5 font-body text-[0.92rem] font-semibold text-ink no-underline transition-colors hover:border-accent hover:text-accent"
           >
             <Download className="h-4 w-4" aria-hidden /> Download resume
           </a>
