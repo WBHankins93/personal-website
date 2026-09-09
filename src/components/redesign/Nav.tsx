@@ -95,10 +95,11 @@ export default function Nav() {
           </li>
         </ul>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle — 44px min tap target (WCAG 2.5.5), negative margin
+            keeps the visible icon aligned with the desktop layout's edge. */}
         <button
           type="button"
-          className="md:hidden inline-flex items-center justify-center h-9 w-9 text-ink"
+          className="md:hidden -mr-2.5 inline-flex h-11 w-11 items-center justify-center text-ink"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}

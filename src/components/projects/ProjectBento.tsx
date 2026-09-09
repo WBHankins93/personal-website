@@ -37,7 +37,10 @@ function MotionToggle({ active, onClick, label }: { active: boolean; onClick: ()
 
 function ProjectCard({ project, className, index }: { project: Project; className: string; index: number }) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { amount: 0.25, margin: "-8% 0px" });
+  // Stricter than the desktop-tuned default: on a phone, stacked 1-col cards
+  // spend far longer dwelling near the viewport edge, so a loose threshold
+  // let 2+ cards run their infinite loops concurrently and jank the scroll.
+  const inView = useInView(ref, { amount: 0.4, margin: "-15% 0px" });
   const reduce = Boolean(useReducedMotion());
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -55,7 +58,7 @@ function ProjectCard({ project, className, index }: { project: Project; classNam
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
       }}
-      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card plate-frame work-card group relative flex min-h-[31rem] flex-col focus-within:border-line-strong ${className}`}
+      className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} project-signal-card plate-frame work-card group relative flex min-h-[26rem] flex-col focus-within:border-line-strong md:min-h-[31rem] ${className}`}
     >
       {/* fig-tag: half-overlaps the plate-frame's top edge with a real,
           sequential label tied to this card's position in the grid. The

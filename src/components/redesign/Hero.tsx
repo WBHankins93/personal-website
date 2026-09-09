@@ -257,6 +257,10 @@ export default function Hero() {
                     src={logo.src}
                     alt={i < trustedLogos.length ? logo.name : ""}
                     aria-hidden={i >= trustedLogos.length}
+                    loading="lazy"
+                    decoding="async"
+                    width={80}
+                    height={28}
                     className="max-h-full max-w-full object-contain grayscale opacity-50 transition-all duration-300 hover:opacity-90 hover:grayscale-0"
                   />
                 </span>
