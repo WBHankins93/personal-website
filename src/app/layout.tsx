@@ -39,7 +39,7 @@ const spaceMono = Space_Mono({
 const SITE_URL = "https://www.benhankins.dev";
 const TITLE = "Ben Hankins: Solutions Engineer & Software Builder";
 const DESCRIPTION =
-  "Ben Hankins is a Solutions Engineer who builds production software and living technical systems, including Greenlit, Business Plan Writer, and Solutions Playbook.";
+  "Ben Hankins is a customer-facing engineer who builds full-stack software, AI workflows, and cloud systems from discovery through production.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -55,8 +55,10 @@ export const metadata: Metadata = {
   keywords: [
     "Ben Hankins",
     "Solutions Engineer",
-    "Sales Engineer",
     "Forward Deployed Engineer",
+    "Implementation Engineer",
+    "Customer Engineer",
+    "Full Stack Engineer",
     "cloud infrastructure",
     "Kubernetes",
     "platform engineering",

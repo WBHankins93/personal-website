@@ -39,7 +39,8 @@ export default function Contact() {
           Let&apos;s build something.
         </h2>
         <p className="mx-auto mt-5 max-w-[52ch] font-body text-[1.05rem] leading-relaxed text-paper/75">
-          Open to Solutions Engineer, Sales Engineer, and Forward Deployed
+          Open to hands-on Solutions Engineer, Forward Deployed Engineer,
+          Implementation Engineer, Customer Engineer, and selective Full Stack
           Engineer roles. Also available for consulting through{" "}
           <a
             href="https://sproutflow-studio.com"
