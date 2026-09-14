@@ -5,7 +5,7 @@ export type ProjectSlug =
 
 export type ProjectStage =
   | "Live beta · redesign underway"
-  | "Internal release candidate"
+  | "Public preview · release candidate"
   | "Live · continuously maintained";
 
 export type MicroWorldId = ProjectSlug | "breadth";
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     proofPoints: [
       "Free industry-aware scan",
       "Deterministic scoring with grounded coaching",
-      "13 editorial resume templates",
+      "10 ATS-safe resume templates",
     ],
     capabilities: ["Product design", "AI systems", "Next.js", "Document rendering"],
     microWorld: "greenlit",
@@ -80,8 +80,8 @@ export const projects: Project[] = [
       ],
       evidence: [
         "The free scan is live at greenlit.cv and does not require an account.",
-        "The product includes an industry-aware scoring system, coaching pipeline, and 13 resume templates.",
-        "A broader profile and product-design makeover is underway; the portfolio labels that work honestly rather than presenting it as finished.",
+        "The career profile, Story Bank, scoring system, ten-template rendering engine, and verified coaching pipeline are implemented.",
+        "The coaching and document-builder interfaces are still being connected before the broader paid release.",
       ],
       walkthrough: [
         "Upload and parse",
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     slug: "business-plan-writer",
     name: "Business Plan Writer",
     shortName: "Plan Writer",
-    stage: "Internal release candidate",
+    stage: "Public preview · release candidate",
     role: "Product architecture · AI orchestration",
     value:
       "A review-gated system that turns structured intake and evidence into a funding-focused business plan.",
@@ -119,9 +119,9 @@ export const projects: Project[] = [
     featured: true,
     links: [
       {
-        label: "View source",
-        href: "https://github.com/WBHankins93/business-plan-writer",
-        kind: "source",
+        label: "Visit public preview",
+        href: "https://business-plan-writer-chi.vercel.app",
+        kind: "live",
       },
     ],
     caseStudy: {
@@ -140,9 +140,9 @@ export const projects: Project[] = [
         "Block customer-final downloads until deterministic gates and human review conditions pass.",
       ],
       evidence: [
-        "The internal release-candidate workflow runs end to end through CLI and web-demo paths.",
+        "The public product site and fictional sample are live; access and purchasing remain gated during validation.",
         "The system retains distinct audit artifacts, call telemetry, critic history, and rendered review packets.",
-        "Commercial launch still depends on evaluator calibration, production OCR, and written SBA-counsel guidance.",
+        "Commercial launch still depends on authenticated-product deployment, evaluator calibration across human-reviewed plans, and written SBA-counsel guidance.",
       ],
       walkthrough: [
         "Validate intake",
@@ -228,7 +228,8 @@ export const projects: Project[] = [
 export const featuredProjects = [...projects].sort((a, b) => a.order - b.order);
 
 export const supportingWork = [
-  { name: "Clipboard", stage: "Private · polishing", capability: "Operations platforms" },
+  { name: "ClipBoard", stage: "Private · polishing", capability: "Operations platforms" },
+  { name: "FarmFinder", stage: "National data pipeline · in development", capability: "Data products" },
   { name: "Treehouse", stage: "In development", capability: "Mobile products" },
 ] as const;
 

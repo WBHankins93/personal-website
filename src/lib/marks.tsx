@@ -60,6 +60,18 @@ export function ChecklistIcon(props: IconProps) {
   );
 }
 
+/** FarmFinder: field rows under a location pin. */
+export function FarmPinIcon(props: IconProps) {
+  return svg(
+    props,
+    <>
+      <path d="M12 13.5s4-3.6 4-6.7a4 4 0 10-8 0c0 3.1 4 6.7 4 6.7z" />
+      <circle cx="12" cy="6.8" r="1.2" />
+      <path d="M4 16.5h16M6 20l3-3.5M18 20l-3-3.5M12 20v-3.5" />
+    </>
+  );
+}
+
 /** Business Plan Writer: a fanned pipeline of agent nodes handing off work. */
 export function PipelineIcon(props: IconProps) {
   return svg(
@@ -157,6 +169,11 @@ export const MARKS: Record<string, Mark> = {
     Icon: ChecklistIcon,
     text: "text-[var(--color-mark-denim)]",
     bg: "bg-[var(--color-mark-denim-soft)]",
+  },
+  "farm-finder": {
+    Icon: FarmPinIcon,
+    text: "text-[var(--color-mark-moss)]",
+    bg: "bg-[var(--color-mark-moss-soft)]",
   },
   "business-plan-writer": {
     Icon: PipelineIcon,

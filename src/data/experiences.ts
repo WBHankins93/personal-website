@@ -17,7 +17,7 @@ export const experiences: Experience[] = [
   {
     company: "Sproutflow Studio",
     role: "Founder & Solutions Engineer",
-    period: "Oct 2025–Present",
+    period: "Sep 2025–Present",
     href: "https://sproutflow-studio.com",
     logo: "/logos/sproutflow.png",
     summary:
@@ -42,7 +42,7 @@ export const experiences: Experience[] = [
     period: "2019–2024",
     logo: "/logos/ibm.svg",
     summary:
-      "Led technical discovery, solution design, and demo delivery across enterprise accounts including AT&T, Boeing, Cencora, and Norfolk Southern. Owned the production infrastructure for CenterPoint Energy's $10.1M SAP RISE engagement. Built customer-facing MVPs and POCs with a strong evaluation-to-signing conversion rate.",
+      "Led technical discovery, solution design, and demo delivery across enterprise accounts including AT&T, Boeing, Cencora, and Norfolk Southern. For CenterPoint Energy's $10.1M SAP RISE engagement, remained embedded to expand from 2 existing environments to 52 total with Terraform. Built customer-facing MVPs and multicloud proofs of concept across React, OpenShift, AWS, GCP, and IBM Cloud.",
   },
   {
     company: "Kortivity",

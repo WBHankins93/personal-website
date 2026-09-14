@@ -230,7 +230,7 @@ function BreadthWorld({ play, active, reduced }: WorldProps) {
     <div className="relative flex h-full flex-col justify-center gap-2 overflow-hidden px-4 py-5" aria-hidden>
       <div className="absolute inset-0 micro-grid opacity-45" />
       {supportingWork.map((work, index) => {
-        const markId = ["clipboard", "treehouse", "solutions-playbook", "ai-engineering-studio"][index];
+        const markId = work.name === "ClipBoard" ? "clipboard" : work.name === "FarmFinder" ? "farm-finder" : "treehouse";
         const mark = MARKS[markId];
         const Icon = mark.Icon;
         return (

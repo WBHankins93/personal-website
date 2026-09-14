@@ -128,8 +128,9 @@ export default function Hero() {
               style={{ fontSize: "clamp(1.2rem, 2.1vw, 1.55rem)", fontWeight: 500 }}
               {...reveal(0.22)}
             >
-              <span className="text-accent">Solutions Engineer</span> by career.
-              Builder by default. The products are how I stay sharp.
+              <span className="text-accent">Customer-facing engineer</span> by career.
+              Product builder by practice. I turn complex requirements into
+              software that ships.
             </motion.p>
 
             {/* Subline */}
