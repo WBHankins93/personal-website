@@ -572,6 +572,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* Mount reveals are driven by Framer, not CSS, so the overrides above can't
+     reach them: the element carries an inline `opacity: 0` from its `initial`
+     prop, rendered server-side before any media query is known, and it only
+     clears if the JS animation actually commits. It intermittently didn't,
+     which blanked the hero. Pin every reveal to its final state from the first
+     paint so a reduced-motion visitor never depends on that animation. Keep
+     this in sync with the `.motion-reveal` tags in Hero.tsx. */
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Matrix green gradient text utility */
