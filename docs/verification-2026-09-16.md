@@ -94,16 +94,16 @@ Six current captures in `docs/screenshots/` — home hero, selected work, and
 contact CTA at 1440×900 and 390×844. See that folder's README for how they
 were produced.
 
+## Follow-up changes
+
+- **Contact copy trimmed to the four role targets.** "Customer Engineer" was
+  removed from the contact section and the metadata keywords — it overlaps
+  with Solutions Engineer, so it added length without adding a distinct target.
+- **`CLAUDE.md` rewritten** to match the current codebase. It described a
+  Matrix green theme, a `src/components/ui/` directory, `src/lib/colors.ts`, a
+  `cn()` helper, Radix UI, and Three.js, none of which exist now.
+
 ## Open items (not changed)
 
-- **Contact copy lists five role titles** — Solutions Engineer, Forward
-  Deployed Engineer, Implementation Engineer, Customer Engineer, and selective
-  Full Stack Engineer. The handoff names four targets and says not to turn the
-  site into a list of every possible title. "Customer Engineer" is the extra
-  one. Left as merged in PR #22 — it is a positioning call, not a defect.
-- **`CLAUDE.md` has drifted** — it describes a Matrix green theme, a
-  `src/components/ui/` directory, `src/lib/colors.ts`, `useParallax`, and
-  Three.js, none of which exist now. Out of scope here (the handoff scoped doc
-  updates to the README) but worth a follow-up.
 - **`receipt.html`** remains an orphaned file at the repo root, as recorded in
   `docs/role-targeting-copy-fix-2026-08-30.md`.

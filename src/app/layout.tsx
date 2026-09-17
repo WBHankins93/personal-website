@@ -57,7 +57,6 @@ export const metadata: Metadata = {
     "Solutions Engineer",
     "Forward Deployed Engineer",
     "Implementation Engineer",
-    "Customer Engineer",
     "Full Stack Engineer",
     "cloud infrastructure",
     "Kubernetes",
