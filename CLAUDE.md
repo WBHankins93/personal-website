@@ -22,7 +22,7 @@ npm run build:check  # Type check + build (use before deploy)
 - `/` — single editorial page: Hero, ProjectBento (`#work`), Experience, Contact
 - `/projects` and `/projects/[slug]` — project index and case studies (static params from `src/data/projects.ts`)
 - `/about` and `/contact` — permanent redirects to `/#experience` and `/#contact`; keep them for inbound links
-- `opengraph-image.tsx`, `sitemap.ts`, `robots.ts` — generated metadata routes
+- `opengraph-image.tsx`, `sitemap.ts`, `robots.ts` — generated metadata routes. The OG card is a still of the Hero, rendered at build time from static fonts and a resized headshot in `src/app/_og/` (next/font can't be used there); update it when the Hero changes
 
 **Key Directories**:
 - `src/components/redesign/` — homepage sections plus Nav, Footer, ScrollRail
