@@ -44,17 +44,19 @@ export default function Hero() {
   const cueOpacity = useTransform(scrollYProgress, [0, 0.14], [1, 0]);
   const washY = useSpring(washYRaw, { stiffness: 110, damping: 28, mass: 0.35 });
   const photoY = useSpring(photoYRaw, { stiffness: 120, damping: 30, mass: 0.4 });
-  const reveal = (delay: number) =>
-    reduce
-      ? {
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0 },
-        }
-      : {
-          initial: { opacity: 0, y: 16 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, delay, ease: EASE.easeOut },
-        };
+  // Mount reveal for the hero. There is deliberately no `reduce` branch here.
+  // `useReducedMotion` can only report the real preference after mount, so the
+  // server always renders the pre-animation state; branching in JS raced that,
+  // and when the effect landed before Framer committed the animation the
+  // element stayed stranded at `opacity: 0` — intermittently blanking the
+  // entire hero text column for reduced-motion visitors. Reduced motion is
+  // handled in globals.css instead, where `.motion-reveal` is pinned to its
+  // final state from the first paint and never depends on JS running at all.
+  const reveal = (delay: number) => ({
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay, ease: EASE.easeOut },
+  });
 
   return (
     <section
@@ -72,7 +74,7 @@ export default function Hero() {
       <div className="relative mx-auto max-w-6xl px-6 md:px-8 pt-28 md:pt-32 pb-12 md:pb-16">
         {/* Masthead meta row */}
         <motion.div
-          className="rule-label font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted"
+          className="motion-reveal rule-label font-mono text-[0.7rem] tracking-[0.18em] uppercase text-ink-muted"
           {...reveal(0.04)}
         >
           <span className="text-clay">No. 01</span>
@@ -87,7 +89,7 @@ export default function Hero() {
             {/* terminal-moment: hero only, per docs/DESIGN.md — do not repeat
                 this pattern elsewhere on the page. */}
             <motion.div
-              className="terminal-moment gap-2 rounded-sm px-3.5 py-1.5 mb-6 text-[0.7rem] tracking-[0.03em]"
+              className="motion-reveal terminal-moment gap-2 rounded-sm px-3.5 py-1.5 mb-6 text-[0.7rem] tracking-[0.03em]"
               {...reveal(0.08)}
             >
               <span aria-hidden className="text-plate/55">
@@ -106,7 +108,7 @@ export default function Hero() {
 
             {/* Oversized editorial headline */}
             <motion.h1
-              className="font-heading font-bold text-ink leading-[0.92] tracking-[-0.02em]"
+              className="motion-reveal font-heading font-bold text-ink leading-[0.92] tracking-[-0.02em]"
               style={{ fontSize: "clamp(3.25rem, 8.5vw, 6.25rem)" }}
               {...reveal(0.14)}
             >
@@ -124,7 +126,7 @@ export default function Hero() {
 
             {/* Tagline */}
             <motion.p
-              className="mt-6 font-body text-ink leading-snug max-w-[34ch]"
+              className="motion-reveal mt-6 font-body text-ink leading-snug max-w-[34ch]"
               style={{ fontSize: "clamp(1.2rem, 2.1vw, 1.55rem)", fontWeight: 500 }}
               {...reveal(0.22)}
             >
@@ -135,7 +137,7 @@ export default function Hero() {
 
             {/* Subline */}
             <motion.p
-              className="mt-4 font-body text-ink-soft leading-relaxed max-w-[48ch] text-[1.02rem]"
+              className="motion-reveal mt-4 font-body text-ink-soft leading-relaxed max-w-[48ch] text-[1.02rem]"
               {...reveal(0.3)}
             >
               7+ years across solutions engineering, cloud infrastructure, and
@@ -144,7 +146,7 @@ export default function Hero() {
 
             {/* CTAs: one solid primary, the rest quiet */}
             <motion.div
-              className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+              className="motion-reveal mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
               {...reveal(0.38)}
             >
               <a
@@ -185,7 +187,7 @@ export default function Hero() {
 
           {/* Photo plate: matted field-journal print, bled to the right */}
           <motion.figure
-            className="md:col-span-5 relative mx-auto md:mx-0 md:ml-auto w-full max-w-[19rem] md:max-w-[20rem]"
+            className="motion-reveal md:col-span-5 relative mx-auto md:mx-0 md:ml-auto w-full max-w-[19rem] md:max-w-[20rem]"
             style={reduce ? undefined : { y: photoY }}
             {...reveal(0.18)}
           >
@@ -211,7 +213,7 @@ export default function Hero() {
 
         {/* Ledger stat strip: full width, ruled dividers */}
         <motion.div
-          className="mt-14 grid grid-cols-3 border-t border-b border-line"
+          className="motion-reveal mt-14 grid grid-cols-3 border-t border-b border-line"
           {...reveal(0.46)}
         >
           {stats.map((s) => (
@@ -234,7 +236,7 @@ export default function Hero() {
             their brand colors don't add a fourth accent hue to the page;
             they resolve to full color on hover. Duplicated once for a
             seamless loop via the existing `ticker-scroll` keyframe. */}
-        <motion.div className="mt-6 flex items-center gap-4" {...reveal(0.52)}>
+        <motion.div className="motion-reveal mt-6 flex items-center gap-4" {...reveal(0.52)}>
           <span className="font-mono text-[0.62rem] tracking-[0.16em] uppercase text-ink-muted whitespace-nowrap">
             Trusted on
             <br className="sm:hidden" /> engagements with

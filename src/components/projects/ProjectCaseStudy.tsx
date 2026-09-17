@@ -41,13 +41,17 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   return (
     <article className={`${PROJECT_SIGNAL_CLASS[project.microWorld]} px-6 pb-20 pt-28 md:px-8 md:pb-28 md:pt-32`}>
       <div className="mx-auto max-w-6xl">
+        {/* Single code path on purpose — see the `.motion-reveal` note in
+            globals.css. Branching these props on `useReducedMotion` raced the
+            server-rendered `opacity: 0`, which could strand the case-study
+            header (title, stage, and the live project links) invisible. */}
         <motion.div
-          initial={reduce ? false : "hidden"}
-          animate={reduce ? undefined : "visible"}
+          initial="hidden"
+          animate="visible"
           variants={staggerVariants}
           className="grid gap-9 md:grid-cols-12 md:items-end"
         >
-          <motion.div variants={revealVariants} className="md:col-span-8">
+          <motion.div variants={revealVariants} className="motion-reveal md:col-span-8">
             <Link
               href="/projects"
               className="project-signal-link inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-ink-muted no-underline transition-colors"
@@ -64,7 +68,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
               {project.name}<span className="text-[var(--signal)]">.</span>
             </h1>
           </motion.div>
-          <motion.div variants={revealVariants} className="md:col-span-4">
+          <motion.div variants={revealVariants} className="motion-reveal md:col-span-4">
             <p className="font-body text-[1.2rem] font-medium leading-snug text-ink">{project.value}</p>
             <div className="mt-6 flex flex-wrap gap-4">
               {project.links.map((link) => (
@@ -84,12 +88,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
         <motion.div
           ref={visualRef}
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={reduce ? undefined : { opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: MOTION.duration.slow, delay: 0.18, ease: MOTION.ease.easeOut }}
           onMouseEnter={() => setActive(true)}
           onMouseLeave={() => setActive(false)}
-          className="project-signal-stage relative mt-12 h-[22rem] overflow-hidden rounded-xs border border-line-strong shadow-[0_24px_70px_-52px_rgba(34,27,18,0.75)] md:h-[32rem]"
+          className="motion-reveal project-signal-stage relative mt-12 h-[22rem] overflow-hidden rounded-xs border border-line-strong shadow-[0_24px_70px_-52px_rgba(34,27,18,0.75)] md:h-[32rem]"
         >
           <ProjectMicroWorld id={project.microWorld} play={inView} active={active} reduced={reduce} />
         </motion.div>

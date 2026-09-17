@@ -40,8 +40,8 @@ export default function Contact() {
         </h2>
         <p className="mx-auto mt-5 max-w-[52ch] font-body text-[1.05rem] leading-relaxed text-paper/75">
           Open to hands-on Solutions Engineer, Forward Deployed Engineer,
-          Implementation Engineer, Customer Engineer, and selective Full Stack
-          Engineer roles. Also available for consulting through{" "}
+          Implementation Engineer, and selective Full Stack Engineer roles.
+          Also available for consulting through{" "}
           <a
             href="https://sproutflow-studio.com"
             target="_blank"

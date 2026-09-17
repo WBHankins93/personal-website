@@ -1,48 +1,55 @@
 # Ben Hankins: Personal Website
 
-> Solutions Engineer | Full-Stack Builder | AI Product Development
+> Customer-facing engineer by career. Product builder by practice.
 
-Live Site: https://benhankins.dev
+Live site: https://benhankins.dev
 
 ---
 
 ## Overview
 
-Personal portfolio site built to showcase my background as a Solutions 
-Engineer who builds. The site leads with customer impact and business 
-outcomes, backed by deep technical work across full-stack development, 
-cloud infrastructure, and AI engineering.
+Personal portfolio site and career hub. It presents Ben Hankins as a
+customer-facing engineer who builds, backed by proof across full-stack
+development, cloud infrastructure, and AI engineering.
 
-Includes:
-- Customer-focused positioning with enterprise proof points
-- Interactive experience timeline with business outcomes
-- Technical capabilities presented through a delivery lens
-- Animated portfolio with client work and open-source projects
-- Responsive design with smooth animations
+The site is a single editorial page plus per-project case studies:
+
+- **Hero** — identity, headline metrics, and the enterprise accounts engaged
+- **Selected work** — three flagship projects, each with a full case study
+- **Experience** — timeline from IBM Client Engineering through Sproutflow Studio
+- **Contact** — role targets and direct links
+
+`/about` and `/contact` are permanent redirects into the corresponding
+sections of the homepage, kept so inbound links and SEO equity survive the
+consolidation to one page.
 
 ---
 
 ## Positioning
 
-This site is designed to appeal to:
-- **Solutions Engineering roles**: Customer engagement, POC delivery, 
-  technical presentations, deal support
-- **Full-Stack / Founding Engineer roles**: End-to-end product 
-  delivery, from UI to infrastructure
-- **AI-focused technical roles**: Multi-agent systems, LLM 
-  architecture, provider-agnostic pipelines
+The site targets one narrative, not a list of every possible title:
+
+- **Solutions Engineer**
+- **Forward Deployed Engineer**
+- **Implementation Engineer**
+- Selective **Full Stack Engineer** roles
+
+Consulting work runs through [Sproutflow Studio](https://sproutflow-studio.com).
+
+Identity copy lives in three places that must stay in sync: the `Hero`
+tagline, the `layout.tsx` description/metadata, and `opengraph-image.tsx`.
 
 ---
 
 ## Tech Stack
 
-- Next.js 14+ (App Router)
+- Next.js 15 (App Router)
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS v4
 - Framer Motion
-- Vercel (deployment)
 - Lucide Icons
-- `@react-three/fiber` (3D animation)
+- Jest
+- Vercel (deployment)
 
 ---
 
@@ -55,6 +62,18 @@ npm install
 npm run dev
 # Open http://localhost:3000
 ```
+
+### Checks
+
+```bash
+npm run type-check   # TypeScript
+npm test             # Jest
+npm run build        # Production build
+npm run build:check  # type-check + build, use before deploy
+```
+
+See `CLAUDE.md` for architecture notes and `docs/DESIGN.md` for the design
+system. Current site screenshots live in `docs/screenshots/`.
 
 ---
 
