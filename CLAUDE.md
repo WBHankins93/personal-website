@@ -42,7 +42,7 @@ npm run build:check  # Type check + build (use before deploy)
 
 - Identity line: "Customer-facing engineer by career. Product builder by practice." It appears in the Hero tagline, `layout.tsx` metadata, `opengraph-image.tsx`, and `structured-data.ts` — keep all four in sync.
 - Role targets: Solutions Engineer, Forward Deployed Engineer, Implementation Engineer, and selective Full Stack Engineer. Don't add more titles.
-- Employment facts and metrics must match the resume in `public/Ben_Hankins_SE_Resume.pdf`. Don't invent or round claims.
+- Employment facts and metrics must match the resume in `public/Ben_Hankins_FDE_Resume.pdf`. Don't invent or round claims.
 
 ## Styling
 

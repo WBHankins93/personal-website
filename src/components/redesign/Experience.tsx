@@ -70,7 +70,7 @@ export default function Experience() {
           </div>
 
           <a
-            href="/Ben_Hankins_SE_Resume.pdf"
+            href="/Ben_Hankins_FDE_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-7 inline-flex items-center gap-2 border-b border-ink pb-0.5 font-body text-[0.92rem] font-semibold text-ink no-underline transition-colors hover:border-accent hover:text-accent"

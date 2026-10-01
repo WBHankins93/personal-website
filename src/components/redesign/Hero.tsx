@@ -156,7 +156,7 @@ export default function Hero() {
                 Explore the Work <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="/Ben_Hankins_SE_Resume.pdf"
+                href="/Ben_Hankins_FDE_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-1.5 font-body font-semibold text-[0.95rem] text-ink no-underline border-b border-line-strong hover:border-ink pb-0.5 transition-colors"

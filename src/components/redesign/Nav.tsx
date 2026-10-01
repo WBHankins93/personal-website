@@ -85,7 +85,7 @@ export default function Nav() {
           })}
           <li>
             <a
-              href="/Ben_Hankins_SE_Resume.pdf"
+              href="/Ben_Hankins_FDE_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="font-body text-[0.85rem] font-semibold text-white no-underline bg-accent hover:bg-accent-hover transition-colors rounded-md px-4 py-2"
@@ -137,7 +137,7 @@ export default function Nav() {
             ))}
             <li>
               <a
-                href="/Ben_Hankins_SE_Resume.pdf"
+                href="/Ben_Hankins_FDE_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
