@@ -1,0 +1,232 @@
+/* The Trail: desktop elevation map and phone list. */
+
+.trail {
+  background: var(--color-sand);
+}
+.trail-desktop {
+  display: none;
+}
+@media (min-width: 64rem) {
+  .trail {
+    padding-bottom: 40px;
+  }
+  .trail-desktop {
+    display: block;
+  }
+  .trail-phone {
+    display: none;
+  }
+}
+
+.trail-map {
+  position: relative;
+}
+.trail-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.trail-map text {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.trail-map .trail-label-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Draw-in. Visible by default; Trail.tsx arms it only when the map is
+   below the fold and motion is allowed. */
+.trail-wipe {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.trail-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.trail-map[data-draw="armed"] .trail-wipe {
+  stroke-dashoffset: 1;
+}
+.trail-map[data-draw="armed"] .trail-pop {
+  opacity: 0;
+  transform: scale(0.85);
+}
+.trail-map[data-draw="drawn"] .trail-wipe {
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.45, 0, 0.3, 1);
+}
+.trail-map[data-draw="drawn"] .trail-pop {
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+  transition-delay: calc(0.15s + var(--i) * 0.3s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .trail-map .trail-wipe {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+  .trail-map .trail-pop {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.trail-stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.trail-stop {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.trail-marker {
+  position: absolute;
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.trail-marker:hover,
+.trail-marker[aria-expanded="true"] {
+  box-shadow: inset 0 0 0 4px var(--color-coral);
+}
+.trail-detail {
+  position: absolute;
+  top: -18px;
+  left: 30px;
+  z-index: 20;
+  width: 300px;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-print);
+  padding: 14px 16px 16px;
+}
+.trail-stop[data-side="left"] .trail-detail {
+  left: auto;
+  right: 30px;
+}
+.trail-detail-name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 1;
+}
+.trail-detail-role {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f5a53;
+  margin-top: 6px;
+}
+.trail-detail-bullets {
+  list-style: disc;
+  padding-left: 18px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.trail-detail-bullets li + li {
+  margin-top: 4px;
+}
+.trail-detail-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+}
+
+/* ---------- phone list ---------- */
+
+.trail-list {
+  list-style: none;
+  margin: 8px 0 0 10px;
+  padding: 0 0 0 22px;
+  border-left: 5px dashed var(--color-coral);
+}
+.trail-list-stop {
+  position: relative;
+  margin-bottom: 22px;
+}
+.trail-list-stop::before {
+  content: "";
+  position: absolute;
+  left: -36px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  border: 3px solid var(--color-ink);
+  box-sizing: border-box;
+}
+.trail-list-stop[data-summit]::before {
+  background: var(--color-yellow);
+}
+.trail-list-stop summary {
+  list-style: none;
+  cursor: pointer;
+}
+.trail-list-stop summary::-webkit-details-marker {
+  display: none;
+}
+.trail-list-years,
+.trail-list-name,
+.trail-list-role {
+  display: block;
+}
+.trail-list-years {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1f5a53;
+}
+.trail-list-name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 30px;
+  line-height: 1;
+  margin: 2px 0;
+}
+.trail-list-role {
+  font-size: 14px;
+}
+.trail-list-more {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  border: 1.5px solid var(--color-ink);
+  padding: 7px 10px;
+  background: var(--color-cream);
+}
+.trail-list-more::after {
+  content: "Details +";
+}
+details[open] .trail-list-more::after {
+  content: "Close −";
+}
+.trail-list-detail {
+  margin-top: 10px;
+  padding: 12px 14px 14px;
+  background: var(--color-cream);
+  border: 2px solid var(--color-ink);
+  box-shadow: 5px 6px 0 var(--color-ink);
+  margin-right: 6px;
+}
+.trail-list-detail .trail-detail-role {
+  display: none;
+}
+.trail-list-detail .trail-detail-bullets {
+  margin-top: 0;
+}

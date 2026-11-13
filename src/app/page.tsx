@@ -1,6 +1,9 @@
 import BayouScene from "@/components/hero/BayouScene";
 import Hero from "@/components/hero/Hero";
+import OffTheClock from "@/components/offclock/OffTheClock";
 import ContactSign from "@/components/site/ContactSign";
+import Ticker from "@/components/site/Ticker";
+import Trail from "@/components/trail/Trail";
 import SelectedWork from "@/components/work/SelectedWork";
 import { getProject } from "@/content/projects";
 import { featured } from "@/content/site";
@@ -30,8 +33,11 @@ export default function HomePage() {
             external: featuredLink !== null,
           }}
         />
+        <Ticker />
         {/* Parked: the employer "Now" section slots in here (handoff 13). */}
         <SelectedWork />
+        <Trail />
+        <OffTheClock />
       </main>
       <ContactSign />
     </>
