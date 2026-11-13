@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/hero.css";
+@import "../styles/work.css";
 
 /* Bayou design tokens (docs/redesign-bayou/HANDOFF.md section 6).
    Values are fixed. Change them only with Ben's sign-off. */

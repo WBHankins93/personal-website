@@ -1,0 +1,410 @@
+/* Selected Work: poster wall, flip, unfold panel. */
+
+.work {
+  background: var(--color-cream);
+}
+
+/* Phones: horizontal snap row showing about 1.3 posters. */
+.wall {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0 calc(var(--gutter) * -1) 0 0;
+  padding: 0 var(--gutter) 14px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.wall::-webkit-scrollbar {
+  display: none;
+}
+.wall-swipe {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.poster-slot {
+  position: relative;
+  flex: 0 0 72%;
+  aspect-ratio: 3 / 4.25;
+  container-type: inline-size;
+  box-shadow: var(--shadow-print);
+  perspective: 1400px;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 64rem) {
+  .wall {
+    display: grid;
+    grid-template-columns: repeat(var(--posters, 4), minmax(0, 1fr));
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .wall-swipe {
+    display: none;
+  }
+  .poster-slot {
+    flex: none;
+  }
+}
+
+.poster-btn {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.poster-slot[data-open] {
+  outline: 4px solid var(--color-coral);
+  outline-offset: 5px;
+}
+
+.poster-flip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+}
+.poster-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.poster-face--back {
+  transform: rotateY(180deg);
+}
+
+/* ---------- poster paper ---------- */
+
+.poster-paper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border: 3.15cqw solid var(--color-cream);
+}
+/* Ink keyline on the inside edge of the cream mat. */
+.poster-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border: 2px solid currentColor;
+  pointer-events: none;
+}
+.poster-paper svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.poster-paper text {
+  font-family: var(--font-mono);
+}
+
+.poster-paper--kit {
+  background: #0d2f2d;
+  color: var(--color-cream);
+  border: 5cqw solid var(--color-yellow);
+}
+.poster-paper--kit::before {
+  display: none;
+}
+.poster-paper--green {
+  background: #dff0c8;
+  color: #143a22;
+}
+.poster-paper--navy {
+  background: #1c2a4a;
+  color: var(--color-cream);
+}
+.poster-paper--navy::before {
+  border-color: #1c2a4a;
+}
+.poster-paper--amber {
+  background: #f3b23e;
+  color: var(--color-ink);
+}
+.poster-paper--schematic {
+  background: var(--color-schematic-bg);
+  color: var(--color-mint);
+  border-color: var(--color-cream);
+}
+
+.poster-head {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5%;
+  z-index: 3;
+  display: block;
+  padding: 0 5.6cqw;
+  text-align: center;
+}
+.poster-mast {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: max(8px, 3.15cqw);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0 4px 6px;
+  margin-bottom: 8px;
+  border-bottom: 1.5px solid currentColor;
+}
+.poster-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 18.2cqw;
+  line-height: 0.92;
+}
+.poster-title span {
+  display: block;
+  white-space: nowrap;
+}
+.poster-foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: block;
+  text-align: center;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  padding: 9px 10px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: max(8px, 3.45cqw);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.poster-paper--schematic .poster-foot {
+  background: var(--color-mint);
+  color: var(--color-schematic-bg);
+}
+.poster-badge {
+  position: absolute;
+  top: 4.4cqw;
+  right: -12cqw;
+  z-index: 5;
+  transform: rotate(38deg);
+  background: var(--color-coral);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: max(8px, 3.45cqw);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14.5cqw;
+}
+
+/* Touch only: unfold button on the back of a flipped poster. */
+.poster-details {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  z-index: 6;
+  transform: translateX(-50%);
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  box-shadow: 4px 5px 0 var(--color-ink);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+/* ---------- unfold panel ---------- */
+
+.panel {
+  position: relative;
+  margin-top: 40px;
+  display: grid;
+  gap: 24px;
+  background: #fff;
+  border: 2px solid var(--color-ink);
+  padding: 20px;
+  box-shadow: var(--shadow-print);
+  scroll-margin: 24px;
+}
+.panel:focus-visible {
+  outline-offset: 6px;
+}
+.panel-poster {
+  display: none;
+  position: relative;
+  aspect-ratio: 3 / 4.25;
+  container-type: inline-size;
+}
+.panel-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 40px;
+  line-height: 1;
+  margin: 8px 0 12px;
+  padding-right: 84px;
+}
+.panel-bullets {
+  list-style: disc;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.panel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin-top: 14px;
+}
+.panel-cta {
+  display: inline-block;
+  margin-top: 18px;
+  background: var(--color-ink);
+  color: var(--color-yellow);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+}
+a.panel-cta:hover {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 2px var(--color-ink);
+}
+.panel-cta--pending {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1.5px dashed var(--color-ink);
+}
+.panel-shots {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  height: 260px;
+}
+.shot {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid var(--color-ink);
+}
+.shot:first-child {
+  grid-row: span 2;
+}
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.shot--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border: 1.5px dashed var(--color-teal-mid);
+  background: repeating-linear-gradient(45deg, #eef1ec, #eef1ec 12px, #e3e8e0 12px, #e3e8e0 24px);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #1f5a53;
+}
+.panel-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--color-ink);
+  padding: 8px 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.panel-close:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+@media (min-width: 64rem) {
+  .panel {
+    margin-top: 64px;
+    grid-template-columns: 300px minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 36px;
+    padding: 30px;
+    align-items: start;
+  }
+  .panel-poster {
+    display: block;
+  }
+  .panel-shots {
+    height: 330px;
+    margin-top: 44px;
+  }
+  .panel-title {
+    padding-right: 0;
+  }
+}
+
+/* ---------- open source row ---------- */
+
+.labs {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.labs-label,
+.labs-chip {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.labs-label {
+  width: 100%;
+}
+.labs-chip {
+  border: 1.5px solid var(--color-ink);
+  background: #fff;
+  padding: 10px 12px;
+}
+.labs-chip:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+@media (min-width: 64rem) {
+  .labs-label {
+    width: auto;
+  }
+}
+
+/* Mount reveals pin to their final state under reduced motion (CLAUDE.md). */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
