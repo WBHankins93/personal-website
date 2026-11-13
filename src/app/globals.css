@@ -1,671 +1,524 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Bayou design tokens (docs/redesign-bayou/HANDOFF.md section 6).
+   Values are fixed. Change them only with Ben's sign-off. */
+@theme {
+  --color-cream: #f6ecd4;
+  --color-ink: #0b2423;
+  --color-ink-deep: #081d1c;
+  --color-teal: #12403e;
+  --color-teal-mid: #2c6f66;
+  --color-water: #1b5853;
+  --color-moss: #5f7d57;
+  --color-moss-light: #8fae7a;
+  --color-sun: #f58a2c;
+  --color-coral: #ee4e34;
+  --color-yellow: #ffcb05;
+  --color-pink: #ff3d8b;
+  --color-cyan: #37d6ff;
+  --color-mint: #5dffb0;
+  --color-schematic-bg: #06120f;
+  --color-sign: #5b3a21;
+  --color-sand: #e9dcbc;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  /* v3 "specimen and signal" radius scale (docs/DESIGN.md `rounded`).
-     No shadcn/ui primitives exist in this repo yet, so it's safe to make
-     these the literal 2px/3px the spec calls for instead of deriving them
-     from a base --radius. */
-  --radius-xs: 2px;
-  --radius-sm: 3px;
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --color-sky-1: #fbe3ac;
+  --color-sky-2: #f9d48f;
+  --color-sky-3: #f7bf73;
+  --color-sky-4: #f5a657;
+  --color-sky-5: #f28f43;
+  --color-ridge-far: #e2733a;
+  --color-ridge-near: #a8502f;
 
-  /* Matrix color system */
-  --color-matrix: #00FF41;
-  --color-matrix-light: #39FF6E;
-  --color-matrix-dim: #00CC34;
-  --color-matrix-dark: #009926;
+  --font-display: var(--font-anton), "Arial Narrow", Impact, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-body: var(--font-grotesk), system-ui, sans-serif;
+  --font-serif: var(--font-dm-serif), Georgia, serif;
 
-  --color-mbg-primary: #060606;
-  --color-mbg-card: rgba(10,10,10,0.75);
-  --color-mbg-cardHover: rgba(16,16,16,0.85);
-
-  --color-mborder-subtle: rgba(255,255,255,0.04);
-  --color-mborder-hover: rgba(255,255,255,0.10);
-  --color-mborder-rule: rgba(255,255,255,0.06);
-
-  --color-mglow-sm: rgba(0,255,65,0.08);
-  --color-mglow-md: rgba(0,255,65,0.15);
-  --color-mglow-lg: rgba(0,255,65,0.25);
-  --color-mglow-border: rgba(0,255,65,0.10);
-  --color-mglow-borderHover: rgba(0,255,65,0.30);
-
-  --color-mtext-primary: #EDEDED;
-  --color-mtext-dim: #999999;
-  --color-mtext-light: #B0B0B0;
-  --color-mtext-muted: #5A5A5A;
-
-  /* Animations */
-  --animate-ticker-scroll: ticker-scroll 35s linear infinite;
-  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
-  --animate-cursor-blink: cursor-blink 1s step-end infinite;
-
-  /* Editorial redesign system (warm field-journal), recolored to the v3
-     "specimen and signal" palette in docs/DESIGN.md. Warm parchment base
-     with espresso ink, a near-black forest green carrying real weight
-     (buttons, headline color, plate borders), and a terracotta rust used
-     as the site's one deliberate energy color. `accent`/`clay` are kept as
-     aliases of `forest`/`rust` so existing markup keeps working — forest
-     and rust are the canonical names for anything new. Values below are
-     the exact hexes DESIGN.md verified for WCAG contrast; don't drift them. */
-  --color-paper: #F6F1E7;           /* warm bone: main base */
-  --color-paper-alt: #ECE4D5;       /* deeper kraft band: visible banding */
-  --color-paper-deep: #E4DAC6;      /* third tone for nested panels */
-  --color-paper-card: #FFFDF8;      /* clean stock: cards / diagrams */
-  --color-plate: #FBF6EC;           /* card surface for plate-frame / fig-tag / terminal-moment text */
-  --color-ink: #211C15;             /* espresso: primary text / headlines — AAA on paper (15.02:1) */
-  --color-ink-soft: #51483B;        /* body copy */
-  --color-ink-muted: #6B5F4A;       /* labels, captions, eyebrows — AA on paper (5.55:1) */
-  --color-line: #D8C7A4;            /* hairline borders */
-  --color-line-strong: #C7BAA0;     /* hover / emphasized borders */
-
-  --color-forest: #183F2A;          /* deep forest: primary — AAA on paper (10.46:1) */
-  --color-forest-deep: #0F2B1C;     /* forest hover / dark panels (footer, terminal-moment) */
-  --color-accent: var(--color-forest);
-  --color-accent-hover: var(--color-forest-deep);
-  --color-accent-soft: #D8E8D8;     /* accent tint backgrounds */
-
-  --color-rust: #9A4E27;            /* signal rust — AA on paper (5.34:1); budget it */
-  --color-rust-bright: #B85A2C;     /* decorative / large-text / cursor ONLY — 4.11:1 on paper, 3.28:1 on forest-deep, fails body text */
-  --color-clay: var(--color-rust);
-  --color-clay-hover: #7E391A;
-  --color-clay-soft: #F1D9CC;       /* clay tint backgrounds */
-
-  --color-teal: #1F6B5C;            /* sparing tertiary accent — AA on paper (5.63:1) */
-
-  /* Status badge palette (color-coded product states). Reined in to the v3
-     three-family-plus-teal system: live work reads forest, beta reads teal,
-     everything else reads neutral ink-muted — no more ochre/blue one-offs. */
-  --color-status-beta: var(--color-teal);       /* Live beta */
-  --color-status-beta-bg: var(--color-plate);
-  --color-status-dev: var(--color-ink-muted);   /* In development */
-  --color-status-dev-bg: var(--color-plate);
-  --color-status-prod: var(--color-forest);     /* Live / production */
-  --color-status-prod-bg: var(--color-plate);
-  --color-status-proto: var(--color-ink-muted); /* Internal / prototype */
-  --color-status-proto-bg: var(--color-plate);
-
-  /* Mark palette: per-item identity color for individual products, labs,
-     and build categories, so no two cards share a visual signature.
-     Same muted, warm-shifted family as accent/clay above. */
-  --color-mark-pine: #1F6B5C;
-  --color-mark-pine-soft: #DCEBE6;
-  --color-mark-honey: #B8871F;
-  --color-mark-honey-soft: #F2E7C9;
-  --color-mark-denim: #375B7A;
-  --color-mark-denim-soft: #DCE5EC;
-  --color-mark-plum: #7A3B54;
-  --color-mark-plum-soft: #EDDCE3;
-  --color-mark-slate: #5B6B63;
-  --color-mark-slate-soft: #E1E6E3;
-  --color-mark-rust: #9C4A2E;
-  --color-mark-rust-soft: #EEDCD3;
-  --color-mark-moss: #6B7237;
-  --color-mark-moss-soft: #E6E7D4;
+  --shadow-print: 8px 10px 0 var(--color-ink);
+  --breakpoint-desk: 64rem;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: #060606;
-  --foreground: #EDEDED;
-  --card: rgba(10,10,10,0.75);
-  --card-foreground: #EDEDED;
-  --popover: #060606;
-  --popover-foreground: #EDEDED;
-  --primary: #00FF41;
-  --primary-foreground: #060606;
-  --secondary: rgba(16,16,16,0.85);
-  --secondary-foreground: #EDEDED;
-  --muted: rgba(255,255,255,0.04);
-  --muted-foreground: #5A5A5A;
-  --accent: rgba(0,255,65,0.08);
-  --accent-foreground: #00FF41;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(255,255,255,0.04);
-  --input: rgba(255,255,255,0.10);
-  --ring: rgba(0,255,65,0.30);
-  --chart-1: #00FF41;
-  --chart-2: #39FF6E;
-  --chart-3: #00CC34;
-  --chart-4: #009926;
-  --chart-5: #B0B0B0;
-  --sidebar: #060606;
-  --sidebar-foreground: #EDEDED;
-  --sidebar-primary: #00FF41;
-  --sidebar-primary-foreground: #060606;
-  --sidebar-accent: rgba(0,255,65,0.08);
-  --sidebar-accent-foreground: #00FF41;
-  --sidebar-border: rgba(255,255,255,0.04);
-  --sidebar-ring: rgba(0,255,65,0.30);
+  --gutter: 18px;
+  --section-y: 56px;
+  /* Paper grain: feTurbulence noise, multiplied over painted surfaces only. */
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .18  0 0 0 0 .1  0 0 0 1.1 -.42'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>");
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    background: #060606;
-    color: #EDEDED;
-    cursor: crosshair;
-    /* `clip` instead of `hidden`: it clamps horizontal overflow without turning
-       the body into a scroll container, so sticky/scroll-linked descendants and
-       momentum scrolling on iOS behave normally. */
-    overflow-x: clip;
-    -webkit-font-smoothing: antialiased;
-  }
-  a, button {
-    cursor: pointer;
+@media (min-width: 64rem) {
+  :root {
+    --gutter: 44px;
+    --section-y: 96px;
   }
 }
 
-/* FONT OVERRIDE: Ensure our custom fonts are applied */
-@layer base {
-  body {
-    font-family: var(--font-body), sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), sans-serif;
-  }
-
-  code, pre {
-    font-family: var(--font-mono), monospace;
-  }
-}
-
-/* Explicit font family utilities: these win over base layer */
-.font-heading { font-family: var(--font-heading), sans-serif !important; }
-.font-body { font-family: var(--font-body), sans-serif !important; }
-.font-mono { font-family: var(--font-mono), monospace !important; }
-
-/* ─── Editorial redesign scope ────────────────────────────────────────────
-   Applied to the redesigned homepage root so the light editorial system is
-   fully self-contained and does not depend on the dark body defaults. */
-.editorial {
-  background-color: var(--color-paper);
-  /* Faint paper grain so large open areas read as textured stock, not void */
-  background-image: radial-gradient(rgba(80, 64, 40, 0.05) 0.5px, transparent 0.6px);
-  background-size: 5px 5px;
-  color: var(--color-ink);
-  cursor: auto;
-  font-family: var(--font-body), sans-serif;
-}
-
-/* Faint ruled-ledger grid for hero / feature panels (field-journal texture) */
-.ledger-grid {
-  background-image:
-    linear-gradient(to right, rgba(80, 64, 40, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(80, 64, 40, 0.06) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-/* The project micro-worlds share a quiet drafting grid. Individual scenes
-   provide the character; this keeps the set visually related. */
-.micro-grid {
-  background-image:
-    linear-gradient(to right, rgba(80, 64, 40, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(80, 64, 40, 0.055) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.28));
-}
-
-/* Project-owned signal inks, tied to each project's actual status language
-   (DESIGN.md Migration Note #4) instead of an arbitrary per-card hue — the
-   mint/blue/mauve pastels that used to live here (rgb(216,238,229),
-   rgb(220,231,247), rgb(237,220,227)) are gone. `--signal-soft` is now the
-   shared plate surface for every card, so the only thing that still varies
-   by project is the status-colored ink (border, badge text, icon accents). */
-.signal-greenlit {
-  /* Live beta · redesign underway -> beta */
-  --signal: var(--color-teal);
-  --signal-soft: var(--color-plate);
-}
-
-.signal-business-plan-writer {
-  /* Internal release candidate -> internal / not yet public */
-  --signal: var(--color-ink-muted);
-  --signal-soft: var(--color-plate);
-}
-
-.signal-living-playbooks {
-  /* Live · continuously maintained -> live */
-  --signal: var(--color-forest);
-  --signal-soft: var(--color-plate);
-}
-
-.signal-breadth {
-  /* Supporting/workshop builds, not yet a featured card */
-  --signal: var(--color-rust);
-  --signal-soft: var(--color-plate);
-}
-
-.project-signal-card {
-  border-top: 4px solid var(--signal);
-  background: var(--color-paper-card);
-}
-
-.project-signal-stage {
-  background: var(--signal-soft);
-}
-
-.project-signal-stage::before {
-  position: absolute;
-  z-index: 0;
-  inset-block: 0;
-  right: 0;
-  width: 24%;
-  clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%);
-  background: var(--signal);
-  content: "";
-  opacity: 0.09;
-  pointer-events: none;
-}
-
-/* Lift stage content above the ::before wedge. `position` is required for
-   z-index to apply, which is why static children get `relative` here. */
-.project-signal-stage > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Escape hatch for children that pin themselves to the stage box. This rule is
-   unlayered, so it outranks Tailwind's layered `absolute` utility no matter the
-   specificity — without it, the rule above silently drops such a child back
-   into flow (which is what pushed the motion toggle to the top-left). */
-.project-signal-stage > .stage-pin {
-  position: absolute;
-  z-index: 20;
-}
-
-.project-signal-badge,
-.project-signal-chip {
-  border-color: color-mix(in srgb, var(--signal) 28%, transparent);
-  background: var(--signal-soft);
-  color: var(--signal);
-}
-
-.project-signal-link {
-  color: var(--signal);
-}
-
-.project-signal-link:hover {
-  color: color-mix(in srgb, var(--signal) 78%, #211C15);
-}
-
-.project-signal-control {
-  border-color: color-mix(in srgb, var(--signal) 38%, var(--color-line));
-  color: var(--signal);
-}
-
-/* logo-ticker: the hero's compact "trusted on engagements with" row.
-   Edge-masked so logos fade in/out of view instead of hard-cutting, and
-   paused on hover so a visitor can actually read a name they land on. */
-.logo-ticker {
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-.logo-ticker:hover .logo-ticker-track {
-  animation-play-state: paused;
-}
-
-/* ─── v3 component system (docs/DESIGN.md) ──────────────────────────────── */
-
-/* plate-frame: base card/hero treatment. Ink border, sharp corners,
-   ink-muted corner brackets top-left and bottom-right at 55% opacity. This
-   is the live site's existing "Fig. 01" photo-plate idea, made a reusable
-   component instead of a one-off. */
-.plate-frame {
-  position: relative;
-  background-color: var(--color-plate);
-  border: 1.5px solid var(--color-ink);
-  border-radius: var(--radius-xs);
-}
-.plate-frame::before,
-.plate-frame::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  opacity: 0.55;
-  pointer-events: none;
-}
-.plate-frame::before {
-  top: -1.5px;
-  left: -1.5px;
-  border-top: 1.5px solid var(--color-ink-muted);
-  border-left: 1.5px solid var(--color-ink-muted);
-}
-.plate-frame::after {
-  bottom: -1.5px;
-  right: -1.5px;
-  border-bottom: 1.5px solid var(--color-ink-muted);
-  border-right: 1.5px solid var(--color-ink-muted);
-}
-
-/* fig-tag: small forest-deep pill, plate-colored monospace text, half
-   overlapping the top edge of a plate-frame. Give the parent
-   `position: relative` (plate-frame already does) and pass a real,
-   sequential label — "FIG. 02 · REVISION", not decoration. */
-.fig-tag {
-  position: absolute;
-  top: 0;
-  left: 14px;
-  transform: translateY(-50%);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  background-color: var(--color-forest-deep);
-  color: var(--color-plate);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: var(--radius-xs);
-}
-
-/* rotated-stamp: rust circle outline, rust monospace text, rotated. One per
-   page maximum — this is punctuation, not a pattern to repeat. */
-.rotated-stamp {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1.5px solid var(--color-rust);
-  border-radius: 9999px;
-  background-color: var(--color-plate);
-  color: var(--color-rust);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.5rem 1rem;
-  transform: rotate(-9deg);
-}
-
-/* terminal-moment: forest-deep background, plate-colored monospace text,
-   one blinking rust-bright cursor. Hero only — do not repeat elsewhere. */
-.terminal-moment {
-  display: inline-flex;
-  align-items: center;
-  background-color: var(--color-forest-deep);
-  color: var(--color-plate);
-  font-family: var(--font-mono), monospace;
-}
-
-.terminal-cursor {
-  display: inline-block;
-  width: 0.5em;
-  height: 1em;
-  margin-left: 0.15em;
-  background-color: var(--color-rust-bright);
-  vertical-align: -0.15em;
-}
-
-.terminal-cursor--blink {
-  animation: terminal-cursor-blink 1.1s steps(1) infinite;
-}
-
-@keyframes terminal-cursor-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-/* button-primary: forest fill, plate text, sharp `--radius-sm` corners,
-   darkens to forest-deep on hover. */
-.button-primary {
-  background-color: var(--color-forest);
-  color: var(--color-plate);
-  border-radius: var(--radius-sm);
-  transition: background-color 180ms ease;
-}
-.button-primary:hover {
-  background-color: var(--color-forest-deep);
-}
-
-/* work-card: plate background, ink border, sharp corners, one whimsical
-   hover lift+rotate. Composes with plate-frame for the border/corner
-   treatment; this adds the hover motion on top. */
-.work-card {
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-@media (hover: hover) {
-  .work-card:hover {
-    transform: translateY(-3px) rotate(-0.3deg);
-  }
-}
-
-.inverse-ledger {
-  background-image:
-    linear-gradient(to right, rgba(246, 241, 231, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(246, 241, 231, 0.06) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-/* Tree rings for the closing green field. The artwork lives in
-   public/tree-rings.svg and is painted as a background image, so its path data
-   is a cached static asset rather than client JS. The mask fades it into the
-   ledger grid on the left so it never competes with the headline. */
-.tree-ring-field {
-  background-image: url("/tree-rings.svg");
-  background-position: center right;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.26;
-  mask-image: linear-gradient(to left, #000 46%, rgba(0, 0, 0, 0.7) 74%, transparent 100%);
-}
-
-/* Editorial section label: index number + small-caps title + extending rule */
-.rule-label {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-.rule-label .rule-line {
-  height: 1px;
-  flex: 1;
-  background: var(--color-line);
-}
-.editorial a,
-.editorial button {
-  cursor: pointer;
-}
-.editorial h1,
-.editorial h2,
-.editorial h3,
-.editorial h4,
-.editorial h5,
-.editorial h6 {
-  font-family: var(--font-heading), sans-serif;
-}
-/* Offset anchored sections so the fixed nav doesn't overlap headings */
-.editorial [id] {
-  scroll-margin-top: 5.5rem;
-}
-
-/* Smooth anchor scrolling for the editorial homepage (motion-safe only) */
-@media (prefers-reduced-motion: no-preference) {
-  html:has(.editorial) {
-    scroll-behavior: smooth;
-  }
-}
-
-/* ─── Scroll-driven motion ────────────────────────────────────────────────
-   These use CSS scroll-driven animations (`animation-timeline: view()`), which
-   the browser runs off the main thread — no scroll listener, no React render,
-   no jank as the page gets longer. Everything is progressive enhancement: with
-   no support, or with reduced motion, elements simply render in their final
-   state, because the animations only ever apply inside the guards below. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    /* Editorial rules that draw themselves in as a section enters. */
-    .scroll-rule {
-      transform-origin: left center;
-      animation: scroll-rule linear both;
-      animation-timeline: view();
-      animation-range: entry 15% cover 40%;
-    }
-
-    /* Slow counter-drift for artwork inside a framed stage, so the illustration
-       and its card move at different rates as the card crosses the viewport. */
-    .scroll-drift {
-      animation: scroll-drift linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-      will-change: transform;
-    }
-  }
-}
-
-@keyframes scroll-rule {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-/* The 1.04 scale gives the drift somewhere to travel without exposing an edge. */
-@keyframes scroll-drift {
-  from { transform: translate3d(0, 2.5%, 0) scale(1.04); }
-  to   { transform: translate3d(0, -2.5%, 0) scale(1.04); }
+html {
+  scroll-behavior: smooth;
+  background: var(--color-cream);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .editorial *,
-  .editorial *::before,
-  .editorial *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  /* Mount reveals are driven by Framer, not CSS, so the overrides above can't
-     reach them: the element carries an inline `opacity: 0` from its `initial`
-     prop, rendered server-side before any media query is known, and it only
-     clears if the JS animation actually commits. It intermittently didn't,
-     which blanked the hero. Pin every reveal to its final state from the first
-     paint so a reduced-motion visitor never depends on that animation. Keep
-     this in sync with the `.motion-reveal` tags in Hero.tsx. */
-  .motion-reveal {
-    opacity: 1 !important;
-    transform: none !important;
+  html {
+    scroll-behavior: auto;
   }
 }
 
-/* Matrix green gradient text utility */
-.matrix-gradient-text {
-  background: linear-gradient(180deg, #00FF41 30%, #009926 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-/* Typing cursor */
-.typing-cursor::after {
-  content: '|';
-  animation: blink 1s infinite;
+:focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-ink);
 }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-ink);
 }
 
-/* ─── Keyframe animations (must live here for Tailwind v4) ─────────────────── */
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* ---------- print treatment ---------- */
+
+.anton {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-@keyframes cursor-blink {
-  0%, 100% { border-color: #00FF41; }
-  50%       { border-color: transparent; }
+/* Paper grain overlay. Painted surfaces only, never schematic ones.
+   The host must be positioned (relative or absolute). */
+.grain::after,
+.grain-layer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: var(--grain);
 }
 
-/* Scrollbar hide utility */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.shadow-print {
+  box-shadow: var(--shadow-print);
 }
 
-.scrollbar-hide::-webkit-scrollbar {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- illustration modes ---------- */
+
+/* Schematic: the same shapes as 1.2px mint outlines with no fill. */
+.bayou-schematic :is(path, circle, ellipse, rect, line, polygon):not(.keep),
+:is(path, circle, ellipse, rect, line, polygon).bayou-schematic {
+  fill: none;
+  stroke: var(--color-mint);
+  stroke-width: 1.2;
+  stroke-dasharray: none;
+  opacity: 1;
+  vector-effect: non-scaling-stroke;
+}
+.bayou-schematic .moss:not(.keep) {
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+.bayou-schematic .paint-only {
+  display: none;
+}
+.bayou-paint .schematic-only {
   display: none;
 }
 
-/* Gradient border reveal via mask-composite (used by bento/project cards) */
-.gradient-border-card::before {
-  content: '';
+/* ---------- sections ---------- */
+
+.section {
+  position: relative;
+  padding: var(--section-y) var(--gutter);
+  scroll-margin-top: 0;
+}
+/* Content sits above the grain. */
+.section > * {
+  position: relative;
+  z-index: 9;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(58px, 6.67vw, 96px);
+  line-height: 0.92;
+  margin: 10px 0 26px;
+  /* Off-register second ink. */
+  text-shadow: 5px 5px 0 var(--color-coral);
+}
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid currentColor;
+  padding: 5px 9px;
+}
+
+.skip-link {
   position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  border-radius: 15px;
-  padding: 1px;
-  background: linear-gradient(135deg, transparent 30%, rgba(0,255,65,0.10) 50%, transparent 70%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+}
+.skip-link:focus {
+  top: 12px;
 }
 
-.gradient-border-card:hover::before {
-  opacity: 1;
+/* ---------- ticker ---------- */
+
+.ticker {
+  background: var(--color-pink);
+  color: #fff;
+  border-top: 4px solid var(--color-ink);
+  border-bottom: 4px solid var(--color-ink);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 48s linear infinite;
+}
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+.ticker-group {
+  display: inline-flex;
+  flex: none;
+}
+.ticker-sep {
+  color: var(--color-yellow);
+  margin: 0 18px;
+}
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (min-width: 64rem) {
+  .ticker {
+    font-size: 30px;
+    padding: 13px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
 }
 
-/* Top-edge glow line on hover */
-.gradient-border-card::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,255,65,0.25), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
+/* ---------- off the clock ---------- */
+
+.off {
+  background: var(--color-teal);
+  color: var(--color-cream);
+}
+.off .eyebrow {
+  color: var(--color-yellow);
+}
+.off .section-title {
+  text-shadow: 5px 5px 0 var(--color-ink);
+}
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0 40px;
+  list-style: none;
+  padding: 0;
+}
+.card {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  padding: 7px 7px 0;
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:nth-child(odd) {
+  transform: rotate(-1.6deg);
+}
+.card:nth-child(even) {
+  transform: rotate(1.3deg);
+}
+.card:hover {
+  transform: rotate(0deg) translateY(-8px);
+  box-shadow: 12px 18px 0 rgba(0, 0, 0, 0.45);
+}
+.card-pic {
+  position: relative;
+}
+.card-pic svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 2px 12px;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 19px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+/* Captions show from tablet width up, as in the approved phone layout. */
+.card-note {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.conservation {
+  border-left: 5px solid var(--color-yellow);
+  padding: 6px 0 6px 18px;
+  font-size: 17px;
+  max-width: 720px;
+}
+@media (min-width: 64rem) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+  .card {
+    padding: 12px 12px 0;
+  }
+  .card-title {
+    font-size: 30px;
+  }
+  .card-note {
+    display: block;
+    font-size: 10px;
+  }
+  .conservation {
+    font-size: 19px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
 }
 
-.gradient-border-card:hover::after {
-  opacity: 1;
+/* ---------- contact sign ---------- */
+
+.sign {
+  position: relative;
+  background: var(--color-sign);
+  color: var(--color-cream);
+  padding: 50px var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.sign > * {
+  position: relative;
+  z-index: 9;
+}
+.sign-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(64px, 8.33vw, 120px);
+  line-height: 0.92;
+  text-shadow: 5px 5px 0 var(--color-ink);
+}
+.sign-meta {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-style: normal;
+}
+.sign-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  list-style: none;
+  padding: 0;
+}
+.sign-links li + li::before {
+  content: "·";
+  margin: 0 10px;
+}
+.sign-links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  padding: 6px 0;
+}
+.sign-links a:hover {
+  color: var(--color-yellow);
+}
+@media (min-width: 64rem) {
+  .sign {
+    padding: 70px var(--gutter);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .sign-meta {
+    text-align: right;
+  }
+  .sign-links {
+    justify-content: flex-end;
+  }
+}
+
+/* ---------- 404 and kit ---------- */
+
+.notfound {
+  min-height: 100svh;
+  background: var(--color-schematic-bg);
+  color: var(--color-mint);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding: var(--gutter);
+  font-family: var(--font-mono);
+}
+.notfound h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(72px, 16vw, 214px);
+  line-height: 0.92;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-mint);
+}
+.notfound a {
+  align-self: flex-start;
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  padding: 14px 20px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kit-page {
+  padding: 40px var(--gutter) 80px;
+}
+.kit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+.kit-tile {
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-print);
+  background: var(--color-cream);
+}
+.kit-tile figcaption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  border-top: 2px solid var(--color-ink);
+}
+.kit-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.kit-pair svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.kit-pair > div {
+  position: relative;
+}
+.kit-pair > .grain {
+  background: var(--color-sky-1);
+}
+.kit-pair > .kit-dark {
+  background: var(--color-schematic-bg);
+}
+.kit-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.kit-swatch {
+  width: 116px;
+  border: 2px solid var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  background: #fff;
+}
+.kit-swatch i {
+  display: block;
+  height: 54px;
+  border-bottom: 2px solid var(--color-ink);
+}
+.kit-swatch span {
+  display: block;
+  padding: 4px 6px;
 }

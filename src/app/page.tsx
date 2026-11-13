@@ -1,28 +1,15 @@
-import Nav from "@/components/redesign/Nav";
-import ScrollRail from "@/components/redesign/ScrollRail";
-import Hero from "@/components/redesign/Hero";
-import ProjectBento from "@/components/projects/ProjectBento";
-import Experience from "@/components/redesign/Experience";
-import Contact from "@/components/redesign/Contact";
-import Footer from "@/components/redesign/Footer";
-import { buildJsonLd } from "@/lib/structured-data";
+import ContactSign from "@/components/site/ContactSign";
 
+// Order is fixed by the handoff (7): Hero, Ticker, Selected Work, The Trail,
+// Off the Clock, Contact sign. Sections land milestone by milestone.
 export default function HomePage() {
   return (
-    <div className="editorial relative z-[1] min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd()) }}
-      />
-      <Nav />
-      <ScrollRail />
-      <main>
-        <Hero />
-        <ProjectBento />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <a className="skip-link" href="#contact">
+        Skip to contact
+      </a>
+      <main />
+      <ContactSign />
+    </>
   );
 }
