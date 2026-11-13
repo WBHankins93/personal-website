@@ -1,6 +1,6 @@
 # Ben Hankins: Personal Website
 
-> Customer-facing engineer by career. Product builder by practice.
+> Full Stack Engineer · South Louisiana
 
 Live site: https://benhankins.dev
 
@@ -8,36 +8,23 @@ Live site: https://benhankins.dev
 
 ## Overview
 
-Personal portfolio site and career hub. It presents Ben Hankins as a
-customer-facing engineer who builds, backed by proof across full-stack
-development, cloud infrastructure, and AI engineering.
+Personal site for Ben Hankins. The idea behind the design: the landscape is
+visibly engineered. A South Louisiana bayou loads as a schematic and gets
+painted into a park-poster scene.
 
-The site is a single editorial page plus per-project case studies:
+One page, in this order:
 
-- **Hero** — identity, headline metrics, and the enterprise accounts engaged
-- **Selected work** — three flagship projects, each with a full case study
-- **Experience** — timeline from IBM Client Engineering through Sproutflow Studio
-- **Contact** — role targets and direct links
+- **Hero** — the bayou, schematic to painted, with a drag handle between the two
+- **Ticker** — the stack
+- **Selected work** — posters that flip to an architecture diagram and unfold into details
+- **The trail** — career as an elevation map, 2018 to now
+- **Off the clock** — four postcards
+- **Contact** — the park sign
 
-`/about` and `/contact` are permanent redirects into the corresponding
-sections of the homepage, kept so inbound links and SEO equity survive the
-consolidation to one page.
+`/projects`, `/about` and `/contact` permanently redirect into the matching
+section, so old inbound links still work.
 
----
-
-## Positioning
-
-The site targets one narrative, not a list of every possible title:
-
-- **Solutions Engineer**
-- **Forward Deployed Engineer**
-- **Implementation Engineer**
-- Selective **Full Stack Engineer** roles
-
-Consulting work runs through [Sproutflow Studio](https://sproutflow-studio.com).
-
-Identity copy lives in three places that must stay in sync: the `Hero`
-tagline, the `layout.tsx` description/metadata, and `opengraph-image.tsx`.
+Copy and facts live in typed data files under `src/content/`.
 
 ---
 
@@ -47,7 +34,6 @@ tagline, the `layout.tsx` description/metadata, and `opengraph-image.tsx`.
 - TypeScript
 - Tailwind CSS v4
 - Framer Motion
-- Lucide Icons
 - Jest
 - Vercel (deployment)
 
@@ -72,8 +58,8 @@ npm run build        # Production build
 npm run build:check  # type-check + build, use before deploy
 ```
 
-See `CLAUDE.md` for architecture notes and `docs/DESIGN.md` for the design
-system. Current site screenshots live in `docs/screenshots/`.
+See `CLAUDE.md` for architecture notes, `docs/DESIGN.md` for the design
+system, and `docs/redesign-bayou/HANDOFF.md` for the redesign spec.
 
 ---
 

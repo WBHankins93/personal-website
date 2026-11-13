@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>benhankins.dev concept round 1</title>
+<style>
+@font-face{font-family:Anton;src:url(node_modules/@fontsource/anton/files/anton-latin-400-normal.woff2)}
+@font-face{font-family:Mono;src:url(node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:Grotesk;font-weight:400;src:url(node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-400-normal.woff2)}
+@font-face{font-family:Grotesk;font-weight:700;src:url(node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2)}
+@font-face{font-family:DMSerif;src:url(node_modules/@fontsource/dm-serif-display/files/dm-serif-display-latin-400-normal.woff2)}
+:root{--cream:#f6ecd4;--ink:#0b2423;--teal:#12403e;--mid:#2c6f66;--moss:#9bb06a;--sun:#f58a2c;--coral:#ee4e34;--yellow:#ffcb05;--mint:#5dffb0;--pink:#ff3d8b;--night:#170f3a;--sign:#5b3a21}
+*{box-sizing:border-box;margin:0}
+body{font-family:Grotesk,sans-serif;background:var(--cream);color:var(--ink)}
+.mono{font-family:Mono,monospace}.anton{font-family:Anton,sans-serif;text-transform:uppercase;line-height:.92}
+/* HERO */
+.hero{position:relative;height:810px;overflow:hidden;background:#06120f}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.wire .f{fill:none!important;stroke:var(--mint);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.wire .skyb,.wire .refl{display:none}
+.wire .mossS{stroke:var(--mint)!important;stroke-width:.8;opacity:.7}
+.painted .wonly{display:none}
+.nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 44px;z-index:5}
+.nav img{height:46px}.nav .links{display:flex;gap:34px;font-family:Mono;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.hero.dark .nav img{filter:invert(1);mix-blend-mode:screen}.hero.lit .nav img,.m .nav img{mix-blend-mode:multiply}.hero.dark .nav{color:var(--mint)}
+.hero.lit .nav .links{background:#081d1c;color:var(--cream);padding:11px 20px}.hero.dark .role,.hero.dark .tag{background:#06120f;display:table;padding:2px 8px 2px 0}
+.id{position:absolute;left:44px;top:118px;z-index:5;max-width:900px}
+.cta2{display:flex;gap:14px;margin-top:26px}.cta2 span{font-family:Mono;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:14px 20px;border:2px solid currentColor}.cta2 span:first-child{background:var(--yellow);color:#0b2423;border-color:var(--yellow)}
+.feat{position:absolute;right:84px;bottom:96px;z-index:5;width:330px;background:var(--cream);color:var(--ink);border:12px solid var(--yellow);padding:18px 20px;box-shadow:8px 10px 0 var(--ink);transform:rotate(2deg)}.feat b{font-family:Anton;font-weight:400;font-size:38px;line-height:.95;text-transform:uppercase;display:block;margin:6px 0 8px}.feat .mono{font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.id h1{font-size:214px;letter-spacing:.01em}
+.id .role{font-family:Mono;font-size:17px;margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo-slot{border:1.5px dashed currentColor;padding:5px 12px;font-family:Mono;font-size:12px;letter-spacing:.1em}
+.id .tag{font-family:DMSerif,serif;font-size:27px;margin-top:14px;line-height:1.25}
+.hero.dark .id{color:var(--mint)}.hero.dark .id h1{color:transparent;-webkit-text-stroke:1.5px var(--mint)}
+.hero.lit .id{color:var(--cream)}.hero.lit .id h1{text-shadow:0 4px 0 rgba(11,36,35,.35)}
+.log{position:absolute;right:44px;top:120px;z-index:5;font-family:Mono;font-size:13px;line-height:1.9;color:var(--mint);background:rgba(6,18,15,.72);border:1px solid rgba(93,255,176,.4);padding:16px 20px;width:330px}
+.log b{color:#fff;font-weight:500}.log .ok{float:right}
+.hint{position:absolute;right:44px;bottom:40px;z-index:5;font-family:Mono;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.hero.dark .hint{color:var(--mint)}.hero.lit .hint{color:var(--cream)}
+.node text{font-family:Mono;font-size:11px;fill:var(--mint)}
+.cap{position:absolute;left:0;top:0;background:var(--yellow);color:#000;font-family:Mono;font-size:12px;padding:5px 10px;z-index:9;letter-spacing:.06em}
+/* SECTIONS */
+section{position:relative;padding:96px 44px}
+.eyebrow{font-family:Mono;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+h2{font-family:Anton;text-transform:uppercase;font-size:96px;line-height:.92;margin:10px 0 26px}
+/* NOW */
+.now{background:var(--night);color:#fff;overflow:hidden}
+.now .beams{position:absolute;inset:0;width:100%;height:100%}
+.now .grid{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:end}
+.now h2{font-size:190px;color:var(--yellow);margin:6px 0 20px}
+.now p{font-size:21px;line-height:1.5;max-width:560px}
+.chips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.chips span{font-family:Mono;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #fff;padding:7px 12px;border-radius:99px}
+.band{background:var(--pink);color:#fff;transform:rotate(-4deg);padding:20px 26px;font-family:Anton;font-size:34px;letter-spacing:.04em;display:flex;justify-content:space-between;align-items:center;border-top:4px dashed rgba(255,255,255,.55);border-bottom:4px dashed rgba(255,255,255,.55);box-shadow:0 18px 0 rgba(0,0,0,.35);margin-bottom:60px}
+.band small{font-family:Mono;font-size:12px;letter-spacing:.1em}
+.band .chip{width:54px;height:54px;border-radius:50%;background:var(--yellow);border:5px solid var(--night)}
+.now .logo-slot{display:inline-block;padding:26px 40px;font-size:14px;color:#fff}
+/* WORK */
+.work{background:var(--cream)}
+.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.poster{position:relative;aspect-ratio:3/4.25;overflow:hidden;box-shadow:8px 10px 0 var(--ink)}
+.poster svg{position:absolute;inset:0;width:100%;height:100%}
+.poster .t{position:absolute;left:0;right:0;padding:0 18px;text-align:center}
+.poster h3{font-family:Anton;text-transform:uppercase;font-size:58px;line-height:.92}
+
+.poster .foot{bottom:0!important;background:#0b2423;color:#f6ecd4;padding:9px 10px}
+.poster .sub{font-family:Mono;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.badge{position:absolute;top:14px;right:-38px;transform:rotate(38deg);background:var(--coral);color:#fff;font-family:Mono;font-size:11px;letter-spacing:.1em;padding:6px 46px;z-index:3}
+.p1{border:16px solid var(--yellow);background:#0d2f2d;color:var(--cream)}
+.p2{background:#dff0c8;color:#143a22;border:10px solid var(--cream);outline:2px solid #143a22;outline-offset:-10px}
+.p3{background:#1c2a4a;color:var(--cream);border:10px solid var(--cream);outline:2px solid #1c2a4a;outline-offset:-10px}
+.p4{background:#f3b23e;color:#0b2423;border:10px solid var(--cream);outline:2px solid #0b2423;outline-offset:-10px}
+.open{margin-top:64px;display:grid;grid-template-columns:300px 1fr;gap:36px;background:#fff;border:2px solid var(--ink);padding:30px;box-shadow:8px 10px 0 var(--ink)}
+.open .shots{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:330px}
+.shot{background:repeating-linear-gradient(45deg,#eef1ec,#eef1ec 12px,#e3e8e0 12px,#e3e8e0 24px);border:1.5px dashed var(--mid);display:flex;align-items:center;justify-content:center;font-family:Mono;font-size:12px;color:var(--mid);text-align:center;padding:10px}
+.shot:first-child{grid-row:span 2}
+.open h4{font-family:Anton;font-size:40px;text-transform:uppercase;margin-bottom:10px}
+.open li{font-size:15px;line-height:1.6;margin-left:18px}
+.open .cta{display:inline-block;margin-top:16px;background:var(--ink);color:var(--yellow);font-family:Mono;font-size:13px;letter-spacing:.08em;padding:11px 16px;text-transform:uppercase}
+.note{font-family:Mono;font-size:12px;color:var(--mid);margin-top:18px}
+/* TRAIL */
+.trail{background:#e9dcbc;padding-bottom:40px}
+.trail svg{width:100%;height:auto;display:block}
+.trail text{font-family:Mono}
+/* OFF */
+.off{background:var(--teal);color:var(--cream)}
+.stamps{display:flex;gap:30px;flex-wrap:wrap;margin:8px 0 34px}
+.stamp{width:176px;height:176px;border-radius:50%;border:3px solid var(--cream);outline:1.5px solid var(--cream);outline-offset:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin:8px}
+.stamp b{font-family:Anton;font-size:30px;letter-spacing:.04em;font-weight:400}.stamp i{font-family:Mono;font-size:10px;letter-spacing:.14em;font-style:normal;margin-top:4px;text-transform:uppercase}
+.stamp svg{width:54px;height:40px;margin-bottom:4px}
+.cons{border-left:5px solid var(--yellow);padding:6px 0 6px 18px;font-size:19px;max-width:720px}
+.sign{background:var(--sign);color:var(--cream);padding:70px 44px;display:flex;justify-content:space-between;align-items:end}
+.sign h2{font-size:120px;margin:0}.sign .mono{font-size:13px;line-height:2;text-align:right;letter-spacing:.06em}
+.poster::after,section::after,.hero.lit::after,.card .pic::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:8;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .18  0 0 0 0 .1  0 0 0 1.1 -.42'/></filter><rect width='260' height='260' filter='url(%23n)'/></svg>")}
+section>*{position:relative;z-index:9}
+h2{text-shadow:5px 5px 0 var(--coral)}.off h2{text-shadow:5px 5px 0 #0b2423}
+.handle{position:absolute;z-index:7;width:60px;height:60px;border-radius:50%;background:var(--yellow);border:4px solid #0b2423;display:flex;align-items:center;justify-content:center;font-family:Mono;font-size:18px;color:#0b2423;box-shadow:0 6px 0 rgba(0,0,0,.35);transform:translate(-50%,-50%)}
+.park{position:absolute;top:0;bottom:0;right:22px;width:3px;background:var(--mint);z-index:6}
+.tog{position:absolute;right:44px;bottom:30px;z-index:9;display:flex;font-family:Mono;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--cream);background:#081d1c;color:var(--cream)}
+.tog span{padding:9px 14px}.tog .on{background:var(--yellow);color:#0b2423}
+.hero.dark .tog{border-color:var(--mint);color:var(--mint)}
+.m .tog{right:18px;bottom:18px;font-size:10px}
+.poster.flip{background:#06120f;color:var(--mint);outline-color:var(--mint)}
+.poster.flip h3{font-size:40px}.m .poster.flip h3{font-size:30px}
+.poster.flip .foot{background:var(--mint);color:#06120f}
+.poster .mast{font-family:Mono;font-size:10px;letter-spacing:.2em;text-transform:uppercase;display:flex;justify-content:space-between;padding:0 4px;margin-bottom:8px;border-bottom:1.5px solid currentColor;padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:18px 0 48px}
+.card{background:var(--cream);padding:12px 12px 0;box-shadow:8px 10px 0 rgba(0,0,0,.45);color:var(--ink)}
+.card .pic{position:relative}.card svg{display:block;width:100%;height:auto}
+.card .cp{display:flex;justify-content:space-between;align-items:baseline;padding:10px 2px 12px}
+.card b{font-family:Anton;font-weight:400;font-size:30px;text-transform:uppercase}
+.card i{font-family:Mono;font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.card:nth-child(odd){transform:rotate(-1.6deg)}.card:nth-child(even){transform:rotate(1.3deg)}
+.m .cards{grid-template-columns:1fr 1fr;gap:14px}.m .card b{font-size:19px}.m .card i{display:none}.m .card{padding:7px 7px 0}
+.m .hero.lit::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(#081d1cd9 0%,#081d1cb0 45%,#081d1c00 68%)}
+.hero.dark::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,#06120ff2 0%,#06120fd0 38%,#06120f00 62%)}
+.hero.lit .id h1{text-shadow:7px 7px 0 #0b2423}
+.tick{background:var(--pink);color:#fff;font-family:Anton;font-size:30px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;padding:13px 0;border-top:4px solid #0b2423;border-bottom:4px solid #0b2423;text-transform:uppercase}
+.tick i{font-style:normal;color:var(--yellow);margin:0 18px}
+.m .tick{font-size:19px;padding:9px 0}
+.labs{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-family:Mono;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.labs span{border:1.5px solid var(--ink);padding:8px 12px;background:#fff}.labs span:first-child{border:0;background:none;padding-left:0}
+/* PHONE */
+.m .hero{height:700px}.m .nav{padding:18px}.m .nav .links{display:none}.m .nav img{height:38px}
+.m .id{left:18px;right:18px;top:92px}.m .cta2 span{font-size:11px;padding:10px 12px}.m .feat{display:none}.m .id h1{font-size:88px}.m .id .tag{font-size:20px}.m .id .role{font-size:13px}
+.m .hint{display:none}
+.m section{padding:56px 18px}.m h2{font-size:58px}
+.m .now .grid{grid-template-columns:1fr;gap:26px}.m .now h2{font-size:92px}.m .now p{font-size:17px}
+.m .band{font-size:20px;padding:14px;margin:34px 0 10px}.m .band .chip{width:34px;height:34px}
+.m .wall{display:flex;overflow:hidden;gap:16px;margin-right:-18px}.m .poster{flex:0 0 72%}
+.m .open{display:none}.m .poster h3{font-size:40px}.m .stamp i{font-size:8px;padding:0 14px}
+.m .stamp{width:136px;height:136px;margin:6px}.m .stamps{gap:14px}.m .stamp b{font-size:22px}
+.m .sign{flex-direction:column;align-items:start;gap:20px;padding:50px 18px}.m .sign h2{font-size:64px}.m .sign .mono{text-align:left}
+.m .trailD{display:none}.trailM{display:none}.m .trailM{display:block}
+.swipe{display:none;font-family:Mono;font-size:11px;letter-spacing:.1em;margin-top:14px}.m .swipe{display:block}
+</style></head><body>
+<div id="app"></div>
+<script>
+const q=new URLSearchParams(location.search), heroMode=q.get('hero')||'done', M=q.has('m');
+if(M)document.body.classList.add('m');
+/* ---------- bayou scene ---------- */
+function rnd(seed){let s=seed;return()=>(s=(s*16807)%2147483647)/2147483647}
+function tree(x,base,h,w,col,r,mossCol){
+  const top=base-h, fl=w*1.9;
+  let d=`M${x-fl},${base} C${x-w*.9},${base-h*.10} ${x-w*.55},${base-h*.22} ${x-w*.42},${top+h*.18} L${x-w*.3},${top} L${x+w*.3},${top} L${x+w*.42},${top+h*.18} C${x+w*.55},${base-h*.22} ${x+w*.9},${base-h*.10} ${x+fl},${base} Z`;
+  let o=`<path class="f" d="${d}" fill="${col}"/>`;
+  // branches + canopy
+  const n=3+Math.floor(r()*2);
+  for(let i=0;i<n;i++){
+    const by=top+h*(.04+i*.11), dir=i%2?1:-1, len=w*(3.2+r()*3.2);
+    const ex=x+dir*len, ey=by-h*(.03+r()*.05);
+    o+=`<path class="f" d="M${x},${by+w*.25} Q${x+dir*len*.5},${by-w*.2} ${ex},${ey} L${ex},${ey-w*.22} Q${x+dir*len*.5},${by-w*.7} ${x},${by-w*.2} Z" fill="${col}"/>`;
+    o+=`<ellipse class="f" cx="${ex-dir*len*.2}" cy="${ey-w*.55}" rx="${len*.62}" ry="${w*(.9+r()*.5)}" fill="${col}"/>`;
+    // moss strands
+    const k=4+Math.floor(r()*4);
+    for(let j=0;j<k;j++){
+      const mx=x+dir*len*(.25+.75*j/k), my=by-(by-ey)*(.25+.75*j/k)+2, ml=h*(.07+r()*.14);
+      o+=`<path class="mossS" d="M${mx},${my} q${(r()-.5)*6},${ml*.5} ${(r()-.5)*4},${ml}" stroke="${mossCol}" stroke-width="${Math.max(1.6,w*.16)}" stroke-linecap="round" fill="none"/>`;
+    }
+  }
+  // knees
+  for(let i=0;i<3;i++){const kx=x+(r()-.5)*fl*3.4,kh=h*(.025+r()*.03);o+=`<path class="f" d="M${kx-4},${base} Q${kx},${base-kh*2} ${kx+4},${base} Z" fill="${col}"/>`}
+  return o;
+}
+function ridge(y,amp,step,col,seed){const r=rnd(seed);let d=`M0,${y}`;for(let x=0;x<=1440;x+=step){d+=` L${x},${y-amp*(.35+r()*.65)}`}d+=` L1440,${y} Z`;return `<path class="f" d="${d}" fill="${col}"/>`}
+function scene(cls){
+  const r=rnd(77);const H=540; // horizon
+  let s=`<svg class="${cls}" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">`;
+  if(cls==='painted'){
+    s+=`<rect width="1440" height="810" fill="#fbe3ac"/>`;
+    ['#f9d48f','#f7bf73','#f5a657','#f28f43'].forEach((c,i)=>s+=`<rect class="skyb" y="${250+i*72}" width="1440" height="80" fill="${c}"/>`);
+  } else {
+    s+=`<defs><pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#5dffb0" stroke-opacity=".13"/></pattern></defs><rect width="1440" height="810" fill="#06120f"/><rect width="1440" height="810" fill="url(#g)"/>`;
+    // perspective water mesh
+    for(let i=-14;i<=14;i++)s+=`<line class="wonly" x1="${940+i*26}" y1="${H}" x2="${940+i*190}" y2="810" stroke="#5dffb0" stroke-opacity=".28"/>`;
+    for(let i=1;i<9;i++){const y=H+Math.pow(i/9,1.8)*270;s+=`<line class="wonly" x1="0" y1="${y}" x2="1440" y2="${y}" stroke="#5dffb0" stroke-opacity=".28"/>`}
+  }
+  if(cls==='painted'){for(let i=0;i<14;i++){const a=(-176+i*13)*Math.PI/180,b=(-170+i*13)*Math.PI/180,R=1500;s+=`<path class="refl" d="M940,${H-40} L${940+R*Math.cos(a)},${H-40+R*Math.sin(a)} L${940+R*Math.cos(b)},${H-40+R*Math.sin(b)} Z" fill="#fff3cf" opacity=".3"/>`}
+  [[610,250,1],[650,232,.8],[700,262,.7],[1010,214,.9]].forEach(b=>s+=`<path class="refl" d="M${b[0]},${b[1]} q${9*b[2]},${-9*b[2]} ${18*b[2]},0 q${9*b[2]},${-9*b[2]} ${18*b[2]},0" fill="none" stroke="#0b2423" stroke-width="3" stroke-linecap="round"/>`)}
+  s+=`<circle class="f" cx="940" cy="${H-40}" r="150" fill="#fff3cf"/><circle class="f" cx="940" cy="${H-40}" r="188" fill="none" stroke="#fff3cf" stroke-width="5" style="${cls==='painted'?'':'display:none'}"/>`;
+  s+=ridge(H,80,36,'#e2733a',5)+ridge(H,46,24,'#a8502f',9);
+  // far trees
+  const r2=rnd(31);
+  for(let i=0;i<9;i++){const x=80+i*170+r2()*60;s+=tree(x,H+4,150+r2()*70,7,'#2c6f66',r2,'#6fa08b')}
+  // water
+  s+=`<rect class="f" x="0" y="${H}" width="1440" height="${810-H}" fill="#1b5853"/>`;
+  if(cls==='painted'){
+    const r3=rnd(12);
+    for(let i=0;i<16;i++){const y=H+10+i*17,w=60+r3()*240;s+=`<rect class="refl" x="${940-w/2+(r3()-.5)*40}" y="${y}" width="${w}" height="6" rx="3" fill="#f7bf73" opacity="${.9-i*.045}"/>`}
+    for(let i=0;i<22;i++){s+=`<rect class="refl" x="${r3()*1440}" y="${H+20+r3()*250}" width="${40+r3()*160}" height="4" rx="2" fill="#2c7a70"/>`}
+  }
+  // mid trees
+  const r4=rnd(202);
+  [[250,640,330,15],[600,625,290,13],[1180,650,360,16],[1340,630,300,13]].forEach(a=>s+=tree(a[0],a[1],a[2],a[3],'#12403e',r4,'#8fae7a'));
+  // egret
+  s+=`<path class="f" d="M770,668 q-6,-34 10,-52 q10,-10 6,-22 l20,6 l-16,2 q8,12 -4,24 q-10,14 -4,42 Z" fill="#fff7e2"/><path class="f" d="M774,668 l-2,26 M782,668 l2,26" stroke="#fff7e2" stroke-width="2" fill="none"/>`;
+  // foreground
+  const r5=rnd(404);
+  s+=tree(70,830,720,34,'#081d1c',r5,'#5f7d57')+tree(1420,840,780,36,'#081d1c',r5,'#5f7d57');
+  s+=`<path class="f" d="M0,790 Q300,760 520,800 L520,810 L0,810 Z" fill="#081d1c"/>`;
+  s+=`<path class="f" d="M0,34 Q720,-34 1440,44 L1440,74 Q720,-2 0,62 Z" fill="#081d1c"/>`;
+  const r6=rnd(909);for(let i=0;i<46;i++){const mx=130+i*27+r6()*10;const top=58-Math.sin((mx/1440)*Math.PI)*40;const ml=(mx>980?26:60)+r6()*(mx>980?30:150);s+=`<path class="mossS" d="M${mx},${top} q${(r6()-.5)*14},${ml*.5} ${(r6()-.5)*8},${ml}" stroke="#5f7d57" stroke-width="${3+r6()*3}" stroke-linecap="round" fill="none"/>`}
+  if(cls==='wire'){
+    const nodes=[[940,500,'sun.light  intensity 1.4'],[250,318,'cypress_02  214 verts'],[1180,296,'cypress_04  moss.strands 31'],[790,610,'egret.spawn(1)'],[1120,715,'water.plane  reflect: on']];
+    nodes.forEach(n=>s+=`<g class="node"><circle cx="${n[0]}" cy="${n[1]}" r="5" fill="#06120f" stroke="#5dffb0" stroke-width="1.5"/><line x1="${n[0]+6}" y1="${n[1]}" x2="${n[0]+34}" y2="${n[1]-18}" stroke="#5dffb0"/><text x="${n[0]+38}" y="${n[1]-20}">${n[2]}</text></g>`);
+  }
+  return s+'</svg>';
+}
+function hero(mode){
+  const dark=mode==='wire', lit=!dark;
+  let layers='';
+  if(mode==='wire')layers=scene('wire');
+  else if(mode==='done'||M)layers=scene('painted');
+  else layers=scene('wire')+`<div style="position:absolute;inset:0;clip-path:polygon(0 0,62% 0,40% 100%,0 100%)">${scene('painted')}</div><svg viewBox="0 0 1440 810" preserveAspectRatio="none" style="z-index:4"><line x1="893" y1="0" x2="576" y2="810" stroke="#5dffb0" stroke-width="3"/><line x1="893" y1="0" x2="576" y2="810" stroke="#5dffb0" stroke-width="14" opacity=".25"/></svg>`;
+  const cap={wire:'FRAME 1 · page load: schematic',mid:'FRAME 2 · auto-sweep on load, then the handle is yours to drag',done:'FRAME 3 · painted, handle parked at the edge'}[mode];
+  const log=mode==='wire'?`<div class="log">&gt; build bayou.scene<br>&gt; cypress.mesh <span class="ok"><b>ok</b></span><br>&gt; moss.shader <span class="ok"><b>ok</b></span><br>&gt; water.reflect <span class="ok">waiting</span><br>&gt; paint <span class="ok">starting ▍</span></div>`:
+    mode==='mid'?`<div class="log">&gt; cypress.mesh <span class="ok"><b>ok</b></span><br>&gt; moss.shader <span class="ok"><b>ok</b></span><br>&gt; water.reflect <span class="ok"><b>ok</b></span><br>&gt; paint <span class="ok"><b>62%</b> ▍</span></div>`:'';
+  return `<div class="hero ${mode==='wire'?'dark':'lit'}">${M?'':`<div class="cap">${cap}</div>`}${layers}
+  <div class="nav"><img src="blogo.png" alt="B"><div class="links"><span>Work</span><span>Trail</span><span>Off the clock</span><span>Contact</span></div></div>
+  ${M?'':log}
+  <div class="id" ${mode==='mid'?'style="color:var(--cream)"':''}><h1 class="anton" ${mode==='mid'?'style="color:var(--cream);-webkit-text-stroke:0"':''}>Ben<br>Hankins</h1>
+  <div class="role">Full Stack Engineer · South Louisiana</div>
+  <div class="tag">I write software in South Louisiana, usually louder than necessary. <span class="mono" style="font-size:11px;opacity:.75">[draft line]</span></div><div class="cta2"><span>See the work →</span><span>Walk the trail</span></div></div>
+  ${mode==='wire'||M?'':`<div class="feat"><div class="mono">Just shipped</div><b>Pre-Sales Field Kit</b><div class="mono">On Gumroad now →</div></div>`}
+  ${mode==='mid'?'<div class="handle" style="left:734px;top:405px">◂▸</div>':''}${mode==='done'&&!M?'<div class="park"></div><div class="handle" style="left:1418px;top:405px">◂▸</div>':''}
+  <div class="tog"><span class="${mode==='wire'?'on':''}">Schematic</span><span class="${mode==='wire'?'':'on'}">Painted</span></div></div>`;
+}
+/* ---------- posters ---------- */
+const fir=(x,b,h,w,c)=>`<path d="M${x},${b-h} L${x+w*.5},${b-h*.6} L${x+w*.28},${b-h*.6} L${x+w*.72},${b-h*.28} L${x+w*.4},${b-h*.28} L${x+w},${b} L${x-w},${b} L${x-w*.4},${b-h*.28} L${x-w*.72},${b-h*.28} L${x-w*.28},${b-h*.6} L${x-w*.5},${b-h*.6} Z" fill="${c}"/>`;
+const rdg=(W,y,amp,step,col,seed,bot)=>{const r=rnd(seed);let d=`M0,${bot}L0,${y}`;for(let x=0;x<=W;x+=step)d+=`L${x},${y-amp*(.3+r()*.7)}`;return `<path d="${d}L${W},${bot}Z" fill="${col}"/>`};
+const dots=(id,col,r=1.4)=>`<pattern id="${id}" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="3.5" cy="3.5" r="${r}" fill="${col}"/></pattern>`;
+const firRow=(W,b,n,h,w,c,seed)=>{const r=rnd(seed);let o='';for(let i=0;i<n;i++)o+=fir((i+.5)*W/n+(r()-.5)*10,b+r()*8,h*(.65+r()*.5),w,c);return o};
+const artKit=()=>{let o='<g fill="none" stroke="#f6ecd4" stroke-opacity=".3" stroke-width="1.2">';
+  for(let i=0;i<9;i++)o+=`<ellipse cx="95" cy="250" rx="${14+i*19}" ry="${9+i*13}" transform="rotate(-20 95 250)"/>`;
+  for(let i=0;i<8;i++)o+=`<ellipse cx="235" cy="330" rx="${12+i*17}" ry="${8+i*12}" transform="rotate(14 235 330)"/>`;
+  o+='</g>'+rdg(300,372,40,22,'#081d1c',41,425);
+  o+=`<path d="M28,352 C70,300 96,318 118,270 S190,250 214,206" fill="none" stroke="#ee4e34" stroke-width="3.5" stroke-dasharray="9 7" stroke-linecap="round"/><path d="M206,198 l16,16 m0,-16 l-16,16" stroke="#ee4e34" stroke-width="4"/>`;
+  o+=`<g transform="translate(96 252)"><circle r="50" fill="#ffcb05"/><circle r="41" fill="none" stroke="#0d2f2d" stroke-width="2"/>${Array.from({length:16},(_,i)=>`<line y1="-41" y2="${i%4?-36:-31}" stroke="#0d2f2d" stroke-width="2" transform="rotate(${i*22.5})"/>`).join('')}<g transform="rotate(28)"><path d="M0,-30 L8,0 L0,30 L-8,0 Z" fill="#0d2f2d"/><path d="M0,-30 L8,0 L-8,0 Z" fill="#ee4e34"/></g><circle r="3.5" fill="#ffcb05"/></g>`;return o};
+const artGreen=()=>`<defs>${dots('hg','#143a22')}</defs><rect width="300" height="425" fill="#eef6d6"/><rect y="170" width="300" height="120" fill="#dcedbd"/><circle cx="150" cy="232" r="84" fill="#f6ecd4"/><circle cx="150" cy="232" r="60" fill="#35b45a"/><circle cx="150" cy="232" r="60" fill="url(#hg)" opacity=".18"/>${rdg(300,300,60,26,'#b5d6a0',7,425)}${rdg(300,330,46,20,'#7fb27a',19,425)}<rect y="318" width="300" height="14" fill="#eef6d6" opacity=".6"/>${firRow(300,372,11,90,13,'#2f6b3f',5)}${firRow(300,398,8,128,17,'#143a22',23)}`;
+const artPlan=()=>{const r=rnd(66);let st='';for(let i=0;i<34;i++)st+=`<circle cx="${r()*300}" cy="${150+r()*130}" r="${.6+r()*1.1}" fill="#f6ecd4"/>`;
+  return `<defs>${dots('hp','#0f1830',1.7)}</defs>${st}<circle cx="236" cy="206" r="27" fill="#f58a2c"/>${rdg(300,318,50,30,'#2a3d6e',13,425)}<path d="M20,400 L150,196 L290,400 Z" fill="#3d5a99"/><path d="M150,196 L290,400 L170,400 L186,300 L160,262 Z" fill="url(#hp)" opacity=".55"/><path d="M150,196 L124,238 L140,231 L150,246 L162,232 L177,240 Z" fill="#f6ecd4"/><path d="M52,398 L96,352 L78,328 L128,300 L116,274 L146,246 L150,204" fill="none" stroke="#ee4e34" stroke-width="3.2" stroke-dasharray="8 6" stroke-linecap="round"/><path d="M150,198 v-26 l20,7 l-20,7" fill="#ffcb05" stroke="#f6ecd4" stroke-width="2"/>${firRow(300,400,9,64,12,'#0f1830',31)}`};
+const artClip=()=>{const r=rnd(88);let rf='';for(let i=0;i<9;i++){const w=30+r()*120;rf+=`<rect x="${150-w/2+(r()-.5)*16}" y="${300+i*10}" width="${w}" height="4.5" rx="2" fill="#f3b23e" opacity="${1-i*.08}"/>`}
+  return `<rect y="150" width="300" height="50" fill="#f6c25c"/><rect y="200" width="300" height="50" fill="#f0a23a"/><circle cx="150" cy="262" r="62" fill="#ee4e34"/>${rdg(300,292,26,16,'#a8502f',3,300)}<rect y="292" width="300" height="140" fill="#12403e"/>${rf}${tree(52,330,210,9,'#0b2423',r,'#5f7d57')}${tree(250,318,170,7,'#0b2423',r,'#5f7d57')}${tree(196,300,96,4,'#1f5a56',r,'#6fa08b')}`};
+const sch=()=>{const B=(x,y,w,t)=>`<rect x="${x}" y="${y}" width="${w}" height="26" fill="#06120f" stroke="#5dffb0" stroke-width="1.4"/><text x="${x+w/2}" y="${y+17}" text-anchor="middle" font-size="9.5" fill="#5dffb0" style="font-family:Mono">${t}</text>`;
+  const L=d=>`<path d="${d}" fill="none" stroke="#5dffb0" stroke-width="1.3"/>`;
+  return `<defs><pattern id="sg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#5dffb0" stroke-opacity=".14"/></pattern></defs><rect width="300" height="425" fill="url(#sg)"/><g transform="translate(0 4)">
+  ${L('M150,162 v12 M150,200 v10 M150,210 H82 v10 M150,210 H218 v10 M82,246 v12 H218 v-12 M150,258 v10 M150,294 v12 M150,332 v12')}
+  ${B(96,136,108,'idea in')}${B(96,174,108,'1 validation')}${B(30,220,104,'2 market')}${B(166,220,104,'3 financial')}${B(96,268,108,'4 drafting')}${B(96,306,108,'5 critique')}${B(96,344,108,'plan out')}
+  <text x="150" y="216" text-anchor="middle" font-size="8" fill="#5dffb0" style="font-family:Mono" dy="-10"></text>
+  <text x="18" y="290" font-size="8" fill="#5dffb0" opacity=".8" style="font-family:Mono">parallel</text><text x="222" y="284" font-size="8" fill="#5dffb0" opacity=".8" style="font-family:Mono">per-step model</text><text x="222" y="295" font-size="8" fill="#5dffb0" opacity=".8" style="font-family:Mono">routing</text></g>`};
+const posters=[
+ {c:'p1',n:'Pre-Sales<br>Field Kit',mast:['Vol. 01 · 2026',''],badge:'NEW',art:artKit(),foot:'Sproutflow · on Gumroad now'},
+ {c:'p2',n:'Greenlit',mast:['greenlit.cv','live'],art:artGreen(),foot:'AI resume scoring and coaching'},
+ {c:'p3 flip',n:'Business<br>Plan Writer',mast:['schematic','hover'],art:sch(),foot:'FastAPI · Next.js · Supabase · Stripe'},
+ {c:'p4',n:'ClipBoard',mast:['multi-tenant','ops'],art:artClip(),foot:'SaaS operations platform'}];
+const pHTML=(p,sm)=>`${p.badge?`<div class="badge">${p.badge}</div>`:''}<svg viewBox="0 0 300 425" preserveAspectRatio="xMidYMid slice">${p.art}</svg><div class="t" style="top:5%"><div class="mast"><span>${p.mast[0]}</span><span>${p.mast[1]}</span></div><h3 ${sm?'style="font-size:44px"':''}>${p.n}</h3></div><div class="t sub foot">${p.foot}</div>`;
+const wall=posters.map(p=>`<div class="poster ${p.c}">${pHTML(p)}</div>`).join('');
+/* ---------- trail ---------- */
+function trail(){
+  const pts=[[110,480,'2018','General Assembly','Bootcamp · trailhead'],[330,440,'2019','Kortivity','Front End Dev'],[560,360,'2019 to 2024','IBM','Client Engineering · 3 roles'],[800,285,'2025','Prove AI','Site Reliability Eng'],[1040,215,'2025 to now','Sproutflow Studio','Founder'],[1270,120,'2026','Next summit','New chapter · details soon']];
+  let s=`<svg viewBox="0 0 1352 600">`;
+  s+=`<path d="M0,420 L120,330 L240,380 L380,250 L520,330 L640,220 L800,300 L930,190 L1100,280 L1230,170 L1352,230 L1352,600 L0,600 Z" fill="#dccb9f"/>`;
+  s+=`<path d="M0,520 L160,300 L260,400 L420,180 L560,360 L700,150 L860,330 L1010,90 L1180,300 L1352,120 L1352,600 L0,600 Z" fill="#cdbb8d"/>`;
+  s+=`<path d="M1010,90 L975,150 L1000,140 L1018,160 L1045,146 Z M700,150 L672,196 L696,188 L712,204 L730,196 Z" fill="#f6ecd4"/>`;
+  s+=`<path d="M0,560 L${pts.map(p=>p[0]+','+(p[1]+30)).join(' L')} L1352,${95+30} L1352,600 L0,600 Z" fill="#2c6f66"/>`;
+  for(let k=1;k<7;k++)s+=`<path d="M0,${560+k*34} L${pts.map(p=>p[0]+','+(p[1]+30+k*34)).join(' L')} L1352,${125+k*34}" fill="none" stroke="#3f857a" stroke-width="1.6"/>`;
+  const r=rnd(3);for(let i=0;i<34;i++){const x=20+i*40+r()*14;const t=x/1352;const y=560-t*400+r()*30;const h=26+r()*34;if(y<590)s+=`<path d="M${x-10},${y+50} L${x},${y+50-h} L${x+10},${y+50} Z" fill="#12403e"/>`}
+  s+=`<path d="M0,540 L${pts.map(p=>p[0]+','+p[1]).join(' L')}" fill="none" stroke="#ee4e34" stroke-width="5" stroke-dasharray="14 10" stroke-linecap="round"/>`;
+  s+=`<rect x="0" y="566" width="1352" height="34" fill="#0b2423"/>`;
+  pts.forEach(p=>{s+=`<line x1="${p[0]}" y1="${p[1]}" x2="${p[0]}" y2="566" stroke="#f6ecd4" stroke-opacity=".55" stroke-dasharray="2 6" stroke-width="1.5"/><text x="${p[0]}" y="588" text-anchor="middle" font-size="12" fill="#f6ecd4" letter-spacing="2">${p[2].slice(0,4)}</text>`});
+  s+=`<g transform="translate(905 492)"><circle r="40" fill="#f6ecd4" stroke="#0b2423" stroke-width="2.5"/><path d="M0,-32 L9,0 L0,32 L-9,0 Z" fill="#0b2423"/><path d="M0,-32 L9,0 L-9,0 Z" fill="#ee4e34"/><path d="M-32,0 L0,-7 L32,0 L0,7 Z" fill="#0b2423" opacity=".35"/><text y="-44" text-anchor="middle" font-size="13" fill="#f6ecd4">N</text></g>`;
+  s+=`<g transform="translate(1000 440)"><rect width="300" height="108" fill="#f6ecd4" stroke="#0b2423" stroke-width="2"/><text x="14" y="22" font-size="11" letter-spacing="2" fill="#2c6f66">LEGEND</text><line x1="14" y1="42" x2="62" y2="42" stroke="#ee4e34" stroke-width="4" stroke-dasharray="10 7"/><text x="76" y="46" font-size="11" fill="#0b2423">career trail</text><circle cx="38" cy="66" r="8" fill="#f6ecd4" stroke="#0b2423" stroke-width="3"/><text x="76" y="70" font-size="11" fill="#0b2423">role · hover for stack + stories</text><path d="M32,98 v-18 l16,5 l-16,5" fill="#ff3d8b" stroke="#0b2423" stroke-width="2"/><text x="76" y="94" font-size="11" fill="#0b2423">next summit</text></g>`;
+  pts.forEach((p,i)=>{const last=i==pts.length-1;
+    s+=`<circle cx="${p[0]}" cy="${p[1]}" r="${last?16:11}" fill="${last?'#ffcb05':'#f6ecd4'}" stroke="#0b2423" stroke-width="4"/>`;
+    if(last)s+=`<path d="M${p[0]},${p[1]-16} v-46 l38,12 l-38,12" fill="#ff3d8b" stroke="#0b2423" stroke-width="3"/>`;
+    const W=206, bx=last?p[0]-W+40:p[0]-W/2, by=last?p[1]+84:p[1]-96;
+    s+=`<g><rect x="${bx}" y="${by}" width="${W}" height="68" fill="#f6ecd4" stroke="#0b2423" stroke-width="2"/><text x="${bx+10}" y="${by+19}" font-size="11" fill="#2c6f66" letter-spacing="1.5">${p[2].toUpperCase()}</text><text x="${bx+10}" y="${by+41}" font-size="20" fill="#0b2423" style="font-family:Anton;letter-spacing:.5px">${p[3].toUpperCase()}</text><text x="${bx+10}" y="${by+58}" font-size="11" fill="#0b2423">${p[4]}</text></g>`;
+  });
+  return s+'</svg>';
+}
+function trailM(){const rows=[['2026','Next summit','New chapter, details soon',1],['2025 to now','Sproutflow Studio','Founder'],['2025','Prove AI','Site Reliability Eng'],['2019 to 2024','IBM','Client Engineering · 3 roles'],['2019','Kortivity','Front End Dev'],['2018','General Assembly','Trailhead']];
+  return `<div style="border-left:5px dashed var(--coral);margin-left:10px;padding-left:22px">${rows.map(r=>`<div style="position:relative;margin-bottom:22px"><span style="position:absolute;left:-36px;top:4px;width:20px;height:20px;border-radius:50%;background:${r[3]?'var(--yellow)':'var(--cream)'};border:3px solid var(--ink)"></span><div class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--mid)">${r[0].toUpperCase()}</div><div class="anton" style="font-size:30px">${r[1]}</div><div style="font-size:14px">${r[2]}</div></div>`).join('')}</div>`}
+/* ---------- stamps ---------- */
+const grass=(x,y,n,h,seed)=>{const r=rnd(seed);let o='';for(let i=0;i<n;i++){const gx=x+r()*26-13;o+=`<path d="M${gx},${y} q${(r()-.5)*10},${-h*.6} ${(r()-.5)*14},${-h*(.6+r()*.5)}" stroke="#0b2423" stroke-width="2" fill="none" stroke-linecap="round"/>`}return o};
+const scHike=()=>`<rect width="300" height="210" fill="#fbe3ac"/><rect y="70" width="300" height="50" fill="#f9d08a"/><circle cx="214" cy="74" r="34" fill="#f58a2c"/>${rdg(300,128,62,34,'#9fc0b8',4,210)}${rdg(300,152,44,26,'#4f8a80',14,210)}${rdg(300,182,26,20,'#1f5a56',24,210)}<path d="M96,210 C120,186 150,190 168,170 S214,150 226,128" fill="none" stroke="#fbe3ac" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>${fir(30,212,120,22,'#0b2423')}${fir(66,214,86,17,'#0b2423')}${fir(272,214,134,24,'#0b2423')}${fir(240,214,78,15,'#0b2423')}`;
+const scMarsh=()=>{const r=rnd(52);let rf='';for(let i=0;i<8;i++){const w=30+r()*110;rf+=`<rect x="${150-w/2+(r()-.5)*14}" y="${128+i*9}" width="${w}" height="4" rx="2" fill="#fbe3ac" opacity="${.95-i*.09}"/>`}
+  return `<rect width="300" height="210" fill="#f9c777"/><rect y="60" width="300" height="34" fill="#f5a657"/><rect y="94" width="300" height="30" fill="#f28f43"/><circle cx="150" cy="120" r="58" fill="#fff3cf"/>${rdg(300,122,12,14,'#a8502f',2,124)}<rect y="122" width="300" height="90" fill="#1b5853"/>${rf}<path d="M176,160 q42,12 92,-2 l-10,10 h-70 Z" fill="#0b2423"/><path d="M236,158 v-30 M236,128 l-22,54" stroke="#0b2423" stroke-width="2.5" fill="none"/><circle cx="236" cy="124" r="5" fill="#0b2423"/><path d="M229,134 h14 v22 h-14 Z" fill="#0b2423"/><path d="M84,176 q-4,-22 6,-34 q6,-7 4,-14 l13,4 l-10,1 q5,8 -3,16 q-7,9 -3,27 Z" fill="#fff7e2"/>${grass(18,212,14,60,1)}${grass(48,212,10,40,2)}${grass(284,212,14,56,3)}${grass(120,214,8,26,4)}`};
+const scFest=()=>{const r=rnd(71);let st='',cr='';for(let i=0;i<40;i++)st+=`<circle cx="${r()*300}" cy="${r()*90}" r="${.5+r()}" fill="#fff"/>`;
+  for(let i=0;i<24;i++){const x=6+i*12.6+r()*4,y=186+r()*10;cr+=`<circle cx="${x}" cy="${y}" r="6.5" fill="#0a061c"/>${i%3==0?`<path d="M${x-5},${y} l-5,-20 M${x+5},${y} l6,-19" stroke="#0a061c" stroke-width="3.2" stroke-linecap="round"/>`:''}`}
+  return `<rect width="300" height="210" fill="#170f3a"/><rect y="96" width="300" height="40" fill="#5a1f6b"/><rect y="130" width="300" height="34" fill="#ff3d8b"/><rect y="158" width="300" height="60" fill="#f58a2c"/>${st}<g transform="translate(248 104)"><circle r="34" fill="none" stroke="#0a061c" stroke-width="3"/>${[0,30,60,90,120,150].map(a=>`<line x1="-34" x2="34" stroke="#0a061c" stroke-width="1.6" transform="rotate(${a})"/>`).join('')}${[0,45,90,135,180,225,270,315].map(a=>`<circle r="4" cx="${34*Math.cos(a*Math.PI/180)}" cy="${34*Math.sin(a*Math.PI/180)}" fill="#ffcb05"/>`).join('')}<path d="M0,0 L-16,76 M0,0 L16,76" stroke="#0a061c" stroke-width="3"/></g><path d="M96,70 L20,210 L84,210 Z" fill="#ff3d8b" opacity=".5"/><path d="M118,70 L96,210 L160,210 Z" fill="#ffcb05" opacity=".45"/><path d="M140,70 L176,210 L236,210 Z" fill="#37d6ff" opacity=".45"/><path d="M52,180 V84 Q118,36 184,84 V180 H170 V96 Q118,62 66,96 V180 Z" fill="#0a061c"/><rect x="60" y="150" width="116" height="34" fill="#0a061c"/><rect x="0" y="196" width="300" height="20" fill="#0a061c"/>${cr}`};
+const scGolf=()=>`<rect width="300" height="210" fill="#fde6b0"/><rect y="56" width="300" height="34" fill="#f9cf8a"/><circle cx="72" cy="92" r="36" fill="#f58a2c"/><ellipse cx="90" cy="150" rx="210" ry="56" fill="#9cc27a"/><ellipse cx="250" cy="170" rx="200" ry="62" fill="#5fa35a"/><ellipse cx="120" cy="222" rx="260" ry="64" fill="#2f7d4a"/><ellipse cx="150" cy="176" rx="84" ry="20" fill="#8fd17a"/><path d="M18,196 q26,-18 58,-6 q16,10 -8,18 q-34,8 -50,-12 Z" fill="#fbe3ac"/><ellipse cx="170" cy="176" rx="7" ry="2.6" fill="#0b2423"/><path d="M170,176 V104" stroke="#0b2423" stroke-width="2.5"/><path d="M170,104 l30,10 l-30,10 Z" fill="#ff3d8b"/><circle cx="128" cy="180" r="3.4" fill="#fff"/>${fir(262,170,96,17,'#0b2423')}${fir(286,176,120,20,'#0b2423')}${fir(238,166,62,12,'#143a22')}`;
+const cards=[['Hiking','Ridge days',scHike()],['Marsh','Bayou mornings',scMarsh()],['Festivals','Front of house',scFest()],['Golf','Early tee times',scGolf()]].map(c=>`<div class="card"><div class="pic"><svg viewBox="0 0 300 210">${c[2]}</svg></div><div class="cp"><b>${c[0]}</b><i>${c[1]}</i></div></div>`).join('');
+/* ---------- page ---------- */
+const beams=`<svg class="beams" viewBox="0 0 1440 700" preserveAspectRatio="none"><path d="M300,0 L-100,700 L260,700 Z" fill="#ff3d8b" opacity=".28"/><path d="M720,0 L520,700 L940,700 Z" fill="#ffcb05" opacity=".14"/><path d="M1150,0 L1050,700 L1540,700 Z" fill="#37d6ff" opacity=".22"/><path d="M0,700 ${Array.from({length:60},(_,i)=>`a12,14 0 0 1 24,0`).join(' ')} V700 Z" fill="#0a061c"/></svg>`;
+document.getElementById('app').innerHTML=
+ hero(heroMode)+
+ `<div class="tick">TypeScript<i>✦</i>Next.js<i>✦</i>React<i>✦</i>Node<i>✦</i>Python<i>✦</i>Go<i>✦</i>Postgres<i>✦</i>Kubernetes<i>✦</i>Terraform<i>✦</i>AWS<i>✦</i>TypeScript<i>✦</i>Next.js<i>✦</i>React<i>✦</i></div>`+
+ `<section class="work"><div class="eyebrow">Selected work · click a poster to unfold it</div><h2>Things I built</h2><div class="wall">${wall}</div><div class="swipe">← SWIPE →</div>
+ <div class="open"><div class="poster p1" style="box-shadow:none">${pHTML(posters[0],1)}</div>
+ <div><div style="display:grid;grid-template-columns:1fr 1.4fr;gap:28px"><div><div class="eyebrow">Unfolded view</div><h4>Pre-Sales Field Kit</h4><ul><li>What it is, in one line</li><li>Who it is for</li><li>What shipped in the latest upgrade</li><li class="mono" style="font-size:12px">stack · chips · go · here</li></ul><span class="cta">Get it on Gumroad →</span></div>
+ <div class="shots"><div class="shot">real product screenshot<br>(hero shot)</div><div class="shot">screenshot 2</div><div class="shot">screenshot 3</div></div></div></div></div>
+ <div class="labs"><span>Open source + labs →</span><span>solutions-playbook</span><span>litellm-pii-guardrail</span><span>more on GitHub</span></div><div class="note">Poster 3 is shown in its hover state: every poster flips to the real architecture of that product. Click unfolds screenshots, as with the Field Kit here.</div></section>`+
+ `<section class="trail"><div class="eyebrow">The trail · 2018 to now</div><h2>How I got here</h2><div class="trailD">${trail()}</div><div class="trailM">${trailM()}</div></section>`+
+ `<section class="off"><div class="eyebrow" style="color:var(--yellow)">Off the clock · field notes</div><h2>Outside the editor</h2><div class="cards">${cards}</div>
+ <div class="cons">Working to partner with a local wildlife conservation group. More here soon.</div></section>`+
+ `<div class="sign"><h2 class="anton">Say hey.</h2><div class="mono">BEN HANKINS · SOFTWARE ENGINEER<br>29.98°N 90.15°W · METAIRIE, LOUISIANA<br>EMAIL · GITHUB · LINKEDIN</div></div>`;
+</script></body></html>
