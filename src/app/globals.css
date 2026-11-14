@@ -224,9 +224,11 @@ body {
   border-bottom: 4px solid var(--color-ink);
   overflow: hidden;
   white-space: nowrap;
-  padding: 9px 0;
+  padding: 8px 0;
   font-family: var(--font-display);
-  font-size: 19px;
+  /* 24px is the smallest size at which white on pink (3.3:1) meets WCAG AA,
+     which asks 3:1 of large text. */
+  font-size: 24px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }

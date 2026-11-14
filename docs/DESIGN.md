@@ -62,7 +62,22 @@ All illustration is SVG drawn by components in `src/components/kit/`, seeded thr
 - Desktop from 1024px: 44px gutters, 96px section padding.
 - Phone below 1024px: 18px gutters, 56px section padding, no drag handle in the hero, a snap-scroll poster row, a vertical trail, postcards 2 × 2.
 
-## Open items
+## Accessibility decisions
 
-- Text contrast over the painted hero has not been measured at every viewport size. The role line and tagline carry a hard ink outline as a stopgap; milestone 7 measures and settles it.
-- The trail map scales its labels with the SVG, so at 1024px wide the 11px labels render near 8px. Milestone 7 should decide whether the phone trail takes over below about 1200px.
+- axe-core (WCAG 2 A/AA plus best practices) reports no violations on the page at 1440px and 390px, in painted and schematic hero modes and with a work panel open. Text over illustration cannot be scored automatically and was checked by eye.
+- Hero text over the painted scene: the role line and tagline carry a hard ink outline, and the outline button has a solid ink ground. The name relies on its 7px ink offset shadow; over the palest sky band the cream face alone would not meet a contrast ratio. That is the approved look, so it stays until Ben says otherwise.
+- Ticker: white on pink is 3.3:1, which passes only as large text. The phone ticker is 24px for that reason, up from the mockup's 19px.
+- Small mono labels on cream or sand use `#1f5a53`, not `teal-mid`.
+- The trail map switches to the list layout below 1200px.
+
+## Measured (milestone 7, headless Chromium, local production build)
+
+| Check | Result |
+|---|---|
+| LCP, laptop, fast 4G | about 0.5s (0.65s at 4x CPU slowdown). The LCP element is the hero name |
+| LCP, phone, fast 4G, 4x CPU | about 0.75s |
+| CLS | 0.007 desktop, including the canvas mounting; 0 on phone |
+| Main-thread blocking, Tier 1 | under 50ms |
+| Transfer | about 580KB desktop (about 242KB of it the Tier 2 chunks, after load), about 330KB phone |
+
+Not measured: Lighthouse scores, frame rate on a real GPU, Safari, Firefox, iOS and Android.

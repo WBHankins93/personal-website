@@ -237,6 +237,11 @@
 .hero-chrome--painted .hero-tagline {
   text-shadow: 1.5px 1.5px 0 var(--color-ink), -1px 1px 0 var(--color-ink), 1px -1px 0 var(--color-ink), -1px -1px 0 var(--color-ink);
 }
+/* The outline button gets a solid ground: over the pale sky its cream
+   text and border have nothing to read against. */
+.hero-chrome--painted .hero-btn:not(.hero-btn--primary) {
+  background: var(--color-ink-deep);
+}
 .hero-chrome--painted .hero-logo {
   background: var(--color-cream);
 }

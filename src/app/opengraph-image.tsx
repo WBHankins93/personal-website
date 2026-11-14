@@ -1,62 +1,57 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import BayouScene from "@/components/hero/BayouScene";
 import { site } from "@/content/site";
 
-// Open Graph / Twitter card: a flat still in the painted hero's palette.
-// Interim version. Milestone 7 replaces it with a render of the painted
-// bayou scene itself. Copy comes from content/site.ts; colors are the
-// tokens from globals.css, inlined because ImageResponse renders outside
-// the stylesheet. Fonts are static WOFF files in `_og/` because the
-// renderer cannot use next/font (or WOFF2).
+// Open Graph / Twitter card: a still of the painted hero. The scene is the
+// same <BayouScene/> the page draws, rendered to an SVG string and used as
+// the card's background, so the card cannot drift from the site. The name
+// and role line sit on top exactly as in the hero.
+//
+// Copy comes from content/site.ts. Fonts are static WOFF files in `_og/`
+// because the renderer cannot use next/font (or WOFF2).
 //
 // Node runtime (not edge) so the assets load from disk and the image is
 // generated once at build time.
-export const alt = `${site.name}: ${site.role}, ${site.place}`;
+export const alt = `${site.name}: ${site.role}, ${site.place}. A painted bayou at dawn with cypress trees, Spanish moss and an egret.`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const CREAM = "#f6ecd4";
 const INK = "#0b2423";
-const SKY = ["#fbe3ac", "#f9d48f", "#f7bf73", "#f5a657", "#f28f43"];
-const HORIZON = 420;
 
 const asset = (file: string) => readFile(join(process.cwd(), "src/app/_og", file));
 
+async function paintedScene(): Promise<string> {
+  // Loaded lazily: Next refuses a static react-dom/server import in app/.
+  const { renderToStaticMarkup } = await import("react-dom/server");
+  const svg = renderToStaticMarkup(<BayouScene mode="paint" />)
+    // The scene is 1440 x 810. Crop to the card's shape, keeping the horizon.
+    .replace('viewBox="0 0 1440 810"', 'xmlns="http://www.w3.org/2000/svg" viewBox="0 27 1440 756" width="1200" height="630"');
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
+}
+
 export default async function OpengraphImage() {
-  const [anton, mono] = await Promise.all([
+  const [anton, mono, scene] = await Promise.all([
     asset("anton-latin-400-normal.woff"),
     asset("jetbrains-mono-latin-500-normal.woff"),
+    paintedScene(),
   ]);
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: SKY[0] }}>
-        {SKY.slice(1).map((color, i) => (
-          <div key={color} style={{ position: "absolute", left: 0, right: 0, top: 190 + i * 58, height: 64, background: color }} />
-        ))}
-        {/* Sun and ring on the horizon. */}
-        <div style={{ position: "absolute", left: 760, top: HORIZON - 196, width: 332, height: 332, borderRadius: 166, border: "5px solid #fff3cf" }} />
-        <div style={{ position: "absolute", left: 796, top: HORIZON - 160, width: 260, height: 260, borderRadius: 130, background: "#fff3cf" }} />
-        <div style={{ position: "absolute", left: 0, right: 0, top: HORIZON - 26, height: 26, background: "#a8502f" }} />
-        {/* Water with reflection bars. */}
-        <div style={{ position: "absolute", left: 0, right: 0, top: HORIZON, bottom: 0, background: "#1b5853" }} />
-        {[220, 150, 260, 120, 190, 90].map((w, i) => (
-          <div
-            key={i}
-            style={{ position: "absolute", left: 926 - w / 2, top: HORIZON + 14 + i * 18, width: w, height: 6, borderRadius: 3, background: "#f7bf73", opacity: 0.9 - i * 0.1 }}
-          />
-        ))}
-        {/* Canopy branch. */}
-        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 22, background: "#081d1c" }} />
+      <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#fbe3ac" }}>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <img src={scene} width={1200} height={630} style={{ position: "absolute", left: 0, top: 0 }} />
 
-        <div style={{ position: "absolute", left: 56, top: 64, display: "flex", flexDirection: "column" }}>
+        <div style={{ position: "absolute", left: 44, top: 70, display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               fontFamily: "Anton",
-              fontSize: 196,
+              fontSize: 178,
               lineHeight: 0.92,
               letterSpacing: 2,
               color: CREAM,
@@ -67,26 +62,20 @@ export default async function OpengraphImage() {
             <span>Ben</span>
             <span>Hankins</span>
           </div>
-          <div style={{ display: "flex", marginTop: 26, fontFamily: "Mono", fontSize: 26, color: CREAM }}>
+          <div
+            style={{
+              display: "flex",
+              alignSelf: "flex-start",
+              marginTop: 30,
+              fontFamily: "Mono",
+              fontSize: 24,
+              color: CREAM,
+              background: "#081d1c",
+              padding: "8px 14px",
+            }}
+          >
             {site.role} · {site.place}
           </div>
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            right: 56,
-            bottom: 44,
-            display: "flex",
-            fontFamily: "Mono",
-            fontSize: 20,
-            letterSpacing: 2,
-            color: INK,
-            background: "#ffcb05",
-            padding: "10px 16px",
-          }}
-        >
-          BENHANKINS.DEV
         </div>
       </div>
     ),

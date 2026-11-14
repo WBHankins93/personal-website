@@ -99,6 +99,7 @@ function Layers({ layers, reveal, active, guard, onReady, onFail }: SceneProps) 
   const meshes = useRef<(Mesh | null)[]>([]);
   const pointer = useRef({ x: 0, y: 0 });
   const drift = useRef({ x: 0, y: 0 });
+  const [uploaded, setUploaded] = useState(false);
   const clock = useRef({ time: 0, last: 0, started: 0, windowStart: 0, frames: 0, lastReveal: -1, ready: false });
 
   const built = useMemo(
@@ -173,7 +174,7 @@ function Layers({ layers, reveal, active, guard, onReady, onFail }: SceneProps) 
       mesh.userData.rest = { x: cx * scale, y: cy * scale, scale };
     });
     invalidate();
-  }, [built, camera, size, invalidate]);
+  }, [built, camera, size, invalidate, uploaded]);
 
   // Pointer parallax. Fine pointers only; the hero never reacts to scroll.
   useEffect(() => {
@@ -186,6 +187,26 @@ function Layers({ layers, reveal, active, guard, onReady, onFail }: SceneProps) 
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, [gl]);
+
+  // Send the textures to the GPU one per frame before anything is drawn.
+  // Uploading all of them in the first frame blocks the main thread for a
+  // couple of hundred milliseconds.
+  useEffect(() => {
+    const queue = built.flatMap((b) => b.textures).filter((t): t is CanvasTexture => t !== null);
+    let raf = 0;
+    const step = () => {
+      const next = queue.shift();
+      if (!next) {
+        setUploaded(true);
+        return;
+      }
+      gl.initTexture(next);
+      raf = requestAnimationFrame(step);
+    };
+    setUploaded(false);
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [built, gl]);
 
   // A lost context cannot be drawn to again: hand back to Tier 1.
   useEffect(() => {
@@ -274,7 +295,7 @@ function Layers({ layers, reveal, active, guard, onReady, onFail }: SceneProps) 
       }
     });
 
-    if (!c.ready) {
+    if (uploaded && !c.ready) {
       c.ready = true;
       c.started = performance.now();
       // Two frames later the textures are on the GPU and on screen.
@@ -294,6 +315,7 @@ function Layers({ layers, reveal, active, guard, onReady, onFail }: SceneProps) 
           material={b.material}
           renderOrder={i}
           frustumCulled={false}
+          visible={uploaded}
         />
       ))}
     </>

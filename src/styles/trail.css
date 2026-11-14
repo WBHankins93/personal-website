@@ -6,7 +6,10 @@
 .trail-desktop {
   display: none;
 }
-@media (min-width: 64rem) {
+/* The map scales as one SVG, so its 11px labels shrink with it. Below
+   1200px they would drop under 9px, so the list layout carries on until
+   then (the rest of the page switches at 1024px). */
+@media (min-width: 75rem) {
   .trail {
     padding-bottom: 40px;
   }
@@ -148,6 +151,7 @@
 /* ---------- phone list ---------- */
 
 .trail-list {
+  max-width: 640px;
   list-style: none;
   margin: 8px 0 0 10px;
   padding: 0 0 0 22px;

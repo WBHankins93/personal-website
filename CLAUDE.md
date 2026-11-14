@@ -18,8 +18,9 @@ npm run build:check  # Type check + build (use before deploy)
 
 The site is mid-redesign on the `redesign/bayou` branch. The spec is `docs/redesign-bayou/HANDOFF.md`; read it before changing anything visual. `docs/redesign-bayou/reference/index.html` is the approved mockup source (shapes, colors, proportions, not production code).
 
-- Milestones 1 to 5 are built: foundation, illustration kit, Tier 1 SVG hero, Selected Work, Trail, Off the Clock, ticker.
-- Still open: milestone 6 (Three.js hero, Tier 2), 7 (hardening, cross-browser, final Open Graph image), 8 (review and pull request).
+- Milestones 1 to 7 are built: foundation, illustration kit, Tier 1 SVG hero, Selected Work, Trail, Off the Clock, ticker, Tier 2 Three.js hero, hardening.
+- Still open: milestone 8, which Ben has reserved for the final UI and animation polish (Tier 2 motion and its performance on real hardware), then the pull request.
+- Known gaps going into milestone 8: the Tier 2 chunks are about 242KB gzipped against a budget of about 200KB; frame rate has only been measured on software GL; Safari, Firefox and real phones are untested; Lighthouse has not been run.
 - Branch rules: commit only to `redesign/bayou`. Never commit to, push to, or merge into `main`. Ben merges the pull request himself.
 - If something in the handoff looks wrong, ask Ben. No silent changes beyond the spec.
 
@@ -31,12 +32,12 @@ The site is mid-redesign on the `redesign/bayou` branch. The spec is `docs/redes
 - `/` — one page, in fixed order: Hero, Ticker, Selected Work (`#work`), The Trail (`#trail`), Off the Clock (`#off-the-clock`), Contact sign (`#contact`)
 - `/kit` — illustration kit reference. Works in local dev and on Vercel previews, 404s in production (`VERCEL_ENV === "production"`)
 - `/projects`, `/projects/*`, `/about`, `/contact` — permanent redirects in `next.config.ts` to the matching section; keep them for inbound links
-- `opengraph-image.tsx`, `sitemap.ts`, `robots.ts`, `not-found.tsx` — metadata routes. The OG card is an interim flat still; milestone 7 replaces it with a render of the painted hero. It loads WOFF fonts from `src/app/_og/` because the renderer cannot use next/font
+- `opengraph-image.tsx`, `sitemap.ts`, `robots.ts`, `not-found.tsx` — metadata routes. The OG card renders `<BayouScene mode="paint" />` to an SVG string and uses it as the background, so it follows the hero automatically. It loads WOFF fonts from `src/app/_og/` because the renderer cannot use next/font
 
 **Key directories**:
 - `src/content/` — all copy and facts as typed data: `site.ts`, `projects.ts`, `trail.ts`, `postcards.ts`; `content.test.ts` guards them
 - `src/components/kit/` — illustration kit: `geometry.ts` (pure seeded path builders) and `index.tsx` (`<Cypress/>`, `<Fir/>`, `<FirRow/>`, `<Ridge/>`, `<Moss/>`, `<Halftone/>`, `<ReflectionBars/>`)
-- `src/components/hero/` — `BayouScene.tsx` (server component, the scene in paint or schematic mode) and `Hero.tsx` (client, the reveal)
+- `src/components/hero/` — `BayouScene.tsx` (server component, the scene in paint or schematic mode), `Hero.tsx` (client, the reveal) and `tier2/` (`BayouCanvas.tsx`, the Three.js layers; `layers.ts`, the layer list and texture builder)
 - `src/components/work/`, `trail/`, `offclock/`, `site/` — the page sections
 - `src/styles/` — `hero.css`, `work.css`, `trail.css`, imported by `src/app/globals.css`
 - `src/lib/` — `rand.ts` (seeded random), `structured-data.ts` (JSON-LD)
@@ -56,10 +57,19 @@ The site is mid-redesign on the `redesign/bayou` branch. The spec is `docs/redes
 
 ## Hero reveal
 
-- One value drives the hero: the reveal position from 0 (schematic) to 1 (painted). `Hero.tsx` writes it to the `--x` and `--k` custom properties; the auto-sweep, drag handle, keyboard and switch all call `setReveal()`. Tier 2 must read the same value (`uReveal`)
+- One value drives the hero: the reveal position from 0 (schematic) to 1 (painted). `Hero.tsx` writes it to the `--x` and `--k` custom properties and keeps it in a ref; the auto-sweep, drag handle, keyboard and switch all call `setReveal()`. Tier 2 reads the same ref into its `uReveal` uniform every frame
 - The nav and text block render three times: a mint copy in the schematic layer, a cream copy in the clipped painted layer, and a transparent live copy on top holding the real `h1` and links. The visual copies are `inert` and `aria-hidden`. Change markup in `Chrome`, once
 - CSS sets the pre-JavaScript state: schematic on desktop, painted below 1024px and under reduced motion. Keep `hero.css` and the `useEffect` in `Hero.tsx` in agreement
 - The hero never reacts to scroll
+
+## Hero Tier 2 (Three.js)
+
+- Tier 1 (SVG) always renders first and is the LCP. Tier 2 is a separate chunk loaded with `next/dynamic` after the page's `load` event, only at 1024px and wider, with WebGL, with reduced motion off. Do not import `three` or `@react-three/fiber` anywhere outside `src/components/hero/tier2/`
+- There is one source of art. `layers.ts` serializes each `data-layer` group of the server-rendered SVG and rasterizes it to a canvas texture in the browser. To change the art, change `BayouScene`; to change the layering or depth, change `LAYERS`
+- The fragment shader in `BayouCanvas.tsx` must use the same diagonal as the `clip-path` in `hero.css` (11% lean at mid-sweep, zero at both ends). If one changes, change the other
+- The canvas sits under both hero layers. `data-tier="2"` on the hero hides the SVG scenes and clips the schematic layer to its own side of the line; the DOM text, build log, handle and switch stay as they are
+- Fallback to Tier 1: WebGL context failure or loss, or an average under 40fps across two seconds. The choice is kept in `sessionStorage`. `?tier=1` and `?tier=2` force a tier; `?tier=2` also turns the frame-rate fallback off, which is needed on headless or software-GL machines
+- The render loop is demand-driven: full rate while the pointer or reveal is moving, half rate for idle motion, nothing while the hero is off screen or the tab is hidden. Keep it that way
 
 ## Content and positioning
 
@@ -73,7 +83,7 @@ The site is mid-redesign on the `redesign/bayou` branch. The spec is `docs/redes
 - Tokens are fixed (handoff section 6) and live in `@theme` in `src/app/globals.css`; do not drift the hexes. `docs/DESIGN.md` is the reference
 - Fonts are self-hosted from `src/app/fonts/` through `next/font/local`: Anton (display), JetBrains Mono 500 (labels and UI), Space Grotesk (body), DM Serif Display (hero tagline only). The font variables sit on `<html>` because the theme tokens resolve at `:root`
 - Print treatment: hard offset shadows with no blur, an off-register second ink on section headings, paper grain (`.grain`) on painted surfaces only. No rounded cards, no glassmorphism, no blurred shadows, and no gradients on painted surfaces except the phone hero scrim
-- The desktop layout starts at 1024px (`64rem`). Below that is the phone layout
+- The desktop layout starts at 1024px (`64rem`). Below that is the phone layout. One exception: the trail map starts at 1200px (`75rem`), because its SVG labels get too small below that
 
 ## Motion and accessibility
 
