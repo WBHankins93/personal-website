@@ -12,9 +12,14 @@
 // schematic layer, a cream copy inside the clipped painted layer, and a
 // transparent "live" copy on top that holds the real h1 and links. The two
 // visual copies are inert and aria-hidden.
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { navLinks, site } from "@/content/site";
+
+// Tier 2: Three.js layers over the SVG. A separate chunk, fetched after
+// first paint, never on the server.
+const BayouCanvas = dynamic(() => import("./tier2/BayouCanvas"), { ssr: false });
 
 type Mode = "schematic" | "painted";
 type Variant = Mode | "live";
@@ -29,6 +34,19 @@ const HANDLE_MIN = 34;
 const HANDLE_MAX = 22;
 const DESKTOP = "(min-width: 64rem)";
 const REDUCED = "(prefers-reduced-motion: reduce)";
+/** Set when Tier 2 gave up on this machine, so a reload does not retry it. */
+const TIER_FLAG = "bayou-tier1";
+
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    return gl !== null;
+  } catch {
+    return false;
+  }
+}
 
 const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -93,6 +111,10 @@ export default function Hero({ schematicScene, paintedScene, featured }: HeroPro
   const dragging = useRef(false);
   // Which end the reveal is nearer. Drives aria-pressed and what is tabbable.
   const [mode, setMode] = useState<Mode>("schematic");
+  // Tier 2 state: "off" (SVG only), "loading" (canvas mounting underneath
+  // the SVG), "on" (canvas drawing, SVG scenes hidden).
+  const [tier2, setTier2] = useState<"off" | "loading" | "on">("off");
+  const [guard, setGuard] = useState(true);
 
   const cancel = useCallback(() => cancelAnimationFrame(frame.current), []);
 
@@ -159,6 +181,56 @@ export default function Hero({ schematicScene, paintedScene, featured }: HeroPro
     };
   }, [animateTo, cancel, setReveal]);
 
+  // Tier 2 mounts only at 1024px and wider, with WebGL, with reduced motion
+  // off, and after the page has loaded, so it never delays first paint.
+  // ?tier=1 forces the SVG hero; ?tier=2 forces the canvas and switches off
+  // the frame-rate fallback (for review on slow or headless machines).
+  useEffect(() => {
+    const force = new URLSearchParams(window.location.search).get("tier");
+    const desktop = window.matchMedia(DESKTOP);
+    const reduced = window.matchMedia(REDUCED);
+    let idle = 0;
+    const gaveUp = () => {
+      try {
+        return window.sessionStorage.getItem(TIER_FLAG) === "1";
+      } catch {
+        return false;
+      }
+    };
+
+    const decide = () => {
+      const eligible = desktop.matches && !reduced.matches && force !== "1" && (force === "2" || !gaveUp());
+      if (!eligible) {
+        setTier2("off");
+        return;
+      }
+      setGuard(force !== "2");
+      setTier2((current) => (current === "off" && hasWebGL() ? "loading" : current));
+    };
+    const start = () => {
+      idle = window.setTimeout(decide, 300);
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    desktop.addEventListener("change", decide);
+    reduced.addEventListener("change", decide);
+    return () => {
+      window.clearTimeout(idle);
+      window.removeEventListener("load", start);
+      desktop.removeEventListener("change", decide);
+      reduced.removeEventListener("change", decide);
+    };
+  }, []);
+
+  const onTierReady = useCallback(() => setTier2((current) => (current === "loading" ? "on" : current)), []);
+  const onTierFail = useCallback((reason: string) => {
+    setTier2("off");
+    try {
+      window.sessionStorage.setItem(TIER_FLAG, "1");
+    } catch {}
+    if (process.env.NODE_ENV !== "production") console.info(`[hero] staying on Tier 1: ${reason}`);
+  }, []);
+
   const revealFromPointer = (clientX: number) => {
     const el = root.current;
     if (!el) return;
@@ -199,10 +271,12 @@ export default function Hero({ schematicScene, paintedScene, featured }: HeroPro
   const painted = mode === "painted";
 
   return (
-    <section id="top" ref={root} className="hero" data-mode={mode} data-edge="schematic" aria-label="Introduction">
+    <section id="top" ref={root} className="hero" data-mode={mode} data-edge="schematic" data-tier={tier2 === "on" ? "2" : "1"} aria-label="Introduction">
       <noscript>
         <style>{`.hero{--x:100%}`}</style>
       </noscript>
+
+      {tier2 !== "off" && <BayouCanvas hero={root} reveal={reveal} guard={guard} onReady={onTierReady} onFail={onTierFail} />}
 
       <div className="hero-layer hero-layer--schematic">
         {schematicScene}

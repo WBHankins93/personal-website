@@ -456,3 +456,22 @@
     padding: 9px 14px;
   }
 }
+
+/* ---------- Tier 2 (Three.js canvas) ---------- */
+
+/* The canvas sits under both layers and mounts invisibly: the SVG scenes
+   cover it until it has drawn, so there is no flash and no layout shift. */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+/* Once it is drawing, the SVG scenes step aside. The schematic layer is
+   clipped to its own side of the line, because the painted layer above it
+   no longer has an opaque scene to hide it. */
+.hero[data-tier="2"] .hero-scene {
+  visibility: hidden;
+}
+.hero[data-tier="2"] .hero-layer--schematic {
+  clip-path: polygon(calc(var(--x) + var(--k)) 0, 100% 0, 100% 100%, calc(var(--x) - var(--k)) 100%);
+}
